@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:supplier_mobile/screens/BackgroundScreen.dart';
+import 'package:supplier_mobile/screens/playground_screen.dart';
 
 import './constants.dart';
-import './screens/HomeScreen.dart';
-import './screens/BackgroundScreen.dart';
+import 'screens/home_screen.dart';
+import 'screens/playground_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,35 +18,11 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Lato',
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      onGenerateRoute: (settings) {
-        // Handle '/'
-        if (settings.name == '/') {
-          return MaterialPageRoute(builder: (context) => HomeScreen());
-        }
-
-        // Handle '/details/:id'
-        var uri = Uri.parse(settings.name);
-        if (uri.pathSegments.length == 2 &&
-            uri.pathSegments.first == 'details') {
-          var id = uri.pathSegments[1];
-          return MaterialPageRoute(
-              builder: (context) => BackgroundScreen(id: id));
-        }
-
-        return MaterialPageRoute(builder: (context) => HomeScreen());
+      initialRoute: HomeScreen.route,
+      routes: {
+        HomeScreen.route: (context) => HomeScreen(),
+        PlaygroundScreen.route: (context) => PlaygroundScreen(),
       },
-    );
-  }
-}
-
-class UnknownScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: Text('404!'),
-      ),
     );
   }
 }

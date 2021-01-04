@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
-class BackgroundScreen extends StatelessWidget {
-  String id;
+import 'home_screen.dart';
 
-  BackgroundScreen({
-    this.id,
-  });
+class PlaygroundScreen extends StatelessWidget {
+  static const String route = "playground";
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +13,10 @@ class BackgroundScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Viewing details for item $id'),
             FlatButton(
-              child: Text('Pop!'),
+              child: Text('Home'),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.popAndPushNamed(context, HomeScreen.route);
               },
             ),
           ],
