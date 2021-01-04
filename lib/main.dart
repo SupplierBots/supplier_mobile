@@ -17,6 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Lato',
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        backgroundColor: kBackgroundColor,
+        accentColor: kVioletColor,
       ),
       initialRoute: HomeScreen.route,
       routes: {
