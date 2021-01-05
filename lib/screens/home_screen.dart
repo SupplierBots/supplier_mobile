@@ -81,11 +81,33 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+                      //Container(
+                      // child: Column(
+                      // children: [
+                      // DecoratedBox(
+                      // decoration: BoxDecoration(
+                      // gradient: LinearGradient(
+                      // colors: [kVioletColor, kPinkColor],
+                      //),
+                      //),
+                      //),
+                      //],
+                      //),
+                      // ),
                       Container(
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [kVioletColor, kPinkColor],
+                        padding: EdgeInsets.only(top: 15),
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 120),
+                          child: Container(
+                            height: 2.0,
+                            width: 250.0,
+                            //color: kPinkColor,
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [kPinkColor, kVioletColor],
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -98,7 +120,7 @@ class HomeScreen extends StatelessWidget {
                   //),
                   SizedBox(
                     width: 500,
-                    height: 350,
+                    height: 300,
                   ),
                   Container(
                     height: 50,
