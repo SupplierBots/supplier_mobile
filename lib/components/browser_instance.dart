@@ -15,6 +15,8 @@ class BrowserInstance extends StatefulWidget {
 
 class _BrowserInstanceState extends State<BrowserInstance> {
   WebViewController _webviewController;
+  static const String initialUrl =
+      'https://www.supremenewyork.com/mobile/#categories/new';
 
   @override
   Widget build(BuildContext context) {
@@ -30,19 +32,21 @@ class _BrowserInstanceState extends State<BrowserInstance> {
               AbsorbPointer(
                 absorbing: runner.activeInstanceIndex != widget.index,
                 child: WebView(
-                  initialUrl:
-                      'https://www.supremenewyork.com/mobile/#categories/new',
+                  initialUrl: initialUrl,
                   javascriptMode: JavascriptMode.unrestricted,
                   gestureNavigationEnabled: true,
                   onWebViewCreated: (controller) {
                     _webviewController = controller;
                   },
-                  onPageFinished: (initialUrl) async {
+                  onPageFinished: (url) async {
+                    if (url != initialUrl) return;
                     String source = await rootBundle
                         .loadString('assets/javascript/supremeInject.js');
-
-                    print(source);
-                    _webviewController.evaluateJavascript(source);
+                    try {
+                      _webviewController.evaluateJavascript(source);
+                    } catch (ex) {
+                      print(ex);
+                    }
                   },
                 ),
               ),

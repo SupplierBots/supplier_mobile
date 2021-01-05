@@ -37,9 +37,9 @@ class _PlaygroundScreenState extends State<PlaygroundScreen> {
                   padding: EdgeInsets.all(20),
                   child: Stack(children: [
                     BrowserInstance(0, Alignment.topLeft),
-                    BrowserInstance(1, Alignment.topRight),
-                    BrowserInstance(2, Alignment.bottomLeft),
-                    BrowserInstance(3, Alignment.bottomRight)
+                    // BrowserInstance(1, Alignment.topRight),
+                    // BrowserInstance(2, Alignment.bottomLeft),
+                    // BrowserInstance(3, Alignment.bottomRight)
                   ]),
                 ),
               ),
