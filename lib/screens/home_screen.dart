@@ -3,6 +3,7 @@ import 'package:supplier_mobile/switch.dart';
 
 import 'playground_screen.dart';
 import 'package:supplier_mobile/constants.dart';
+import 'package:supplier_mobile/steal_switch.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String route = "home";
@@ -62,6 +63,9 @@ class HomeScreen extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.only(right: 200),
                     child: Switcher(),
+                  ),
+                  Container(
+                    child: StealSwitch(value: true, onToggle: null),
                   ),
                   SizedBox(
                     width: 500,
