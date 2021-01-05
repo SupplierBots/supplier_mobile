@@ -91,7 +91,6 @@ class _FlutterSwitchState extends State<StealSwitch>
   void initState() {
     super.initState();
     _animationController = AnimationController(
-      // ignore_for_file: UNDEFINED_NAMED_PARAMETER
       vsync: this,
       value: widget.value ? 1.0 : 0.0,
       duration: Duration(milliseconds: 60),
