@@ -4,7 +4,7 @@ import 'package:supplier_mobile/switch.dart';
 
 import 'playground_screen.dart';
 import 'package:supplier_mobile/constants.dart';
-import 'package:supplier_mobile/steal_switch.dart';
+//import 'package:supplier_mobile/steal_switch.dart';
 import 'package:supplier_mobile/header.dart';
 
 class HomeScreen extends StatelessWidget {

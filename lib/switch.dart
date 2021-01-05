@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/constants.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:supplier_mobile/steal_switch.dart';
 
 class Switcher extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class _SwitcherState extends State<Switcher> {
     return Center(
       child: Row(
         children: [
-          FlutterSwitch(
+          StealSwitch(
             height: 20.0,
             width: 40.0,
             padding: 1.0,
@@ -29,7 +30,6 @@ class _SwitcherState extends State<Switcher> {
                 print(isSwitched);
               });
             },
-            activeColor: kPinkColor,
           ),
           Container(
             padding: EdgeInsets.all(15),

@@ -6,7 +6,6 @@ class StealSwitch extends StatefulWidget {
     Key key,
     @required this.value,
     @required this.onToggle,
-    this.activeColor = kVioletColor,
     this.inactiveColor = kDarkGrey,
     this.activeTextColor = kLighGrey,
     this.inactiveTextColor = kLighGrey,
@@ -54,7 +53,6 @@ class StealSwitch extends StatefulWidget {
   final bool showOnOff;
   final String activeText;
   final String inactiveText;
-  final Color activeColor;
   final Color inactiveColor;
   final Color activeTextColor;
   final Color inactiveTextColor;
@@ -91,6 +89,7 @@ class _FlutterSwitchState extends State<StealSwitch>
   void initState() {
     super.initState();
     _animationController = AnimationController(
+      // ignore_for_file: UNDEFINED_NAMED_PARAMETER
       vsync: this,
       value: widget.value ? 1.0 : 0.0,
       duration: Duration(milliseconds: 60),
@@ -131,7 +130,7 @@ class _FlutterSwitchState extends State<StealSwitch>
 
     if (widget.value) {
       _toggleColor = widget.activeToggleColor ?? widget.toggleColor;
-      _switchColor = widget.activeColor;
+      _switchColor = kPinkColor;
       _switchBorder = widget.activeSwitchBorder ?? widget.switchBorder;
       _toggleBorder = widget.activeToggleBorder ?? widget.toggleBorder;
       _icon = widget.activeIcon;
@@ -161,7 +160,11 @@ class _FlutterSwitchState extends State<StealSwitch>
             padding: EdgeInsets.all(widget.padding),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(widget.borderRadius),
-              color: _switchColor,
+              gradient: LinearGradient(
+                colors: [Color(0xFFC95BA3), Color(0xFF9253C1)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
               border: _switchBorder,
             ),
             child: Row(
