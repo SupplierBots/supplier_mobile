@@ -5,6 +5,7 @@ import 'package:supplier_mobile/switch.dart';
 import 'playground_screen.dart';
 import 'package:supplier_mobile/constants.dart';
 import 'package:supplier_mobile/steal_switch.dart';
+import 'package:supplier_mobile/header.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String route = "home";
@@ -94,24 +95,7 @@ class HomeScreen extends StatelessWidget {
                       //],
                       //),
                       // ),
-                      Container(
-                        padding: EdgeInsets.only(top: 15),
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 120),
-                          child: Container(
-                            height: 2.0,
-                            width: 250.0,
-                            //color: kPinkColor,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [kPinkColor, kVioletColor],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      Header(),
                     ],
                   ),
 
