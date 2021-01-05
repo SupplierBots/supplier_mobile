@@ -22,13 +22,16 @@ class BrowserInstance extends StatelessWidget {
               AbsorbPointer(
                 absorbing: runner.activeInstanceIndex != index,
                 child: WebView(
-                  initialUrl: 'https://bot.sannysoft.com',
+                  initialUrl: 'https://browserleaks.com/canvas',
                   javascriptMode: JavascriptMode.unrestricted,
-                  gestureNavigationEnabled: false,
+                  gestureNavigationEnabled: true,
                 ),
               ),
-              GestureDetector(
-                onTap: () => runner.setActiveInstance(index),
+              IgnorePointer(
+                ignoring: runner.activeInstanceIndex == index,
+                child: GestureDetector(
+                  onTap: () => runner.setActiveInstance(index),
+                ),
               ),
             ],
           ),

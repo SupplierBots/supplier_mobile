@@ -5,6 +5,7 @@ import 'home_screen.dart';
 import '../constants.dart';
 import '../components/browser_instance.dart';
 import '../components/runner.dart';
+import 'dart:io';
 
 class PlaygroundScreen extends StatefulWidget {
   static const String route = "playground";
@@ -14,6 +15,12 @@ class PlaygroundScreen extends StatefulWidget {
 }
 
 class _PlaygroundScreenState extends State<PlaygroundScreen> {
+  @override
+  void initState() {
+    super.initState();
+    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
