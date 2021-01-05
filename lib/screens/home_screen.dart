@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:supplier_mobile/switch.dart';
 
 import 'playground_screen.dart';
@@ -56,20 +57,48 @@ class HomeScreen extends StatelessWidget {
                       hintText: ('Placeholder'),
                     ),
                   ),
+
                   SizedBox(
                     width: 500,
                     height: 30,
                   ),
                   Container(
-                    padding: EdgeInsets.only(right: 200),
+                    padding: EdgeInsets.only(right: 230),
                     child: Switcher(),
                   ),
-                  Container(
-                    child: StealSwitch(value: true, onToggle: null),
+                  SizedBox(
+                    height: 30,
                   ),
+                  Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(right: 230),
+                        child: Text(
+                          'Billing data',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: kLightPurple,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [kVioletColor, kPinkColor],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  //Container(
+                  //child: StealSwitch(value: true, onToggle: null),
+                  //),
                   SizedBox(
                     width: 500,
-                    height: 400,
+                    height: 350,
                   ),
                   Container(
                     height: 50,
