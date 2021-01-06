@@ -29,8 +29,11 @@ class BottomBox extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                height: 9.0,
+                height: 6.0,
                 decoration: BoxDecoration(gradient: kPrimaryGradient),
+              ),
+              SizedBox(
+                height: 18,
               ),
               ShaderMask(
                 shaderCallback: (bounds) {
