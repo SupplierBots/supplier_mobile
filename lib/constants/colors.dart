@@ -8,3 +8,11 @@ const kSecondaryBackground = Color(0xFF242225);
 const kTetiaryBackground = Color(0xFF282629);
 const kDarkGrey = Color(0xFF747273);
 const kLighGrey = Color(0xFFB4B1B2);
+const kRed = Color(0xFFFF0606);
+
+const kPrimaryGradient = LinearGradient(
+  colors: [kPinkColor, kVioletColor],
+);
+const kRedGradient = LinearGradient(
+  colors: [Color(0xFFD20000), Color(0xFF890000)],
+);
