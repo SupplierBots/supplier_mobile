@@ -5,6 +5,8 @@ import 'package:supplier_mobile/components/switch.dart';
 import 'playground_screen.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/components/header.dart';
+import '../components/bottom_app_bar.dart';
+//import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String route = "home";
@@ -86,26 +88,26 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   SizedBox(
                     width: 500,
-                    height: 300,
+                    height: 220,
                   ),
-                  Container(
-                    height: 50,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: kSecondaryBackground,
-                      // borderRadius: BorderRadius.circular(300),
-                    ),
-                    child: FlatButton(
-                      child: Text('Playground'),
-                      textColor: kPinkColor,
-                      onPressed: () {
-                        Navigator.popAndPushNamed(
-                          context,
-                          PlaygroundScreen.route,
-                        );
-                      },
-                    ),
-                  ),
+                  //Container(
+                  //height: 50,
+                  //width: double.infinity,
+                  //decoration: BoxDecoration(
+                  //color: kSecondaryBackground,
+                  // borderRadius: BorderRadius.circular(300),
+                  //),
+                  // child: FlatButton(
+                  // child: Text('Playground'),
+                  //textColor: kPinkColor,
+                  //onPressed: () {
+                  // Navigator.popAndPushNamed(
+                  // context,
+                  // PlaygroundScreen.route,
+                  //);
+                  //},
+                  // ),
+                  //),
                 ],
               ),
             ),
