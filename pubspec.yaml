@@ -21,7 +21,6 @@ environment:
   sdk: ">=2.8.0 <3.0.0"
 
 dependencies:
-  flutter_switch: ^0.0.2
   flutter:
     sdk: flutter
 
@@ -30,6 +29,8 @@ dependencies:
   cupertino_icons: ^1.0.0
   webview_flutter: ^1.0.7
   provider: ^4.3.2+3
+  flutter_svg: ^0.17.4
+  flutter_switch: ^0.0.2
 
 dev_dependencies:
   flutter_test:

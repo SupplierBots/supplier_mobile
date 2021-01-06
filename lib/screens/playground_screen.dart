@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:provider/provider.dart';
 import 'home_screen.dart';
-import '../constants.dart';
+import '../constants/colors.dart';
 import '../components/browser_instance.dart';
 import '../components/runner.dart';
 import 'dart:io';

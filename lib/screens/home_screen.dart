@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:supplier_mobile/components/switch.dart';
 
 import 'playground_screen.dart';
-import 'package:supplier_mobile/constants.dart';
+import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/components/header.dart';
 
 class HomeScreen extends StatefulWidget {

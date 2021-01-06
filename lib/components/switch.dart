@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:supplier_mobile/constants.dart';
+import 'package:supplier_mobile/constants/colors.dart';
 
 class Switcher extends StatefulWidget {
   const Switcher({

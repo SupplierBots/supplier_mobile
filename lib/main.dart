@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/screens/playground_screen.dart';
 
-import './constants.dart';
+import 'constants/colors.dart';
 import 'screens/home_screen.dart';
 import 'screens/playground_screen.dart';
 

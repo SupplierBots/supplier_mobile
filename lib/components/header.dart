@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'constants.dart';
+import '../constants/colors.dart';
 
 class Header extends StatelessWidget {
   const Header({@required this.text, @required this.underlineWidth});
