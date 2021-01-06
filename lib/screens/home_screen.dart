@@ -15,89 +15,109 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isSwitched = false;
+  final _formKey = GlobalKey<FormState>();
+  bool _masno = false;
+  String _name;
+  String _email;
+  bool _saved = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
         backgroundColor: kBackgroundColor,
-        body: Column(
-          children: [
-            Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 200,
-                  ),
-                  Input(
-                      placeholder: 'Name',
-                      validator: (value) {
-                        if (value == null) return 'Required';
-                        if (!value.contains('Rockstar'))
-                          return 'Must be rockstar';
-                        if (value.length < 15) return 'Min 15 characters';
-
-                        return null;
-                      }),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Input(
-                      placeholder: 'Email',
-                      validator: (value) {
-                        if (value == null) return 'Required';
-                        if (!value.contains('@')) return 'Not valid email';
-                        return null;
-                      }),
-                  SizedBox(
-                    width: 500,
-                    height: 30,
-                  ),
-                  Header(
-                    text: 'Billing data',
-                    underlineWidth: 240,
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Switcher(
-                    name: 'Giovana',
-                    value: isSwitched,
-                    onToggle: (v) {
-                      setState(() {
-                        isSwitched = v;
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    width: 500,
-                    height: 220,
-                  ),
-                  //Container(
-                  //height: 50,
-                  //width: double.infinity,
-                  //decoration: BoxDecoration(
-                  //color: kSecondaryBackground,
-                  // borderRadius: BorderRadius.circular(300),
-                  //),
-                  // child: FlatButton(
-                  // child: Text('Playground'),
-                  //textColor: kPinkColor,
-                  //onPressed: () {
-                  // Navigator.popAndPushNamed(
-                  // context,
-                  // PlaygroundScreen.route,
-                  //);
-                  //},
-                  // ),
-                  //),
-                ],
+        body: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 100,
               ),
-            ),
-          ],
+              Header(
+                text: 'Billing data',
+                underlineWidth: 240,
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Input(
+                placeholder: 'Name',
+                initialValue: 'Initial John',
+                validator: (value) {
+                  if (value == null) return 'Required';
+                  if (value.length < 6) return 'Min 6 characters';
+
+                  return null;
+                },
+                onSaved: (value) {
+                  setState(() {
+                    _name = value;
+                  });
+                },
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Input(
+                placeholder: 'Email',
+                type: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value == null) return 'Required';
+                  if (!value.contains('@')) return 'Not valid email';
+                  return null;
+                },
+                onSaved: (value) {
+                  setState(() {
+                    _email = value;
+                  });
+                },
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Switcher(
+                name: 'Masno',
+                value: _masno,
+                onToggle: (v) {
+                  setState(() {
+                    _masno = v;
+                  });
+                },
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              RaisedButton.icon(
+                color: Colors.cyan[900],
+                textColor: Colors.white,
+                label: Text('Submit'),
+                icon: Icon(Icons.save),
+                onPressed: () {
+                  if (!_formKey.currentState.validate()) return;
+                  _formKey.currentState.save();
+                  _saved = true;
+                },
+              ),
+              SizedBox(
+                width: 500,
+                height: 30,
+              ),
+              Text(
+                'Name: ${_name ?? ''}',
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              ),
+              Text(
+                'Email: ${_email ?? ''}',
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              ),
+              Text(
+                'Masno: ${_saved ? _masno : ''}',
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              ),
+            ],
+          ),
         ),
       ),
     );

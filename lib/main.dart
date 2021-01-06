@@ -15,11 +15,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        fontFamily: 'Lato',
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        backgroundColor: kBackgroundColor,
-        accentColor: kVioletColor,
-      ),
+          fontFamily: 'Lato',
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          backgroundColor: kBackgroundColor,
+          accentColor: kVioletColor,
+          textSelectionColor: kPinkColor),
       initialRoute: HomeScreen.route,
       routes: {
         HomeScreen.route: (context) => HomeScreen(),

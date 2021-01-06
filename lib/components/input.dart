@@ -3,10 +3,18 @@ import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 
 class Input extends StatefulWidget {
-  const Input({@required this.placeholder, this.validator});
+  const Input(
+      {@required this.placeholder,
+      this.validator,
+      this.onSaved,
+      this.initialValue = '',
+      this.type = TextInputType.text});
 
   final String placeholder;
+  final TextInputType type;
   final String Function(String) validator;
+  final void Function(String) onSaved;
+  final String initialValue;
 
   @override
   _InputState createState() => _InputState();
@@ -22,6 +30,9 @@ class _InputState extends State<Input> {
   void initState() {
     super.initState();
     _controller = TextEditingController();
+
+    value = widget.initialValue;
+    _controller.text = value;
   }
 
   void dispose() {
@@ -44,50 +55,73 @@ class _InputState extends State<Input> {
 
   @override
   Widget build(BuildContext context) {
-    print('rebuild $errorText');
-    return Form(
-      child: Container(
-        padding: EdgeInsets.all(2.0),
-        decoration: BoxDecoration(
-            gradient: getGradient(),
-            borderRadius: BorderRadius.all(
-              Radius.circular(10.0),
-            )),
-        child: FocusScope(
-          child: Focus(
-            onFocusChange: (focus) {
+    return Container(
+      padding: EdgeInsets.all(2.0),
+      decoration: BoxDecoration(
+          gradient: getGradient(),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
+          )),
+      child: FocusScope(
+        child: Focus(
+          onFocusChange: (focus) {
+            setState(() {
+              isFocused = focus;
+              errorText = focus || widget.validator == null
+                  ? null
+                  : widget.validator(value);
+            });
+          },
+          child: TextFormField(
+            onSaved: widget.onSaved,
+            keyboardType: widget.type,
+            controller: _controller,
+            autocorrect: false,
+            style: TextStyle(color: kLightPurple),
+            cursorColor: kLightPurple,
+            validator: (_) {
               setState(() {
-                isFocused = focus;
-                errorText = focus || widget.validator == null
-                    ? null
-                    : widget.validator(value);
+                errorText =
+                    widget.validator == null ? null : widget.validator(value);
+              });
+              return errorText;
+            },
+            onChanged: (text) {
+              setState(() {
+                errorText = null;
+                value = text;
               });
             },
-            child: TextFormField(
-              controller: _controller,
-              style: TextStyle(color: kLightPurple),
-              cursorColor: kLightPurple,
-              onChanged: (text) {
-                setState(() {
-                  value = text;
-                });
-              },
-              decoration: InputDecoration(
-                suffix: Text(errorText ?? ''),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
-                  ),
-                  borderSide: BorderSide(
-                    width: 0,
-                    style: BorderStyle.none,
-                  ),
+            decoration: InputDecoration(
+              suffixIcon: Padding(
+                padding: EdgeInsets.only(right: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      errorText ?? '',
+                      style: TextStyle(color: kRed),
+                      textAlign: TextAlign.end,
+                    ),
+                  ],
                 ),
-                filled: true,
-                fillColor: kSecondaryBackground,
-                hintStyle: TextStyle(color: kLighGrey),
-                suffixStyle: TextStyle(color: kRed),
-                hintText: (widget.placeholder),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10.0),
+                ),
+                borderSide: BorderSide(
+                  width: 0,
+                  style: BorderStyle.none,
+                ),
+              ),
+              filled: true,
+              fillColor: kSecondaryBackground,
+              hintStyle: TextStyle(color: kLighGrey),
+              hintText: (widget.placeholder),
+              errorStyle: TextStyle(
+                height: 0,
+                color: Colors.transparent,
               ),
             ),
           ),
