@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:supplier_mobile/switch.dart';
+import 'package:supplier_mobile/components/switch.dart';
 
 import 'playground_screen.dart';
 import 'package:supplier_mobile/constants.dart';
-//import 'package:supplier_mobile/steal_switch.dart';
-import 'package:supplier_mobile/header.dart';
+import 'package:supplier_mobile/components/header.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const String route = "home";
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +25,8 @@ class HomeScreen extends StatelessWidget {
           children: [
             Container(
               child: Column(
-                verticalDirection: VerticalDirection.down,
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
                     height: 200,
@@ -58,50 +64,26 @@ class HomeScreen extends StatelessWidget {
                       hintText: ('Placeholder'),
                     ),
                   ),
-
                   SizedBox(
                     width: 500,
                     height: 30,
                   ),
-                  Container(
-                    padding: EdgeInsets.only(right: 230),
-                    child: Switcher(),
+                  Header(
+                    text: 'Billing data',
+                    underlineWidth: 240,
                   ),
                   SizedBox(
                     height: 30,
                   ),
-                  Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(right: 230),
-                        child: Text(
-                          'Billing data',
-                          style: TextStyle(
-                            fontSize: 30,
-                            color: kLightPurple,
-                          ),
-                        ),
-                      ),
-                      //Container(
-                      // child: Column(
-                      // children: [
-                      // DecoratedBox(
-                      // decoration: BoxDecoration(
-                      // gradient: LinearGradient(
-                      // colors: [kVioletColor, kPinkColor],
-                      //),
-                      //),
-                      //),
-                      //],
-                      //),
-                      // ),
-                      Header(),
-                    ],
+                  Switcher(
+                    name: 'Giovana',
+                    value: isSwitched,
+                    onToggle: (v) {
+                      setState(() {
+                        isSwitched = v;
+                      });
+                    },
                   ),
-
-                  //Container(
-                  //child: StealSwitch(value: true, onToggle: null),
-                  //),
                   SizedBox(
                     width: 500,
                     height: 300,
