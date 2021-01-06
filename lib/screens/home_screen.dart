@@ -5,8 +5,7 @@ import 'package:supplier_mobile/components/switch.dart';
 import 'playground_screen.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/components/header.dart';
-import '../components/bottom_app_bar.dart';
-//import 'package:flutter_svg/flutter_svg.dart';
+import 'package:supplier_mobile/components/input.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String route = "home";
@@ -33,39 +32,26 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     height: 200,
                   ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      disabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: kSecondaryBackground,
-                          width: 3.0,
-                        ),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: kVioletColor,
-                          width: 3.0,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: kSecondaryBackground,
-                          width: 3.0,
-                        ),
-                      ),
-                      errorText: 'Required',
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.red,
-                          width: 3.0,
-                        ),
-                      ),
-                      filled: true,
-                      fillColor: kSecondaryBackground,
-                      hintStyle: TextStyle(color: kLighGrey),
-                      hintText: ('Placeholder'),
-                    ),
+                  Input(
+                      placeholder: 'Name',
+                      validator: (value) {
+                        if (value == null) return 'Required';
+                        if (!value.contains('Rockstar'))
+                          return 'Must be rockstar';
+                        if (value.length < 15) return 'Min 15 characters';
+
+                        return null;
+                      }),
+                  SizedBox(
+                    height: 20,
                   ),
+                  Input(
+                      placeholder: 'Email',
+                      validator: (value) {
+                        if (value == null) return 'Required';
+                        if (!value.contains('@')) return 'Not valid email';
+                        return null;
+                      }),
                   SizedBox(
                     width: 500,
                     height: 30,
