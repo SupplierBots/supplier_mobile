@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:supplier_mobile/components/drop_box.dart';
 import 'package:supplier_mobile/components/navigation_bar.dart';
 import 'package:supplier_mobile/components/switch.dart';
 
@@ -118,6 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 'Masno: ${_saved ? _masno : ''}',
                 style: TextStyle(color: Colors.white, fontSize: 25),
               ),
+              KlawyButton(),
             ],
           ),
         ),
