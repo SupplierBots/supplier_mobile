@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:supplier_mobile/components/drop_box.dart';
+import 'package:supplier_mobile/components/dropbox_menu_button.dart';
 import 'package:supplier_mobile/components/navigation_bar.dart';
 import 'package:supplier_mobile/components/switch.dart';
 
-import 'playground_screen.dart';
-import 'package:supplier_mobile/constants/colors.dart';
+//import 'playground_screen.dart';
+//import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/components/header.dart';
 import 'package:supplier_mobile/components/input.dart';
 
@@ -18,9 +18,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _formKey = GlobalKey<FormState>();
+  final List<String> items = ["Polska", "Chodaków", "USA", "Czerwonka"];
   bool _masno = false;
   String _name;
   String _email;
+  String _country;
   bool _saved = false;
 
   @override
@@ -90,7 +92,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               SizedBox(
-                height: 30,
+                height: 10,
+              ),
+              DropBoxMenuButton(
+                items: items,
+                onChange: (value) {
+                  setState(() {
+                    _country = value;
+                  });
+                },
+              ),
+              SizedBox(
+                height: 20,
               ),
               RaisedButton.icon(
                 color: Colors.cyan[900],
@@ -98,7 +111,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 label: Text('Submit'),
                 icon: Icon(Icons.save),
                 onPressed: () {
-                  if (!_formKey.currentState.validate()) return;
+                  if (!_formKey.currentState.validate() || _country == null)
+                    return;
                   _formKey.currentState.save();
                   _saved = true;
                 },
@@ -119,7 +133,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 'Masno: ${_saved ? _masno : ''}',
                 style: TextStyle(color: Colors.white, fontSize: 25),
               ),
-              KlawyButton(),
+              Text(
+                'Country: ${_saved ? _country : ''}',
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              ),
             ],
           ),
         ),
