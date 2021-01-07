@@ -15,15 +15,32 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+          scaffoldBackgroundColor: kBackgroundColor,
           fontFamily: 'Lato',
           visualDensity: VisualDensity.adaptivePlatformDensity,
           backgroundColor: kBackgroundColor,
           accentColor: kVioletColor,
           textSelectionColor: kPinkColor),
       initialRoute: HomeScreen.route,
-      routes: {
-        HomeScreen.route: (context) => HomeScreen(),
-        PlaygroundScreen.route: (context) => PlaygroundScreen(),
+      onGenerateRoute: (settings) {
+        Widget Function(BuildContext, Animation<double>, Animation<double>)
+            builder;
+        switch (settings.name) {
+          case HomeScreen.route:
+            builder = (_, __, ___) => HomeScreen();
+            break;
+          case PlaygroundScreen.route:
+            builder = (_, __, ___) => PlaygroundScreen();
+            break;
+          default:
+            throw Exception('Invalid route: ${settings.name}');
+        }
+        // You can also return a PageRouteBuilder and
+        // define custom transitions between pages
+        return PageRouteBuilder(
+          pageBuilder: builder,
+          settings: settings,
+        );
       },
     );
   }

@@ -2,46 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 
-class BottomBox extends StatelessWidget {
-  const BottomBox(
-      {Key key,
-      this.kutas,
-      this.choosenColor,
-      this.choosenIconColor,
-      this.route})
-      : super(key: key);
-  final IconData kutas;
-  final Color choosenColor;
-  final Color choosenIconColor;
+class NavigationButton extends StatelessWidget {
+  const NavigationButton({
+    Key key,
+    this.icon,
+    this.route,
+  }) : super(key: key);
+
+  final IconData icon;
   final String route;
 
   @override
   Widget build(BuildContext context) {
+    bool isActiveRoute = ModalRoute.of(context).settings.name == route;
     return Expanded(
-      child: Container(
-        height: 100,
-        color: choosenColor,
-        child: GestureDetector(
-          onTap: () {
-            Navigator.popAndPushNamed(context, route);
-          },
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pushReplacementNamed(context, route);
+        },
+        child: Container(
+          height: 100,
+          color: isActiveRoute ? kTetiaryBackground : kSecondaryBackground,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                height: 6.0,
-                decoration: BoxDecoration(gradient: kPrimaryGradient),
+                height: 4.0,
+                decoration: BoxDecoration(
+                    gradient: isActiveRoute ? kPrimaryLRGradient : null),
               ),
               SizedBox(
-                height: 18,
+                height: 16,
               ),
-              ShaderMask(
-                shaderCallback: (bounds) {
-                  return kPrimaryGradient.createShader(bounds);
-                },
+              Padding(
+                padding: EdgeInsets.all(3),
                 child: Icon(
-                  kutas,
-                  color: Colors.white,
+                  icon,
+                  color: isActiveRoute ? kLightPurple : kDarkGrey,
                 ),
               ),
             ],

@@ -25,101 +25,103 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundColor,
+      bottomNavigationBar: NavigationBar(),
       body: Form(
         key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 100,
-            ),
-            Header(
-              text: 'Billing data',
-              underlineWidth: 240,
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Input(
-              placeholder: 'Name',
-              initialValue: 'Initial John',
-              validator: (value) {
-                if (value == null) return 'Required';
-                if (value.length < 6) return 'Min 6 characters';
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 100,
+              ),
+              Header(
+                text: 'Billing data',
+                underlineWidth: 240,
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Input(
+                placeholder: 'Name',
+                initialValue: 'Initial John',
+                validator: (value) {
+                  if (value == null) return 'Required';
+                  if (value.length < 6) return 'Min 6 characters';
 
-                return null;
-              },
-              onSaved: (value) {
-                setState(() {
-                  _name = value;
-                });
-              },
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Input(
-              placeholder: 'Email',
-              type: TextInputType.emailAddress,
-              validator: (value) {
-                if (value == null) return 'Required';
-                if (!value.contains('@')) return 'Not valid email';
-                return null;
-              },
-              onSaved: (value) {
-                setState(() {
-                  _email = value;
-                });
-              },
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Switcher(
-              name: 'Masno',
-              value: _masno,
-              onToggle: (v) {
-                setState(() {
-                  _masno = v;
-                });
-              },
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            RaisedButton.icon(
-              color: Colors.cyan[900],
-              textColor: Colors.white,
-              label: Text('Submit'),
-              icon: Icon(Icons.save),
-              onPressed: () {
-                if (!_formKey.currentState.validate()) return;
-                _formKey.currentState.save();
-                _saved = true;
-              },
-            ),
-            SizedBox(
-              width: 500,
-              height: 30,
-            ),
-            Text(
-              'Name: ${_name ?? ''}',
-              style: TextStyle(color: Colors.white, fontSize: 25),
-            ),
-            Text(
-              'Email: ${_email ?? ''}',
-              style: TextStyle(color: Colors.white, fontSize: 25),
-            ),
-            Text(
-              'Masno: ${_saved ? _masno : ''}',
-              style: TextStyle(color: Colors.white, fontSize: 25),
-            ),
-          ],
+                  return null;
+                },
+                onSaved: (value) {
+                  setState(() {
+                    _name = value;
+                  });
+                },
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Input(
+                placeholder: 'Email',
+                type: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value == null) return 'Required';
+                  if (!value.contains('@')) return 'Not valid email';
+                  return null;
+                },
+                onSaved: (value) {
+                  setState(() {
+                    _email = value;
+                  });
+                },
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Switcher(
+                name: 'Masno',
+                value: _masno,
+                onToggle: (v) {
+                  setState(() {
+                    _masno = v;
+                  });
+                },
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              RaisedButton.icon(
+                color: Colors.cyan[900],
+                textColor: Colors.white,
+                label: Text('Submit'),
+                icon: Icon(Icons.save),
+                onPressed: () {
+                  if (!_formKey.currentState.validate()) return;
+                  _formKey.currentState.save();
+                  _saved = true;
+                },
+              ),
+              SizedBox(
+                width: 500,
+                height: 30,
+              ),
+              Text(
+                'Name: ${_name ?? ''}',
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              ),
+              Text(
+                'Email: ${_email ?? ''}',
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              ),
+              Text(
+                'Masno: ${_saved ? _masno : ''}',
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              ),
+            ],
+          ),
         ),
       ),
-      bottomNavigationBar: NavigationBar(),
     );
   }
 }

@@ -16,3 +16,8 @@ const kPrimaryGradient = LinearGradient(
 const kRedGradient = LinearGradient(
   colors: [Color(0xFFD20000), Color(0xFF890000)],
 );
+
+const kPrimaryLRGradient = LinearGradient(
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    colors: [kPinkColor, kVioletColor]);

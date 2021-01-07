@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:supplier_mobile/components/navigation_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:provider/provider.dart';
 import '../constants/colors.dart';
@@ -23,7 +24,7 @@ class _PlaygroundScreenState extends State<PlaygroundScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundColor,
+      bottomNavigationBar: NavigationBar(),
       body: SafeArea(
         child: ChangeNotifierProvider(
           create: (_) => Runner(),
