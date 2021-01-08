@@ -9,6 +9,7 @@ import 'package:supplier_mobile/components/header.dart';
 import 'package:supplier_mobile/components/input.dart';
 import 'package:supplier_mobile/components/top_bar.dart';
 import 'package:supplier_mobile/constants/colors.dart';
+import 'package:supplier_mobile/presentation/my_flutter_app_icons.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String route = "home";
@@ -30,25 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(
-        height: 80,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                Container(
-                  child: Text(
-                    'Profiles',
-                    style: TextStyle(color: kLightPurple, fontSize: 25),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+        isEditing: true,
+        profileName: 'Juras PKO',
       ),
-      // appBar: TopBar(),
-
       bottomNavigationBar: NavigationBar(),
       body: Form(
         key: _formKey,
@@ -59,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 100,
+                height: 70,
               ),
               Header(
                 text: 'Billing data',
@@ -68,38 +53,38 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 30,
               ),
-              Input(
-                placeholder: 'Name',
-                initialValue: 'Initial John',
-                validator: (value) {
-                  if (value == null) return 'Required';
-                  if (value.length < 6) return 'Min 6 characters';
+              // Input(
+              //   placeholder: 'Name',
+              //   initialValue: 'Initial John',
+              //   validator: (value) {
+              //     if (value == null) return 'Required';
+              //     if (value.length < 6) return 'Min 6 characters';
 
-                  return null;
-                },
-                onSaved: (value) {
-                  setState(() {
-                    _name = value;
-                  });
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Input(
-                placeholder: 'Email',
-                type: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null) return 'Required';
-                  if (!value.contains('@')) return 'Not valid email';
-                  return null;
-                },
-                onSaved: (value) {
-                  setState(() {
-                    _email = value;
-                  });
-                },
-              ),
+              //     return null;
+              //   },
+              //   onSaved: (value) {
+              //     setState(() {
+              //       _name = value;
+              //     });
+              //   },
+              // ),
+              // SizedBox(
+              //   height: 20,
+              // ),
+              // Input(
+              //   placeholder: 'Email',
+              //   type: TextInputType.emailAddress,
+              //   validator: (value) {
+              //     if (value == null) return 'Required';
+              //     if (!value.contains('@')) return 'Not valid email';
+              //     return null;
+              //   },
+              //   onSaved: (value) {
+              //     setState(() {
+              //       _email = value;
+              //     });
+              //   },
+              // ),
               SizedBox(
                 height: 15,
               ),
