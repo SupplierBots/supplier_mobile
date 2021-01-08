@@ -5,6 +5,7 @@ import 'package:supplier_mobile/components/form/form_dropdown.dart';
 import 'package:supplier_mobile/components/form/form_text_field.dart';
 import 'package:supplier_mobile/components/navigation_bar.dart';
 import 'package:supplier_mobile/components/form/form_switch.dart';
+import 'package:supplier_mobile/components/top_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String route = "home";
@@ -19,6 +20,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: TopBar(
+        isEditing: true,
+        profileName: 'Juras PKO',
+      ),
       bottomNavigationBar: NavigationBar(),
       body: SafeArea(
         child: FormBuilder(
