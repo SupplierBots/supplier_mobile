@@ -69,7 +69,8 @@ class _DropBoxMenuButtonState extends State<DropBoxMenuButton> {
       },
       decoration: BoxDecoration(
         color: kSecondaryBackground,
-        border: true
+        border: false
+            // ignore: dead_code
             ? Border.all(color: kPinkColor)
             : Border.all(color: kSecondaryBackground),
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
