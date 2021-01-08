@@ -6,6 +6,7 @@ import 'package:supplier_mobile/components/form/form_text_field.dart';
 import 'package:supplier_mobile/components/navigation_bar.dart';
 import 'package:supplier_mobile/components/form/form_switch.dart';
 import 'package:supplier_mobile/components/top_bar.dart';
+import 'package:supplier_mobile/components/profile_bar_details.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String route = "home";
@@ -21,8 +22,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(
-        isEditing: true,
-        profileName: 'Juras PKO',
+        content: ProfileBarDetails(
+          isEditing: false,
+          profileName: 'Juras zjeb',
+        ),
       ),
       bottomNavigationBar: NavigationBar(),
       body: SafeArea(
@@ -31,6 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
           autovalidateMode: AutovalidateMode.disabled,
           child: Column(
             children: [
+              SizedBox(
+                height: 30,
+              ),
               FormTextField(
                 name: 'test',
                 placeholder: 'xd',
