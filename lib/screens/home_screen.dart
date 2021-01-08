@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:supplier_mobile/components/dropbox_menu_button.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:supplier_mobile/components/form/form_dropdown.dart';
+import 'package:supplier_mobile/components/form/form_text_field.dart';
 import 'package:supplier_mobile/components/navigation_bar.dart';
-import 'package:supplier_mobile/components/switch.dart';
-
-//import 'playground_screen.dart';
-//import 'package:supplier_mobile/constants/colors.dart';
-import 'package:supplier_mobile/components/header.dart';
-import 'package:supplier_mobile/components/input.dart';
+import 'package:supplier_mobile/components/form/form_switch.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String route = "home";
@@ -17,125 +14,62 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final List<String> items = ["Polska", "Chodaków", "USA", "Czerwonka"];
-  bool _masno = false;
-  String _name;
-  String _email;
-  String _country;
-  bool _saved = false;
+  final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: NavigationBar(),
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+      body: SafeArea(
+        child: FormBuilder(
+          key: _formKey,
+          autovalidateMode: AutovalidateMode.disabled,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 100,
+              FormTextField(
+                name: 'test',
+                placeholder: 'xd',
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.email(context,
+                      errorText: 'Invalid email'),
+                  FormBuilderValidators.required(context)
+                ]),
               ),
-              Header(
-                text: 'Billing data',
-                underlineWidth: 240,
+              FormTextField(
+                name: 'tescior2',
+                placeholder: 'xd2',
+                validator: FormBuilderValidators.required(context),
               ),
-              SizedBox(
-                height: 30,
-              ),
-              Input(
-                placeholder: 'Name',
-                initialValue: 'Initial John',
-                validator: (value) {
-                  if (value == null) return 'Required';
-                  if (value.length < 6) return 'Min 6 characters';
-
+              FormSwitch(
+                name: 'test232',
+                initialValue: true,
+                validator: (val) {
+                  if (_formKey.currentState.fields['tescior2'].value.length <
+                      5) {
+                    return 'Kindly specify your language';
+                  }
                   return null;
                 },
-                onSaved: (value) {
-                  setState(() {
-                    _name = value;
-                  });
-                },
               ),
-              SizedBox(
-                height: 20,
+              FormDropdown(
+                name: 'dropdown',
+                items: ['x', 'y', 'z'],
+                placeholder: 'Select x',
+                isRequired: true,
               ),
-              Input(
-                placeholder: 'Email',
-                type: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null) return 'Required';
-                  if (!value.contains('@')) return 'Not valid email';
-                  return null;
-                },
-                onSaved: (value) {
-                  setState(() {
-                    _email = value;
-                  });
-                },
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Switcher(
-                name: 'Masno',
-                value: _masno,
-                onToggle: (v) {
-                  setState(() {
-                    _masno = v;
-                  });
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              DropBoxMenuButton(
-                items: items,
-                onChange: (value) {
-                  setState(() {
-                    _country = value;
-                  });
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              RaisedButton.icon(
-                color: Colors.cyan[900],
-                textColor: Colors.white,
-                label: Text('Submit'),
-                icon: Icon(Icons.save),
+              MaterialButton(
+                color: Theme.of(context).accentColor,
+                child: Text(
+                  "Submit",
+                  style: TextStyle(color: Colors.white),
+                ),
                 onPressed: () {
-                  if (!_formKey.currentState.validate() || _country == null)
-                    return;
-                  _formKey.currentState.save();
-                  _saved = true;
+                  if (_formKey.currentState.saveAndValidate()) {
+                    print(_formKey.currentState.value);
+                  } else {
+                    print("validation failed");
+                  }
                 },
-              ),
-              SizedBox(
-                width: 500,
-                height: 30,
-              ),
-              Text(
-                'Name: ${_name ?? ''}',
-                style: TextStyle(color: Colors.white, fontSize: 25),
-              ),
-              Text(
-                'Email: ${_email ?? ''}',
-                style: TextStyle(color: Colors.white, fontSize: 25),
-              ),
-              Text(
-                'Masno: ${_saved ? _masno : ''}',
-                style: TextStyle(color: Colors.white, fontSize: 25),
-              ),
-              Text(
-                'Country: ${_saved ? _country : ''}',
-                style: TextStyle(color: Colors.white, fontSize: 25),
               ),
             ],
           ),

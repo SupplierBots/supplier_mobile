@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 
-class DropBoxItem extends StatelessWidget {
-  DropBoxItem(this.selectedItem);
+class FormDropdownItem extends StatelessWidget {
+  FormDropdownItem(this.item);
 
-  final String selectedItem;
+  final String item;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class DropBoxItem extends StatelessWidget {
             children: <Widget>[
               Flexible(
                 child: Text(
-                  selectedItem,
+                  item,
                   style: TextStyle(color: kLightPurple),
                   overflow: TextOverflow.ellipsis,
                 ),
