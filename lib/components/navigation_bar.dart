@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/screens/home_screen.dart';
 import 'package:supplier_mobile/screens/playground_screen.dart';
-import '../presentation/my_flutter_app_icons.dart';
+import '../presentation/CustomIcons.dart';
 import 'navigation_button.dart';
 
 class NavigationBar extends StatelessWidget {
@@ -18,19 +18,19 @@ class NavigationBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             NavigationButton(
-              icon: MyFlutterApp.dashboard,
+              icon: CustomIcons.dashboard,
               route: HomeScreen.route,
             ),
             NavigationButton(
-              icon: MyFlutterApp.profiles,
+              icon: CustomIcons.profiles,
               route: PlaygroundScreen.route,
             ),
             NavigationButton(
-              icon: MyFlutterApp.tshirt,
+              icon: CustomIcons.tshirt,
               //route: ,
             ),
             NavigationButton(
-              icon: MyFlutterApp.settings,
+              icon: CustomIcons.settings,
               //route: ,
             ),
           ],

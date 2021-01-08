@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/constants/colors.dart';
-import 'package:supplier_mobile/presentation/my_flutter_app_icons.dart';
+import 'package:supplier_mobile/presentation/CustomIcons.dart';
 
 class TopBar extends PreferredSize {
   TopBar({
@@ -12,7 +12,7 @@ class TopBar extends PreferredSize {
   final bool isEditing;
 
   @override
-  Size get preferredSize => Size.fromHeight(110);
+  Size get preferredSize => Size.fromHeight(120);
 
   @override
   Widget build(BuildContext context) {
@@ -22,48 +22,44 @@ class TopBar extends PreferredSize {
       child: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: ShaderMask(
+            ShaderMask(
+              child: Padding(
+                padding: EdgeInsets.all(8),
                 child: Icon(
-                  MyFlutterApp.logo,
+                  CustomIcons.logo,
                   color: Colors.white,
-                  size: 50,
+                  size: 45,
                 ),
-                shaderCallback: (Rect bounds) {
-                  return kPrimaryGradient.createShader(bounds);
-                },
               ),
+              shaderCallback: (Rect bounds) {
+                return kPrimaryGradient.createShader(bounds);
+              },
             ),
             isEditing
-                ? Padding(
-                    padding: EdgeInsets.only(bottom: 8.0),
-                    child: Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Profiles',
-                              style: TextStyle(
-                                  color: kLightPurple,
-                                  fontSize: 20,
-                                  letterSpacing: 1.1),
-                            ),
-                            Text(
-                              'Editing: $profileName',
-                              style: TextStyle(
-                                  color: kLightPurple,
-                                  fontSize: 16,
-                                  letterSpacing: 1.1),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                ? Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Profiles',
+                            style: TextStyle(
+                                color: kLightPurple,
+                                fontSize: 20,
+                                letterSpacing: 1.1),
+                          ),
+                          Text(
+                            'Editing: $profileName',
+                            style: TextStyle(
+                                color: kLightPurple,
+                                fontSize: 16,
+                                letterSpacing: 1.1),
+                          ),
+                        ],
+                      ),
+                    ],
                   )
                 : Padding(
                     padding: EdgeInsets.only(bottom: 5.0),
