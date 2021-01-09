@@ -5,7 +5,7 @@ import 'package:supplier_mobile/components/top_bar.dart';
 import 'package:supplier_mobile/constants/typography.dart';
 
 class SettingsScreen extends StatefulWidget {
-  static const String route = "settings";
+  static const String route = 'settings';
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();

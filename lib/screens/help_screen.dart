@@ -5,7 +5,7 @@ import 'package:supplier_mobile/components/top_bar.dart';
 import 'package:supplier_mobile/constants/typography.dart';
 
 class HelpScreen extends StatefulWidget {
-  static const String route = "help";
+  static const String route = 'help';
 
   @override
   _HelpScreenState createState() => _HelpScreenState();

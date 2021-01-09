@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:supplier_mobile/screens/help_screen.dart';
 import 'package:supplier_mobile/screens/playground_screen.dart';
+import 'package:supplier_mobile/screens/profiles_screen.dart';
+import 'package:supplier_mobile/screens/settings_screen.dart';
+import 'package:supplier_mobile/screens/tasks_screen.dart';
 
 import 'constants/colors.dart';
 import 'screens/home_screen.dart';
@@ -32,8 +36,17 @@ class MyApp extends StatelessWidget {
           case HomeScreen.route:
             builder = (_, __, ___) => HomeScreen();
             break;
-          case PlaygroundScreen.route:
-            builder = (_, __, ___) => PlaygroundScreen();
+          case TasksScreen.route:
+            builder = (_, __, ___) => TasksScreen();
+            break;
+          case ProfilesScreen.route:
+            builder = (_, __, ___) => ProfilesScreen();
+            break;
+          case SettingsScreen.route:
+            builder = (_, __, ___) => SettingsScreen();
+            break;
+          case HelpScreen.route:
+            builder = (_, __, ___) => HelpScreen();
             break;
           default:
             throw Exception('Invalid route: ${settings.name}');
