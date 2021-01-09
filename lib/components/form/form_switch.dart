@@ -134,12 +134,12 @@ class _FormSwitchState extends State<FormSwitch>
                     },
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 15),
+                    padding: EdgeInsets.only(left: 10),
                     child: Text(
                       widget.name,
                       style: TextStyle(
                         color: kLighGrey,
-                        fontSize: 23,
+                        fontSize: 16,
                       ),
                     ),
                   ),

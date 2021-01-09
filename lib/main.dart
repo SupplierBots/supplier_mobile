@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         highlightColor: Colors.transparent,
       ),
       initialRoute: HomeScreen.route,
-      onGenerateRoute: (settings) {
+      onGenerateRoute: (RouteSettings settings) {
         Widget Function(BuildContext, Animation<double>, Animation<double>)
             builder;
         switch (settings.name) {
@@ -38,8 +38,7 @@ class MyApp extends StatelessWidget {
           default:
             throw Exception('Invalid route: ${settings.name}');
         }
-        // You can also return a PageRouteBuilder and
-        // define custom transitions between pages
+
         return PageRouteBuilder(
           pageBuilder: builder,
           settings: settings,

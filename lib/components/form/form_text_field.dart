@@ -8,19 +8,15 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 
 class FormTextField extends FormBuilderField<String> {
-  final String placeholder;
-  final TextInputType type;
-  final bool obscure;
-
   FormTextField({
     Key key,
     @required String name,
     FormFieldValidator<String> validator,
-    String initialValue,
     ValueTransformer<String> valueTransformer,
     @required this.placeholder,
     this.obscure = false,
     this.type = TextInputType.text,
+    this.initialValue,
   }) : super(
           key: key,
           name: name,
@@ -28,7 +24,7 @@ class FormTextField extends FormBuilderField<String> {
           valueTransformer: valueTransformer,
           autovalidateMode: AutovalidateMode.disabled,
           builder: (FormFieldState<String> field) {
-            final state = field as _FormTextFieldState;
+            final _FormTextFieldState state = field as _FormTextFieldState;
 
             LinearGradient getGradient() {
               if (state._isFocused) {
@@ -99,6 +95,11 @@ class FormTextField extends FormBuilderField<String> {
           },
         );
 
+  final String placeholder;
+  final String initialValue;
+  final TextInputType type;
+  final bool obscure;
+
   @override
   _FormTextFieldState createState() => _FormTextFieldState();
 }
@@ -112,7 +113,7 @@ class _FormTextFieldState extends FormBuilderFieldState<FormTextField, String> {
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: initialValue);
+    _controller = TextEditingController(text: widget.initialValue);
     _controller.addListener(_handleControllerChanged);
     effectiveFocusNode.addListener(validateOnFocusChange);
   }

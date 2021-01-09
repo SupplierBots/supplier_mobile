@@ -23,66 +23,86 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: TopBar(
         content: ProfileBarDetails(
-          isEditing: false,
+          isEditing: true,
           profileName: 'Juras zjeb',
         ),
       ),
       bottomNavigationBar: const NavigationBar(),
       body: SafeArea(
-        child: FormBuilder(
-          key: _formKey,
-          autovalidateMode: AutovalidateMode.disabled,
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 30,
-              ),
-              FormTextField(
-                name: 'test',
-                placeholder: 'xd',
-                validator: FormBuilderValidators.compose([
-                  FormBuilderValidators.email(context,
-                      errorText: 'Invalid email'),
-                  FormBuilderValidators.required(context)
-                ]),
-              ),
-              FormTextField(
-                name: 'tescior2',
-                placeholder: 'xd2',
-                validator: FormBuilderValidators.required(context),
-              ),
-              FormSwitch(
-                name: 'test232',
-                initialValue: true,
-                validator: (bool val) {
-                  // if (_formKey.currentState.fields['tescior2'].value.length <
-                  //     5) {
-                  //   return 'Kindly specify your language';
-                  // }
-                  return null;
-                },
-              ),
-              const FormDropdown(
-                name: 'dropdown',
-                items: ['x', 'y', 'z'],
-                placeholder: 'Select x',
-                isRequired: true,
-              ),
-              MaterialButton(
-                color: Theme.of(context).accentColor,
-                child: const Text(
-                  'Submit',
-                  style: TextStyle(color: Colors.white),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: FormBuilder(
+            key: _formKey,
+            autovalidateMode: AutovalidateMode.disabled,
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
                 ),
-                onPressed: () {
-                  if (_formKey.currentState.saveAndValidate()) {
-                    print(_formKey.currentState.value);
-                  } else {
-                    print('validation failed');
-                  }
-                },
-              ),
-            ],
+                FormTextField(
+                  name: 'test',
+                  placeholder: 'xd',
+                  validator: FormBuilderValidators.compose([
+                    FormBuilderValidators.email(context,
+                        errorText: 'Invalid email'),
+                    FormBuilderValidators.required(context)
+                  ]),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                FormTextField(
+                  name: 'tescior2',
+                  placeholder: 'xd2',
+                  validator: FormBuilderValidators.required(context),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                FormTextField(
+                  name: 'tescior23',
+                  placeholder: 'xd2',
+                  validator: FormBuilderValidators.required(context),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                FormSwitch(
+                  name: 'Test232',
+                  initialValue: true,
+                  validator: (bool val) {
+                    // if (_formKey.currentState.fields['tescior2'].value.length <
+                    //     5) {
+                    //   return 'Kindly specify your language';
+                    // }
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const FormDropdown(
+                  name: 'dropdown',
+                  items: ['x', 'y', 'z'],
+                  placeholder: 'Select x',
+                  isRequired: true,
+                ),
+                MaterialButton(
+                  color: Theme.of(context).accentColor,
+                  child: const Text(
+                    'Submit',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState.saveAndValidate()) {
+                      print(_formKey.currentState.value);
+                    } else {
+                      print('validation failed');
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
