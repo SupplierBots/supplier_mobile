@@ -40,13 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 20,
                 ),
                 FormTextField(
-                  name: 'test',
-                  placeholder: 'xd',
-                  validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.email(context,
-                        errorText: 'Invalid email'),
-                    FormBuilderValidators.required(context)
-                  ]),
+                  name: 'firstName',
+                  placeholder: 'First Name',
                 ),
                 const SizedBox(
                   height: 10,

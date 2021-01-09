@@ -1,14 +1,13 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:supplier_mobile/components/form/form_text_field.dart';
+import 'package:supplier_mobile/components/header.dart';
 import 'package:supplier_mobile/components/item_color.dart';
 import 'package:supplier_mobile/components/navigation_bar.dart';
 import 'package:supplier_mobile/components/profile_bar_details.dart';
 import 'package:supplier_mobile/components/top_bar.dart';
+import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/constants/typography.dart';
-import 'package:supplier_mobile/models/profile.dart';
-import 'package:supplier_mobile/state/profiles_state.dart';
 
 class ProfilesScreen extends StatefulWidget {
   static const String route = 'profiles';
@@ -18,11 +17,10 @@ class ProfilesScreen extends StatefulWidget {
 }
 
 class _ProfilesScreenState extends State<ProfilesScreen> {
+  final GlobalKey<FormBuilderState> _formalkey = GlobalKey<FormBuilderState>();
+
   @override
   Widget build(BuildContext context) {
-    final ProfilesState profilesState =
-        Provider.of<ProfilesState>(context, listen: false);
-
     return Scaffold(
       appBar: TopBar(
         content: Text(
@@ -31,40 +29,119 @@ class _ProfilesScreenState extends State<ProfilesScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Consumer<ProfilesState>(
-          builder: (BuildContext context, ProfilesState state, Widget child) {
-            final List<ItemColor> items = <ItemColor>[];
-            state.profiles.forEach((String key, Profile value) {
-              items.add(ItemColor(itemColor: key + value.firstName));
-            });
-
-            return Column(children: items);
-          },
+        padding: const EdgeInsets.all(10),
+        child: FormBuilder(
+          key: _formalkey,
+          autovalidateMode: AutovalidateMode.disabled,
+          child: ListView(
+            children: [
+              Header(
+                underlineWidth: 250,
+                text: 'Billing details',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              FormTextField(
+                name: 'firstName',
+                placeholder: 'First Name',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              FormTextField(
+                name: 'lastName',
+                placeholder: 'Last Name',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              FormTextField(
+                name: 'email',
+                placeholder: 'Email',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              FormTextField(
+                name: 'phoneNumber',
+                placeholder: 'Phone Number',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              FormTextField(
+                name: 'address',
+                placeholder: 'Address',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              FormTextField(
+                name: 'addressDetails',
+                placeholder: 'Address Details',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              FormTextField(
+                name: 'city',
+                placeholder: 'City',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              FormTextField(
+                name: 'postcode',
+                placeholder: 'Post Code',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              FormTextField(
+                name: 'country',
+                placeholder: 'Country',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              FormTextField(
+                name: 'creditCardType',
+                placeholder: 'Credit Card Type',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              FormTextField(
+                name: 'creditCardNumber',
+                placeholder: 'Credit Card Number',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              FormTextField(
+                name: 'expiryMonth',
+                placeholder: 'Expiry Month',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              FormTextField(
+                name: 'expiryYear',
+                placeholder: 'Expiry Year',
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              FormTextField(
+                name: 'securityCode',
+                placeholder: 'Security Code',
+              ),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          final Profile profile = Profile(
-            firstName: 'Juras',
-            lastName: 'Debil',
-            email: 'jd@gmail.com',
-            phoneNumber: '997',
-            address: 'Slowianska 5',
-            addressDetails: 'Apt1',
-            city: 'Sochaczew',
-            postcode: '96-500',
-            country: 'Poland',
-            creditCardType: 'Mastercard',
-            creditCardNumber: '4444 5555 6666 7777',
-            expiryMonth: '10',
-            expiryYear: '2021',
-            securityCode: '542',
-          );
-          profilesState.addProfile(Random().nextInt(300).toString(), profile);
-        },
-      ),
-      bottomNavigationBar: NavigationBar(),
+      bottomNavigationBar: const NavigationBar(),
     );
   }
 }
