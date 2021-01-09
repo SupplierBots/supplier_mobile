@@ -7,10 +7,12 @@ class NavigationButton extends StatelessWidget {
     Key key,
     this.icon,
     this.route,
+    this.iconSize,
   }) : super(key: key);
 
   final IconData icon;
   final String route;
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +33,21 @@ class NavigationButton extends StatelessWidget {
                 decoration: BoxDecoration(
                     gradient: isActiveRoute ? kPrimaryLRGradient : null),
               ),
-              SizedBox(
-                height: 16,
-              ),
-              Padding(
-                padding: EdgeInsets.all(3),
-                child: Icon(
-                  icon,
-                  color: isActiveRoute ? kLightPurple : kDarkGrey,
+              // SizedBox(
+              //   height: 16,
+              // ),
+              Spacer(),
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.all(3),
+                  child: Icon(
+                    icon,
+                    color: isActiveRoute ? kLightPurple : kDarkGrey,
+                    size: iconSize,
+                  ),
                 ),
               ),
+              Spacer(),
             ],
           ),
         ),

@@ -22,7 +22,7 @@ class TopBar extends PreferredSize {
               child: Padding(
                 padding: EdgeInsets.all(8),
                 child: Icon(
-                  CustomIcons.logo,
+                  CustomIcons.union,
                   color: Colors.white,
                   size: 45,
                 ),
