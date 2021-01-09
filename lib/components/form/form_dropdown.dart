@@ -26,7 +26,7 @@ class FormDropdown extends StatefulWidget {
 
 class _FormDropdownState extends State<FormDropdown> {
   String _selectedItem;
-  bool _isOpened = false;
+  bool _hasError = false;
 
   @override
   void initState() {
@@ -36,24 +36,25 @@ class _FormDropdownState extends State<FormDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderField(
+    return FormBuilderField<String>(
       name: widget.name,
-      validator: (value) {
+      validator: (String value) {
         if (widget.isRequired && _selectedItem == widget.placeholder) {
+          setState(() {
+            _hasError = true;
+          });
           return 'Required';
         }
         return widget.validator?.call(value);
       },
       builder: (FormFieldState<String> field) {
-        return MenuButton(
-          child: FormDropdownItem(_selectedItem),
+        return MenuButton<String>(
           items: widget.items,
           topDivider: false,
           popupHeight: 200,
-          scrollPhysics: ClampingScrollPhysics(),
-          itemBuilder: (value) => Container(
+          scrollPhysics: const ClampingScrollPhysics(),
+          itemBuilder: (String value) => Container(
             color: kSecondaryBackground,
-            width: 83,
             height: 40,
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -61,28 +62,26 @@ class _FormDropdownState extends State<FormDropdown> {
               //decoration: BoxDecoration(gradient: kPrimaryGradient),
               child: value == _selectedItem
                   ? ShaderMask(
-                      shaderCallback: (bounds) => kPrimaryGradient.createShader(
+                      shaderCallback: (Rect bounds) =>
+                          kPrimaryGradient.createShader(
                         Rect.fromLTWH(0, 0, bounds.width, bounds.height),
                       ),
                       child: Text(
                         value,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                         ),
                       ),
                     )
                   : Text(
                       value,
-                      style: TextStyle(color: kLighGrey),
+                      style: const TextStyle(color: kLighGrey),
                     ),
             ),
           ),
-          toggledChild: Container(
-            color: kSecondaryBackground,
-            child: FormDropdownItem(_selectedItem),
-          ),
-          divider: SizedBox(),
-          onItemSelected: (value) {
+          toggledChild: FormDropdownItem(_selectedItem),
+          divider: const SizedBox(),
+          onItemSelected: (String value) {
             setState(
               () {
                 _selectedItem = value;
@@ -92,19 +91,14 @@ class _FormDropdownState extends State<FormDropdown> {
           },
           decoration: BoxDecoration(
             color: kSecondaryBackground,
-            border: false
-                // ignore: dead_code
-                ? Border.all(color: kPinkColor)
-                : Border.all(color: kSecondaryBackground),
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            border: Border.all(color: kSecondaryBackground),
+            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
             //color: kSecondaryBackground,
           ),
-          onMenuButtonToggle: (value) {
-            setState(() {
-              print(value);
-              _isOpened = value;
-            });
+          onMenuButtonToggle: (bool value) {
+            setState(() {});
           },
+          child: FormDropdownItem(_selectedItem),
         );
       },
     );

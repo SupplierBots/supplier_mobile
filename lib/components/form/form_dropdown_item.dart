@@ -28,14 +28,12 @@ class FormDropdownItem extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                // width: 12,
-                // height: 17,
                 child: FittedBox(
                   fit: BoxFit.fill,
                   child: Icon(
                     Icons.expand_more,
                     size: 35,
-                    color: kPinkColor,
+                    color: kDarkGrey,
                   ),
                 ),
               ),

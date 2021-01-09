@@ -28,7 +28,7 @@ class FormSwitch extends StatefulWidget {
 
 class _FormSwitchState extends State<FormSwitch>
     with SingleTickerProviderStateMixin {
-  Animation _toggleAnimation;
+  Animation<Alignment> _toggleAnimation;
   AnimationController _animationController;
   bool value;
 

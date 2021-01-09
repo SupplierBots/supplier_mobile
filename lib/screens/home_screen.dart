@@ -9,14 +9,14 @@ import 'package:supplier_mobile/components/top_bar.dart';
 import 'package:supplier_mobile/components/profile_bar_details.dart';
 
 class HomeScreen extends StatefulWidget {
-  static const String route = "home";
+  static const String route = 'home';
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _formKey = GlobalKey<FormBuilderState>();
+  final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +27,14 @@ class _HomeScreenState extends State<HomeScreen> {
           profileName: 'Juras zjeb',
         ),
       ),
-      bottomNavigationBar: NavigationBar(),
+      bottomNavigationBar: const NavigationBar(),
       body: SafeArea(
         child: FormBuilder(
           key: _formKey,
           autovalidateMode: AutovalidateMode.disabled,
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               FormTextField(
@@ -54,15 +54,15 @@ class _HomeScreenState extends State<HomeScreen> {
               FormSwitch(
                 name: 'test232',
                 initialValue: true,
-                validator: (val) {
-                  if (_formKey.currentState.fields['tescior2'].value.length <
-                      5) {
-                    return 'Kindly specify your language';
-                  }
+                validator: (bool val) {
+                  // if (_formKey.currentState.fields['tescior2'].value.length <
+                  //     5) {
+                  //   return 'Kindly specify your language';
+                  // }
                   return null;
                 },
               ),
-              FormDropdown(
+              const FormDropdown(
                 name: 'dropdown',
                 items: ['x', 'y', 'z'],
                 placeholder: 'Select x',
@@ -70,15 +70,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               MaterialButton(
                 color: Theme.of(context).accentColor,
-                child: Text(
-                  "Submit",
+                child: const Text(
+                  'Submit',
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
                   if (_formKey.currentState.saveAndValidate()) {
                     print(_formKey.currentState.value);
                   } else {
-                    print("validation failed");
+                    print('validation failed');
                   }
                 },
               ),

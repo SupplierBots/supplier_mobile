@@ -15,12 +15,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-          scaffoldBackgroundColor: kBackgroundColor,
-          fontFamily: 'Lato',
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          backgroundColor: kBackgroundColor,
-          accentColor: kVioletColor,
-          textSelectionColor: kPinkColor),
+        scaffoldBackgroundColor: kBackgroundColor,
+        fontFamily: 'Lato',
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        backgroundColor: kBackgroundColor,
+        accentColor: kVioletColor,
+        textSelectionColor: kPinkColor,
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+      ),
       initialRoute: HomeScreen.route,
       onGenerateRoute: (settings) {
         Widget Function(BuildContext, Animation<double>, Animation<double>)
