@@ -13,7 +13,17 @@ class TopBar extends PreferredSize {
   Widget build(BuildContext context) {
     return Container(
       height: preferredSize.height,
-      color: kSecondaryBackground,
+      decoration: BoxDecoration(
+        color: kSecondaryBackground,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            spreadRadius: 10,
+            blurRadius: 10,
+            offset: Offset(0, 1), // changes position of shadow
+          ),
+        ],
+      ),
       child: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
