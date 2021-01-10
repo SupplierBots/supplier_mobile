@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
         ),
-        initialRoute: HomeScreen.route,
+        initialRoute: ProfilesScreen.route,
         onGenerateRoute: (RouteSettings settings) {
           Widget Function(BuildContext, Animation<double>, Animation<double>)
               builder;
