@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/components/form/form_text_field.dart';
 import 'package:supplier_mobile/components/header.dart';
+import 'package:supplier_mobile/components/primary_button.dart';
+import 'package:supplier_mobile/components/secondary_button.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/presentation/CustomIcons.dart';
 
@@ -79,22 +81,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 padding: EdgeInsets.only(top: 25, bottom: 25),
                 child: FormTextField(name: null, placeholder: 'Password'),
               ),
-              GestureDetector(
-                child: SizedBox(
-                  width: 180,
-                  height: 50,
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      gradient:
-                          LinearGradient(colors: [kPinkColor, kVioletColor]),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(7),
-                      ),
-                    ),
-                    child: Text('Login'),
-                  ),
-                ),
+              PrimaryButton(
+                text: 'Login',
+                height: 50,
+                width: 180,
               ),
             ],
           ),
@@ -115,26 +105,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               shaderCallback: (Rect bounds) {
                 return kPrimaryGradient.createShader(bounds);
               },
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 35.0, vertical: 10),
-                decoration: const BoxDecoration(
-                  border: Border(
-                    top: BorderSide(width: 1.0, color: Colors.white),
-                    left: BorderSide(width: 1.0, color: Colors.white),
-                    right: BorderSide(width: 1.0, color: Colors.white),
-                    bottom: BorderSide(width: 1.0, color: Colors.white),
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
-                  ),
-                ),
-                child: const Text(
-                  'Create Account',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              ),
+              child: SecondaryButton(text: 'Create Account'),
             ),
           )
         ],
