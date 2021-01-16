@@ -73,14 +73,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Header(text: 'Welcome', underlineWidth: 200),
+              SizedBox(
+                height: 35,
+              ),
               Container(
-                padding: EdgeInsets.only(top: 35),
                 child: FormTextField(name: null, placeholder: 'Email'),
               ),
+              SizedBox(
+                height: 25,
+              ),
               Container(
-                padding: EdgeInsets.only(top: 25, bottom: 25),
                 child: FormTextField(name: null, placeholder: 'Password'),
               ),
+              SizedBox(height: 25),
               PrimaryButton(
                 text: 'Login',
                 height: 50,
