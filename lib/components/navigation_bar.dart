@@ -4,7 +4,7 @@ import 'package:supplier_mobile/screens/help_screen.dart';
 import 'package:supplier_mobile/screens/home_screen.dart';
 //import 'package:supplier_mobile/screens/playground_screen.dart';
 import 'package:supplier_mobile/screens/profiles_screen.dart';
-import 'package:supplier_mobile/screens/settings_screen.dart';
+import 'package:supplier_mobile/screens/login_screen.dart';
 import 'package:supplier_mobile/screens/tasks_screen.dart';
 import '../presentation/CustomIcons.dart';
 import 'navigation_button.dart';

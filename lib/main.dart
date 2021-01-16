@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:supplier_mobile/screens/help_screen.dart';
 import 'package:supplier_mobile/screens/playground_screen.dart';
 import 'package:supplier_mobile/screens/profiles_screen.dart';
-import 'package:supplier_mobile/screens/settings_screen.dart';
+import 'package:supplier_mobile/screens/login_screen.dart';
 import 'package:supplier_mobile/screens/tasks_screen.dart';
 import 'package:supplier_mobile/state/profiles_state.dart';
 
