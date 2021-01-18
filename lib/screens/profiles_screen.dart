@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:supplier_mobile/components/expanded_profile_bar.dart';
 import 'package:supplier_mobile/components/form/form_dropdown.dart';
 import 'package:supplier_mobile/components/form/form_text_field.dart';
 import 'package:supplier_mobile/components/header.dart';
-import 'package:supplier_mobile/components/item_color.dart';
 import 'package:supplier_mobile/components/navigation_bar.dart';
-import 'package:supplier_mobile/components/profile_bar.dart';
 import 'package:supplier_mobile/components/profile_bar_details.dart';
 import 'package:supplier_mobile/components/top_bar.dart';
-import 'package:supplier_mobile/constants/colors.dart';
-import 'package:supplier_mobile/constants/typography.dart';
 
 class ProfilesScreen extends StatefulWidget {
   static const String route = 'profiles';
@@ -37,34 +32,34 @@ class _ProfilesScreenState extends State<ProfilesScreen> {
           autovalidateMode: AutovalidateMode.disabled,
           child: ListView(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
-              Header(
+              const Header(
                 underlineWidth: 300,
                 text: 'Payment details',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              FormDropdown(
+              const FormDropdown(
                 name: 'creditCardType',
                 placeholder: 'Credit Card Type',
-                items: const <String>['Mastercard', 'Visa', 'American Express'],
+                items: <String>['Mastercard', 'Visa', 'American Express'],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               FormTextField(
                 name: 'creditCardNumber',
                 placeholder: 'Credit Card Number',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: FormDropdown(
                       name: 'expiryMonth',
                       placeholder: 'Month',
@@ -78,8 +73,8 @@ class _ProfilesScreenState extends State<ProfilesScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(width: 10),
-                  Expanded(
+                  const SizedBox(width: 10),
+                  const Expanded(
                     child: FormDropdown(
                       name: 'expiryYear',
                       placeholder: 'Year',
@@ -92,7 +87,7 @@ class _ProfilesScreenState extends State<ProfilesScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: FormTextField(
                       name: 'securityCode',
@@ -101,73 +96,73 @@ class _ProfilesScreenState extends State<ProfilesScreen> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Header(
+              const Header(
                 underlineWidth: 260,
                 text: 'Billing details',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               FormTextField(
                 name: 'firstName',
                 placeholder: 'First Name',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               FormTextField(
                 name: 'lastName',
                 placeholder: 'Last Name',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               FormTextField(
                 name: 'email',
                 placeholder: 'Email',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               FormTextField(
                 name: 'phoneNumber',
                 placeholder: 'Phone Number',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               FormTextField(
                 name: 'address',
                 placeholder: 'Address',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               FormTextField(
                 name: 'addressDetails',
                 placeholder: 'Address Details',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               FormTextField(
                 name: 'city',
                 placeholder: 'City',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               FormTextField(
                 name: 'postcode',
                 placeholder: 'Post Code',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              FormDropdown(
+              const FormDropdown(
                 name: 'country',
                 placeholder: 'Country',
                 items: [
@@ -177,10 +172,10 @@ class _ProfilesScreenState extends State<ProfilesScreen> {
                   'Poland4',
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
             ],

@@ -19,20 +19,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 100,
           ),
           Row(
             // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 width: 70,
               ),
               ShaderMask(
                 shaderCallback: (Rect bounds) {
                   return kPrimaryGradient.createShader(bounds);
                 },
-                child: Icon(
+                child: const Icon(
                   CustomIcons.union,
                   color: Colors.white,
                   size: 100,
@@ -41,19 +41,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // ignore: avoid_unnecessary_containers
                   Container(
-                    child: Text(
+                    child: const Text(
                       'Supplier',
                       style: TextStyle(
                           color: kLightPurple, fontSize: 30, letterSpacing: 3),
                     ),
                   ),
+                  // ignore: avoid_unnecessary_containers
                   Container(
                     child: ShaderMask(
                       shaderCallback: (Rect bounds) {
                         return kPrimaryGradient.createShader(bounds);
                       },
-                      child: Text(
+                      child: const Text(
                         'Mobile',
                         style: TextStyle(
                             color: Colors.white,
@@ -66,43 +68,45 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Header(text: 'Welcome', underlineWidth: 200),
-              SizedBox(
+              const Header(text: 'Welcome', underlineWidth: 200),
+              const SizedBox(
                 height: 35,
               ),
+              // ignore: avoid_unnecessary_containers
               Container(
                 child: FormTextField(name: null, placeholder: 'Email'),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
+              // ignore: avoid_unnecessary_containers
               Container(
                 child: FormTextField(name: null, placeholder: 'Password'),
               ),
-              SizedBox(height: 25),
-              PrimaryButton(
+              const SizedBox(height: 25),
+              const PrimaryButton(
                 text: 'Login',
                 height: 50,
                 width: 180,
               ),
             ],
           ),
-          SizedBox(
-            height: 150,
+          const SizedBox(
+            height: 50,
           ),
           Container(
             height: 1,
             width: 90,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 gradient: LinearGradient(colors: [kPinkColor, kVioletColor])),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           GestureDetector(
@@ -110,9 +114,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               shaderCallback: (Rect bounds) {
                 return kPrimaryGradient.createShader(bounds);
               },
-              child: SecondaryButton(text: 'Create Account'),
+              child: const SecondaryButton(text: 'Create Account'),
             ),
-          )
+          ),
         ],
       ),
     );
