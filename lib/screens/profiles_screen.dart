@@ -33,7 +33,7 @@ class _ProfilesScreenState extends State<ProfilesScreen> {
       )),
       body: Center(
         child: FractionallySizedBox(
-          widthFactor: 0.9,
+          widthFactor: kMainContentScreenWidth,
           child: FormBuilder(
             key: _formKey,
             autovalidateMode: AutovalidateMode.disabled,
