@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/components/navigation_bar.dart';
-import 'package:supplier_mobile/components/profile_bar_details.dart';
 import 'package:supplier_mobile/components/top_bar.dart';
 import 'package:supplier_mobile/constants/typography.dart';
 
@@ -21,7 +20,7 @@ class _HelpScreenState extends State<HelpScreen> {
           style: kHeader,
         ),
       ),
-      bottomNavigationBar: NavigationBar(),
+      bottomNavigationBar: const NavigationBar(),
     );
   }
 }

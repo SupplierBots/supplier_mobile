@@ -20,7 +20,7 @@ class _HelpScreenState extends State<HelpScreen> {
           style: kHeader,
         ),
       ),
-      bottomNavigationBar: NavigationBar(),
+      bottomNavigationBar: const NavigationBar(),
     );
   }
 }

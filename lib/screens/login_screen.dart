@@ -39,22 +39,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   size: 100,
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // ignore: avoid_unnecessary_containers
-                  Container(
-                    child: const Text(
-                      'Supplier',
-                      style: TextStyle(
-                          color: kLightPurple, fontSize: 30, letterSpacing: 3),
+              Container(
+                margin: EdgeInsets.only(top: 3),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // ignore: avoid_unnecessary_containers
+                    Container(
+                      child: const Text(
+                        'Supplier',
+                        style: TextStyle(
+                            color: kLightPurple,
+                            fontSize: 30,
+                            letterSpacing: 3),
+                      ),
                     ),
-                  ),
-                  // ignore: avoid_unnecessary_containers
-                  const GradientText(
-                    text: 'Mobile',
-                  ),
-                ],
+                    // ignore: avoid_unnecessary_containers
+                    const GradientText(
+                      text: 'Mobile',
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

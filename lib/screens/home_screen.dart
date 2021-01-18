@@ -84,10 +84,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 MaterialButton(
                   color: Theme.of(context).accentColor,
-                  child: const Text(
-                    'Submit',
-                    style: TextStyle(color: Colors.white),
-                  ),
                   onPressed: () {
                     if (_formKey.currentState.saveAndValidate()) {
                       print(_formKey.currentState.value);
@@ -95,6 +91,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       print('validation failed');
                     }
                   },
+                  child: const Text(
+                    'Submit',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
             ),
