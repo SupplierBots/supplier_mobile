@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 
 class GradientText extends StatelessWidget {
-  final String text;
   const GradientText({
     Key key,
     @required this.text,
   }) : super(key: key);
+
+  final String text;
 
   @override
   Widget build(BuildContext context) {

@@ -10,22 +10,25 @@ class SecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 35.0, vertical: 10),
+      width: 180,
+      height: 50,
       decoration: const BoxDecoration(
         border: Border(
-          top: BorderSide(width: 1.0, color: Colors.white),
-          left: BorderSide(width: 1.0, color: Colors.white),
-          right: BorderSide(width: 1.0, color: Colors.white),
-          bottom: BorderSide(width: 1.0, color: Colors.white),
+          top: BorderSide(color: Colors.white),
+          left: BorderSide(color: Colors.white),
+          right: BorderSide(color: Colors.white),
+          bottom: BorderSide(color: Colors.white),
         ),
         borderRadius: BorderRadius.all(
           Radius.circular(5),
         ),
       ),
-      child: Text(
-        text,
-        textAlign: TextAlign.center,
-        style: TextStyle(color: Colors.white, fontSize: 20),
+      child: Center(
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        ),
       ),
     );
   }

@@ -24,7 +24,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             height: 100,
           ),
           Row(
-            // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(
                 width: 70,
@@ -40,21 +39,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 3),
+                margin: EdgeInsets.only(top: 11),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // ignore: avoid_unnecessary_containers
-                    Container(
-                      child: const Text(
-                        'Supplier',
-                        style: TextStyle(
-                            color: kLightPurple,
-                            fontSize: 30,
-                            letterSpacing: 3),
-                      ),
+                    const Text(
+                      'Supplier',
+                      style: TextStyle(
+                          color: kLightPurple, fontSize: 30, letterSpacing: 3),
                     ),
-                    // ignore: avoid_unnecessary_containers
                     const GradientText(
                       text: 'Mobile',
                     ),
@@ -68,22 +61,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               const Header(text: 'Welcome', underlineWidth: 200),
               const SizedBox(
                 height: 35,
               ),
-              // ignore: avoid_unnecessary_containers
-              Container(
-                child: FormTextField(name: null, placeholder: 'Email'),
-              ),
+              FormTextField(name: null, placeholder: 'Email'),
               const SizedBox(
                 height: 25,
               ),
-              // ignore: avoid_unnecessary_containers
-              Container(
-                child: FormTextField(name: null, placeholder: 'Password'),
-              ),
+              FormTextField(name: null, placeholder: 'Password'),
               const SizedBox(height: 25),
               const PrimaryButton(
                 text: 'Login',
