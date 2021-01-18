@@ -3,16 +3,16 @@ import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/presentation/CustomIcons.dart';
 
 class TopBar extends PreferredSize {
-  TopBar({@required this.content});
+  const TopBar({@required this.content});
 
   @override
-  Size get preferredSize => Size.fromHeight(120);
+  Size get preferredSize => const Size.fromHeight(100);
   final Widget content;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: preferredSize.height,
+      height: 75 + MediaQuery.of(context).padding.top,
       decoration: BoxDecoration(
         color: kSecondaryBackground,
         boxShadow: [
@@ -20,16 +20,18 @@ class TopBar extends PreferredSize {
             color: Colors.black.withOpacity(0.1),
             spreadRadius: 10,
             blurRadius: 10,
-            offset: Offset(0, 1), // changes position of shadow
+            offset: const Offset(0, 1),
           ),
         ],
       ),
       child: SafeArea(
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+          children: <Widget>[
             ShaderMask(
-              child: Padding(
+              shaderCallback: (Rect bounds) {
+                return kPrimaryGradient.createShader(bounds);
+              },
+              child: const Padding(
                 padding: EdgeInsets.all(8),
                 child: Icon(
                   CustomIcons.union,
@@ -37,9 +39,6 @@ class TopBar extends PreferredSize {
                   size: 45,
                 ),
               ),
-              shaderCallback: (Rect bounds) {
-                return kPrimaryGradient.createShader(bounds);
-              },
             ),
             content,
           ],

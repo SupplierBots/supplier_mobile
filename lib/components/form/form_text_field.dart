@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:supplier_mobile/constants/colors.dart';
+import 'package:supplier_mobile/constants/scaling.dart';
 
 class FormTextField extends FormBuilderField<String> {
   FormTextField({
@@ -13,16 +14,17 @@ class FormTextField extends FormBuilderField<String> {
     @required String name,
     FormFieldValidator<String> validator,
     ValueTransformer<String> valueTransformer,
+    String initialValue,
     @required this.placeholder,
     this.obscure = false,
     this.type = TextInputType.text,
-    this.initialValue,
   }) : super(
           key: key,
           name: name,
           validator: validator,
           valueTransformer: valueTransformer,
           autovalidateMode: AutovalidateMode.disabled,
+          initialValue: initialValue,
           builder: (FormFieldState<String> field) {
             final _FormTextFieldState state = field as _FormTextFieldState;
 
@@ -35,13 +37,14 @@ class FormTextField extends FormBuilderField<String> {
                 return kRedGradient;
               }
 
-              return LinearGradient(
-                colors: [kSecondaryBackground, kSecondaryBackground],
+              return const LinearGradient(
+                colors: <Color>[kSecondaryBackground, kSecondaryBackground],
               );
             }
 
             return Container(
               padding: EdgeInsets.all(2.0),
+              height: kInputsHeight,
               decoration: BoxDecoration(
                 gradient: getGradient(),
                 borderRadius: BorderRadius.all(
@@ -57,6 +60,7 @@ class FormTextField extends FormBuilderField<String> {
                 controller: state._effectiveController,
                 focusNode: state.effectiveFocusNode,
                 decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 12.0),
                   suffixIcon: Padding(
                     padding: EdgeInsets.only(right: 20),
                     child: Column(
@@ -84,7 +88,7 @@ class FormTextField extends FormBuilderField<String> {
                   filled: true,
                   fillColor: kSecondaryBackground,
                   hintStyle: TextStyle(color: kLighGrey),
-                  hintText: (placeholder),
+                  hintText: placeholder,
                   errorStyle: TextStyle(
                     height: 0,
                     color: Colors.transparent,
@@ -96,7 +100,6 @@ class FormTextField extends FormBuilderField<String> {
         );
 
   final String placeholder;
-  final String initialValue;
   final TextInputType type;
   final bool obscure;
 

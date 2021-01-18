@@ -16,30 +16,27 @@ class NavigationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isActiveRoute = ModalRoute.of(context).settings.name == route;
+    final bool isActiveRoute = ModalRoute.of(context).settings.name == route;
     return Expanded(
       child: GestureDetector(
         onTap: () {
           Navigator.pushReplacementNamed(context, route);
         },
         child: Container(
-          height: 100,
+          height: 60,
           color: isActiveRoute ? kTetiaryBackground : kSecondaryBackground,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+            children: <Widget>[
               Container(
-                height: 4.0,
+                height: 2.0,
                 decoration: BoxDecoration(
                     gradient: isActiveRoute ? kPrimaryLRGradient : null),
               ),
-              // SizedBox(
-              //   height: 16,
-              // ),
-              Spacer(),
+              const Spacer(),
               Center(
                 child: Padding(
-                  padding: EdgeInsets.all(3),
+                  padding: const EdgeInsets.all(3),
                   child: Icon(
                     icon,
                     color: isActiveRoute ? kLightPurple : kDarkGrey,
@@ -47,7 +44,7 @@ class NavigationButton extends StatelessWidget {
                   ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
             ],
           ),
         ),

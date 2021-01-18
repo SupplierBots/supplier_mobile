@@ -17,12 +17,12 @@ class Header extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-              fontSize: 30,
+              fontSize: 22,
               color: kLightPurple,
             ),
           ),
         ),
-        SizedBox(height: 11),
+        SizedBox(height: 8),
         Container(
           height: 2.0,
           width: underlineWidth,

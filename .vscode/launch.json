@@ -1,0 +1,57 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "iPhone 12",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "00008101-001471A11061401E"
+    },
+    {
+      "name": "Xiaomi Redmi Note 9",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "1b03ca990406"
+    },
+    {
+      "name": "iPhone 8 (Simulator)",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "5878A656-4794-48FE-8E0A-48E9663619FB"
+    },
+    {
+      "name": "iPhone 12 (Simulator)",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "EC2D23D4-3A41-42D9-9209-02D5C27DF6EC"
+    },
+  ],
+  "compounds": [
+    {
+      "name": "All",
+      "configurations": [
+        "iPhone 12",
+        "Xiaomi Redmi Note 9",
+        "iPhone 8 (Simulator)",
+        "iPhone 12 (Simulator)"
+      ],
+    },
+    {
+      "name": "All physical",
+      "configurations": [
+        "iPhone 12",
+        "Xiaomi Redmi Note 9",
+      ],
+    },
+    {
+      "name": "Simulators",
+      "configurations": [
+        "iPhone 8 (Simulator)",
+        "iPhone 12 (Simulator)"
+      ],
+    }
+  ]
+}
