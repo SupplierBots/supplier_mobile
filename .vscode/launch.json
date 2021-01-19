@@ -5,6 +5,11 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Default",
+      "request": "launch",
+      "type": "dart",
+    },
+    {
       "name": "iPhone 12",
       "request": "launch",
       "type": "dart",

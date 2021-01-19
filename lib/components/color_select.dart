@@ -31,8 +31,8 @@ class ColorSelect extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 13, left: 13, bottom: 10),
+              const Padding(
+                padding: EdgeInsets.only(top: 13, left: 13, bottom: 10),
                 child: Text(
                   'Colors',
                   style: TextStyle(color: kLightPurple, fontSize: 22),
@@ -40,20 +40,20 @@ class ColorSelect extends StatelessWidget {
               ),
               Wrap(
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: ItemColor(
                       itemColor: 'Giga Long Kutas hehe',
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: ItemColor(
                       itemColor: 'Kutas hehe',
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: ItemColor(
                       itemColor: 'Kutas hehe',
                     ),

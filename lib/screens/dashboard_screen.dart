@@ -21,7 +21,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
           style: kHeader,
         ),
       ),
-      body: ListView(
+      body: //FractionallySizedBox(
+          //widthFactor: kMainContentScreenWidth,
+          //child: Wrap(
+          //runSpacing: kPrimaryElementsSpacing,
+          //children: [
+          ListView(
         shrinkWrap: true,
         children: <Widget>[
           const SizedBox(
@@ -76,6 +81,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ],
       ),
+      //   ],
+      //),
+      // ),
       bottomNavigationBar: const NavigationBar(),
     );
   }

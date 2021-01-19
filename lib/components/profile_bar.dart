@@ -3,33 +3,39 @@ import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/presentation/CustomIcons.dart';
 
 class Debil extends StatelessWidget {
-  final String text;
   const Debil({
     Key key,
     this.text,
   }) : super(key: key);
+  final String text;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 18),
+      padding: const EdgeInsets.only(left: 18),
       alignment: Alignment.centerLeft,
+      height: 60,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: kSecondaryBackground,
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
       child: Row(
         children: [
           Text(
             text,
-            style: TextStyle(color: kLightPurple, fontSize: 18),
+            style: const TextStyle(color: kLightPurple, fontSize: 18),
           ),
-          Spacer(),
-          Container(
-            child: Icon(
-              CustomIcons.edit,
-              color: kLighGrey,
-              size: 20,
-            ),
+          const Spacer(),
+          const Icon(
+            CustomIcons.edit,
+            color: kLighGrey,
+            size: 20,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 19),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 19),
             child: Icon(
               CustomIcons.remove,
               color: kLighGrey,
@@ -37,14 +43,6 @@ class Debil extends StatelessWidget {
             ),
           ),
         ],
-      ),
-      height: 60,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: kSecondaryBackground,
-        borderRadius: BorderRadius.all(
-          Radius.circular(10),
-        ),
       ),
     );
   }

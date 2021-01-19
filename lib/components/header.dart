@@ -13,21 +13,19 @@ class Header extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          child: Text(
-            text,
-            style: TextStyle(
-              fontSize: 22,
-              color: kLightPurple,
-            ),
+        Text(
+          text,
+          style: const TextStyle(
+            fontSize: 22,
+            color: kLightPurple,
           ),
         ),
-        SizedBox(height: 8),
-        Container(
+        const SizedBox(height: 8),
+        SizedBox(
           height: 2.0,
           width: underlineWidth,
           //color: kPinkColor,
-          child: DecoratedBox(
+          child: const DecoratedBox(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [kPinkColor, kVioletColor],

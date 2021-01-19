@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:supplier_mobile/components/item_color.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/presentation/CustomIcons.dart';
 
 class ExpandedProfileBar extends StatelessWidget {
-  final String profileName;
-  final String itemName;
   const ExpandedProfileBar({
     Key key,
     this.profileName,
     this.itemName,
   }) : super(key: key);
+  final String profileName;
+  final String itemName;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +33,8 @@ class ExpandedProfileBar extends StatelessWidget {
                   shaderCallback: (Rect bounds) {
                     return kPrimaryGradient.createShader(bounds);
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 23),
+                  child: const Padding(
+                    padding: EdgeInsets.only(right: 23),
                     child: Icon(
                       CustomIcons.tshirt,
                       color: Colors.white,

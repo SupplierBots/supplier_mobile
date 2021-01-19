@@ -109,7 +109,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               shaderCallback: (Rect bounds) {
                 return kPrimaryGradient.createShader(bounds);
               },
-              child: const SecondaryButton(text: 'Create Account'),
+              child: const SecondaryButton(
+                text: 'Create Account',
+                width: 210,
+                height: 50,
+              ),
             ),
           ),
         ],

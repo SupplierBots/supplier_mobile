@@ -21,7 +21,7 @@ class NavigationBar extends StatelessWidget {
             color: Colors.black.withOpacity(0.1),
             spreadRadius: 10,
             blurRadius: 10,
-            offset: Offset(0, -1), // changes position of shadow
+            offset: const Offset(0, -1), // changes position of shadow
           ),
         ],
       ),
@@ -29,27 +29,27 @@ class NavigationBar extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            NavigationButton(
+            const NavigationButton(
               iconSize: 30,
               icon: Icons.play_arrow,
               route: TasksScreen.route,
             ),
-            NavigationButton(
+            const NavigationButton(
               iconSize: 23,
               icon: CustomIcons.profiles,
               route: ProfilesScreen.route,
             ),
-            NavigationButton(
+            const NavigationButton(
               iconSize: 23,
               icon: CustomIcons.settings,
               route: SettingsScreen.route,
             ),
-            NavigationButton(
+            const NavigationButton(
               iconSize: 25,
               icon: Icons.home,
               route: DashboardScreen.route,
             ),
-            NavigationButton(
+            const NavigationButton(
               icon: Icons.help_outline,
               iconSize: 25,
               route: HelpScreen.route,

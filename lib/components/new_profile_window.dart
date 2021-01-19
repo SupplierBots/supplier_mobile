@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/constants/colors.dart';
-import 'package:supplier_mobile/presentation/CustomIcons.dart';
 
 class ProfileWindow extends StatelessWidget {
   @override
@@ -11,7 +10,7 @@ class ProfileWindow extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: kSecondaryBackground,
       ),
-      padding: EdgeInsets.all(25),
+      padding: const EdgeInsets.all(25),
       child: Column(
         children: [
           Padding(
@@ -20,12 +19,12 @@ class ProfileWindow extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Text(
+                const Text(
                   'Create new profile',
                   style: TextStyle(color: kLightPurple, fontSize: 20),
                 ),
-                Spacer(),
-                Icon(
+                const Spacer(),
+                const Icon(
                   Icons.close,
                   size: 35,
                   color: Color.fromRGBO(241, 227, 255, 1),
@@ -40,7 +39,7 @@ class ProfileWindow extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 color: kTetiaryBackground,
               ),
-              child: TextField(
+              child: const TextField(
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Insert profile name',
@@ -51,8 +50,8 @@ class ProfileWindow extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(
+          const Padding(
+            padding: EdgeInsets.only(
               top: 20,
               bottom: 10,
             ),
@@ -68,8 +67,8 @@ class ProfileWindow extends StatelessWidget {
             padding: const EdgeInsets.only(top: 30, right: 7),
             child: Row(
               children: [
-                Spacer(),
-                Icon(
+                const Spacer(),
+                const Icon(
                   Icons.done,
                   size: 30,
                   color: kLightPurple,

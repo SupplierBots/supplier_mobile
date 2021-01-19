@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/constants/colors.dart';
-import 'package:supplier_mobile/presentation/CustomIcons.dart';
 
 class ItemColor extends StatelessWidget {
+  const ItemColor({Key key, @required this.itemColor}) : super(key: key);
   final String itemColor;
 
-  const ItemColor({Key key, @required this.itemColor}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,8 +19,8 @@ class ItemColor extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 15),
+              const Padding(
+                padding: EdgeInsets.only(right: 15),
                 child: Icon(
                   Icons.close,
                   size: 15,
@@ -29,7 +28,7 @@ class ItemColor extends StatelessWidget {
               ),
               Text(
                 itemColor,
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
             ],
           ),
