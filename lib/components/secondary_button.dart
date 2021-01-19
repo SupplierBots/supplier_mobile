@@ -15,10 +15,8 @@ class SecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.center,
       width: width,
       height: height,
-      padding: const EdgeInsets.symmetric(horizontal: 35.0, vertical: 10),
       decoration: const BoxDecoration(
         border: Border(
           top: BorderSide(color: Colors.white),
@@ -30,10 +28,12 @@ class SecondaryButton extends StatelessWidget {
           Radius.circular(5),
         ),
       ),
-      child: Text(
-        text,
-        textAlign: TextAlign.center,
-        style: const TextStyle(color: Colors.white, fontSize: 20),
+      child: Center(
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: const TextStyle(color: Colors.white, fontSize: 20),
+        ),
       ),
     );
   }

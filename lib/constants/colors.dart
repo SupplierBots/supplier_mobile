@@ -17,5 +17,7 @@ const LinearGradient kRedGradient = LinearGradient(
   colors: [Color(0xFFD20000), Color(0xFF890000)],
 );
 
-const LinearGradient kPrimaryLRGradient =
-    LinearGradient(colors: [kPinkColor, kVioletColor]);
+const LinearGradient kPrimaryLRGradient = LinearGradient(
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    colors: [kPinkColor, kVioletColor]);

@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'profile.g.dart';
+
+@JsonSerializable(nullable: false)
 class Profile {
   Profile(
       {this.firstName,
@@ -15,6 +20,9 @@ class Profile {
       this.expiryYear,
       this.securityCode});
 
+  factory Profile.fromJson(Map<String, dynamic> json) =>
+      _$ProfileFromJson(json);
+
   final String firstName;
   final String lastName;
   final String email;
@@ -29,4 +37,6 @@ class Profile {
   final String expiryMonth;
   final String expiryYear;
   final String securityCode;
+
+  Map<String, dynamic> toJson() => _$ProfileToJson(this);
 }

@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopBar(
+      appBar: const TopBar(
         content: ProfileBarDetails(
           isEditing: true,
           profileName: 'Juras zjeb',

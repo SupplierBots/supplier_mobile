@@ -40,7 +40,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 3),
+                margin: const EdgeInsets.only(top: 3),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
