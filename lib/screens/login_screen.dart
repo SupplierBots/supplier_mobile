@@ -92,8 +92,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ],
           ),
-          const SizedBox(
-            height: 50,
+          const Divider(
+            height: 170,
           ),
           Container(
             height: 1,
@@ -101,7 +101,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             decoration: const BoxDecoration(
                 gradient: LinearGradient(colors: [kPinkColor, kVioletColor])),
           ),
-          const SizedBox(
+          const Divider(
             height: 30,
           ),
           GestureDetector(
