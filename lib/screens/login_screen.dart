@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/components/form/form_text_field.dart';
 import 'package:supplier_mobile/components/gradient_text.dart';
+import 'package:supplier_mobile/components/gradient_widget.dart';
 import 'package:supplier_mobile/components/header.dart';
 import 'package:supplier_mobile/components/primary_button.dart';
 import 'package:supplier_mobile/components/secondary_button.dart';
@@ -55,9 +56,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                     ),
                     // ignore: avoid_unnecessary_containers
+                    // const GradientWidget(
+                    //   widget: Text(
+                    //     'Mobile',
+                    //     style: TextStyle(
+                    //         color: Colors.white,
+                    //         fontSize: 30,
+                    //         letterSpacing: 3),
+                    //   ),
+                    // ),
                     const GradientText(
                       text: 'Mobile',
-                    ),
+                      fontSize: 30,
+                      letterSpacing: 3,
+                    )
                   ],
                 ),
               ),

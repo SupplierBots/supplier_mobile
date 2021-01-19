@@ -5,8 +5,12 @@ class GradientText extends StatelessWidget {
   const GradientText({
     Key key,
     @required this.text,
+    @required this.fontSize,
+    @required this.letterSpacing,
   }) : super(key: key);
   final String text;
+  final double fontSize;
+  final double letterSpacing;
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +20,10 @@ class GradientText extends StatelessWidget {
       },
       child: Text(
         text,
-        style: const TextStyle(
-            color: Colors.white, fontSize: 30, letterSpacing: 3),
+        style: TextStyle(
+            color: Colors.white,
+            fontSize: fontSize,
+            letterSpacing: letterSpacing),
       ),
     );
   }
