@@ -55,7 +55,7 @@ class ExpandedProfileBar extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Row(
-              children: [
+              children: <Widget>[
                 ShaderMask(
                   shaderCallback: (Rect bounds) {
                     return kPrimaryGradient.createShader(bounds);

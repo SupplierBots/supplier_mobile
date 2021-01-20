@@ -30,6 +30,11 @@ class NavigationBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             const NavigationButton(
+              iconSize: 25,
+              icon: Icons.home,
+              route: DashboardScreen.route,
+            ),
+            const NavigationButton(
               iconSize: 30,
               icon: Icons.play_arrow,
               route: TasksScreen.route,
@@ -43,11 +48,6 @@ class NavigationBar extends StatelessWidget {
               iconSize: 23,
               icon: CustomIcons.settings,
               route: SettingsScreen.route,
-            ),
-            const NavigationButton(
-              iconSize: 25,
-              icon: Icons.home,
-              route: DashboardScreen.route,
             ),
             const NavigationButton(
               icon: Icons.help_outline,
