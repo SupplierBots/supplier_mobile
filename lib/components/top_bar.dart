@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:supplier_mobile/components/gradient_widget.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/constants/scaling.dart';
-import 'package:supplier_mobile/presentation/custom_icons.dart';
+import 'package:supplier_mobile/constants/custom_icons.dart';
 
 class TopBar extends PreferredSize {
   const TopBar({@required this.content});

@@ -3,10 +3,10 @@ import 'package:supplier_mobile/components/form/form_text_field.dart';
 import 'package:supplier_mobile/components/gradient_text.dart';
 import 'package:supplier_mobile/components/gradient_widget.dart';
 import 'package:supplier_mobile/components/header.dart';
-import 'package:supplier_mobile/components/primary_button.dart';
-import 'package:supplier_mobile/components/secondary_button.dart';
+import 'package:supplier_mobile/components/buttons/primary_button.dart';
+import 'package:supplier_mobile/components/buttons/secondary_button.dart';
 import 'package:supplier_mobile/constants/colors.dart';
-import 'package:supplier_mobile/presentation/custom_icons.dart';
+import 'package:supplier_mobile/constants/custom_icons.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const String route = 'settings';

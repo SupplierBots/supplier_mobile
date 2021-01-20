@@ -29,12 +29,6 @@ class _FormDropdownState extends State<FormDropdown> {
   bool _hasError = false;
 
   @override
-  void initState() {
-    _selectedItem = widget.placeholder;
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return FormBuilderField<String>(
       name: widget.name,
@@ -48,6 +42,8 @@ class _FormDropdownState extends State<FormDropdown> {
         return widget.validator?.call(value);
       },
       builder: (FormFieldState<String> field) {
+        _selectedItem = field.value ?? widget.placeholder;
+
         return MenuButton<String>(
           items: widget.items,
           topDivider: false,

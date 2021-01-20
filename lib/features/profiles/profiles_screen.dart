@@ -3,8 +3,13 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:supplier_mobile/components/form/form_dropdown.dart';
 import 'package:supplier_mobile/components/form/form_text_field.dart';
+import 'package:supplier_mobile/components/gradient_widget.dart';
 import 'package:supplier_mobile/components/header.dart';
-import 'package:supplier_mobile/features/navigation/navigation_bar.dart';
+import 'package:supplier_mobile/components/navigation/navigation_bar.dart';
+import 'package:supplier_mobile/constants/colors.dart';
+import 'package:supplier_mobile/constants/custom_icons.dart';
+import 'package:supplier_mobile/features/profiles/widgets/create_profile_window.dart';
+import 'package:supplier_mobile/features/profiles/widgets/profiles_form.dart';
 import 'package:supplier_mobile/features/profiles/widgets/profiles_list_tile.dart';
 import 'package:supplier_mobile/components/profiles_top_header.dart';
 import 'package:supplier_mobile/features/profiles/widgets/profiles_list.dart';
@@ -14,207 +19,50 @@ import 'package:supplier_mobile/constants/typography.dart';
 import 'package:supplier_mobile/features/profiles/profile_model.dart';
 import 'package:supplier_mobile/features/profiles/profiles_provider.dart';
 
-class ProfilesScreen extends StatefulWidget {
+class ProfilesScreen extends StatelessWidget {
   static const String route = 'profiles';
 
   @override
-  _ProfilesScreenState createState() => _ProfilesScreenState();
-}
-
-class _ProfilesScreenState extends State<ProfilesScreen> {
-  final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
-
-  bool isEditing = false;
-
-  @override
   Widget build(BuildContext context) {
-    final ProfilesState state =
-        Provider.of<ProfilesState>(context, listen: false);
-
-    void submit() {
-      if (!_formKey.currentState.saveAndValidate()) return;
-
-      final Profile profile = Profile.fromJson(_formKey.currentState.value);
-      state.addProfile(
-          _formKey.currentState.value['firstName'] as String, profile);
-      _formKey.currentState.reset();
-      setState(() {
-        isEditing = false;
-      });
-    }
+    final ProfilesProvider state = Provider.of<ProfilesProvider>(context);
 
     return Scaffold(
       appBar: TopBar(
         content: ProfilesTopHeader(
-          profileName: 'Juras PKO',
-          isEditing: isEditing,
-          undoAction: () {
-            setState(() {
-              isEditing = !isEditing;
-            });
-          },
-          confirmAction: submit,
+          primaryText:
+              '${state.isCreatingNew ? "Creating" : "Editing"}: ${state.editedProfileName}',
+          isEditing: state.isEditing,
+          undoAction: state.stopEditing,
+          confirmAction: state.saveEditedProfile,
         ),
       ),
-      floatingActionButton: !isEditing
+      floatingActionButton: !state.isEditing && !state.isModalOpen
           ? FloatingActionButton(
-              onPressed: () {
-                setState(() {
-                  isEditing = true;
-                });
-              },
+              backgroundColor: kSecondaryBackground,
+              onPressed: state.openModal,
+              child: const GradientWidget(
+                child: Icon(
+                  CustomIcons.plus,
+                  size: 20,
+                ),
+              ),
             )
           : null,
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: FractionallySizedBox(
-          widthFactor: kMainContentScreenWidth,
-          child: isEditing
-              ? FormBuilder(
-                  key: _formKey,
-                  autovalidateMode: AutovalidateMode.disabled,
-                  child: ListView(
-                    children: <Widget>[
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      const Header(
-                        underlineWidth: 220,
-                        text: 'Payment details',
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Wrap(
-                        runSpacing: kPrimaryElementsSpacing,
-                        children: <Widget>[
-                          const FormDropdown(
-                            name: 'creditCardType',
-                            placeholder: 'Credit Card Type',
-                            items: <String>[
-                              'Mastercard',
-                              'Visa',
-                              'American Express'
-                            ],
-                          ),
-                          FormTextField(
-                            name: 'creditCardNumber',
-                            placeholder: 'Credit Card Number',
-                          ),
-                          Row(
-                            children: const <Widget>[
-                              Expanded(
-                                child: FormDropdown(
-                                  name: 'expiryMonth',
-                                  placeholder: 'Month',
-                                  items: <String>[
-                                    '01',
-                                    '02',
-                                    '03',
-                                    '04',
-                                    '05',
-                                    'dobra i inne tez beda'
-                                  ],
-                                ),
-                              ),
-                              SizedBox(width: kPrimaryElementsSpacing),
-                              Expanded(
-                                child: FormDropdown(
-                                  name: 'expiryYear',
-                                  placeholder: 'Year',
-                                  items: <String>[
-                                    '2021',
-                                    '2022',
-                                    '2023',
-                                    '2024',
-                                    'dobra i inne tez beda'
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: FormTextField(
-                                  name: 'securityCode',
-                                  placeholder: 'CVV',
-                                ),
-                              ),
-                              const SizedBox(width: kPrimaryElementsSpacing),
-                              const Spacer()
-                            ],
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      const Header(
-                        underlineWidth: 190,
-                        text: 'Billing details',
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Wrap(
-                        runSpacing: kPrimaryElementsSpacing,
-                        children: <Widget>[
-                          FormTextField(
-                            name: 'firstName',
-                            placeholder: 'First Name',
-                          ),
-                          FormTextField(
-                            name: 'lastName',
-                            placeholder: 'Last Name',
-                          ),
-                          FormTextField(
-                            name: 'email',
-                            placeholder: 'Email',
-                            validator: FormBuilderValidators.email(context,
-                                errorText: 'Invalid email'),
-                          ),
-                          FormTextField(
-                            name: 'phoneNumber',
-                            placeholder: 'Phone Number',
-                          ),
-                          FormTextField(
-                            name: 'address',
-                            placeholder: 'Address',
-                          ),
-                          FormTextField(
-                            name: 'addressDetails',
-                            placeholder: 'Address Details',
-                            optional: true,
-                          ),
-                          FormTextField(
-                            name: 'city',
-                            placeholder: 'City',
-                          ),
-                          FormTextField(
-                            name: 'postcode',
-                            placeholder: 'Post Code',
-                          ),
-                          const FormDropdown(
-                            name: 'country',
-                            placeholder: 'Country',
-                            items: <String>[
-                              'Poland1',
-                              'Poland2',
-                              'Poland3',
-                              'Poland4',
-                            ],
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 75,
-                      ),
-                    ],
-                  ),
-                )
-              : const ProfilesList(),
-        ),
+      body: Stack(
+        children: [
+          Align(
+            alignment: Alignment.topCenter,
+            child: FractionallySizedBox(
+              widthFactor: kMainContentScreenWidth,
+              child: state.isEditing ? ProfilesForm() : const ProfilesList(),
+            ),
+          ),
+          if (state.isModalOpen)
+            Container(
+              color: Colors.black.withOpacity(0.2),
+              child: ProfileWindow(),
+            )
+        ],
       ),
       bottomNavigationBar: const NavigationBar(),
     );

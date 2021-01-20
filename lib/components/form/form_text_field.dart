@@ -127,6 +127,10 @@ class _FormTextFieldState extends FormBuilderFieldState<FormTextField, String> {
     _controller = TextEditingController(text: widget.initialValue);
     _controller.addListener(_handleControllerChanged);
     effectiveFocusNode.addListener(validateOnFocusChange);
+
+    if (formState.initialValue == null ||
+        !formState.initialValue.containsKey(widget.name)) return;
+    _controller.text = formState.initialValue[widget.name] as String;
   }
 
   @override

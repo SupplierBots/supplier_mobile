@@ -5,7 +5,7 @@ import 'package:supplier_mobile/features/help/help_screen.dart';
 import 'package:supplier_mobile/features/profiles/profiles_screen.dart';
 import 'package:supplier_mobile/features/authentication/authentication_screen.dart';
 import 'package:supplier_mobile/features/tasks/tasks_screen.dart';
-import '../../presentation/custom_icons.dart';
+import '../../constants/custom_icons.dart';
 import 'navigation_button.dart';
 
 class NavigationBar extends StatelessWidget {

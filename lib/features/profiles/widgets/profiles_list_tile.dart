@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/constants/colors.dart';
-import 'package:supplier_mobile/presentation/custom_icons.dart';
+import 'package:supplier_mobile/constants/custom_icons.dart';
 
 class ProfilesListTile extends StatelessWidget {
   const ProfilesListTile({

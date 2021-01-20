@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/features/profiles/widgets/profiles_list_tile.dart';
 import 'package:supplier_mobile/constants/scaling.dart';
 import 'package:supplier_mobile/features/profiles/profile_model.dart';
@@ -14,20 +15,29 @@ class ProfilesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 20.0),
-      child: Consumer<ProfilesState>(
-        builder: (_, ProfilesState state, __) {
-          return Wrap(
-              alignment: WrapAlignment.center,
-              runSpacing: kPrimaryElementsSpacing,
-              children: state.profiles.entries
-                  .map((MapEntry<String, Profile> e) => ProfilesListTile(
-                        name: e.value.firstName,
-                        editAction: () {},
-                        deleteAction: () {
-                          state.removeProfile(e.key);
-                        },
-                      ))
-                  .toList());
+      child: Consumer<ProfilesProvider>(
+        builder: (_, ProfilesProvider state, __) {
+          return state.profiles.isNotEmpty
+              ? Wrap(
+                  alignment: WrapAlignment.center,
+                  runSpacing: kPrimaryElementsSpacing,
+                  children: state.profiles.entries
+                      .map((MapEntry<String, Profile> e) => ProfilesListTile(
+                            name: e.key,
+                            editAction: () {
+                              state.setEditedProfile(e.key);
+                            },
+                            deleteAction: () {
+                              state.removeProfile(e.key);
+                            },
+                          ))
+                      .toList())
+              : const Center(
+                  child: Text(
+                    "You haven't created any profiles yet",
+                    style: TextStyle(color: kDarkGrey),
+                  ),
+                );
         },
       ),
     );

@@ -4,13 +4,13 @@ import 'package:supplier_mobile/constants/typography.dart';
 
 class ProfilesTopHeader extends StatelessWidget {
   const ProfilesTopHeader({
-    @required this.profileName,
+    @required this.primaryText,
     @required this.isEditing,
     @required this.undoAction,
     @required this.confirmAction,
   });
 
-  final String profileName;
+  final String primaryText;
   final bool isEditing;
   final void Function() undoAction;
   final void Function() confirmAction;
@@ -31,7 +31,7 @@ class ProfilesTopHeader extends StatelessWidget {
                       color: kLightPurple, fontSize: 20, letterSpacing: 1.1),
                 ),
                 Text(
-                  'Editing: $profileName',
+                  primaryText,
                   style: const TextStyle(
                       color: kLightPurple, fontSize: 16, letterSpacing: 1.1),
                 ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/components/header.dart';
-import 'package:supplier_mobile/features/navigation/navigation_bar.dart';
+import 'package:supplier_mobile/components/navigation/navigation_bar.dart';
 import 'package:supplier_mobile/components/top_bar.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/constants/scaling.dart';

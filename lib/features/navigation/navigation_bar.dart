@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/constants/colors.dart';
+import 'package:supplier_mobile/features/dashboard/dashboard_screen.dart';
 import 'package:supplier_mobile/features/help/help_screen.dart';
 import 'package:supplier_mobile/features/profiles/profiles_screen.dart';
 import 'package:supplier_mobile/features/authentication/authentication_screen.dart';
 import 'package:supplier_mobile/features/tasks/tasks_screen.dart';
-import '../constants/custom_icons.dart';
-import 'navigation/navigation_button.dart';
+import '../../constants/custom_icons.dart';
+import '../../components/navigation/navigation_button.dart';
 
-class SmallNavigationBar extends StatelessWidget {
-  const SmallNavigationBar({Key key}) : super(key: key);
+class NavigationBar extends StatelessWidget {
+  const NavigationBar({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
       decoration: BoxDecoration(
         color: kSecondaryBackground,
         boxShadow: [
@@ -30,27 +30,28 @@ class SmallNavigationBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             const NavigationButton(
-              iconSize: 35,
+              iconSize: 25,
+              icon: Icons.home,
+              route: DashboardScreen.route,
+            ),
+            const NavigationButton(
+              iconSize: 30,
               icon: Icons.play_arrow,
               route: TasksScreen.route,
             ),
             const NavigationButton(
-              iconSize: 28,
+              iconSize: 23,
               icon: CustomIcons.profiles,
               route: ProfilesScreen.route,
             ),
             const NavigationButton(
-              iconSize: 25,
+              iconSize: 23,
               icon: CustomIcons.settings,
               route: SettingsScreen.route,
             ),
             const NavigationButton(
-              iconSize: 30,
-              icon: Icons.home,
-            ),
-            const NavigationButton(
               icon: Icons.help_outline,
-              iconSize: 30,
+              iconSize: 25,
               route: HelpScreen.route,
             ),
           ],
