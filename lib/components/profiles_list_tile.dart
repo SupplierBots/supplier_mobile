@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/presentation/CustomIcons.dart';
 
-class Debil extends StatelessWidget {
-  const Debil({
+class ProfilesListTile extends StatelessWidget {
+  const ProfilesListTile({
     Key key,
-    this.text,
+    @required this.name,
+    @required this.editAction,
+    @required this.deleteAction,
   }) : super(key: key);
-  final String text;
+  final String name;
+  final VoidCallback editAction;
+  final VoidCallback deleteAction;
 
   @override
   Widget build(BuildContext context) {
@@ -25,21 +29,27 @@ class Debil extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            text,
+            name,
             style: const TextStyle(color: kLightPurple, fontSize: 18),
           ),
           const Spacer(),
-          const Icon(
-            CustomIcons.edit,
-            color: kLighGrey,
-            size: 20,
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 19),
-            child: Icon(
-              CustomIcons.remove,
+          GestureDetector(
+            onTap: editAction,
+            child: const Icon(
+              CustomIcons.edit,
               color: kLighGrey,
-              size: 20,
+              size: 18,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: GestureDetector(
+              onTap: deleteAction,
+              child: const Icon(
+                CustomIcons.remove,
+                color: kLighGrey,
+                size: 18,
+              ),
             ),
           ),
         ],

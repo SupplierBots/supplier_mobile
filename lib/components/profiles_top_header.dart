@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/constants/typography.dart';
 
-class ProfileBarDetails extends StatelessWidget {
-  const ProfileBarDetails({
+class ProfilesTopHeader extends StatelessWidget {
+  const ProfilesTopHeader({
     @required this.profileName,
     @required this.isEditing,
+    @required this.undoAction,
+    @required this.confirmAction,
   });
 
   final String profileName;
   final bool isEditing;
+  final void Function() undoAction;
+  final void Function() confirmAction;
 
   @override
   Widget build(BuildContext context) {
@@ -39,17 +43,25 @@ class ProfileBarDetails extends StatelessWidget {
               style: kHeader,
             ),
           const Spacer(),
-          const Icon(
-            Icons.undo,
-            color: kLightPurple,
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25),
-            child: Icon(
-              Icons.save,
-              color: kLightPurple,
+          if (isEditing) ...<Widget>[
+            GestureDetector(
+              onTap: undoAction,
+              child: const Icon(
+                Icons.undo,
+                color: kLightPurple,
+              ),
             ),
-          ),
+            Container(
+              margin: const EdgeInsets.only(left: 25, right: 10),
+              child: GestureDetector(
+                onTap: confirmAction,
+                child: const Icon(
+                  Icons.save,
+                  color: kLightPurple,
+                ),
+              ),
+            ),
+          ]
         ],
       ),
     );

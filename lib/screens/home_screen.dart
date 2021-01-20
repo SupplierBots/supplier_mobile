@@ -6,7 +6,7 @@ import 'package:supplier_mobile/components/form/form_text_field.dart';
 import 'package:supplier_mobile/components/navigation_bar.dart';
 import 'package:supplier_mobile/components/form/form_switch.dart';
 import 'package:supplier_mobile/components/top_bar.dart';
-import 'package:supplier_mobile/components/profile_bar_details.dart';
+import 'package:supplier_mobile/components/profiles_top_header.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String route = 'home';
@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const TopBar(
-        content: ProfileBarDetails(
+        content: ProfilesTopHeader(
           isEditing: true,
           profileName: 'Juras zjeb',
         ),

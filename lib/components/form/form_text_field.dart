@@ -18,10 +18,17 @@ class FormTextField extends FormBuilderField<String> {
     @required this.placeholder,
     this.obscure = false,
     this.type = TextInputType.text,
+    this.optional = false,
   }) : super(
           key: key,
           name: name,
-          validator: validator,
+          validator: optional
+              ? validator
+              : FormBuilderValidators.compose(<String Function(String)>[
+                  validator ?? (String v) => null,
+                  (String value) =>
+                      value == null || value.isEmpty ? 'Required' : null,
+                ]),
           valueTransformer: valueTransformer,
           autovalidateMode: AutovalidateMode.disabled,
           initialValue: initialValue,
@@ -102,6 +109,7 @@ class FormTextField extends FormBuilderField<String> {
   final String placeholder;
   final TextInputType type;
   final bool obscure;
+  final bool optional;
 
   @override
   _FormTextFieldState createState() => _FormTextFieldState();

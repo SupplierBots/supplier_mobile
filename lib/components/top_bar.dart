@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/constants/colors.dart';
+import 'package:supplier_mobile/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/CustomIcons.dart';
 
 class TopBar extends PreferredSize {
@@ -25,23 +26,26 @@ class TopBar extends PreferredSize {
         ],
       ),
       child: SafeArea(
-        child: Row(
-          children: <Widget>[
-            ShaderMask(
-              shaderCallback: (Rect bounds) {
-                return kPrimaryGradient.createShader(bounds);
-              },
-              child: const Padding(
-                padding: EdgeInsets.all(8),
-                child: Icon(
-                  CustomIcons.union,
-                  color: Colors.white,
-                  size: 45,
+        child: FractionallySizedBox(
+          widthFactor: 0.94,
+          child: Row(
+            children: <Widget>[
+              ShaderMask(
+                shaderCallback: (Rect bounds) {
+                  return kPrimaryGradient.createShader(bounds);
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(right: 10),
+                  child: const Icon(
+                    CustomIcons.union,
+                    color: Colors.white,
+                    size: 45,
+                  ),
                 ),
               ),
-            ),
-            content,
-          ],
+              content,
+            ],
+          ),
         ),
       ),
     );
