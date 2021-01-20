@@ -6,7 +6,7 @@ import 'package:supplier_mobile/components/header.dart';
 import 'package:supplier_mobile/components/primary_button.dart';
 import 'package:supplier_mobile/components/secondary_button.dart';
 import 'package:supplier_mobile/constants/colors.dart';
-import 'package:supplier_mobile/presentation/CustomIcons.dart';
+import 'package:supplier_mobile/presentation/custom_icons.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const String route = 'settings';

@@ -4,15 +4,15 @@ import 'package:provider/provider.dart';
 import 'package:supplier_mobile/components/form/form_dropdown.dart';
 import 'package:supplier_mobile/components/form/form_text_field.dart';
 import 'package:supplier_mobile/components/header.dart';
-import 'package:supplier_mobile/components/navigation_bar.dart';
-import 'package:supplier_mobile/components/profiles_list_tile.dart';
+import 'package:supplier_mobile/features/navigation/navigation_bar.dart';
+import 'package:supplier_mobile/features/profiles/widgets/profiles_list_tile.dart';
 import 'package:supplier_mobile/components/profiles_top_header.dart';
-import 'package:supplier_mobile/components/profiles_list.dart';
+import 'package:supplier_mobile/features/profiles/widgets/profiles_list.dart';
 import 'package:supplier_mobile/components/top_bar.dart';
 import 'package:supplier_mobile/constants/scaling.dart';
 import 'package:supplier_mobile/constants/typography.dart';
-import 'package:supplier_mobile/models/profile.dart';
-import 'package:supplier_mobile/state/profiles_state.dart';
+import 'package:supplier_mobile/features/profiles/profile_model.dart';
+import 'package:supplier_mobile/features/profiles/profiles_provider.dart';
 
 class ProfilesScreen extends StatefulWidget {
   static const String route = 'profiles';

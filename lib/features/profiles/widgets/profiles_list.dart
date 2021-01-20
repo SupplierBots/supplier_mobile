@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:supplier_mobile/components/profiles_list_tile.dart';
+import 'package:supplier_mobile/features/profiles/widgets/profiles_list_tile.dart';
 import 'package:supplier_mobile/constants/scaling.dart';
-import 'package:supplier_mobile/models/profile.dart';
-import 'package:supplier_mobile/state/profiles_state.dart';
+import 'package:supplier_mobile/features/profiles/profile_model.dart';
+import 'package:supplier_mobile/features/profiles/profiles_provider.dart';
 
 class ProfilesList extends StatelessWidget {
   const ProfilesList({

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/constants/colors.dart';
-import 'package:supplier_mobile/presentation/CustomIcons.dart';
+import 'package:supplier_mobile/presentation/custom_icons.dart';
 
 class ExpandedProfileBar extends StatelessWidget {
   const ExpandedProfileBar({

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:supplier_mobile/screens/dashboard_screen.dart';
-import 'package:supplier_mobile/screens/help_screen.dart';
-import 'package:supplier_mobile/screens/profiles_screen.dart';
-import 'package:supplier_mobile/screens/login_screen.dart';
-import 'package:supplier_mobile/screens/tasks_screen.dart';
-import 'package:supplier_mobile/state/profiles_state.dart';
+import 'package:supplier_mobile/features/dashboard/dashboard_screen.dart';
+import 'package:supplier_mobile/features/help/help_screen.dart';
+import 'package:supplier_mobile/features/profiles/profiles_screen.dart';
+import 'package:supplier_mobile/features/authentication/authentication_screen.dart';
+import 'package:supplier_mobile/features/tasks/tasks_screen.dart';
+import 'package:supplier_mobile/features/profiles/profiles_provider.dart';
 
 import 'constants/colors.dart';
-import 'screens/home_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -38,9 +37,6 @@ class MyApp extends StatelessWidget {
           Widget Function(BuildContext, Animation<double>, Animation<double>)
               builder;
           switch (settings.name) {
-            case HomeScreen.route:
-              builder = (_, __, ___) => HomeScreen();
-              break;
             case TasksScreen.route:
               builder = (_, __, ___) => TasksScreen();
               break;

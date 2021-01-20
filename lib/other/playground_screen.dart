@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/components/browser_instance.dart';
-import 'package:supplier_mobile/components/navigation_bar.dart';
+import 'package:supplier_mobile/components/navigation/navigation_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:provider/provider.dart';
 import '../constants/colors.dart';

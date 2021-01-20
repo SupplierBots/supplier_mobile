@@ -1,6 +1,6 @@
 import 'dart:collection';
 import 'package:flutter/foundation.dart';
-import 'package:supplier_mobile/models/profile.dart';
+import 'package:supplier_mobile/features/profiles/profile_model.dart';
 
 class ProfilesState with ChangeNotifier {
   final Map<String, Profile> _profiles = <String, Profile>{};
