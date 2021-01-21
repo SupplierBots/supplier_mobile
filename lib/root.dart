@@ -12,6 +12,9 @@ import 'package:supplier_mobile/features/profiles/profiles_provider.dart';
 
 import 'constants/colors.dart';
 
+typedef ScreensBuilder = Widget Function(
+    BuildContext, Animation<double>, Animation<double>);
+
 class Root extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -47,9 +50,7 @@ class Root extends StatelessWidget {
               return Navigator(
                   initialRoute: DashboardScreen.route,
                   onGenerateRoute: (RouteSettings settings) {
-                    Widget Function(
-                            BuildContext, Animation<double>, Animation<double>)
-                        builder;
+                    ScreensBuilder builder;
                     switch (settings.name) {
                       case DashboardScreen.route:
                         builder = (_, __, ___) => DashboardScreen();
@@ -69,7 +70,7 @@ class Root extends StatelessWidget {
                       default:
                         throw Exception('Invalid route: ${settings.name}');
                     }
-                    return PageRouteBuilder(
+                    return PageRouteBuilder<StatefulWidget>(
                       pageBuilder: builder,
                       settings: settings,
                     );
