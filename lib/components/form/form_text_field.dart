@@ -29,7 +29,10 @@ class FormTextField extends FormBuilderField<String> {
                   (String value) =>
                       value == null || value.isEmpty ? 'Required' : null,
                 ]),
-          valueTransformer: valueTransformer,
+          valueTransformer: (String value) {
+            value = value.trim();
+            return valueTransformer != null ? valueTransformer(value) : value;
+          },
           autovalidateMode: AutovalidateMode.disabled,
           initialValue: initialValue,
           builder: (FormFieldState<String> field) {
