@@ -7,7 +7,7 @@ import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/constants/scaling.dart';
 import 'package:supplier_mobile/constants/typography.dart';
 import 'package:supplier_mobile/features/authentication/authentication_screen.dart';
-import 'package:supplier_mobile/features/authentication/firebase_auth_service.dart';
+import 'package:supplier_mobile/features/authentication/authentication_provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const String route = 'settings';
@@ -19,8 +19,8 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    final FirebaseAuthService authService =
-        Provider.of<FirebaseAuthService>(context, listen: false);
+    final AuthenticationProvider authService =
+        Provider.of<AuthenticationProvider>(context, listen: false);
     return Scaffold(
       appBar: TopBar(
         content: Text(

@@ -6,11 +6,11 @@ part 'user_details_model.g.dart';
 class UserDetails {
   UserDetails({this.uid, this.email});
 
-  final String uid;
-  final String email;
-
   factory UserDetails.fromJson(Map<String, dynamic> json) =>
       _$UserDetailsFromJson(json);
+
+  final String uid;
+  final String email;
 
   Map<String, dynamic> toJson() => _$UserDetailsToJson(this);
 }

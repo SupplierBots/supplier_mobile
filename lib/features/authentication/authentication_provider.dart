@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/features/authentication/user_details_model.dart';
 
-class FirebaseAuthService with ChangeNotifier {
+class AuthenticationProvider with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   bool _waitingForResponse = false;
