@@ -30,62 +30,45 @@ class _DashboardScreenState extends State<DashboardScreen> {
             shrinkWrap: true,
             children: <Widget>[
               const SizedBox(
+                height: 25,
+              ),
+              Container(child: const Header(text: 'News', underlineWidth: 100)),
+              const SizedBox(
                 height: 10,
               ),
-              Container(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: const Header(text: 'News', underlineWidth: 150)),
+              Text(
+                'Finally closed beta! We would be thankful for every feedback. Please be aware that some errors can occur. We will fix them as fast as possible. Be sure you have  downloaded latest version. Thanks for participating.',
+                style: TextStyle(fontSize: 16, color: kLighGrey),
+              ),
               const SizedBox(
                 height: 20,
               ),
-              const Card(
-                color: kBackgroundColor,
-                child: Text(
-                  'Finally closed beta! We would be thankful for every feedback. Please be aware that some errors can occur. We will fix them as fast as possible. Be sure you have  downloaded latest version. Thanks for participating.',
-                  style: TextStyle(
-                      fontSize: 16, color: kLighGrey, letterSpacing: 1),
+              const Header(text: 'Tips', underlineWidth: 90),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Here we will display random tips and answers to frequently asked questions. We need more  text - this placeholder is too short, final tips will be a bit longer. At least some of them.',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: kLighGrey,
                 ),
               ),
               const SizedBox(
                 height: 20,
               ),
-              // ignore: avoid_unnecessary_containers
-              Container(
-                child: const Header(text: 'Tips', underlineWidth: 150),
-              ),
+              const Header(text: 'Information', underlineWidth: 200),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
-              const Card(
-                color: kBackgroundColor,
-                child: Text(
-                  'Here we will display random tips and answers to frequently asked questions. We need more  text - this placeholder is too short, final tips will be a bit longer. At least some of them.',
-                  style: TextStyle(
-                      fontSize: 16, color: kLighGrey, letterSpacing: 1),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Header(text: 'Information', underlineWidth: 250),
-              const SizedBox(
-                height: 20,
-              ),
-              const Card(
-                color: kBackgroundColor,
-                child: Text(
-                  'Uzasadnienie dlaczego heljas jest spierdolony. Prosta sprawa. Drze pizde na młodego pracowanika, kótry nawet nie jest zatrudniony, ze ten cos robi, chociaz jest to potrzebne. Po drugie, nie kupil waznego elementu kazdej firmy informatycznej, to jest tablet graficzny marki ajfon (dokladnie ajfon pro). A tak na powaznie to nie chcialem zeby ta strona byla taka plyta, a takze aby moc dodac funkcje scrollowania. Pozdro ryju, trzymaj sie tam, szacun dla tych co zyja z dealow, strzaleczka',
-                  style: TextStyle(
-                      fontSize: 16, color: kLighGrey, letterSpacing: 1),
-                ),
+              Text(
+                'Uzasadnienie dlaczego heljas jest spierdolony. Prosta sprawa. Drze pizde na młodego pracowanika, kótry nawet nie jest zatrudniony, ze ten cos robi, chociaz jest to potrzebne. Po drugie, nie kupil waznego elementu kazdej firmy informatycznej, to jest tablet graficzny marki ajfon (dokladnie ajfon pro). A tak na powaznie to nie chcialem zeby ta strona byla taka plyta, a takze aby moc dodac funkcje scrollowania. Pozdro ryju, trzymaj sie tam, szacun dla tych co zyja z dealow, strzaleczka. \nOdp od heljasa: nie zesraj sie',
+                style: TextStyle(fontSize: 16, color: kLighGrey),
               ),
             ],
           ),
         ),
       ),
-      //   ],
-      //),
-      // ),
       bottomNavigationBar: const NavigationBar(),
     );
   }

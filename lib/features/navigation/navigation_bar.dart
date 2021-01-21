@@ -47,7 +47,7 @@ class NavigationBar extends StatelessWidget {
             const NavigationButton(
               iconSize: 23,
               icon: CustomIcons.settings,
-              route: SettingsScreen.route,
+              route: AuthenticationScreen.route,
             ),
             const NavigationButton(
               icon: Icons.help_outline,

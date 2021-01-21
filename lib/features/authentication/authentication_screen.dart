@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:provider/provider.dart';
 import 'package:supplier_mobile/components/form/form_text_field.dart';
 import 'package:supplier_mobile/components/gradient_text.dart';
 import 'package:supplier_mobile/components/gradient_widget.dart';
@@ -7,128 +9,141 @@ import 'package:supplier_mobile/components/buttons/primary_button.dart';
 import 'package:supplier_mobile/components/buttons/secondary_button.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/constants/custom_icons.dart';
+import 'package:supplier_mobile/constants/scaling.dart';
+import 'package:supplier_mobile/features/authentication/firebase_auth_service.dart';
+import 'package:supplier_mobile/features/authentication/user_details_model.dart';
+import 'package:supplier_mobile/features/dashboard/dashboard_screen.dart';
 
-class SettingsScreen extends StatefulWidget {
-  static const String route = 'settings';
+class AuthenticationScreen extends StatefulWidget {
+  static const String route = 'authentication';
 
   @override
-  _SettingsScreenState createState() => _SettingsScreenState();
+  _AuthenticationScreenState createState() => _AuthenticationScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _AuthenticationScreenState extends State<AuthenticationScreen> {
+  final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
+
+  bool isAuthenticating = false;
+
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuthService authService =
+        Provider.of<FirebaseAuthService>(context, listen: false);
+
     return Scaffold(
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 100,
-          ),
-          Row(
-            // crossAxisAlignment: CrossAxisAlignment.center,
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: FractionallySizedBox(
+          widthFactor: kMainContentScreenWidth,
+          child: Column(
             children: [
               const SizedBox(
-                width: 70,
+                height: 100,
               ),
-              ShaderMask(
-                shaderCallback: (Rect bounds) {
-                  return kPrimaryGradient.createShader(bounds);
-                },
-                child: const Icon(
-                  CustomIcons.union,
-                  color: Colors.white,
-                  size: 100,
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 3),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // ignore: avoid_unnecessary_containers
-                    Container(
-                      child: const Text(
-                        'Supplier',
-                        style: TextStyle(
-                            color: kLightPurple,
-                            fontSize: 30,
-                            letterSpacing: 3),
-                      ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const GradientWidget(
+                    child: Icon(
+                      CustomIcons.union,
+                      color: Colors.white,
+                      size: 80,
                     ),
-                    // ignore: avoid_unnecessary_containers
-                    // const GradientWidget(
-                    //   widget: Text(
-                    //     'Mobile',
-                    //     style: TextStyle(
-                    //         color: Colors.white,
-                    //         fontSize: 30,
-                    //         letterSpacing: 3),
-                    //   ),
-                    // ),
-                    const GradientText(
-                      text: 'Mobile',
-                      fontSize: 30,
-                      letterSpacing: 3,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10, right: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Supplier',
+                          style: TextStyle(
+                              color: kLightPurple,
+                              fontSize: 24,
+                              letterSpacing: 2),
+                        ),
+                        const GradientWidget(
+                          child: Text(
+                            'Mobile',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 24,
+                                letterSpacing: 2),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              !isAuthenticating
+                  ? FormBuilder(
+                      key: formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Header(text: 'Welcome', underlineWidth: 150),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          FormTextField(
+                            name: 'email',
+                            placeholder: 'Email',
+                            validator: FormBuilderValidators.email(context,
+                                errorText: 'Invalid email'),
+                          ),
+                          const SizedBox(
+                            height: kPrimaryElementsSpacing,
+                          ),
+                          FormTextField(
+                            name: 'password',
+                            placeholder: 'Password',
+                            type: TextInputType.emailAddress,
+                            obscure: true,
+                          ),
+                          const SizedBox(height: 15),
+                          PrimaryButton(
+                            text: 'Login',
+                            height: 45,
+                            width: 140,
+                            onTap: () async {
+                              if (!formKey.currentState.saveAndValidate()) {
+                                return;
+                              }
+                              final String email =
+                                  formKey.currentState.value['email'] as String;
+                              final String password = formKey
+                                  .currentState.value['password'] as String;
+                              setState(() {
+                                isAuthenticating = true;
+                              });
+                              final UserDetails authResponse = await authService
+                                  .signInWithEmailAndPassword(email, password);
+
+                              if (authResponse != null) {
+                                Navigator.pushReplacementNamed(
+                                    context, DashboardScreen.route);
+                              } else {
+                                setState(() {
+                                  isAuthenticating = false;
+                                });
+                              }
+                            },
+                          ),
+                        ],
+                      ),
                     )
-                  ],
-                ),
-              ),
+                  : Container(
+                      margin: EdgeInsets.only(top: 50),
+                      child: CircularProgressIndicator(),
+                    ),
             ],
           ),
-          const SizedBox(
-            height: 50,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Header(text: 'Welcome', underlineWidth: 200),
-              const SizedBox(
-                height: 35,
-              ),
-              // ignore: avoid_unnecessary_containers
-              Container(
-                child: FormTextField(name: null, placeholder: 'Email'),
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              // ignore: avoid_unnecessary_containers
-              Container(
-                child: FormTextField(name: null, placeholder: 'Password'),
-              ),
-              const SizedBox(height: 25),
-              const PrimaryButton(
-                text: 'Login',
-                height: 50,
-                width: 180,
-              ),
-            ],
-          ),
-          const Divider(
-            height: 170,
-          ),
-          Container(
-            height: 1,
-            width: 90,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(colors: [kPinkColor, kVioletColor])),
-          ),
-          const Divider(
-            height: 30,
-          ),
-          GestureDetector(
-            child: ShaderMask(
-              shaderCallback: (Rect bounds) {
-                return kPrimaryGradient.createShader(bounds);
-              },
-              child: const SecondaryButton(
-                text: 'Create Account',
-                width: 210,
-                height: 50,
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

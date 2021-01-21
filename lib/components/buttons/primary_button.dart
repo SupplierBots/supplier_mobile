@@ -7,14 +7,17 @@ class PrimaryButton extends StatelessWidget {
     @required this.text,
     @required this.width,
     @required this.height,
+    @required this.onTap,
   }) : super(key: key);
   final String text;
   final double width;
   final double height;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onTap,
       child: SizedBox(
         width: width,
         height: height,
@@ -28,7 +31,7 @@ class PrimaryButton extends StatelessWidget {
           ),
           child: Text(
             text,
-            style: const TextStyle(fontSize: 18),
+            style: const TextStyle(fontSize: 16),
           ),
         ),
       ),
