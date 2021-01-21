@@ -43,8 +43,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 height: 45,
                 onTap: () async {
                   await authService.signOut();
-                  Navigator.pushReplacementNamed(
-                      context, AuthenticationScreen.route);
                 },
               ),
             ],

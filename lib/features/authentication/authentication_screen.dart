@@ -24,12 +24,10 @@ class AuthenticationScreen extends StatefulWidget {
 class _AuthenticationScreenState extends State<AuthenticationScreen> {
   final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
 
-  bool isAuthenticating = false;
-
   @override
   Widget build(BuildContext context) {
     final FirebaseAuthService authService =
-        Provider.of<FirebaseAuthService>(context, listen: false);
+        Provider.of<FirebaseAuthService>(context);
 
     return Scaffold(
       body: Align(
@@ -80,67 +78,55 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
               const SizedBox(
                 height: 50,
               ),
-              !isAuthenticating
-                  ? FormBuilder(
-                      key: formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Header(text: 'Welcome', underlineWidth: 150),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          FormTextField(
-                            name: 'email',
-                            placeholder: 'Email',
-                            validator: FormBuilderValidators.email(context,
-                                errorText: 'Invalid email'),
-                          ),
-                          const SizedBox(
-                            height: kPrimaryElementsSpacing,
-                          ),
-                          FormTextField(
-                            name: 'password',
-                            placeholder: 'Password',
-                            type: TextInputType.emailAddress,
-                            obscure: true,
-                          ),
-                          const SizedBox(height: 15),
-                          PrimaryButton(
-                            text: 'Login',
-                            height: 45,
-                            width: 140,
-                            onTap: () async {
-                              if (!formKey.currentState.saveAndValidate()) {
-                                return;
-                              }
-                              final String email =
-                                  formKey.currentState.value['email'] as String;
-                              final String password = formKey
-                                  .currentState.value['password'] as String;
-                              setState(() {
-                                isAuthenticating = true;
-                              });
-                              final UserDetails authResponse = await authService
-                                  .signInWithEmailAndPassword(email, password);
-
-                              if (authResponse != null) {
-                                Navigator.pushReplacementNamed(
-                                    context, DashboardScreen.route);
-                              } else {
-                                setState(() {
-                                  isAuthenticating = false;
-                                });
-                              }
-                            },
-                          ),
-                        ],
+              if (!authService.waitingForResponse)
+                FormBuilder(
+                  key: formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Header(text: 'Welcome', underlineWidth: 150),
+                      const SizedBox(
+                        height: 15,
                       ),
-                    )
-                  : Container(
-                      margin: EdgeInsets.only(top: 50),
-                      child: CircularProgressIndicator(),
-                    ),
+                      FormTextField(
+                        name: 'email',
+                        placeholder: 'Email',
+                        validator: FormBuilderValidators.email(context,
+                            errorText: 'Invalid email'),
+                      ),
+                      const SizedBox(
+                        height: kPrimaryElementsSpacing,
+                      ),
+                      FormTextField(
+                        name: 'password',
+                        placeholder: 'Password',
+                        type: TextInputType.emailAddress,
+                        obscure: true,
+                      ),
+                      const SizedBox(height: 15),
+                      PrimaryButton(
+                        text: 'Login',
+                        height: 45,
+                        width: 140,
+                        onTap: () async {
+                          if (!formKey.currentState.saveAndValidate()) {
+                            return;
+                          }
+                          final String email =
+                              formKey.currentState.value['email'] as String;
+                          final String password =
+                              formKey.currentState.value['password'] as String;
+                          await authService.signIn(email, password);
+                        },
+                      ),
+                    ],
+                  ),
+                )
+              else
+                Container(
+                  margin: const EdgeInsets.only(top: 50),
+                  child: const CircularProgressIndicator(),
+                ),
             ],
           ),
         ),
