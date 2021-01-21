@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:supplier_mobile/components/form/form_text_field.dart';
+import 'package:supplier_mobile/components/gradient_widget.dart';
 import 'package:supplier_mobile/components/header.dart';
 import 'package:supplier_mobile/components/buttons/primary_button.dart';
+import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/constants/scaling.dart';
 import 'package:supplier_mobile/features/authentication/authentication_provider.dart';
 
@@ -56,6 +58,19 @@ class LoginForm extends StatelessWidget {
             obscure: true,
           ),
           const SizedBox(height: 15),
+          if (auth.hasError) ...<Widget>[
+            GradientWidget(
+              gradient: kRedGradient,
+              child: Text(
+                auth.errorMessage,
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            const SizedBox(height: 15),
+          ],
           PrimaryButton(
             text: 'Login',
             height: 45,

@@ -8,8 +8,17 @@ class AuthenticationProvider with ChangeNotifier {
   bool _waitingForResponse = false;
   bool get waitingForResponse => _waitingForResponse;
 
+  String _errorMessage;
+  String get errorMessage => _errorMessage;
+  bool get hasError => errorMessage != null;
+
   void _setResponseStatus(bool status) {
     _waitingForResponse = status;
+    notifyListeners();
+  }
+
+  void _setErrorMessage(String message) {
+    _errorMessage = message;
     notifyListeners();
   }
 
@@ -29,13 +38,14 @@ class AuthenticationProvider with ChangeNotifier {
 
   Future<void> signIn(String email, String password) async {
     _setResponseStatus(true);
+    _setErrorMessage(null);
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+        _setErrorMessage('Invalid email or password.');
+      } else {
+        _setErrorMessage('Something went wrong. Try again later.');
       }
     }
     _setResponseStatus(false);
