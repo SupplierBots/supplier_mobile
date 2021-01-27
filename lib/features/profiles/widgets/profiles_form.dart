@@ -99,6 +99,16 @@ class ProfilesForm extends ConsumerWidget {
           Wrap(
             runSpacing: kPrimaryElementsSpacing,
             children: <Widget>[
+              const FormDropdown(
+                name: 'country',
+                placeholder: 'Country',
+                items: <String>[
+                  'Poland1',
+                  'Poland2',
+                  'Poland3',
+                  'Poland4',
+                ],
+              ),
               FormTextField(
                 name: 'firstName',
                 placeholder: 'First Name',
@@ -133,16 +143,6 @@ class ProfilesForm extends ConsumerWidget {
               FormTextField(
                 name: 'postcode',
                 placeholder: 'Post Code',
-              ),
-              const FormDropdown(
-                name: 'country',
-                placeholder: 'Country',
-                items: <String>[
-                  'Poland1',
-                  'Poland2',
-                  'Poland3',
-                  'Poland4',
-                ],
               ),
             ],
           ),

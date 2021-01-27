@@ -24,7 +24,7 @@ class FormDropdownItem extends StatelessWidget {
               Flexible(
                 child: Text(
                   item,
-                  style: TextStyle(color: kLightPurple, fontSize: 16),
+                  style: TextStyle(color: kLighGrey, fontSize: 16),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
