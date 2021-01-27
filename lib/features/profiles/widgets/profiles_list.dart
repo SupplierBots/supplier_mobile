@@ -12,19 +12,19 @@ class ProfilesList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final ProfilesProvider state = watch(profilesProvider);
+    final ProfilesProvider profiles = watch(profilesProvider);
 
     List<ProfilesListTile> _getProfiles() {
       final List<ProfilesListTile> _list = <ProfilesListTile>[];
-      for (int i = 0; i < state.profiles.length; i++) {
-        final String key = state.profiles.keyAt(i) as String;
+      for (final dynamic key in profiles.keys) {
+        final String parsedKey = key as String;
         _list.add(ProfilesListTile(
-          name: key,
+          name: parsedKey,
           editAction: () {
-            state.setEditedProfile(key);
+            profiles.setEditedProfile(parsedKey);
           },
           deleteAction: () {
-            state.removeProfile(key);
+            profiles.removeProfile(parsedKey);
           },
         ));
       }
@@ -33,7 +33,7 @@ class ProfilesList extends ConsumerWidget {
 
     return Container(
       margin: const EdgeInsets.only(top: 20.0),
-      child: state.profiles.isNotEmpty
+      child: profiles.isNotEmpty
           ? Wrap(
               alignment: WrapAlignment.center,
               runSpacing: kPrimaryElementsSpacing,

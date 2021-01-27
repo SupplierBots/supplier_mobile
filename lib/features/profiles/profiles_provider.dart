@@ -11,31 +11,35 @@ final ChangeNotifierProvider<ProfilesProvider> profilesProvider =
 
 class ProfilesProvider with ChangeNotifier {
   static String boxId = 'profiles';
+
   final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
-  final Box<Profile> profiles = Hive.box<Profile>(boxId);
+  final Box<Profile> _profiles = Hive.box<Profile>(boxId);
 
   String _editedProfileName;
   bool _isModalOpen = false;
 
   bool get isEditing => _editedProfileName != null;
-  bool get isCreatingNew => !profiles.containsKey(editedProfileName);
   String get editedProfileName => _editedProfileName;
   bool get isModalOpen => _isModalOpen;
+  bool get isNotEmpty => _profiles.isNotEmpty;
+  List<dynamic> get keys => _profiles.keys.toList();
+
+  bool containsKey(String key) => _profiles.containsKey(key);
 
   Map<String, dynamic> getInitialFormValues() {
-    if (!profiles.containsKey(editedProfileName)) return null;
-    return profiles.get(editedProfileName).toJson();
+    if (!_profiles.containsKey(editedProfileName)) return null;
+    return _profiles.get(editedProfileName).toJson();
   }
 
   void saveEditedProfile() {
     if (!formKey.currentState.saveAndValidate()) return;
-    profiles.put(
+    _profiles.put(
         editedProfileName, Profile.fromJson(formKey.currentState.value));
     stopEditing();
   }
 
   void removeProfile(String name) {
-    profiles.delete(name);
+    _profiles.delete(name);
     notifyListeners();
   }
 
@@ -58,5 +62,11 @@ class ProfilesProvider with ChangeNotifier {
     _editedProfileName = null;
     formKey.currentState.reset();
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _profiles.close();
+    super.dispose();
   }
 }

@@ -16,7 +16,7 @@ import 'package:supplier_mobile/features/profiles/profiles_provider.dart';
 class CreateProfileModal extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final ProfilesProvider state = watch(profilesProvider);
+    final ProfilesProvider profiles = watch(profilesProvider);
 
     final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
 
@@ -69,7 +69,7 @@ class CreateProfileModal extends ConsumerWidget {
                       name: 'name',
                       placeholder: 'Profile name',
                       validator: (String value) {
-                        if (!state.profiles.containsKey(value)) return null;
+                        if (!profiles.containsKey(value)) return null;
                         return 'Already exists';
                       },
                     ),
@@ -93,7 +93,7 @@ class CreateProfileModal extends ConsumerWidget {
                             size: 30,
                             color: kDarkGrey,
                           ),
-                          onPressed: state.closeModal,
+                          onPressed: profiles.closeModal,
                         ),
                         const SizedBox(width: 15),
                         IconButton(
@@ -105,9 +105,9 @@ class CreateProfileModal extends ConsumerWidget {
                           onPressed: () {
                             if (!formKey.currentState.saveAndValidate()) return;
 
-                            state.setEditedProfile(
+                            profiles.setEditedProfile(
                                 formKey.currentState.value['name'] as String);
-                            state.closeModal();
+                            profiles.closeModal();
                           },
                         ),
                       ],
