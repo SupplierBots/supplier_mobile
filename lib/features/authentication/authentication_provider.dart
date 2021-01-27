@@ -1,6 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/all.dart';
 import 'package:supplier_mobile/features/authentication/user_details_model.dart';
+
+final ChangeNotifierProvider<AuthenticationProvider> authenticationProvider =
+    ChangeNotifierProvider<AuthenticationProvider>(
+        (ProviderReference ref) => AuthenticationProvider());
 
 class AuthenticationProvider with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;

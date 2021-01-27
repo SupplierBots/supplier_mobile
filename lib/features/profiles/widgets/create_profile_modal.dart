@@ -3,20 +3,20 @@ import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/all.dart';
 import 'package:supplier_mobile/components/buttons/primary_button.dart';
 import 'package:supplier_mobile/components/buttons/secondary_button.dart';
 import 'package:supplier_mobile/components/form/form_text_field.dart';
 import 'package:supplier_mobile/components/header.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/constants/scaling.dart';
+import 'package:supplier_mobile/features/authentication/authentication_provider.dart';
 import 'package:supplier_mobile/features/profiles/profiles_provider.dart';
 
-class CreateProfileModal extends StatelessWidget {
+class CreateProfileModal extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
-    final ProfilesProvider state =
-        Provider.of<ProfilesProvider>(context, listen: false);
+  Widget build(BuildContext context, ScopedReader watch) {
+    final ProfilesProvider state = watch(profilesProvider);
 
     final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
 

@@ -30,6 +30,7 @@ class FormTextField extends FormBuilderField<String> {
                       value == null || value.isEmpty ? 'Required' : null,
                 ]),
           valueTransformer: (String value) {
+            if (value == null) return null;
             value = value.trim();
             return valueTransformer != null ? valueTransformer(value) : value;
           },
@@ -53,40 +54,41 @@ class FormTextField extends FormBuilderField<String> {
             }
 
             return Container(
-              padding: EdgeInsets.all(2.0),
+              padding: const EdgeInsets.all(2.0),
               height: kInputsHeight,
               decoration: BoxDecoration(
                 gradient: getGradient(),
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(10.0),
                 ),
               ),
               child: TextField(
                 keyboardType: type,
-                style: TextStyle(color: kLightPurple),
+                style: const TextStyle(color: kLightPurple),
                 cursorColor: kLightPurple,
                 obscureText: obscure,
                 autocorrect: false,
                 controller: state._effectiveController,
                 focusNode: state.effectiveFocusNode,
+                textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12.0),
                   suffixIcon: Padding(
-                    padding: EdgeInsets.only(right: 20),
+                    padding: const EdgeInsets.only(right: 20),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: <Widget>[
                         Text(
                           field.hasError && !state._isFocused
                               ? field.errorText
                               : '',
-                          style: TextStyle(color: kRed),
+                          style: const TextStyle(color: kRed),
                           textAlign: TextAlign.end,
                         ),
                       ],
                     ),
                   ),
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(10.0),
                     ),
@@ -97,9 +99,9 @@ class FormTextField extends FormBuilderField<String> {
                   ),
                   filled: true,
                   fillColor: kSecondaryBackground,
-                  hintStyle: TextStyle(color: kLighGrey),
+                  hintStyle: const TextStyle(color: kLighGrey),
                   hintText: placeholder,
-                  errorStyle: TextStyle(
+                  errorStyle: const TextStyle(
                     height: 0,
                     color: Colors.transparent,
                   ),

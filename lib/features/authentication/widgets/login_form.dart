@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/all.dart';
 import 'package:supplier_mobile/components/form/form_text_field.dart';
 import 'package:supplier_mobile/components/gradient_widget.dart';
 import 'package:supplier_mobile/components/header.dart';
@@ -9,7 +9,7 @@ import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/constants/scaling.dart';
 import 'package:supplier_mobile/features/authentication/authentication_provider.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends ConsumerWidget {
   LoginForm({
     Key key,
   }) : super(key: key);
@@ -17,9 +17,8 @@ class LoginForm extends StatelessWidget {
   final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
 
   @override
-  Widget build(BuildContext context) {
-    final AuthenticationProvider auth =
-        Provider.of<AuthenticationProvider>(context, listen: false);
+  Widget build(BuildContext context, ScopedReader watch) {
+    final AuthenticationProvider auth = watch(authenticationProvider);
 
     Future<void> submit() async {
       if (!formKey.currentState.saveAndValidate()) {

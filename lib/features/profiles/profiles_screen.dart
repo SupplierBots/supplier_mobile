@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/all.dart';
 import 'package:supplier_mobile/components/gradient_widget.dart';
 import 'package:supplier_mobile/components/navigation/navigation_bar.dart';
 import 'package:supplier_mobile/constants/colors.dart';
@@ -12,12 +12,12 @@ import 'package:supplier_mobile/components/top_bar.dart';
 import 'package:supplier_mobile/constants/scaling.dart';
 import 'package:supplier_mobile/features/profiles/profiles_provider.dart';
 
-class ProfilesScreen extends StatelessWidget {
+class ProfilesScreen extends ConsumerWidget {
   static const String route = 'profiles';
 
   @override
-  Widget build(BuildContext context) {
-    final ProfilesProvider state = Provider.of<ProfilesProvider>(context);
+  Widget build(BuildContext context, ScopedReader watch) {
+    final ProfilesProvider state = watch(profilesProvider);
 
     return Scaffold(
       appBar: TopBar(

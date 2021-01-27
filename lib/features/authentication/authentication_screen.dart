@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/all.dart';
 import 'package:supplier_mobile/constants/scaling.dart';
 import 'package:supplier_mobile/features/authentication/authentication_provider.dart';
 import 'package:supplier_mobile/features/authentication/widgets/login_form.dart';
 import 'package:supplier_mobile/features/authentication/widgets/main_logo.dart';
+import 'package:supplier_mobile/main.dart';
 
-class AuthenticationScreen extends StatelessWidget {
+class AuthenticationScreen extends ConsumerWidget {
   static const String route = 'authentication';
 
   @override
-  Widget build(BuildContext context) {
-    final AuthenticationProvider auth =
-        Provider.of<AuthenticationProvider>(context);
+  Widget build(BuildContext context, ScopedReader watch) {
+    final AuthenticationProvider auth = watch(authenticationProvider);
 
     return Scaffold(
       body: Align(
