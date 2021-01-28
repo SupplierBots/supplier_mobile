@@ -113,7 +113,7 @@ class _FormSwitchState extends State<FormSwitch>
                               child: Container(
                                 width: widget.toggleSize,
                                 height: widget.toggleSize,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Colors.white,
                                 ),
@@ -122,8 +122,8 @@ class _FormSwitchState extends State<FormSwitch>
                             _toggleAnimation.value == Alignment.centerLeft
                                 ? Expanded(
                                     child: Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 4.0),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 4.0),
                                       alignment: Alignment.centerRight,
                                     ),
                                   )
