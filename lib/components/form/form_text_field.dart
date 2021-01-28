@@ -8,7 +8,6 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:supplier_mobile/components/form/masked_text_input_formatter.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/constants/scaling.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class FormTextField extends FormBuilderField<String> {
   FormTextField({
