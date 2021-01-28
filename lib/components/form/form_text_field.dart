@@ -5,8 +5,10 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:supplier_mobile/components/form/masked_text_input_formatter.dart';
 import 'package:supplier_mobile/constants/colors.dart';
 import 'package:supplier_mobile/constants/scaling.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class FormTextField extends FormBuilderField<String> {
   FormTextField({
@@ -14,6 +16,7 @@ class FormTextField extends FormBuilderField<String> {
     @required String name,
     FormFieldValidator<String> validator,
     ValueTransformer<String> valueTransformer,
+    MaskedTextInputFormatter mask,
     String initialValue,
     @required this.placeholder,
     this.obscure = false,
@@ -70,6 +73,9 @@ class FormTextField extends FormBuilderField<String> {
                 autocorrect: false,
                 controller: state._effectiveController,
                 focusNode: state.effectiveFocusNode,
+                inputFormatters: [
+                  if (mask != null) mask,
+                ],
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12.0),

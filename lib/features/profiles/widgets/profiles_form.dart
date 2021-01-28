@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/all.dart';
 import 'package:supplier_mobile/components/form/form_dropdown.dart';
 import 'package:supplier_mobile/components/form/form_text_field.dart';
+import 'package:supplier_mobile/components/form/masked_text_input_formatter.dart';
 import 'package:supplier_mobile/components/header.dart';
 import 'package:supplier_mobile/constants/scaling.dart';
 import 'package:supplier_mobile/features/profiles/profiles_provider.dart';
@@ -39,6 +40,11 @@ class ProfilesForm extends ConsumerWidget {
               FormTextField(
                 name: 'creditCardNumber',
                 placeholder: 'Credit Card Number',
+                type: TextInputType.number,
+                mask: MaskedTextInputFormatter(
+                    mask: 'xxxx xxxx xxxx xxxx',
+                    separator: ' ',
+                    accept: RegExp('[0-9]')),
               ),
               Row(
                 children: const <Widget>[
