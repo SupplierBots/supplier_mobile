@@ -1,20 +1,25 @@
 part of 'auth_forms_bloc.dart';
 
 @freezed
-abstract class AuthFormsState with _$AuthFormsState {
+abstract class AuthFormsState implements _$AuthFormsState {
   const factory AuthFormsState({
-    @required String error,
-    @required bool hasError,
     @required bool isSubmitting,
     @required bool isCreatingAccount,
-    @required bool success,
+    @required Option<Either<AuthFailure, Unit>> failureOrSuccessOption,
   }) = _AuthFormsState;
 
-  factory AuthFormsState.initial() => const AuthFormsState(
-        error: '',
-        hasError: false,
+  const AuthFormsState._();
+
+  factory AuthFormsState.initial() => AuthFormsState(
         isSubmitting: false,
         isCreatingAccount: false,
-        success: false,
+        failureOrSuccessOption: none(),
       );
+
+  bool get isSuccess => failureOrSuccessOption.fold(
+      () => false,
+      (either) => either.fold(
+            (failure) => false,
+            (success) => true,
+          ));
 }

@@ -3,11 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:supplier_mobile/application/auth/auth_forms/auth_forms_bloc.dart';
 import 'package:supplier_mobile/domain/auth/sign_in_credentials.dart';
+import 'package:supplier_mobile/presentation/auth/widgets/error_renderer.dart';
 import 'package:supplier_mobile/presentation/core/buttons/primary_button.dart';
 import 'package:supplier_mobile/presentation/core/form/form_text_field.dart';
-import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
-import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 
 class SignInForm extends StatelessWidget {
@@ -60,19 +59,7 @@ class SignInForm extends StatelessWidget {
               obscure: true,
             ),
             const SizedBox(height: 15),
-            if (state.hasError) ...<Widget>[
-              GradientWidget(
-                gradient: kRedGradient,
-                child: Text(
-                  state.error,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 15),
-            ],
+            ErrorRenderer(),
             PrimaryButton(
               text: 'Sign in',
               height: 45,

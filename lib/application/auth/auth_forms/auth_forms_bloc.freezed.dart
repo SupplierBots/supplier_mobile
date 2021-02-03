@@ -465,17 +465,13 @@ class _$AuthFormsStateTearOff {
 
 // ignore: unused_element
   _AuthFormsState call(
-      {@required String error,
-      @required bool hasError,
-      @required bool isSubmitting,
+      {@required bool isSubmitting,
       @required bool isCreatingAccount,
-      @required bool success}) {
+      @required Option<Either<AuthFailure, Unit>> failureOrSuccessOption}) {
     return _AuthFormsState(
-      error: error,
-      hasError: hasError,
       isSubmitting: isSubmitting,
       isCreatingAccount: isCreatingAccount,
-      success: success,
+      failureOrSuccessOption: failureOrSuccessOption,
     );
   }
 }
@@ -486,11 +482,9 @@ const $AuthFormsState = _$AuthFormsStateTearOff();
 
 /// @nodoc
 mixin _$AuthFormsState {
-  String get error;
-  bool get hasError;
   bool get isSubmitting;
   bool get isCreatingAccount;
-  bool get success;
+  Option<Either<AuthFailure, Unit>> get failureOrSuccessOption;
 
   @JsonKey(ignore: true)
   $AuthFormsStateCopyWith<AuthFormsState> get copyWith;
@@ -502,11 +496,9 @@ abstract class $AuthFormsStateCopyWith<$Res> {
           AuthFormsState value, $Res Function(AuthFormsState) then) =
       _$AuthFormsStateCopyWithImpl<$Res>;
   $Res call(
-      {String error,
-      bool hasError,
-      bool isSubmitting,
+      {bool isSubmitting,
       bool isCreatingAccount,
-      bool success});
+      Option<Either<AuthFailure, Unit>> failureOrSuccessOption});
 }
 
 /// @nodoc
@@ -520,21 +512,19 @@ class _$AuthFormsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object error = freezed,
-    Object hasError = freezed,
     Object isSubmitting = freezed,
     Object isCreatingAccount = freezed,
-    Object success = freezed,
+    Object failureOrSuccessOption = freezed,
   }) {
     return _then(_value.copyWith(
-      error: error == freezed ? _value.error : error as String,
-      hasError: hasError == freezed ? _value.hasError : hasError as bool,
       isSubmitting:
           isSubmitting == freezed ? _value.isSubmitting : isSubmitting as bool,
       isCreatingAccount: isCreatingAccount == freezed
           ? _value.isCreatingAccount
           : isCreatingAccount as bool,
-      success: success == freezed ? _value.success : success as bool,
+      failureOrSuccessOption: failureOrSuccessOption == freezed
+          ? _value.failureOrSuccessOption
+          : failureOrSuccessOption as Option<Either<AuthFailure, Unit>>,
     ));
   }
 }
@@ -547,11 +537,9 @@ abstract class _$AuthFormsStateCopyWith<$Res>
       __$AuthFormsStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String error,
-      bool hasError,
-      bool isSubmitting,
+      {bool isSubmitting,
       bool isCreatingAccount,
-      bool success});
+      Option<Either<AuthFailure, Unit>> failureOrSuccessOption});
 }
 
 /// @nodoc
@@ -567,82 +555,67 @@ class __$AuthFormsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object error = freezed,
-    Object hasError = freezed,
     Object isSubmitting = freezed,
     Object isCreatingAccount = freezed,
-    Object success = freezed,
+    Object failureOrSuccessOption = freezed,
   }) {
     return _then(_AuthFormsState(
-      error: error == freezed ? _value.error : error as String,
-      hasError: hasError == freezed ? _value.hasError : hasError as bool,
       isSubmitting:
           isSubmitting == freezed ? _value.isSubmitting : isSubmitting as bool,
       isCreatingAccount: isCreatingAccount == freezed
           ? _value.isCreatingAccount
           : isCreatingAccount as bool,
-      success: success == freezed ? _value.success : success as bool,
+      failureOrSuccessOption: failureOrSuccessOption == freezed
+          ? _value.failureOrSuccessOption
+          : failureOrSuccessOption as Option<Either<AuthFailure, Unit>>,
     ));
   }
 }
 
 /// @nodoc
-class _$_AuthFormsState implements _AuthFormsState {
+class _$_AuthFormsState extends _AuthFormsState {
   const _$_AuthFormsState(
-      {@required this.error,
-      @required this.hasError,
-      @required this.isSubmitting,
+      {@required this.isSubmitting,
       @required this.isCreatingAccount,
-      @required this.success})
-      : assert(error != null),
-        assert(hasError != null),
-        assert(isSubmitting != null),
+      @required this.failureOrSuccessOption})
+      : assert(isSubmitting != null),
         assert(isCreatingAccount != null),
-        assert(success != null);
+        assert(failureOrSuccessOption != null),
+        super._();
 
-  @override
-  final String error;
-  @override
-  final bool hasError;
   @override
   final bool isSubmitting;
   @override
   final bool isCreatingAccount;
   @override
-  final bool success;
+  final Option<Either<AuthFailure, Unit>> failureOrSuccessOption;
 
   @override
   String toString() {
-    return 'AuthFormsState(error: $error, hasError: $hasError, isSubmitting: $isSubmitting, isCreatingAccount: $isCreatingAccount, success: $success)';
+    return 'AuthFormsState(isSubmitting: $isSubmitting, isCreatingAccount: $isCreatingAccount, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _AuthFormsState &&
-            (identical(other.error, error) ||
-                const DeepCollectionEquality().equals(other.error, error)) &&
-            (identical(other.hasError, hasError) ||
-                const DeepCollectionEquality()
-                    .equals(other.hasError, hasError)) &&
             (identical(other.isSubmitting, isSubmitting) ||
                 const DeepCollectionEquality()
                     .equals(other.isSubmitting, isSubmitting)) &&
             (identical(other.isCreatingAccount, isCreatingAccount) ||
                 const DeepCollectionEquality()
                     .equals(other.isCreatingAccount, isCreatingAccount)) &&
-            (identical(other.success, success) ||
-                const DeepCollectionEquality().equals(other.success, success)));
+            (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
+                const DeepCollectionEquality().equals(
+                    other.failureOrSuccessOption, failureOrSuccessOption)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(error) ^
-      const DeepCollectionEquality().hash(hasError) ^
       const DeepCollectionEquality().hash(isSubmitting) ^
       const DeepCollectionEquality().hash(isCreatingAccount) ^
-      const DeepCollectionEquality().hash(success);
+      const DeepCollectionEquality().hash(failureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -650,24 +623,20 @@ class _$_AuthFormsState implements _AuthFormsState {
       __$AuthFormsStateCopyWithImpl<_AuthFormsState>(this, _$identity);
 }
 
-abstract class _AuthFormsState implements AuthFormsState {
+abstract class _AuthFormsState extends AuthFormsState {
+  const _AuthFormsState._() : super._();
   const factory _AuthFormsState(
-      {@required String error,
-      @required bool hasError,
-      @required bool isSubmitting,
-      @required bool isCreatingAccount,
-      @required bool success}) = _$_AuthFormsState;
+          {@required bool isSubmitting,
+          @required bool isCreatingAccount,
+          @required Option<Either<AuthFailure, Unit>> failureOrSuccessOption}) =
+      _$_AuthFormsState;
 
-  @override
-  String get error;
-  @override
-  bool get hasError;
   @override
   bool get isSubmitting;
   @override
   bool get isCreatingAccount;
   @override
-  bool get success;
+  Option<Either<AuthFailure, Unit>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$AuthFormsStateCopyWith<_AuthFormsState> get copyWith;

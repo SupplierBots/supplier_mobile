@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:supplier_mobile/domain/auth/auth_exception.dart';
+import 'package:supplier_mobile/domain/auth/auth_failure.dart';
 import 'package:supplier_mobile/domain/auth/auth_repository.dart';
 import 'package:supplier_mobile/domain/auth/register_credentials.dart';
 import 'package:supplier_mobile/domain/auth/sign_in_credentials.dart';
@@ -31,27 +32,11 @@ class AuthFormsBloc extends Bloc<AuthFormsEvent, AuthFormsState> {
         isSubmitting: true,
       );
 
-      try {
-        await _authRepository.signIn(e.credentials);
-        yield state.copyWith(
-          isSubmitting: false,
-          success: true,
-        );
-      } on AuthException catch (e) {
-        if (e.message == AuthException.incorrectCredentials) {
-          yield state.copyWith(
-            error: 'Invalid email or password.',
-            hasError: true,
-            isSubmitting: false,
-          );
-        } else {
-          yield state.copyWith(
-            error: 'Something went wrong. Try again later.',
-            hasError: true,
-            isSubmitting: false,
-          );
-        }
-      }
+      final failureOrSuccess = await _authRepository.signIn(e.credentials);
+      yield state.copyWith(
+        isSubmitting: false,
+        failureOrSuccessOption: optionOf(failureOrSuccess),
+      );
     }, createAccountPressed: (e) async* {
       print(e.credentials);
     });

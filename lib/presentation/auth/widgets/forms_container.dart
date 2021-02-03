@@ -19,10 +19,20 @@ class FormsContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthFormsBloc, AuthFormsState>(
         listener: (context, state) {
-      if (state.success) {
-        context.read<AuthBloc>().add(const AuthEvent.authCheckRequested());
-        ExtendedNavigator.of(context).replace(Routes.dashboardPage);
-      }
+      state.failureOrSuccessOption.fold(
+        () {},
+        (either) => {
+          either.fold(
+            (failure) {},
+            (success) {
+              context
+                  .read<AuthBloc>()
+                  .add(const AuthEvent.authCheckRequested());
+              ExtendedNavigator.of(context).replace(Routes.dashboardPage);
+            },
+          )
+        },
+      );
     }, builder: (context, state) {
       return SafeArea(
         child: Column(
@@ -34,15 +44,13 @@ class FormsContainer extends StatelessWidget {
             const SizedBox(
               height: 50,
             ),
-            if (!state.isSubmitting && !state.success) ...[
+            if (!state.isSubmitting && !state.isSuccess) ...[
               if (state.isCreatingAccount) RegisterForm() else SignInForm(),
               const Spacer(),
               const SizedBox(
                 width: 35,
                 child: GradientWidget(
                   child: Divider(
-                    thickness: 1,
-                    height: 35,
                     color: Colors.white,
                   ),
                 ),
