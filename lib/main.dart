@@ -3,7 +3,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:supplier_mobile/inject.dart';
-import 'package:supplier_mobile/presentation/root.dart';
+import 'package:supplier_mobile/presentation/app.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
@@ -13,5 +13,5 @@ Future<void> main() async {
   );
   configureDependencies(Environment.prod);
   await Firebase.initializeApp();
-  runApp(Root());
+  runApp(App());
 }
