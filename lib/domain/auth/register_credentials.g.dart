@@ -11,7 +11,7 @@ _$_RegisterCredentials _$_$_RegisterCredentialsFromJson(
   return _$_RegisterCredentials(
     email: json['email'] as String,
     password: json['password'] as String,
-    license: json['license'] as String,
+    key: json['key'] as String,
   );
 }
 
@@ -20,5 +20,5 @@ Map<String, dynamic> _$_$_RegisterCredentialsToJson(
     <String, dynamic>{
       'email': instance.email,
       'password': instance.password,
-      'license': instance.license,
+      'key': instance.key,
     };

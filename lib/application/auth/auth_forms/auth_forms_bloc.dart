@@ -38,7 +38,14 @@ class AuthFormsBloc extends Bloc<AuthFormsEvent, AuthFormsState> {
         failureOrSuccessOption: optionOf(failureOrSuccess),
       );
     }, createAccountPressed: (e) async* {
-      print(e.credentials);
+      yield state.copyWith(
+        isSubmitting: true,
+      );
+      final failureOrSuccess = await _authRepository.register(e.credentials);
+      yield state.copyWith(
+        isSubmitting: false,
+        failureOrSuccessOption: optionOf(failureOrSuccess),
+      );
     });
   }
 }

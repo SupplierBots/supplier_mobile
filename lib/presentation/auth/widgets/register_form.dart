@@ -55,6 +55,8 @@ class RegisterForm extends StatelessWidget {
             FormTextField(
               name: 'password',
               placeholder: 'Password',
+              validator: FormBuilderValidators.minLength(context, 6,
+                  errorText: 'Min 6 characters'),
               obscure: true,
             ),
             if (state.isCreatingAccount) ...[
@@ -76,7 +78,7 @@ class RegisterForm extends StatelessWidget {
                 height: kPrimaryElementsSpacing,
               ),
               FormTextField(
-                name: 'license',
+                name: 'key',
                 placeholder: 'License Key',
               ),
             ],

@@ -8,7 +8,7 @@ abstract class RegisterCredentials with _$RegisterCredentials {
   const factory RegisterCredentials({
     @required String email,
     @required String password,
-    @required String license,
+    @required String key,
   }) = _RegisterCredentials;
   factory RegisterCredentials.fromJson(Map<String, dynamic> json) =>
       _$RegisterCredentialsFromJson(json);

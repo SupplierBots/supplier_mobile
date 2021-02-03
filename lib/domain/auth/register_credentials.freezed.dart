@@ -20,11 +20,11 @@ class _$RegisterCredentialsTearOff {
   _RegisterCredentials call(
       {@required String email,
       @required String password,
-      @required String license}) {
+      @required String key}) {
     return _RegisterCredentials(
       email: email,
       password: password,
-      license: license,
+      key: key,
     );
   }
 
@@ -42,7 +42,7 @@ const $RegisterCredentials = _$RegisterCredentialsTearOff();
 mixin _$RegisterCredentials {
   String get email;
   String get password;
-  String get license;
+  String get key;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -54,7 +54,7 @@ abstract class $RegisterCredentialsCopyWith<$Res> {
   factory $RegisterCredentialsCopyWith(
           RegisterCredentials value, $Res Function(RegisterCredentials) then) =
       _$RegisterCredentialsCopyWithImpl<$Res>;
-  $Res call({String email, String password, String license});
+  $Res call({String email, String password, String key});
 }
 
 /// @nodoc
@@ -70,12 +70,12 @@ class _$RegisterCredentialsCopyWithImpl<$Res>
   $Res call({
     Object email = freezed,
     Object password = freezed,
-    Object license = freezed,
+    Object key = freezed,
   }) {
     return _then(_value.copyWith(
       email: email == freezed ? _value.email : email as String,
       password: password == freezed ? _value.password : password as String,
-      license: license == freezed ? _value.license : license as String,
+      key: key == freezed ? _value.key : key as String,
     ));
   }
 }
@@ -87,7 +87,7 @@ abstract class _$RegisterCredentialsCopyWith<$Res>
           $Res Function(_RegisterCredentials) then) =
       __$RegisterCredentialsCopyWithImpl<$Res>;
   @override
-  $Res call({String email, String password, String license});
+  $Res call({String email, String password, String key});
 }
 
 /// @nodoc
@@ -105,12 +105,12 @@ class __$RegisterCredentialsCopyWithImpl<$Res>
   $Res call({
     Object email = freezed,
     Object password = freezed,
-    Object license = freezed,
+    Object key = freezed,
   }) {
     return _then(_RegisterCredentials(
       email: email == freezed ? _value.email : email as String,
       password: password == freezed ? _value.password : password as String,
-      license: license == freezed ? _value.license : license as String,
+      key: key == freezed ? _value.key : key as String,
     ));
   }
 }
@@ -120,10 +120,10 @@ class __$RegisterCredentialsCopyWithImpl<$Res>
 /// @nodoc
 class _$_RegisterCredentials implements _RegisterCredentials {
   const _$_RegisterCredentials(
-      {@required this.email, @required this.password, @required this.license})
+      {@required this.email, @required this.password, @required this.key})
       : assert(email != null),
         assert(password != null),
-        assert(license != null);
+        assert(key != null);
 
   factory _$_RegisterCredentials.fromJson(Map<String, dynamic> json) =>
       _$_$_RegisterCredentialsFromJson(json);
@@ -133,11 +133,11 @@ class _$_RegisterCredentials implements _RegisterCredentials {
   @override
   final String password;
   @override
-  final String license;
+  final String key;
 
   @override
   String toString() {
-    return 'RegisterCredentials(email: $email, password: $password, license: $license)';
+    return 'RegisterCredentials(email: $email, password: $password, key: $key)';
   }
 
   @override
@@ -149,8 +149,8 @@ class _$_RegisterCredentials implements _RegisterCredentials {
             (identical(other.password, password) ||
                 const DeepCollectionEquality()
                     .equals(other.password, password)) &&
-            (identical(other.license, license) ||
-                const DeepCollectionEquality().equals(other.license, license)));
+            (identical(other.key, key) ||
+                const DeepCollectionEquality().equals(other.key, key)));
   }
 
   @override
@@ -158,7 +158,7 @@ class _$_RegisterCredentials implements _RegisterCredentials {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(password) ^
-      const DeepCollectionEquality().hash(license);
+      const DeepCollectionEquality().hash(key);
 
   @JsonKey(ignore: true)
   @override
@@ -176,7 +176,7 @@ abstract class _RegisterCredentials implements RegisterCredentials {
   const factory _RegisterCredentials(
       {@required String email,
       @required String password,
-      @required String license}) = _$_RegisterCredentials;
+      @required String key}) = _$_RegisterCredentials;
 
   factory _RegisterCredentials.fromJson(Map<String, dynamic> json) =
       _$_RegisterCredentials.fromJson;
@@ -186,7 +186,7 @@ abstract class _RegisterCredentials implements RegisterCredentials {
   @override
   String get password;
   @override
-  String get license;
+  String get key;
   @override
   @JsonKey(ignore: true)
   _$RegisterCredentialsCopyWith<_RegisterCredentials> get copyWith;
