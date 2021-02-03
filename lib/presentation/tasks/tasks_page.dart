@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
+import 'package:supplier_mobile/presentation/tasks/widgets/color_select.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/expanded_profile_bar.dart';
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
 import 'package:supplier_mobile/presentation/navigation/widgets/navigation_bar.dart';
@@ -28,6 +30,10 @@ class TasksPage extends StatelessWidget {
               profileName: 'SWAGAO Bank Polska',
               itemName: 'Dolce swaggana',
             ),
+            const SizedBox(
+              height: kPrimaryElementsSpacing,
+            ),
+            const ColorSelect(),
           ],
         ),
       ),
