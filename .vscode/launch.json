@@ -1,7 +1,4 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
@@ -31,7 +28,7 @@
       "name": "iPhone 12 (Simulator)",
       "request": "launch",
       "type": "dart",
-      "deviceId": "EC2D23D4-3A41-42D9-9209-02D5C27DF6EC"
+      "deviceId": "B78730F3-7386-4606-A7DE-F43721F41526"
     },
   ],
   "compounds": [

@@ -1,0 +1,14 @@
+{
+  "files.exclude": {
+    "**/*.freezed.dart": true,
+    "**/*.g.dart": true,
+    "**/.gitkeep": true,
+    ".flutter-plugins*": true,
+    ".packages": true,
+    ".metadata": true,
+    ".dart_tool": true,
+    "build": true,
+    ".vscode": true,
+    "pubspec.lock": true
+  },
+}
