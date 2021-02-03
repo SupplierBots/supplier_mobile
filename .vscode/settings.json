@@ -9,6 +9,7 @@
     ".dart_tool": true,
     "build": true,
     ".vscode": true,
-    "pubspec.lock": true
+    "pubspec.lock": true,
+    "README.md": true
   },
 }
