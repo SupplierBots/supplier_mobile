@@ -51,6 +51,8 @@ class FormsContainer extends StatelessWidget {
                 width: 35,
                 child: GradientWidget(
                   child: Divider(
+                    thickness: 1,
+                    height: 35,
                     color: Colors.white,
                   ),
                 ),
