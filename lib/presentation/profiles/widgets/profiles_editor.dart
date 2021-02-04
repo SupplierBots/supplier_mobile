@@ -7,6 +7,7 @@ import 'package:supplier_mobile/domain/profiles/profile.dart';
 import 'package:supplier_mobile/presentation/core/edit_header.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
+import 'package:supplier_mobile/presentation/navigation/widgets/animated_navigation_bar.dart';
 import 'package:supplier_mobile/presentation/navigation/widgets/navigation_bar.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
@@ -15,10 +16,33 @@ import 'package:supplier_mobile/presentation/profiles/widgets/create_profile_mod
 import 'package:supplier_mobile/presentation/profiles/widgets/profiles_form.dart';
 import 'package:supplier_mobile/presentation/profiles/widgets/profiles_list.dart';
 
-class ProfilesEditor extends StatelessWidget {
-  ProfilesEditor({
+class ProfilesEditor extends StatefulWidget {
+  const ProfilesEditor({
     Key key,
   }) : super(key: key);
+
+  @override
+  _ProfilesEditorState createState() => _ProfilesEditorState();
+}
+
+class _ProfilesEditorState extends State<ProfilesEditor>
+    with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 250),
+      vsync: this,
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
 
   final formKey = GlobalKey<FormBuilderState>();
 
@@ -38,8 +62,14 @@ class ProfilesEditor extends StatelessWidget {
       context.read<ProfilesEditorBloc>().add(const Saved());
     }
 
-    return BlocBuilder<ProfilesEditorBloc, ProfilesEditorState>(
-        builder: (context, state) {
+    return BlocConsumer<ProfilesEditorBloc, ProfilesEditorState>(
+        listener: (context, state) {
+      if (state.isEditing) {
+        _controller.forward();
+      } else {
+        _controller.reverse();
+      }
+    }, builder: (context, state) {
       return Scaffold(
         appBar: TopBar(
           content: EditHeader(
@@ -86,7 +116,8 @@ class ProfilesEditor extends StatelessWidget {
               )
           ],
         ),
-        bottomNavigationBar: const NavigationBar(),
+        extendBody: true,
+        bottomNavigationBar: AnimatedNavigationBar(_controller),
       );
     });
   }

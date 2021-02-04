@@ -8,7 +8,7 @@ class ProfilesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ProfilesEditorBloc(),
-      child: ProfilesEditor(),
+      child: const ProfilesEditor(),
     );
   }
 }
