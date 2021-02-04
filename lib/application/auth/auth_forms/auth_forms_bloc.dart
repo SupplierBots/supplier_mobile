@@ -19,6 +19,19 @@ class AuthFormsBloc extends Bloc<AuthFormsEvent, AuthFormsState> {
 
   final AuthRepository _authRepository;
 
+  Stream<AuthFormsState> _performAuthAction(
+    Future<Either<AuthFailure, Unit>> forwardedCall,
+  ) async* {
+    yield state.copyWith(
+      isSubmitting: true,
+    );
+    final failureOrSuccess = await forwardedCall;
+    yield state.copyWith(
+      isSubmitting: false,
+      failureOrSuccessOption: optionOf(failureOrSuccess),
+    );
+  }
+
   @override
   Stream<AuthFormsState> mapEventToState(
     AuthFormsEvent event,
@@ -28,24 +41,9 @@ class AuthFormsBloc extends Bloc<AuthFormsEvent, AuthFormsState> {
         isCreatingAccount: !state.isCreatingAccount,
       );
     }, signInPressed: (e) async* {
-      yield state.copyWith(
-        isSubmitting: true,
-      );
-
-      final failureOrSuccess = await _authRepository.signIn(e.credentials);
-      yield state.copyWith(
-        isSubmitting: false,
-        failureOrSuccessOption: optionOf(failureOrSuccess),
-      );
+      yield* _performAuthAction(_authRepository.signIn(e.credentials));
     }, createAccountPressed: (e) async* {
-      yield state.copyWith(
-        isSubmitting: true,
-      );
-      final failureOrSuccess = await _authRepository.register(e.credentials);
-      yield state.copyWith(
-        isSubmitting: false,
-        failureOrSuccessOption: optionOf(failureOrSuccess),
-      );
+      yield* _performAuthAction(_authRepository.register(e.credentials));
     });
   }
 }
