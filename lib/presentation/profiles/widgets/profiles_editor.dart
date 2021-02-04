@@ -109,11 +109,7 @@ class _ProfilesEditorState extends State<ProfilesEditor>
                     : const ProfilesList(),
               ),
             ),
-            if (state.isModalOpen)
-              Container(
-                color: Colors.black.withOpacity(0.2),
-                child: CreateProfileModal(),
-              )
+            CreateProfileModal()
           ],
         ),
         extendBody: true,
