@@ -30,8 +30,8 @@ class NavigationBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: const [
             NavigationButton(
-              iconSize: 25,
-              icon: Icons.home,
+              iconSize: 24,
+              icon: Icons.apps,
               route: Routes.dashboardPage,
             ),
             NavigationButton(

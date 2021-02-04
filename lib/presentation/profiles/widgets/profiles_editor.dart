@@ -83,15 +83,18 @@ class _ProfilesEditorState extends State<ProfilesEditor>
           ),
         ),
         floatingActionButton: !state.isEditing && !state.isModalOpen
-            ? FloatingActionButton(
-                backgroundColor: kSecondaryBackground,
-                onPressed: () {
-                  context.read<ProfilesEditorBloc>().add(const OpenedModal());
-                },
-                child: const GradientWidget(
-                  child: Icon(
-                    CustomIcons.plus,
-                    size: 20,
+            ? Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: FloatingActionButton(
+                  backgroundColor: kSecondaryBackground,
+                  onPressed: () {
+                    context.read<ProfilesEditorBloc>().add(const OpenedModal());
+                  },
+                  child: const GradientWidget(
+                    child: Icon(
+                      CustomIcons.plus,
+                      size: 20,
+                    ),
                   ),
                 ),
               )
