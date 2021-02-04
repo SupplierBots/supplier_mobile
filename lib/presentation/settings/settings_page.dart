@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/application/auth/auth_bloc.dart';
+import 'package:supplier_mobile/components/color_chuj.dart';
+import 'package:supplier_mobile/components/color_select_working.dart';
 import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
 import 'package:supplier_mobile/presentation/navigation/widgets/navigation_bar.dart';
@@ -40,6 +42,7 @@ class SettingsPage extends StatelessWidget {
                 height: 45,
                 onTap: signOut,
               ),
+              ColorChujWorking(),
             ],
           ),
         ),

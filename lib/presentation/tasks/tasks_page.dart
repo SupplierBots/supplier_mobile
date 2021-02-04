@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:supplier_mobile/components/color_chuj.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/color_select.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/expanded_profile_bar.dart';
@@ -33,7 +34,7 @@ class TasksPage extends StatelessWidget {
             const SizedBox(
               height: kPrimaryElementsSpacing,
             ),
-            const ColorSelect(),
+            const ColorChujWorking(),
           ],
         ),
       ),

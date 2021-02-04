@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:supplier_mobile/components/color_chuj.dart';
 
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
 import 'package:supplier_mobile/presentation/navigation/widgets/navigation_bar.dart';
@@ -20,6 +21,7 @@ class HelpPage extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.all(8.0),
           ),
+          const ColorChujWorking(),
         ],
       ),
       bottomNavigationBar: const NavigationBar(),
