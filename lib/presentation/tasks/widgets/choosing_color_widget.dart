@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/item_color.dart';
 
-class ColorChujWorking extends StatelessWidget {
-  const ColorChujWorking({
+class ColorChoosing extends StatelessWidget {
+  const ColorChoosing({
     Key key,
   }) : super(key: key);
 
@@ -102,7 +102,7 @@ class ColorChujWorking extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: ItemColor(
-                    itemColor: 'Kutas hehe',
+                    itemColor: 'Kutas hehehe',
                   ),
                 ),
               ],
