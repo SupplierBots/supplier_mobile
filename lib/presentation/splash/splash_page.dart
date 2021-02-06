@@ -9,12 +9,12 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        state.map(
-          initial: (_) {},
+        state.maybeMap(
           authenticated: (_) =>
               ExtendedNavigator.of(context).replace(Routes.dashboardPage),
           unauthenticated: (_) =>
               ExtendedNavigator.of(context).replace(Routes.authPage),
+          orElse: () {},
         );
       },
       child: const Scaffold(

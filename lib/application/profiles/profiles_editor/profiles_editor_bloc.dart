@@ -30,17 +30,9 @@ class ProfilesEditorBloc
         editedProfile: e.name,
       );
     }, canceled: (e) async* {
-      yield state.copyWith(
-        isModalOpen: false,
-        isEditing: false,
-        editedProfile: '',
-      );
+      yield ProfilesEditorState.initial();
     }, saved: (e) async* {
-      yield state.copyWith(
-        isModalOpen: false,
-        isEditing: false,
-        editedProfile: '',
-      );
+      yield ProfilesEditorState.initial();
     });
   }
 }

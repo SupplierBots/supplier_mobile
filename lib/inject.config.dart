@@ -5,6 +5,8 @@
 // **************************************************************************
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
@@ -25,8 +27,11 @@ GetIt $initGetIt(
   final gh = GetItHelper(get, environment, environmentFilter);
   final firebaseInjectableModule = _$FirebaseInjectableModule();
   gh.lazySingleton<FirebaseAuth>(() => firebaseInjectableModule.firebaseAuth);
-  gh.lazySingleton<AuthRepository>(
-      () => FirebaseAuthRepository(get<FirebaseAuth>()));
+  gh.lazySingleton<FirebaseFirestore>(() => firebaseInjectableModule.firestore);
+  gh.lazySingleton<FirebaseFunctions>(
+      () => firebaseInjectableModule.cloudFunctions);
+  gh.lazySingleton<AuthRepository>(() =>
+      FirebaseAuthRepository(get<FirebaseAuth>(), get<FirebaseFunctions>()));
   gh.factory<AuthBloc>(() => AuthBloc(get<AuthRepository>()));
   gh.factory<AuthFormsBloc>(() => AuthFormsBloc(get<AuthRepository>()));
   return get;

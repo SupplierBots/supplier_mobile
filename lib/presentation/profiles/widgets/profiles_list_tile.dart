@@ -49,7 +49,7 @@ class ProfilesListTile extends StatelessWidget {
               onTap: () {
                 context
                     .read<ProfilesBloc>()
-                    .add(ProfilesEvent.deleteProfile(name: name));
+                    .add(ProfilesEvent.deletedProfile(name: name));
               },
               child: const Icon(
                 CustomIcons.remove,

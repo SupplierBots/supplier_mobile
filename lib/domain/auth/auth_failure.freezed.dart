@@ -32,6 +32,13 @@ class _$AuthFailureTearOff {
   IncorrectLicense incorrectLicense() {
     return const IncorrectLicense();
   }
+
+// ignore: unused_element
+  MaxInstancesNumberExceeded maxInstancesNumberExceeded(int maxInstances) {
+    return MaxInstancesNumberExceeded(
+      maxInstances,
+    );
+  }
 }
 
 /// @nodoc
@@ -46,6 +53,7 @@ mixin _$AuthFailure {
     @required TResult emailAlreadyInUse(),
     @required TResult invalidCredentials(),
     @required TResult incorrectLicense(),
+    @required TResult maxInstancesNumberExceeded(int maxInstances),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
@@ -53,6 +61,7 @@ mixin _$AuthFailure {
     TResult emailAlreadyInUse(),
     TResult invalidCredentials(),
     TResult incorrectLicense(),
+    TResult maxInstancesNumberExceeded(int maxInstances),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -61,6 +70,8 @@ mixin _$AuthFailure {
     @required TResult emailAlreadyInUse(EmailAlreadyInUse value),
     @required TResult invalidCredentials(InvalidCredentials value),
     @required TResult incorrectLicense(IncorrectLicense value),
+    @required
+        TResult maxInstancesNumberExceeded(MaxInstancesNumberExceeded value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
@@ -68,6 +79,7 @@ mixin _$AuthFailure {
     TResult emailAlreadyInUse(EmailAlreadyInUse value),
     TResult invalidCredentials(InvalidCredentials value),
     TResult incorrectLicense(IncorrectLicense value),
+    TResult maxInstancesNumberExceeded(MaxInstancesNumberExceeded value),
     @required TResult orElse(),
   });
 }
@@ -130,11 +142,13 @@ class _$ServerError implements ServerError {
     @required TResult emailAlreadyInUse(),
     @required TResult invalidCredentials(),
     @required TResult incorrectLicense(),
+    @required TResult maxInstancesNumberExceeded(int maxInstances),
   }) {
     assert(serverError != null);
     assert(emailAlreadyInUse != null);
     assert(invalidCredentials != null);
     assert(incorrectLicense != null);
+    assert(maxInstancesNumberExceeded != null);
     return serverError();
   }
 
@@ -145,6 +159,7 @@ class _$ServerError implements ServerError {
     TResult emailAlreadyInUse(),
     TResult invalidCredentials(),
     TResult incorrectLicense(),
+    TResult maxInstancesNumberExceeded(int maxInstances),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -161,11 +176,14 @@ class _$ServerError implements ServerError {
     @required TResult emailAlreadyInUse(EmailAlreadyInUse value),
     @required TResult invalidCredentials(InvalidCredentials value),
     @required TResult incorrectLicense(IncorrectLicense value),
+    @required
+        TResult maxInstancesNumberExceeded(MaxInstancesNumberExceeded value),
   }) {
     assert(serverError != null);
     assert(emailAlreadyInUse != null);
     assert(invalidCredentials != null);
     assert(incorrectLicense != null);
+    assert(maxInstancesNumberExceeded != null);
     return serverError(this);
   }
 
@@ -176,6 +194,7 @@ class _$ServerError implements ServerError {
     TResult emailAlreadyInUse(EmailAlreadyInUse value),
     TResult invalidCredentials(InvalidCredentials value),
     TResult incorrectLicense(IncorrectLicense value),
+    TResult maxInstancesNumberExceeded(MaxInstancesNumberExceeded value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -233,11 +252,13 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
     @required TResult emailAlreadyInUse(),
     @required TResult invalidCredentials(),
     @required TResult incorrectLicense(),
+    @required TResult maxInstancesNumberExceeded(int maxInstances),
   }) {
     assert(serverError != null);
     assert(emailAlreadyInUse != null);
     assert(invalidCredentials != null);
     assert(incorrectLicense != null);
+    assert(maxInstancesNumberExceeded != null);
     return emailAlreadyInUse();
   }
 
@@ -248,6 +269,7 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
     TResult emailAlreadyInUse(),
     TResult invalidCredentials(),
     TResult incorrectLicense(),
+    TResult maxInstancesNumberExceeded(int maxInstances),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -264,11 +286,14 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
     @required TResult emailAlreadyInUse(EmailAlreadyInUse value),
     @required TResult invalidCredentials(InvalidCredentials value),
     @required TResult incorrectLicense(IncorrectLicense value),
+    @required
+        TResult maxInstancesNumberExceeded(MaxInstancesNumberExceeded value),
   }) {
     assert(serverError != null);
     assert(emailAlreadyInUse != null);
     assert(invalidCredentials != null);
     assert(incorrectLicense != null);
+    assert(maxInstancesNumberExceeded != null);
     return emailAlreadyInUse(this);
   }
 
@@ -279,6 +304,7 @@ class _$EmailAlreadyInUse implements EmailAlreadyInUse {
     TResult emailAlreadyInUse(EmailAlreadyInUse value),
     TResult invalidCredentials(InvalidCredentials value),
     TResult incorrectLicense(IncorrectLicense value),
+    TResult maxInstancesNumberExceeded(MaxInstancesNumberExceeded value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -336,11 +362,13 @@ class _$InvalidCredentials implements InvalidCredentials {
     @required TResult emailAlreadyInUse(),
     @required TResult invalidCredentials(),
     @required TResult incorrectLicense(),
+    @required TResult maxInstancesNumberExceeded(int maxInstances),
   }) {
     assert(serverError != null);
     assert(emailAlreadyInUse != null);
     assert(invalidCredentials != null);
     assert(incorrectLicense != null);
+    assert(maxInstancesNumberExceeded != null);
     return invalidCredentials();
   }
 
@@ -351,6 +379,7 @@ class _$InvalidCredentials implements InvalidCredentials {
     TResult emailAlreadyInUse(),
     TResult invalidCredentials(),
     TResult incorrectLicense(),
+    TResult maxInstancesNumberExceeded(int maxInstances),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -367,11 +396,14 @@ class _$InvalidCredentials implements InvalidCredentials {
     @required TResult emailAlreadyInUse(EmailAlreadyInUse value),
     @required TResult invalidCredentials(InvalidCredentials value),
     @required TResult incorrectLicense(IncorrectLicense value),
+    @required
+        TResult maxInstancesNumberExceeded(MaxInstancesNumberExceeded value),
   }) {
     assert(serverError != null);
     assert(emailAlreadyInUse != null);
     assert(invalidCredentials != null);
     assert(incorrectLicense != null);
+    assert(maxInstancesNumberExceeded != null);
     return invalidCredentials(this);
   }
 
@@ -382,6 +414,7 @@ class _$InvalidCredentials implements InvalidCredentials {
     TResult emailAlreadyInUse(EmailAlreadyInUse value),
     TResult invalidCredentials(InvalidCredentials value),
     TResult incorrectLicense(IncorrectLicense value),
+    TResult maxInstancesNumberExceeded(MaxInstancesNumberExceeded value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -439,11 +472,13 @@ class _$IncorrectLicense implements IncorrectLicense {
     @required TResult emailAlreadyInUse(),
     @required TResult invalidCredentials(),
     @required TResult incorrectLicense(),
+    @required TResult maxInstancesNumberExceeded(int maxInstances),
   }) {
     assert(serverError != null);
     assert(emailAlreadyInUse != null);
     assert(invalidCredentials != null);
     assert(incorrectLicense != null);
+    assert(maxInstancesNumberExceeded != null);
     return incorrectLicense();
   }
 
@@ -454,6 +489,7 @@ class _$IncorrectLicense implements IncorrectLicense {
     TResult emailAlreadyInUse(),
     TResult invalidCredentials(),
     TResult incorrectLicense(),
+    TResult maxInstancesNumberExceeded(int maxInstances),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -470,11 +506,14 @@ class _$IncorrectLicense implements IncorrectLicense {
     @required TResult emailAlreadyInUse(EmailAlreadyInUse value),
     @required TResult invalidCredentials(InvalidCredentials value),
     @required TResult incorrectLicense(IncorrectLicense value),
+    @required
+        TResult maxInstancesNumberExceeded(MaxInstancesNumberExceeded value),
   }) {
     assert(serverError != null);
     assert(emailAlreadyInUse != null);
     assert(invalidCredentials != null);
     assert(incorrectLicense != null);
+    assert(maxInstancesNumberExceeded != null);
     return incorrectLicense(this);
   }
 
@@ -485,6 +524,7 @@ class _$IncorrectLicense implements IncorrectLicense {
     TResult emailAlreadyInUse(EmailAlreadyInUse value),
     TResult invalidCredentials(InvalidCredentials value),
     TResult incorrectLicense(IncorrectLicense value),
+    TResult maxInstancesNumberExceeded(MaxInstancesNumberExceeded value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -497,4 +537,146 @@ class _$IncorrectLicense implements IncorrectLicense {
 
 abstract class IncorrectLicense implements AuthFailure {
   const factory IncorrectLicense() = _$IncorrectLicense;
+}
+
+/// @nodoc
+abstract class $MaxInstancesNumberExceededCopyWith<$Res> {
+  factory $MaxInstancesNumberExceededCopyWith(MaxInstancesNumberExceeded value,
+          $Res Function(MaxInstancesNumberExceeded) then) =
+      _$MaxInstancesNumberExceededCopyWithImpl<$Res>;
+  $Res call({int maxInstances});
+}
+
+/// @nodoc
+class _$MaxInstancesNumberExceededCopyWithImpl<$Res>
+    extends _$AuthFailureCopyWithImpl<$Res>
+    implements $MaxInstancesNumberExceededCopyWith<$Res> {
+  _$MaxInstancesNumberExceededCopyWithImpl(MaxInstancesNumberExceeded _value,
+      $Res Function(MaxInstancesNumberExceeded) _then)
+      : super(_value, (v) => _then(v as MaxInstancesNumberExceeded));
+
+  @override
+  MaxInstancesNumberExceeded get _value =>
+      super._value as MaxInstancesNumberExceeded;
+
+  @override
+  $Res call({
+    Object maxInstances = freezed,
+  }) {
+    return _then(MaxInstancesNumberExceeded(
+      maxInstances == freezed ? _value.maxInstances : maxInstances as int,
+    ));
+  }
+}
+
+/// @nodoc
+class _$MaxInstancesNumberExceeded implements MaxInstancesNumberExceeded {
+  const _$MaxInstancesNumberExceeded(this.maxInstances)
+      : assert(maxInstances != null);
+
+  @override
+  final int maxInstances;
+
+  @override
+  String toString() {
+    return 'AuthFailure.maxInstancesNumberExceeded(maxInstances: $maxInstances)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is MaxInstancesNumberExceeded &&
+            (identical(other.maxInstances, maxInstances) ||
+                const DeepCollectionEquality()
+                    .equals(other.maxInstances, maxInstances)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(maxInstances);
+
+  @JsonKey(ignore: true)
+  @override
+  $MaxInstancesNumberExceededCopyWith<MaxInstancesNumberExceeded>
+      get copyWith =>
+          _$MaxInstancesNumberExceededCopyWithImpl<MaxInstancesNumberExceeded>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult serverError(),
+    @required TResult emailAlreadyInUse(),
+    @required TResult invalidCredentials(),
+    @required TResult incorrectLicense(),
+    @required TResult maxInstancesNumberExceeded(int maxInstances),
+  }) {
+    assert(serverError != null);
+    assert(emailAlreadyInUse != null);
+    assert(invalidCredentials != null);
+    assert(incorrectLicense != null);
+    assert(maxInstancesNumberExceeded != null);
+    return maxInstancesNumberExceeded(maxInstances);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult serverError(),
+    TResult emailAlreadyInUse(),
+    TResult invalidCredentials(),
+    TResult incorrectLicense(),
+    TResult maxInstancesNumberExceeded(int maxInstances),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (maxInstancesNumberExceeded != null) {
+      return maxInstancesNumberExceeded(maxInstances);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult serverError(ServerError value),
+    @required TResult emailAlreadyInUse(EmailAlreadyInUse value),
+    @required TResult invalidCredentials(InvalidCredentials value),
+    @required TResult incorrectLicense(IncorrectLicense value),
+    @required
+        TResult maxInstancesNumberExceeded(MaxInstancesNumberExceeded value),
+  }) {
+    assert(serverError != null);
+    assert(emailAlreadyInUse != null);
+    assert(invalidCredentials != null);
+    assert(incorrectLicense != null);
+    assert(maxInstancesNumberExceeded != null);
+    return maxInstancesNumberExceeded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult serverError(ServerError value),
+    TResult emailAlreadyInUse(EmailAlreadyInUse value),
+    TResult invalidCredentials(InvalidCredentials value),
+    TResult incorrectLicense(IncorrectLicense value),
+    TResult maxInstancesNumberExceeded(MaxInstancesNumberExceeded value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (maxInstancesNumberExceeded != null) {
+      return maxInstancesNumberExceeded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MaxInstancesNumberExceeded implements AuthFailure {
+  const factory MaxInstancesNumberExceeded(int maxInstances) =
+      _$MaxInstancesNumberExceeded;
+
+  int get maxInstances;
+  @JsonKey(ignore: true)
+  $MaxInstancesNumberExceededCopyWith<MaxInstancesNumberExceeded> get copyWith;
 }

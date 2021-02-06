@@ -11,5 +11,5 @@ abstract class AuthRepository {
 
   Future<Either<AuthFailure, Unit>> signIn(SignInCredentials credentials);
 
-  Future<void> signOut();
+  Future<Either<AuthFailure, Unit>> signOut();
 }

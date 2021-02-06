@@ -25,7 +25,7 @@ class ProfilesBloc extends HydratedBloc<ProfilesEvent, ProfilesState> {
           },
         );
       },
-      deleteProfile: (e) async* {
+      deletedProfile: (e) async* {
         final copy = state.copyWith();
         copy.profiles.remove(e.name);
         yield copy;

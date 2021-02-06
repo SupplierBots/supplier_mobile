@@ -14,11 +14,12 @@ class ErrorRenderer extends StatelessWidget {
             () => [],
             (either) => either.fold((failure) {
               final message = failure.map(
-                serverError: (_) => 'Something went wrong. Try again later.',
-                emailAlreadyInUse: (_) => 'Email already in use.',
-                invalidCredentials: (_) => 'Invalid email or password.',
-                incorrectLicense: (_) => 'Incorrect license key.',
-              );
+                  serverError: (_) => 'Something went wrong. Try again later.',
+                  emailAlreadyInUse: (_) => 'Email already in use.',
+                  invalidCredentials: (_) => 'Invalid email or password.',
+                  incorrectLicense: (_) => 'Incorrect license key.',
+                  maxInstancesNumberExceeded: (f) =>
+                      'Already signed in on ${f.maxInstances} other phones.');
               return [
                 Column(
                   children: [

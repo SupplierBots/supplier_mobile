@@ -19,8 +19,8 @@ class _$AuthEventTearOff {
   }
 
 // ignore: unused_element
-  SignedOut signedOut() {
-    return const SignedOut();
+  PressedSignOutButton pressedSignOutButton() {
+    return const PressedSignOutButton();
   }
 }
 
@@ -33,23 +33,23 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult authCheckRequested(),
-    @required TResult signedOut(),
+    @required TResult pressedSignOutButton(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult authCheckRequested(),
-    TResult signedOut(),
+    TResult pressedSignOutButton(),
     @required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult authCheckRequested(AuthCheckRequested value),
-    @required TResult signedOut(SignedOut value),
+    @required TResult pressedSignOutButton(PressedSignOutButton value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult authCheckRequested(AuthCheckRequested value),
-    TResult signedOut(SignedOut value),
+    TResult pressedSignOutButton(PressedSignOutButton value),
     @required TResult orElse(),
   });
 }
@@ -109,10 +109,10 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult authCheckRequested(),
-    @required TResult signedOut(),
+    @required TResult pressedSignOutButton(),
   }) {
     assert(authCheckRequested != null);
-    assert(signedOut != null);
+    assert(pressedSignOutButton != null);
     return authCheckRequested();
   }
 
@@ -120,7 +120,7 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult authCheckRequested(),
-    TResult signedOut(),
+    TResult pressedSignOutButton(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -134,10 +134,10 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult authCheckRequested(AuthCheckRequested value),
-    @required TResult signedOut(SignedOut value),
+    @required TResult pressedSignOutButton(PressedSignOutButton value),
   }) {
     assert(authCheckRequested != null);
-    assert(signedOut != null);
+    assert(pressedSignOutButton != null);
     return authCheckRequested(this);
   }
 
@@ -145,7 +145,7 @@ class _$AuthCheckRequested implements AuthCheckRequested {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult authCheckRequested(AuthCheckRequested value),
-    TResult signedOut(SignedOut value),
+    TResult pressedSignOutButton(PressedSignOutButton value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -161,33 +161,36 @@ abstract class AuthCheckRequested implements AuthEvent {
 }
 
 /// @nodoc
-abstract class $SignedOutCopyWith<$Res> {
-  factory $SignedOutCopyWith(SignedOut value, $Res Function(SignedOut) then) =
-      _$SignedOutCopyWithImpl<$Res>;
+abstract class $PressedSignOutButtonCopyWith<$Res> {
+  factory $PressedSignOutButtonCopyWith(PressedSignOutButton value,
+          $Res Function(PressedSignOutButton) then) =
+      _$PressedSignOutButtonCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$SignedOutCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
-    implements $SignedOutCopyWith<$Res> {
-  _$SignedOutCopyWithImpl(SignedOut _value, $Res Function(SignedOut) _then)
-      : super(_value, (v) => _then(v as SignedOut));
+class _$PressedSignOutButtonCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res>
+    implements $PressedSignOutButtonCopyWith<$Res> {
+  _$PressedSignOutButtonCopyWithImpl(
+      PressedSignOutButton _value, $Res Function(PressedSignOutButton) _then)
+      : super(_value, (v) => _then(v as PressedSignOutButton));
 
   @override
-  SignedOut get _value => super._value as SignedOut;
+  PressedSignOutButton get _value => super._value as PressedSignOutButton;
 }
 
 /// @nodoc
-class _$SignedOut implements SignedOut {
-  const _$SignedOut();
+class _$PressedSignOutButton implements PressedSignOutButton {
+  const _$PressedSignOutButton();
 
   @override
   String toString() {
-    return 'AuthEvent.signedOut()';
+    return 'AuthEvent.pressedSignOutButton()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is SignedOut);
+    return identical(this, other) || (other is PressedSignOutButton);
   }
 
   @override
@@ -197,23 +200,23 @@ class _$SignedOut implements SignedOut {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult authCheckRequested(),
-    @required TResult signedOut(),
+    @required TResult pressedSignOutButton(),
   }) {
     assert(authCheckRequested != null);
-    assert(signedOut != null);
-    return signedOut();
+    assert(pressedSignOutButton != null);
+    return pressedSignOutButton();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult authCheckRequested(),
-    TResult signedOut(),
+    TResult pressedSignOutButton(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (signedOut != null) {
-      return signedOut();
+    if (pressedSignOutButton != null) {
+      return pressedSignOutButton();
     }
     return orElse();
   }
@@ -222,30 +225,30 @@ class _$SignedOut implements SignedOut {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult authCheckRequested(AuthCheckRequested value),
-    @required TResult signedOut(SignedOut value),
+    @required TResult pressedSignOutButton(PressedSignOutButton value),
   }) {
     assert(authCheckRequested != null);
-    assert(signedOut != null);
-    return signedOut(this);
+    assert(pressedSignOutButton != null);
+    return pressedSignOutButton(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult authCheckRequested(AuthCheckRequested value),
-    TResult signedOut(SignedOut value),
+    TResult pressedSignOutButton(PressedSignOutButton value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (signedOut != null) {
-      return signedOut(this);
+    if (pressedSignOutButton != null) {
+      return pressedSignOutButton(this);
     }
     return orElse();
   }
 }
 
-abstract class SignedOut implements AuthEvent {
-  const factory SignedOut() = _$SignedOut;
+abstract class PressedSignOutButton implements AuthEvent {
+  const factory PressedSignOutButton() = _$PressedSignOutButton;
 }
 
 /// @nodoc
@@ -260,6 +263,11 @@ class _$AuthStateTearOff {
 // ignore: unused_element
   Authenticated authenticated() {
     return const Authenticated();
+  }
+
+// ignore: unused_element
+  SignOutAttempt signOutAttempt() {
+    return const SignOutAttempt();
   }
 
 // ignore: unused_element
@@ -278,12 +286,14 @@ mixin _$AuthState {
   TResult when<TResult extends Object>({
     @required TResult initial(),
     @required TResult authenticated(),
+    @required TResult signOutAttempt(),
     @required TResult unauthenticated(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult initial(),
     TResult authenticated(),
+    TResult signOutAttempt(),
     TResult unauthenticated(),
     @required TResult orElse(),
   });
@@ -291,12 +301,14 @@ mixin _$AuthState {
   TResult map<TResult extends Object>({
     @required TResult initial(Initial value),
     @required TResult authenticated(Authenticated value),
+    @required TResult signOutAttempt(SignOutAttempt value),
     @required TResult unauthenticated(Unauthenticated value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult initial(Initial value),
     TResult authenticated(Authenticated value),
+    TResult signOutAttempt(SignOutAttempt value),
     TResult unauthenticated(Unauthenticated value),
     @required TResult orElse(),
   });
@@ -355,10 +367,12 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object>({
     @required TResult initial(),
     @required TResult authenticated(),
+    @required TResult signOutAttempt(),
     @required TResult unauthenticated(),
   }) {
     assert(initial != null);
     assert(authenticated != null);
+    assert(signOutAttempt != null);
     assert(unauthenticated != null);
     return initial();
   }
@@ -368,6 +382,7 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object>({
     TResult initial(),
     TResult authenticated(),
+    TResult signOutAttempt(),
     TResult unauthenticated(),
     @required TResult orElse(),
   }) {
@@ -383,10 +398,12 @@ class _$Initial implements Initial {
   TResult map<TResult extends Object>({
     @required TResult initial(Initial value),
     @required TResult authenticated(Authenticated value),
+    @required TResult signOutAttempt(SignOutAttempt value),
     @required TResult unauthenticated(Unauthenticated value),
   }) {
     assert(initial != null);
     assert(authenticated != null);
+    assert(signOutAttempt != null);
     assert(unauthenticated != null);
     return initial(this);
   }
@@ -396,6 +413,7 @@ class _$Initial implements Initial {
   TResult maybeMap<TResult extends Object>({
     TResult initial(Initial value),
     TResult authenticated(Authenticated value),
+    TResult signOutAttempt(SignOutAttempt value),
     TResult unauthenticated(Unauthenticated value),
     @required TResult orElse(),
   }) {
@@ -451,10 +469,12 @@ class _$Authenticated implements Authenticated {
   TResult when<TResult extends Object>({
     @required TResult initial(),
     @required TResult authenticated(),
+    @required TResult signOutAttempt(),
     @required TResult unauthenticated(),
   }) {
     assert(initial != null);
     assert(authenticated != null);
+    assert(signOutAttempt != null);
     assert(unauthenticated != null);
     return authenticated();
   }
@@ -464,6 +484,7 @@ class _$Authenticated implements Authenticated {
   TResult maybeWhen<TResult extends Object>({
     TResult initial(),
     TResult authenticated(),
+    TResult signOutAttempt(),
     TResult unauthenticated(),
     @required TResult orElse(),
   }) {
@@ -479,10 +500,12 @@ class _$Authenticated implements Authenticated {
   TResult map<TResult extends Object>({
     @required TResult initial(Initial value),
     @required TResult authenticated(Authenticated value),
+    @required TResult signOutAttempt(SignOutAttempt value),
     @required TResult unauthenticated(Unauthenticated value),
   }) {
     assert(initial != null);
     assert(authenticated != null);
+    assert(signOutAttempt != null);
     assert(unauthenticated != null);
     return authenticated(this);
   }
@@ -492,6 +515,7 @@ class _$Authenticated implements Authenticated {
   TResult maybeMap<TResult extends Object>({
     TResult initial(Initial value),
     TResult authenticated(Authenticated value),
+    TResult signOutAttempt(SignOutAttempt value),
     TResult unauthenticated(Unauthenticated value),
     @required TResult orElse(),
   }) {
@@ -505,6 +529,108 @@ class _$Authenticated implements Authenticated {
 
 abstract class Authenticated implements AuthState {
   const factory Authenticated() = _$Authenticated;
+}
+
+/// @nodoc
+abstract class $SignOutAttemptCopyWith<$Res> {
+  factory $SignOutAttemptCopyWith(
+          SignOutAttempt value, $Res Function(SignOutAttempt) then) =
+      _$SignOutAttemptCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$SignOutAttemptCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+    implements $SignOutAttemptCopyWith<$Res> {
+  _$SignOutAttemptCopyWithImpl(
+      SignOutAttempt _value, $Res Function(SignOutAttempt) _then)
+      : super(_value, (v) => _then(v as SignOutAttempt));
+
+  @override
+  SignOutAttempt get _value => super._value as SignOutAttempt;
+}
+
+/// @nodoc
+class _$SignOutAttempt implements SignOutAttempt {
+  const _$SignOutAttempt();
+
+  @override
+  String toString() {
+    return 'AuthState.signOutAttempt()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is SignOutAttempt);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult initial(),
+    @required TResult authenticated(),
+    @required TResult signOutAttempt(),
+    @required TResult unauthenticated(),
+  }) {
+    assert(initial != null);
+    assert(authenticated != null);
+    assert(signOutAttempt != null);
+    assert(unauthenticated != null);
+    return signOutAttempt();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult initial(),
+    TResult authenticated(),
+    TResult signOutAttempt(),
+    TResult unauthenticated(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (signOutAttempt != null) {
+      return signOutAttempt();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult initial(Initial value),
+    @required TResult authenticated(Authenticated value),
+    @required TResult signOutAttempt(SignOutAttempt value),
+    @required TResult unauthenticated(Unauthenticated value),
+  }) {
+    assert(initial != null);
+    assert(authenticated != null);
+    assert(signOutAttempt != null);
+    assert(unauthenticated != null);
+    return signOutAttempt(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult initial(Initial value),
+    TResult authenticated(Authenticated value),
+    TResult signOutAttempt(SignOutAttempt value),
+    TResult unauthenticated(Unauthenticated value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (signOutAttempt != null) {
+      return signOutAttempt(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SignOutAttempt implements AuthState {
+  const factory SignOutAttempt() = _$SignOutAttempt;
 }
 
 /// @nodoc
@@ -547,10 +673,12 @@ class _$Unauthenticated implements Unauthenticated {
   TResult when<TResult extends Object>({
     @required TResult initial(),
     @required TResult authenticated(),
+    @required TResult signOutAttempt(),
     @required TResult unauthenticated(),
   }) {
     assert(initial != null);
     assert(authenticated != null);
+    assert(signOutAttempt != null);
     assert(unauthenticated != null);
     return unauthenticated();
   }
@@ -560,6 +688,7 @@ class _$Unauthenticated implements Unauthenticated {
   TResult maybeWhen<TResult extends Object>({
     TResult initial(),
     TResult authenticated(),
+    TResult signOutAttempt(),
     TResult unauthenticated(),
     @required TResult orElse(),
   }) {
@@ -575,10 +704,12 @@ class _$Unauthenticated implements Unauthenticated {
   TResult map<TResult extends Object>({
     @required TResult initial(Initial value),
     @required TResult authenticated(Authenticated value),
+    @required TResult signOutAttempt(SignOutAttempt value),
     @required TResult unauthenticated(Unauthenticated value),
   }) {
     assert(initial != null);
     assert(authenticated != null);
+    assert(signOutAttempt != null);
     assert(unauthenticated != null);
     return unauthenticated(this);
   }
@@ -588,6 +719,7 @@ class _$Unauthenticated implements Unauthenticated {
   TResult maybeMap<TResult extends Object>({
     TResult initial(Initial value),
     TResult authenticated(Authenticated value),
+    TResult signOutAttempt(SignOutAttempt value),
     TResult unauthenticated(Unauthenticated value),
     @required TResult orElse(),
   }) {

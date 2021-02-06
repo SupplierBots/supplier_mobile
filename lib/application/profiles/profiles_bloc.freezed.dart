@@ -22,8 +22,8 @@ class _$ProfilesEventTearOff {
   }
 
 // ignore: unused_element
-  _DeleteProfile deleteProfile({@required String name}) {
-    return _DeleteProfile(
+  _DeletedProfile deletedProfile({@required String name}) {
+    return _DeletedProfile(
       name: name,
     );
   }
@@ -40,23 +40,23 @@ mixin _$ProfilesEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult setProfile(String name, Profile profile),
-    @required TResult deleteProfile(String name),
+    @required TResult deletedProfile(String name),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult setProfile(String name, Profile profile),
-    TResult deleteProfile(String name),
+    TResult deletedProfile(String name),
     @required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult setProfile(_SetProfile value),
-    @required TResult deleteProfile(_DeleteProfile value),
+    @required TResult deletedProfile(_DeletedProfile value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult setProfile(_SetProfile value),
-    TResult deleteProfile(_DeleteProfile value),
+    TResult deletedProfile(_DeletedProfile value),
     @required TResult orElse(),
   });
 
@@ -176,10 +176,10 @@ class _$_SetProfile implements _SetProfile {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult setProfile(String name, Profile profile),
-    @required TResult deleteProfile(String name),
+    @required TResult deletedProfile(String name),
   }) {
     assert(setProfile != null);
-    assert(deleteProfile != null);
+    assert(deletedProfile != null);
     return setProfile(name, profile);
   }
 
@@ -187,7 +187,7 @@ class _$_SetProfile implements _SetProfile {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult setProfile(String name, Profile profile),
-    TResult deleteProfile(String name),
+    TResult deletedProfile(String name),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -201,10 +201,10 @@ class _$_SetProfile implements _SetProfile {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult setProfile(_SetProfile value),
-    @required TResult deleteProfile(_DeleteProfile value),
+    @required TResult deletedProfile(_DeletedProfile value),
   }) {
     assert(setProfile != null);
-    assert(deleteProfile != null);
+    assert(deletedProfile != null);
     return setProfile(this);
   }
 
@@ -212,7 +212,7 @@ class _$_SetProfile implements _SetProfile {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult setProfile(_SetProfile value),
-    TResult deleteProfile(_DeleteProfile value),
+    TResult deletedProfile(_DeletedProfile value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -236,52 +236,52 @@ abstract class _SetProfile implements ProfilesEvent {
 }
 
 /// @nodoc
-abstract class _$DeleteProfileCopyWith<$Res>
+abstract class _$DeletedProfileCopyWith<$Res>
     implements $ProfilesEventCopyWith<$Res> {
-  factory _$DeleteProfileCopyWith(
-          _DeleteProfile value, $Res Function(_DeleteProfile) then) =
-      __$DeleteProfileCopyWithImpl<$Res>;
+  factory _$DeletedProfileCopyWith(
+          _DeletedProfile value, $Res Function(_DeletedProfile) then) =
+      __$DeletedProfileCopyWithImpl<$Res>;
   @override
   $Res call({String name});
 }
 
 /// @nodoc
-class __$DeleteProfileCopyWithImpl<$Res>
+class __$DeletedProfileCopyWithImpl<$Res>
     extends _$ProfilesEventCopyWithImpl<$Res>
-    implements _$DeleteProfileCopyWith<$Res> {
-  __$DeleteProfileCopyWithImpl(
-      _DeleteProfile _value, $Res Function(_DeleteProfile) _then)
-      : super(_value, (v) => _then(v as _DeleteProfile));
+    implements _$DeletedProfileCopyWith<$Res> {
+  __$DeletedProfileCopyWithImpl(
+      _DeletedProfile _value, $Res Function(_DeletedProfile) _then)
+      : super(_value, (v) => _then(v as _DeletedProfile));
 
   @override
-  _DeleteProfile get _value => super._value as _DeleteProfile;
+  _DeletedProfile get _value => super._value as _DeletedProfile;
 
   @override
   $Res call({
     Object name = freezed,
   }) {
-    return _then(_DeleteProfile(
+    return _then(_DeletedProfile(
       name: name == freezed ? _value.name : name as String,
     ));
   }
 }
 
 /// @nodoc
-class _$_DeleteProfile implements _DeleteProfile {
-  const _$_DeleteProfile({@required this.name}) : assert(name != null);
+class _$_DeletedProfile implements _DeletedProfile {
+  const _$_DeletedProfile({@required this.name}) : assert(name != null);
 
   @override
   final String name;
 
   @override
   String toString() {
-    return 'ProfilesEvent.deleteProfile(name: $name)';
+    return 'ProfilesEvent.deletedProfile(name: $name)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _DeleteProfile &&
+        (other is _DeletedProfile &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)));
   }
@@ -292,30 +292,30 @@ class _$_DeleteProfile implements _DeleteProfile {
 
   @JsonKey(ignore: true)
   @override
-  _$DeleteProfileCopyWith<_DeleteProfile> get copyWith =>
-      __$DeleteProfileCopyWithImpl<_DeleteProfile>(this, _$identity);
+  _$DeletedProfileCopyWith<_DeletedProfile> get copyWith =>
+      __$DeletedProfileCopyWithImpl<_DeletedProfile>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult setProfile(String name, Profile profile),
-    @required TResult deleteProfile(String name),
+    @required TResult deletedProfile(String name),
   }) {
     assert(setProfile != null);
-    assert(deleteProfile != null);
-    return deleteProfile(name);
+    assert(deletedProfile != null);
+    return deletedProfile(name);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult setProfile(String name, Profile profile),
-    TResult deleteProfile(String name),
+    TResult deletedProfile(String name),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (deleteProfile != null) {
-      return deleteProfile(name);
+    if (deletedProfile != null) {
+      return deletedProfile(name);
     }
     return orElse();
   }
@@ -324,36 +324,36 @@ class _$_DeleteProfile implements _DeleteProfile {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult setProfile(_SetProfile value),
-    @required TResult deleteProfile(_DeleteProfile value),
+    @required TResult deletedProfile(_DeletedProfile value),
   }) {
     assert(setProfile != null);
-    assert(deleteProfile != null);
-    return deleteProfile(this);
+    assert(deletedProfile != null);
+    return deletedProfile(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult setProfile(_SetProfile value),
-    TResult deleteProfile(_DeleteProfile value),
+    TResult deletedProfile(_DeletedProfile value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (deleteProfile != null) {
-      return deleteProfile(this);
+    if (deletedProfile != null) {
+      return deletedProfile(this);
     }
     return orElse();
   }
 }
 
-abstract class _DeleteProfile implements ProfilesEvent {
-  const factory _DeleteProfile({@required String name}) = _$_DeleteProfile;
+abstract class _DeletedProfile implements ProfilesEvent {
+  const factory _DeletedProfile({@required String name}) = _$_DeletedProfile;
 
   @override
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$DeleteProfileCopyWith<_DeleteProfile> get copyWith;
+  _$DeletedProfileCopyWith<_DeletedProfile> get copyWith;
 }
 
 ProfilesState _$ProfilesStateFromJson(Map<String, dynamic> json) {

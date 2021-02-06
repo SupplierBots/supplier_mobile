@@ -7,7 +7,7 @@ abstract class ProfilesEvent with _$ProfilesEvent {
     @required Profile profile,
   }) = _SetProfile;
 
-  const factory ProfilesEvent.deleteProfile({
+  const factory ProfilesEvent.deletedProfile({
     @required String name,
-  }) = _DeleteProfile;
+  }) = _DeletedProfile;
 }

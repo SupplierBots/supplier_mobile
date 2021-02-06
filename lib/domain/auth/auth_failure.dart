@@ -8,4 +8,6 @@ abstract class AuthFailure with _$AuthFailure {
   const factory AuthFailure.emailAlreadyInUse() = EmailAlreadyInUse;
   const factory AuthFailure.invalidCredentials() = InvalidCredentials;
   const factory AuthFailure.incorrectLicense() = IncorrectLicense;
+  const factory AuthFailure.maxInstancesNumberExceeded(int maxInstances) =
+      MaxInstancesNumberExceeded;
 }
