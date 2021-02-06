@@ -5,8 +5,8 @@ import 'package:supplier_mobile/application/auth/auth_forms/auth_forms_bloc.dart
 import 'package:supplier_mobile/domain/auth/register_credentials.dart';
 import 'package:supplier_mobile/presentation/auth/widgets/error_renderer.dart';
 import 'package:supplier_mobile/presentation/core/buttons/primary_button.dart';
+import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
 import 'package:supplier_mobile/presentation/core/form/form_text_field.dart';
-import 'package:supplier_mobile/presentation/core/header.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 
 class RegisterForm extends StatelessWidget {
@@ -35,13 +35,6 @@ class RegisterForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Header(
-              text: 'Welcome',
-              underlineWidth: 150,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
             FormTextField(
               name: 'email',
               placeholder: 'Email',
@@ -78,17 +71,33 @@ class RegisterForm extends StatelessWidget {
                 height: kPrimaryElementsSpacing,
               ),
               FormTextField(
+                isLast: true,
                 name: 'key',
                 placeholder: 'License Key',
               ),
             ],
             const SizedBox(height: 15),
             ErrorRenderer(),
-            PrimaryButton(
-              text: 'Create account',
-              height: 45,
-              width: 180,
-              onTap: submit,
+            Row(
+              children: [
+                PrimaryButton(
+                  text: 'Create account',
+                  height: 45,
+                  width: 180,
+                  onTap: submit,
+                ),
+                const SizedBox(width: 15),
+                SecondaryButton(
+                  text: 'Go back',
+                  height: 45,
+                  width: 115,
+                  onTap: () {
+                    context
+                        .read<AuthFormsBloc>()
+                        .add(const SignInOrRegisterToggled());
+                  },
+                ),
+              ],
             ),
           ],
         ),

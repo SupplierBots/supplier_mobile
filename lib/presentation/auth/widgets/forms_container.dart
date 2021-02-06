@@ -6,8 +6,7 @@ import 'package:supplier_mobile/application/auth/auth_forms/auth_forms_bloc.dart
 import 'package:supplier_mobile/presentation/auth/widgets/main_logo.dart';
 import 'package:supplier_mobile/presentation/auth/widgets/register_form.dart';
 import 'package:supplier_mobile/presentation/auth/widgets/sign_in_form.dart';
-import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
-import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
+import 'package:supplier_mobile/presentation/core/header.dart';
 import 'package:supplier_mobile/presentation/navigation/router.gr.dart';
 
 class FormsContainer extends StatelessWidget {
@@ -34,49 +33,33 @@ class FormsContainer extends StatelessWidget {
         },
       );
     }, builder: (context, state) {
-      return SafeArea(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 100,
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 12,
+          ),
+          const MainLogo(),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 15,
+          ),
+          if (!state.isSubmitting && !state.isSuccess) ...[
+            const Header(
+              text: 'Welcome',
+              underlineWidth: 150,
             ),
-            const MainLogo(),
             const SizedBox(
-              height: 50,
+              height: 15,
             ),
-            if (!state.isSubmitting && !state.isSuccess) ...[
-              if (state.isCreatingAccount) RegisterForm() else SignInForm(),
-              const Spacer(),
-              const SizedBox(
-                width: 35,
-                child: GradientWidget(
-                  child: Divider(
-                    thickness: 1,
-                    height: 35,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 30),
-                child: SecondaryButton(
-                  text: state.isCreatingAccount ? 'Sign in' : 'Create account',
-                  height: 45,
-                  width: state.isCreatingAccount ? 130 : 180,
-                  onTap: () {
-                    context
-                        .read<AuthFormsBloc>()
-                        .add(const SignInOrRegisterToggled());
-                  },
-                ),
-              ),
-            ] else
-              Container(
+            if (state.isCreatingAccount) RegisterForm() else SignInForm(),
+          ] else
+            Center(
+              child: Container(
                 margin: const EdgeInsets.only(top: 50),
                 child: const CircularProgressIndicator(),
               ),
-          ],
-        ),
+            ),
+        ],
       );
     });
   }

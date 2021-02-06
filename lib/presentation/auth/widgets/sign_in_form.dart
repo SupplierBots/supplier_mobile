@@ -5,8 +5,10 @@ import 'package:supplier_mobile/application/auth/auth_forms/auth_forms_bloc.dart
 import 'package:supplier_mobile/domain/auth/sign_in_credentials.dart';
 import 'package:supplier_mobile/presentation/auth/widgets/error_renderer.dart';
 import 'package:supplier_mobile/presentation/core/buttons/primary_button.dart';
+import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
+import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/form/form_text_field.dart';
-import 'package:supplier_mobile/presentation/core/header.dart';
+import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 
 class SignInForm extends StatelessWidget {
@@ -36,13 +38,6 @@ class SignInForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Header(
-              text: 'Welcome',
-              underlineWidth: 150,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
             FormTextField(
               name: 'email',
               placeholder: 'Email',
@@ -54,6 +49,7 @@ class SignInForm extends StatelessWidget {
               height: kPrimaryElementsSpacing,
             ),
             FormTextField(
+              isLast: true,
               name: 'password',
               placeholder: 'Password',
               obscure: true,
@@ -63,8 +59,44 @@ class SignInForm extends StatelessWidget {
             PrimaryButton(
               text: 'Sign in',
               height: 45,
-              width: 130,
+              width: 120,
               onTap: submit,
+            ),
+            Center(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  const SizedBox(
+                    width: 35,
+                    child: GradientWidget(
+                      child: Divider(
+                        thickness: 1,
+                        height: 25,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  const Text(
+                    "Don't have an account yet?",
+                    style: TextStyle(fontSize: 17, color: kLightPurple),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  SecondaryButton(
+                    text: 'Create',
+                    height: 45,
+                    width: 115,
+                    onTap: () {
+                      context
+                          .read<AuthFormsBloc>()
+                          .add(const SignInOrRegisterToggled());
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),

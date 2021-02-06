@@ -158,6 +158,7 @@ class ProfilesForm extends StatelessWidget {
                 placeholder: 'City',
               ),
               FormTextField(
+                isLast: true,
                 name: 'postcode',
                 placeholder: 'Post Code',
               ),

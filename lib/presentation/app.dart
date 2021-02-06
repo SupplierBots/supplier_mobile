@@ -21,8 +21,9 @@ class App extends StatelessWidget {
           create: (context) => ProfilesBloc(),
         )
       ],
-      child: Listener(
-        onPointerDown: (PointerDownEvent event) {
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
           FocusManager.instance.primaryFocus.unfocus();
         },
         child: MaterialApp(

@@ -30,6 +30,12 @@
       "type": "dart",
       "deviceId": "B78730F3-7386-4606-A7DE-F43721F41526"
     },
+    {
+      "name": "Nexus 6 (Simulator)",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "emulator-5554"
+    },
   ],
   "compounds": [
     {
@@ -52,7 +58,8 @@
       "name": "Simulators",
       "configurations": [
         "iPhone 8 (Simulator)",
-        "iPhone 12 (Simulator)"
+        "iPhone 12 (Simulator)",
+        "Nexus 6 (Simulator)"
       ],
     }
   ]

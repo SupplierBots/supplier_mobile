@@ -17,6 +17,7 @@ class FormTextField extends FormBuilderField<String> {
     ValueTransformer<String> valueTransformer,
     MaskedTextInputFormatter mask,
     String initialValue,
+    bool isLast = false,
     @required this.placeholder,
     this.obscure = false,
     this.type = TextInputType.text,
@@ -75,7 +76,8 @@ class FormTextField extends FormBuilderField<String> {
                 inputFormatters: [
                   if (mask != null) mask,
                 ],
-                textInputAction: TextInputAction.next,
+                textInputAction:
+                    isLast ? TextInputAction.done : TextInputAction.next,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12.0),
                   suffixIcon: Padding(

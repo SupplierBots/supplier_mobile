@@ -9,14 +9,20 @@ class AuthPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: FractionallySizedBox(
-          widthFactor: kMainContentScreenWidth,
-          child: BlocProvider(
-            create: (context) => getIt<AuthFormsBloc>(),
-            child: const FormsContainer(),
-          ),
+      resizeToAvoidBottomInset: true,
+      body: SafeArea(
+        child: ListView(
+          shrinkWrap: true,
+          physics: const ClampingScrollPhysics(),
+          children: [
+            FractionallySizedBox(
+              widthFactor: kMainContentScreenWidth,
+              child: BlocProvider(
+                create: (context) => getIt<AuthFormsBloc>(),
+                child: const FormsContainer(),
+              ),
+            ),
+          ],
         ),
       ),
     );
