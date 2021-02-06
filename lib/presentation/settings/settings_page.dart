@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supplier_mobile/application/auth/auth_bloc.dart';
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
 import 'package:supplier_mobile/presentation/navigation/widgets/navigation_bar.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/constants/typography.dart';
 import 'package:supplier_mobile/presentation/settings/widgets/sign_out_button.dart';
+import 'package:supplier_mobile/application/auth/auth_bloc.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
@@ -28,7 +31,14 @@ class SettingsPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const NavigationBar(),
+      bottomNavigationBar: BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, state) {
+          return state.maybeMap(
+            authenticated: (_) => const NavigationBar(),
+            orElse: () => const SizedBox(),
+          );
+        },
+      ),
     );
   }
 }
