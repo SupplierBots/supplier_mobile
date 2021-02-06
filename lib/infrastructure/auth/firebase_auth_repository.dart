@@ -9,8 +9,6 @@ import 'package:supplier_mobile/domain/auth/register_credentials.dart';
 import 'package:supplier_mobile/domain/auth/register_response.dart';
 import 'package:supplier_mobile/domain/auth/sign_in_credentials.dart';
 import 'package:supplier_mobile/domain/auth/user.dart';
-import 'package:supplier_mobile/infrastructure/auth/instances_check_response.dart';
-import 'package:supplier_mobile/infrastructure/auth/remove_instance_response.dart';
 import 'package:supplier_mobile/infrastructure/core/cloud_functions_helpers.dart';
 import './firebase_user_mapper.dart';
 
@@ -62,16 +60,15 @@ class FirebaseAuthRepository implements AuthRepository {
         email: credentials.email,
         password: credentials.password,
       );
-      final response =
-          await _cloudFunctions.httpsCallable('checkMobileInstances')();
-      final instancesCheck = InstancesCheckResponse.fromJson(response.toJson());
-      if (instancesCheck.success) {
+      final response = await _cloudFunctions.checkMobileInstances();
+      if (response.success) {
         return right(unit);
       }
       await _firebaseAuth.signOut();
-      if (instancesCheck.error == 'max-instances-exceeded') {
-        return left(AuthFailure.maxInstancesNumberExceeded(
-            instancesCheck.maxInstances));
+      if (response.error == 'max-instances-exceeded') {
+        return left(
+          AuthFailure.maxInstancesNumberExceeded(response.maxInstances),
+        );
       } else {
         return left(const AuthFailure.serverError());
       }
@@ -89,13 +86,8 @@ class FirebaseAuthRepository implements AuthRepository {
   @override
   Future<Either<AuthFailure, Unit>> signOut() async {
     try {
-      final response =
-          await _cloudFunctions.httpsCallable('removeMobileInstance')();
-
-      final removeInstanceResponse =
-          RemoveInstanceResponse.fromJson(response.toJson());
-
-      if (!removeInstanceResponse.success) {
+      final response = await _cloudFunctions.removeMobileInstance();
+      if (!response.success) {
         return left(const AuthFailure.serverError());
       }
     } catch (e) {
