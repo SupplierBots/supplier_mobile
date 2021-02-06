@@ -36,73 +36,13 @@ class ColorChoosing extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: ItemColor(
-                    itemColor: 'Giga Long Kutas hehe',
+                    itemColor: 'Swag',
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: ItemColor(
-                    itemColor: 'Kutas hehe',
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: ItemColor(
-                    itemColor: 'Kutas hehe',
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: ItemColor(
-                    itemColor: 'Kutas hehe',
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: ItemColor(
-                    itemColor: 'Kutas hehe',
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: ItemColor(
-                    itemColor: 'Kutas hehe',
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: ItemColor(
-                    itemColor: 'Kutas hehe',
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: ItemColor(
-                    itemColor: 'Kutas hehe',
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: ItemColor(
-                    itemColor: 'Kutas hehe',
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: ItemColor(
-                    itemColor: 'Kutas hehe',
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: ItemColor(
-                    itemColor: 'Kutas hehe',
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: ItemColor(
-                    itemColor: 'Kutas hehehe',
+                    itemColor: 'Blue',
                   ),
                 ),
               ],

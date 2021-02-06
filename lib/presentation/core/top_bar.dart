@@ -4,7 +4,7 @@ import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 
 class TopBar extends PreferredSize {
-  const TopBar({@required this.content});
+  const TopBar({@required this.content, Column body});
 
   @override
   Size get preferredSize => const Size.fromHeight(100);

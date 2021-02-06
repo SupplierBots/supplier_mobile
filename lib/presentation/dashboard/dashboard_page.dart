@@ -26,11 +26,11 @@ class DashboardPage extends StatelessWidget {
               const SizedBox(
                 height: 25,
               ),
-              Container(child: const Header(text: 'News', underlineWidth: 100)),
+              const Header(text: 'News', underlineWidth: 100),
               const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 'Finally closed beta! We would be thankful for every feedback. Please be aware that some errors can occur. We will fix them as fast as possible. Be sure you have  downloaded latest version. Thanks for participating.',
                 style: TextStyle(fontSize: 16, color: kLighGrey),
               ),
@@ -41,7 +41,7 @@ class DashboardPage extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 'Here we will display random tips and answers to frequently asked questions. We need more  text - this placeholder is too short, final tips will be a bit longer. At least some of them.',
                 style: TextStyle(
                   fontSize: 16,
@@ -55,7 +55,7 @@ class DashboardPage extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 'Uzasadnienie dlaczego heljas jest spierdolony. Prosta sprawa. Drze pizde na młodego pracowanika, kótry nawet nie jest zatrudniony, ze ten cos robi, chociaz jest to potrzebne. Po drugie, nie kupil waznego elementu kazdej firmy informatycznej, to jest tablet graficzny marki ajfon (dokladnie ajfon pro). A tak na powaznie to nie chcialem zeby ta strona byla taka plyta, a takze aby moc dodac funkcje scrollowania. Pozdro ryju, trzymaj sie tam, szacun dla tych co zyja z dealow, strzaleczka. \nOdp od heljasa: nie zesraj sie',
                 style: TextStyle(fontSize: 16, color: kLighGrey),
               ),
