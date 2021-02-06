@@ -17,9 +17,7 @@ abstract class AuthFormsState implements _$AuthFormsState {
       );
 
   bool get isSuccess => failureOrSuccessOption.fold(
-      () => false,
-      (either) => either.fold(
-            (failure) => false,
-            (success) => true,
-          ));
+        () => false,
+        (either) => either.isRight(),
+      );
 }
