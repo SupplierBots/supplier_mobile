@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
-import 'package:supplier_mobile/presentation/tasks/widgets/choosing_color_widget.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/expanded_profile_bar.dart';
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
 import 'package:supplier_mobile/presentation/navigation/widgets/navigation_bar.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/typography.dart';
+import 'package:supplier_mobile/presentation/tasks/widgets/task_state.dart';
 
 class TasksPage extends StatelessWidget {
   @override
@@ -33,7 +33,8 @@ class TasksPage extends StatelessWidget {
             const SizedBox(
               height: kPrimaryElementsSpacing,
             ),
-            const ColorChoosing(),
+            //const ColorChoosing(),
+            TaskState(),
           ],
         ),
       ),

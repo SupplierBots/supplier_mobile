@@ -60,7 +60,7 @@ class FirebaseAuthRepository implements AuthRepository {
         email: credentials.email,
         password: credentials.password,
       );
-      final response = await _cloudFunctions.checkMobileInstances();
+      final response = await _cloudFunctions.addMobileInstance();
       if (response.success) {
         return right(unit);
       }

@@ -1,28 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
-part of 'instances_check_response.dart';
+part of 'add_instance_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-InstancesCheckResponse _$InstancesCheckResponseFromJson(
-    Map<String, dynamic> json) {
-  return _InstancesCheckResponse.fromJson(json);
+AddInstanceResponse _$AddInstanceResponseFromJson(Map<String, dynamic> json) {
+  return _AddInstanceResponse.fromJson(json);
 }
 
 /// @nodoc
-class _$InstancesCheckResponseTearOff {
-  const _$InstancesCheckResponseTearOff();
+class _$AddInstanceResponseTearOff {
+  const _$AddInstanceResponseTearOff();
 
 // ignore: unused_element
-  _InstancesCheckResponse call(
+  _AddInstanceResponse call(
       {@required bool success,
       @required int maxInstances,
       @required String error}) {
-    return _InstancesCheckResponse(
+    return _AddInstanceResponse(
       success: success,
       maxInstances: maxInstances,
       error: error,
@@ -30,42 +29,42 @@ class _$InstancesCheckResponseTearOff {
   }
 
 // ignore: unused_element
-  InstancesCheckResponse fromJson(Map<String, Object> json) {
-    return InstancesCheckResponse.fromJson(json);
+  AddInstanceResponse fromJson(Map<String, Object> json) {
+    return AddInstanceResponse.fromJson(json);
   }
 }
 
 /// @nodoc
 // ignore: unused_element
-const $InstancesCheckResponse = _$InstancesCheckResponseTearOff();
+const $AddInstanceResponse = _$AddInstanceResponseTearOff();
 
 /// @nodoc
-mixin _$InstancesCheckResponse {
+mixin _$AddInstanceResponse {
   bool get success;
   int get maxInstances;
   String get error;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
-  $InstancesCheckResponseCopyWith<InstancesCheckResponse> get copyWith;
+  $AddInstanceResponseCopyWith<AddInstanceResponse> get copyWith;
 }
 
 /// @nodoc
-abstract class $InstancesCheckResponseCopyWith<$Res> {
-  factory $InstancesCheckResponseCopyWith(InstancesCheckResponse value,
-          $Res Function(InstancesCheckResponse) then) =
-      _$InstancesCheckResponseCopyWithImpl<$Res>;
+abstract class $AddInstanceResponseCopyWith<$Res> {
+  factory $AddInstanceResponseCopyWith(
+          AddInstanceResponse value, $Res Function(AddInstanceResponse) then) =
+      _$AddInstanceResponseCopyWithImpl<$Res>;
   $Res call({bool success, int maxInstances, String error});
 }
 
 /// @nodoc
-class _$InstancesCheckResponseCopyWithImpl<$Res>
-    implements $InstancesCheckResponseCopyWith<$Res> {
-  _$InstancesCheckResponseCopyWithImpl(this._value, this._then);
+class _$AddInstanceResponseCopyWithImpl<$Res>
+    implements $AddInstanceResponseCopyWith<$Res> {
+  _$AddInstanceResponseCopyWithImpl(this._value, this._then);
 
-  final InstancesCheckResponse _value;
+  final AddInstanceResponse _value;
   // ignore: unused_field
-  final $Res Function(InstancesCheckResponse) _then;
+  final $Res Function(AddInstanceResponse) _then;
 
   @override
   $Res call({
@@ -83,25 +82,25 @@ class _$InstancesCheckResponseCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$InstancesCheckResponseCopyWith<$Res>
-    implements $InstancesCheckResponseCopyWith<$Res> {
-  factory _$InstancesCheckResponseCopyWith(_InstancesCheckResponse value,
-          $Res Function(_InstancesCheckResponse) then) =
-      __$InstancesCheckResponseCopyWithImpl<$Res>;
+abstract class _$AddInstanceResponseCopyWith<$Res>
+    implements $AddInstanceResponseCopyWith<$Res> {
+  factory _$AddInstanceResponseCopyWith(_AddInstanceResponse value,
+          $Res Function(_AddInstanceResponse) then) =
+      __$AddInstanceResponseCopyWithImpl<$Res>;
   @override
   $Res call({bool success, int maxInstances, String error});
 }
 
 /// @nodoc
-class __$InstancesCheckResponseCopyWithImpl<$Res>
-    extends _$InstancesCheckResponseCopyWithImpl<$Res>
-    implements _$InstancesCheckResponseCopyWith<$Res> {
-  __$InstancesCheckResponseCopyWithImpl(_InstancesCheckResponse _value,
-      $Res Function(_InstancesCheckResponse) _then)
-      : super(_value, (v) => _then(v as _InstancesCheckResponse));
+class __$AddInstanceResponseCopyWithImpl<$Res>
+    extends _$AddInstanceResponseCopyWithImpl<$Res>
+    implements _$AddInstanceResponseCopyWith<$Res> {
+  __$AddInstanceResponseCopyWithImpl(
+      _AddInstanceResponse _value, $Res Function(_AddInstanceResponse) _then)
+      : super(_value, (v) => _then(v as _AddInstanceResponse));
 
   @override
-  _InstancesCheckResponse get _value => super._value as _InstancesCheckResponse;
+  _AddInstanceResponse get _value => super._value as _AddInstanceResponse;
 
   @override
   $Res call({
@@ -109,7 +108,7 @@ class __$InstancesCheckResponseCopyWithImpl<$Res>
     Object maxInstances = freezed,
     Object error = freezed,
   }) {
-    return _then(_InstancesCheckResponse(
+    return _then(_AddInstanceResponse(
       success: success == freezed ? _value.success : success as bool,
       maxInstances:
           maxInstances == freezed ? _value.maxInstances : maxInstances as int,
@@ -121,8 +120,8 @@ class __$InstancesCheckResponseCopyWithImpl<$Res>
 @JsonSerializable()
 
 /// @nodoc
-class _$_InstancesCheckResponse implements _InstancesCheckResponse {
-  const _$_InstancesCheckResponse(
+class _$_AddInstanceResponse implements _AddInstanceResponse {
+  const _$_AddInstanceResponse(
       {@required this.success,
       @required this.maxInstances,
       @required this.error})
@@ -130,8 +129,8 @@ class _$_InstancesCheckResponse implements _InstancesCheckResponse {
         assert(maxInstances != null),
         assert(error != null);
 
-  factory _$_InstancesCheckResponse.fromJson(Map<String, dynamic> json) =>
-      _$_$_InstancesCheckResponseFromJson(json);
+  factory _$_AddInstanceResponse.fromJson(Map<String, dynamic> json) =>
+      _$_$_AddInstanceResponseFromJson(json);
 
   @override
   final bool success;
@@ -142,13 +141,13 @@ class _$_InstancesCheckResponse implements _InstancesCheckResponse {
 
   @override
   String toString() {
-    return 'InstancesCheckResponse(success: $success, maxInstances: $maxInstances, error: $error)';
+    return 'AddInstanceResponse(success: $success, maxInstances: $maxInstances, error: $error)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _InstancesCheckResponse &&
+        (other is _AddInstanceResponse &&
             (identical(other.success, success) ||
                 const DeepCollectionEquality()
                     .equals(other.success, success)) &&
@@ -168,24 +167,24 @@ class _$_InstancesCheckResponse implements _InstancesCheckResponse {
 
   @JsonKey(ignore: true)
   @override
-  _$InstancesCheckResponseCopyWith<_InstancesCheckResponse> get copyWith =>
-      __$InstancesCheckResponseCopyWithImpl<_InstancesCheckResponse>(
+  _$AddInstanceResponseCopyWith<_AddInstanceResponse> get copyWith =>
+      __$AddInstanceResponseCopyWithImpl<_AddInstanceResponse>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_InstancesCheckResponseToJson(this);
+    return _$_$_AddInstanceResponseToJson(this);
   }
 }
 
-abstract class _InstancesCheckResponse implements InstancesCheckResponse {
-  const factory _InstancesCheckResponse(
+abstract class _AddInstanceResponse implements AddInstanceResponse {
+  const factory _AddInstanceResponse(
       {@required bool success,
       @required int maxInstances,
-      @required String error}) = _$_InstancesCheckResponse;
+      @required String error}) = _$_AddInstanceResponse;
 
-  factory _InstancesCheckResponse.fromJson(Map<String, dynamic> json) =
-      _$_InstancesCheckResponse.fromJson;
+  factory _AddInstanceResponse.fromJson(Map<String, dynamic> json) =
+      _$_AddInstanceResponse.fromJson;
 
   @override
   bool get success;
@@ -195,5 +194,5 @@ abstract class _InstancesCheckResponse implements InstancesCheckResponse {
   String get error;
   @override
   @JsonKey(ignore: true)
-  _$InstancesCheckResponseCopyWith<_InstancesCheckResponse> get copyWith;
+  _$AddInstanceResponseCopyWith<_AddInstanceResponse> get copyWith;
 }
