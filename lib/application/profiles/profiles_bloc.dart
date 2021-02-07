@@ -26,9 +26,11 @@ class ProfilesBloc extends HydratedBloc<ProfilesEvent, ProfilesState> {
         );
       },
       deletedProfile: (e) async* {
-        final copy = state.copyWith();
-        copy.profiles.remove(e.name);
-        yield copy;
+        final copiedProfiles = {...state.profiles};
+        copiedProfiles.remove(e.name);
+        yield state.copyWith(
+          profiles: copiedProfiles,
+        );
       },
     );
   }

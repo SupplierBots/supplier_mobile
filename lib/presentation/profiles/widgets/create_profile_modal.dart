@@ -22,7 +22,7 @@ class _CreateProfileModalState extends State<CreateProfileModal>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 300),
       vsync: this,
     );
   }
@@ -47,7 +47,7 @@ class _CreateProfileModalState extends State<CreateProfileModal>
       return IgnorePointer(
         ignoring: !state.isModalOpen,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 400),
+          duration: const Duration(milliseconds: 300),
           color: Colors.black.withOpacity(state.isModalOpen ? 0.35 : 0),
           child: SlideTransition(
             position: Tween<Offset>(
@@ -55,7 +55,6 @@ class _CreateProfileModalState extends State<CreateProfileModal>
               end: Offset.zero,
             ).animate(
                 CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
-            transformHitTests: false,
             child: Align(
               alignment: Alignment.topCenter,
               child: FractionallySizedBox(

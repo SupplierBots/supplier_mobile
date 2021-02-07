@@ -12,7 +12,6 @@ class AnimatedNavigationBar extends StatelessWidget {
         begin: Offset.zero,
         end: const Offset(0, 1),
       ).animate(CurvedAnimation(parent: controller, curve: Curves.easeOut)),
-      transformHitTests: false,
       child: const NavigationBar(),
     );
   }
