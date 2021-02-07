@@ -18,9 +18,11 @@ class NavigationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isActiveRoute = ModalRoute.of(context).settings.name == route;
+
     return Expanded(
       child: GestureDetector(
         onTap: () {
+          if (isActiveRoute) return;
           ExtendedNavigator.of(context).replace(route);
         },
         child: Container(
