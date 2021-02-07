@@ -15,34 +15,15 @@ class SignOutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     void signOut() {
       context.read<AuthBloc>().add(const AuthEvent.pressedSignOutButton());
+      ExtendedNavigator.of(context).replace(Routes.splashPage);
     }
 
-    return BlocConsumer<AuthBloc, AuthState>(
-      listener: (context, state) {
-        state.maybeWhen(
-          unauthenticated: () {
-            ExtendedNavigator.of(context).replace(Routes.authPage);
-          },
-          orElse: () {},
-        );
-      },
-      builder: (context, state) {
-        return state.maybeMap(
-          authenticated: (_) => SecondaryButton(
-            gradient: kRedGradient,
-            text: 'Logout',
-            width: 100,
-            height: 45,
-            onTap: signOut,
-          ),
-          orElse: () => Padding(
-            padding: const EdgeInsets.only(left: 25),
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.red[900]),
-            ),
-          ),
-        );
-      },
+    return SecondaryButton(
+      gradient: kRedGradient,
+      text: 'Logout',
+      width: 100,
+      height: 45,
+      onTap: signOut,
     );
   }
 }

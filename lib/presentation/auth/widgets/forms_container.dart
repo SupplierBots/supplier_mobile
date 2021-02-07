@@ -7,6 +7,7 @@ import 'package:supplier_mobile/presentation/auth/widgets/main_logo.dart';
 import 'package:supplier_mobile/presentation/auth/widgets/register_form.dart';
 import 'package:supplier_mobile/presentation/auth/widgets/sign_in_form.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
+import 'package:supplier_mobile/presentation/core/progress_indicator_header.dart';
 import 'package:supplier_mobile/presentation/navigation/router.gr.dart';
 
 class FormsContainer extends StatelessWidget {
@@ -56,7 +57,11 @@ class FormsContainer extends StatelessWidget {
             Center(
               child: Container(
                 margin: const EdgeInsets.only(top: 50),
-                child: const CircularProgressIndicator(),
+                child: ProgressIndicatorHeader(
+                  text: state.isCreatingAccount
+                      ? 'Creating account'
+                      : 'Signing in',
+                ),
               ),
             ),
         ],

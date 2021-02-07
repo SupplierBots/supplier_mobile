@@ -2,12 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supplier_mobile/application/auth/auth_bloc.dart';
+import 'package:supplier_mobile/presentation/core/constants/colors.dart';
+import 'package:supplier_mobile/presentation/core/progress_indicator_header.dart';
 import 'package:supplier_mobile/presentation/navigation/router.gr.dart';
 
 class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         state.maybeMap(
           authenticated: (_) =>
@@ -17,11 +19,25 @@ class SplashPage extends StatelessWidget {
           orElse: () {},
         );
       },
-      child: const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
+      builder: (context, state) {
+        return Scaffold(
+          body: SafeArea(
+            child: Center(
+              child: ProgressIndicatorHeader(
+                text: state.maybeMap(
+                  signOutAttempt: (_) => 'Signing out',
+                  unauthenticated: (_) => 'Signing out',
+                  orElse: () => '',
+                ),
+                color: state.maybeMap(
+                  initial: (_) => kVioletColor,
+                  orElse: () => Colors.red[900],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
