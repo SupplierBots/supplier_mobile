@@ -14,23 +14,27 @@ class ProfilesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProfilesBloc, ProfilesState>(
       builder: (context, state) {
-        return Container(
-          margin: const EdgeInsets.only(top: 20.0),
-          child: state.profiles.isNotEmpty
-              ? Wrap(
+        final container = state.profiles.isNotEmpty
+            ? Container(
+                margin: const EdgeInsets.only(top: 20.0),
+                child: Wrap(
                   alignment: WrapAlignment.center,
                   runSpacing: kPrimaryElementsSpacing,
                   children: state.profiles.entries
                       .map((profile) => ProfilesListTile(name: profile.key))
                       .toList(),
-                )
-              : const Center(
-                  child: Text(
+                ),
+              )
+            : Center(
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 125),
+                  child: const Text(
                     "You haven't created any profiles yet",
                     style: TextStyle(color: kDarkGrey),
                   ),
                 ),
-        );
+              );
+        return container;
       },
     );
   }
