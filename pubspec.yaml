@@ -27,7 +27,6 @@ dependencies:
   cloud_firestore: ^0.16.0
   flutter_form_builder: ^4.2.0
   flutter_typeahead: <=1.9.1
-  menu_button: ^1.2.1
 
 dev_dependencies:
   flutter_test:
