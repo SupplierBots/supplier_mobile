@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
+import 'package:supplier_mobile/presentation/core/gradient_border_container.dart';
 
 class FormDropdownPopupRoute<T> extends PopupRoute<T> {
   FormDropdownPopupRoute({
@@ -106,45 +107,28 @@ class _DropdownPopupState<T> extends State<_DropdownPopup<T>> {
 
     return Material(
       color: Colors.transparent,
-      child: Container(
-        padding: const EdgeInsets.all(2),
-        decoration: const BoxDecoration(
-          gradient: kPrimaryGradient,
-          borderRadius: radius,
-        ),
-        child: Container(
-          key: key,
-          width: widget.buttonWidth - 4,
-          height: widget.popupHeight,
-          decoration: const BoxDecoration(
-            color: kSecondaryBackground,
-            borderRadius: radius,
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromARGB(20, 0, 0, 0),
-                offset: Offset(1.0, 3.0),
-                blurRadius: 5.0,
-              )
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: SingleChildScrollView(
-              physics: const ClampingScrollPhysics(),
-              child: ListBody(children: [
-                Container(
-                  padding: const EdgeInsets.only(top: 4.0),
-                  child: Align(
-                    alignment: AlignmentDirectional.topStart,
-                    child: SingleChildScrollView(
-                      child: ListBody(
-                        children: widget.route.items,
-                      ),
+      child: GradientBorderContainer(
+        key: key,
+        borderRadius: radius,
+        width: widget.buttonWidth,
+        height: widget.popupHeight,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            child: ListBody(children: [
+              Container(
+                padding: const EdgeInsets.only(top: 4.0),
+                child: Align(
+                  alignment: AlignmentDirectional.topStart,
+                  child: SingleChildScrollView(
+                    child: ListBody(
+                      children: widget.route.items,
                     ),
                   ),
                 ),
-              ]),
-            ),
+              ),
+            ]),
           ),
         ),
       ),

@@ -7,6 +7,7 @@ import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/form/form_dropdown_item.dart';
 import 'package:supplier_mobile/presentation/core/form/form_dropdown_popup.dart';
 import 'package:supplier_mobile/presentation/core/color_extensions.dart';
+import 'package:supplier_mobile/presentation/core/gradient_border_container.dart';
 
 class FormDropdown extends StatefulWidget {
   const FormDropdown({
@@ -131,45 +132,36 @@ class _FormDropdownState extends State<FormDropdown> {
 
         return GestureDetector(
           onTap: toggleMenu,
-          child: Container(
+          child: GradientBorderContainer(
             height: kInputsHeight,
-            padding: const EdgeInsets.all(2),
-            decoration: BoxDecoration(
-              gradient: getGradient(),
-              borderRadius: radius,
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                color: kSecondaryBackground,
-                borderRadius: radius,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Flexible(
-                      child: Text(
-                        _selectedItem ?? widget.placeholder,
-                        style: TextStyle(
-                          color: hasSelectedItem ? kLightPurple : kLighGrey,
-                          fontSize: 16,
-                        ),
-                        overflow: TextOverflow.ellipsis,
+            borderGradient: getGradient(),
+            borderRadius: radius,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Flexible(
+                    child: Text(
+                      _selectedItem ?? widget.placeholder,
+                      style: TextStyle(
+                        color: hasSelectedItem ? kLightPurple : kLighGrey,
+                        fontSize: 16,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  SizedBox(
+                    child: FittedBox(
+                      fit: BoxFit.fill,
+                      child: Icon(
+                        Icons.expand_more,
+                        size: 35,
+                        color: getIconColor(),
                       ),
                     ),
-                    SizedBox(
-                      child: FittedBox(
-                        fit: BoxFit.fill,
-                        child: Icon(
-                          Icons.expand_more,
-                          size: 35,
-                          color: getIconColor(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

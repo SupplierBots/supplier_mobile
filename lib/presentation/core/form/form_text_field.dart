@@ -9,6 +9,7 @@ import 'package:supplier_mobile/presentation/core/form/masked_text_input_formatt
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/color_extensions.dart';
+import 'package:supplier_mobile/presentation/core/gradient_border_container.dart';
 
 class FormTextField extends FormBuilderField<String> {
   FormTextField({
@@ -55,14 +56,11 @@ class FormTextField extends FormBuilderField<String> {
               return kSecondaryBackground.toLinearGradient();
             }
 
-            return Container(
-              padding: const EdgeInsets.all(2.0),
+            return GradientBorderContainer(
               height: kInputsHeight,
-              decoration: BoxDecoration(
-                gradient: getGradient(),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10.0),
-                ),
+              borderGradient: getGradient(),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10.0),
               ),
               child: TextField(
                 keyboardType: type,
