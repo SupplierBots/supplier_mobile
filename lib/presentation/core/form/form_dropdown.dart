@@ -54,6 +54,7 @@ class _FormDropdownState extends State<FormDropdown> {
         _selectedItem = field.value;
 
         Future<void> toggleMenu() async {
+          FocusManager.instance.primaryFocus.unfocus();
           setState(() => _isMenuOpened = !_isMenuOpened);
 
           if (!_isMenuOpened) return;
