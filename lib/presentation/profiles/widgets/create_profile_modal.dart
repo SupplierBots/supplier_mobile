@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/application/profiles/profiles_bloc.dart';
 import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_bloc.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
@@ -10,31 +11,13 @@ import 'package:supplier_mobile/presentation/core/form/form_text_field.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 
-class CreateProfileModal extends StatefulWidget {
-  @override
-  _CreateProfileModalState createState() => _CreateProfileModalState();
-}
-
-class _CreateProfileModalState extends State<CreateProfileModal>
-    with TickerProviderStateMixin {
-  AnimationController _controller;
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
-
+class CreateProfileModal extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    final _controller = useAnimationController(
+      duration: const Duration(milliseconds: 300),
+    );
+
     final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
     return BlocConsumer<ProfilesEditorBloc, ProfilesEditorState>(
         listener: (context, state) {
@@ -54,7 +37,11 @@ class _CreateProfileModalState extends State<CreateProfileModal>
               begin: const Offset(0, 1),
               end: Offset.zero,
             ).animate(
-                CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
+              CurvedAnimation(
+                parent: _controller,
+                curve: Curves.easeOut,
+              ),
+            ),
             child: Align(
               alignment: Alignment.topCenter,
               child: FractionallySizedBox(

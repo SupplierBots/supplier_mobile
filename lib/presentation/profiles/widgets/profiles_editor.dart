@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/application/profiles/profiles_bloc.dart';
 import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_bloc.dart';
 import 'package:supplier_mobile/domain/profiles/profile.dart';
@@ -8,7 +9,6 @@ import 'package:supplier_mobile/presentation/core/edit_header.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
 import 'package:supplier_mobile/presentation/navigation/widgets/animated_navigation_bar.dart';
-import 'package:supplier_mobile/presentation/navigation/widgets/navigation_bar.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
@@ -16,38 +16,15 @@ import 'package:supplier_mobile/presentation/profiles/widgets/create_profile_mod
 import 'package:supplier_mobile/presentation/profiles/widgets/profiles_form.dart';
 import 'package:supplier_mobile/presentation/profiles/widgets/profiles_list.dart';
 
-class ProfilesEditor extends StatefulWidget {
-  const ProfilesEditor({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  _ProfilesEditorState createState() => _ProfilesEditorState();
-}
-
-class _ProfilesEditorState extends State<ProfilesEditor>
-    with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 250),
-      vsync: this,
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
-
+class ProfilesEditor extends HookWidget {
   final formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
+    final _controller = useAnimationController(
+      duration: const Duration(milliseconds: 250),
+    );
+
     void _submitProfile() {
       if (!formKey.currentState.saveAndValidate()) return;
 

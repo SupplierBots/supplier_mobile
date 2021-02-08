@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/form/form_dropdown_item.dart';
@@ -9,7 +10,7 @@ import 'package:supplier_mobile/presentation/core/form/form_dropdown_popup.dart'
 import 'package:supplier_mobile/presentation/core/color_extensions.dart';
 import 'package:supplier_mobile/presentation/core/gradient_border_container.dart';
 
-class FormDropdown extends StatefulWidget {
+class FormDropdown extends HookWidget {
   const FormDropdown({
     Key key,
     @required this.name,
@@ -26,39 +27,35 @@ class FormDropdown extends StatefulWidget {
   final FormFieldValidator<String> validator;
 
   @override
-  State<StatefulWidget> createState() => _FormDropdownState();
-}
-
-class _FormDropdownState extends State<FormDropdown> {
-  bool _isMenuOpened = false;
-  String _selectedItem;
-  bool get hasSelectedItem => _selectedItem != null;
-
-  @override
   Widget build(BuildContext context) {
+    final _isMenuOpened = useState(false);
+    final _selectedItem = useState<String>();
+
+    bool hasSelectedItem() => _selectedItem.value != null;
+
     final radius = BorderRadius.only(
       topLeft: const Radius.circular(10.0),
       topRight: const Radius.circular(10.0),
-      bottomLeft: Radius.circular(_isMenuOpened ? 0 : 10.0),
-      bottomRight: Radius.circular(_isMenuOpened ? 0 : 10.0),
+      bottomLeft: Radius.circular(_isMenuOpened.value ? 0 : 10.0),
+      bottomRight: Radius.circular(_isMenuOpened.value ? 0 : 10.0),
     );
 
     return FormBuilderField<String>(
-      name: widget.name,
+      name: name,
       validator: (String value) {
-        if (widget.isRequired && _selectedItem == null) {
+        if (isRequired && _selectedItem.value == null) {
           return 'Required';
         }
-        return widget.validator?.call(value);
+        return validator?.call(value);
       },
       builder: (FormFieldState<String> field) {
-        _selectedItem = field.value;
+        _selectedItem.value = field.value;
 
         Future<void> toggleMenu() async {
           FocusManager.instance.primaryFocus.unfocus();
-          setState(() => _isMenuOpened = !_isMenuOpened);
+          _isMenuOpened.value = !_isMenuOpened.value;
 
-          if (!_isMenuOpened) return;
+          if (!_isMenuOpened.value) return;
 
           final RenderBox button = context.findRenderObject() as RenderBox;
           final RenderBox overlay =
@@ -78,36 +75,34 @@ class _FormDropdownState extends State<FormDropdown> {
             const Offset(0, -4) & overlay.size,
           );
 
-          if (widget.items.isEmpty) return;
+          if (items.isEmpty) return;
 
           final valueFromPopup = await Navigator.push(
             context,
             FormDropdownPopupRoute<String>(
               position: position,
-              items: widget.items
+              items: items
                   .map((value) => FormDropdownItem(
                         value: value,
-                        isSelected: value == _selectedItem,
+                        isSelected: value == _selectedItem.value,
                       ))
                   .toList(),
               popupHeight: math.min(
                 200,
-                FormDropdownItem.height * widget.items.length + 10,
+                FormDropdownItem.height * items.length + 10,
               ),
               buttonWidth: button.size.width,
             ),
           );
 
-          setState(() {
-            _isMenuOpened = !_isMenuOpened;
-            if (valueFromPopup == null) return;
-            field.didChange(valueFromPopup);
-            _selectedItem = valueFromPopup;
-          });
+          _isMenuOpened.value = !_isMenuOpened.value;
+          if (valueFromPopup == null) return;
+          field.didChange(valueFromPopup);
+          _selectedItem.value = valueFromPopup;
         }
 
         LinearGradient getGradient() {
-          if (_isMenuOpened) {
+          if (_isMenuOpened.value) {
             return kPrimaryGradient;
           }
 
@@ -119,7 +114,7 @@ class _FormDropdownState extends State<FormDropdown> {
         }
 
         Color getIconColor() {
-          if (_isMenuOpened) {
+          if (_isMenuOpened.value) {
             return kVioletColor;
           }
 
@@ -143,9 +138,9 @@ class _FormDropdownState extends State<FormDropdown> {
                 children: <Widget>[
                   Flexible(
                     child: Text(
-                      _selectedItem ?? widget.placeholder,
+                      _selectedItem.value ?? placeholder,
                       style: TextStyle(
-                        color: hasSelectedItem ? kLightPurple : kLighGrey,
+                        color: hasSelectedItem() ? kLightPurple : kLighGrey,
                         fontSize: 16,
                       ),
                       overflow: TextOverflow.ellipsis,

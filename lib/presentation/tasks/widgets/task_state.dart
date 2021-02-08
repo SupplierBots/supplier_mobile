@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 
-class TaskState extends StatefulWidget {
-  @override
-  _TaskStateState createState() => _TaskStateState();
-}
-
-class _TaskStateState extends State<TaskState> {
+class TaskState extends HookWidget {
   String get itemName => 'Swaggowe Bogo';
 
   String get profileName => 'Mefedron';

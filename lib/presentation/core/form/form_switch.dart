@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
+import 'package:supplier_mobile/presentation/core/color_extensions.dart';
 
-class FormSwitch extends StatefulWidget {
+class FormSwitch extends HookWidget {
   const FormSwitch({
-    Key key,
     @required this.name,
     this.initialValue = false,
     this.validator,
@@ -23,130 +24,108 @@ class FormSwitch extends StatefulWidget {
   final double borderRadius;
 
   @override
-  _FormSwitchState createState() => _FormSwitchState();
-}
+  Widget build(BuildContext context) {
+    final current = useState(false);
+    useMemoized(() {
+      current.value = initialValue;
+    });
 
-class _FormSwitchState extends State<FormSwitch>
-    with SingleTickerProviderStateMixin {
-  Animation<Alignment> _toggleAnimation;
-  AnimationController _animationController;
-  bool value;
-
-  @override
-  void initState() {
-    super.initState();
-    value = widget.initialValue;
-    _animationController = AnimationController(
-      vsync: this,
-      value: value ? 1.0 : 0.0,
-      duration: Duration(milliseconds: 60),
+    final _animationController = useAnimationController(
+      duration: const Duration(milliseconds: 60),
+      initialValue: current.value ? 1.0 : 0.0,
     );
-    _toggleAnimation = AlignmentTween(
+
+    final _toggleAnimation = useAnimation(AlignmentTween(
       begin: Alignment.centerLeft,
       end: Alignment.centerRight,
     ).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.linear),
-    );
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    List<Color> _switchColor =
-        value ? [kPinkColor, kVioletColor] : [kLighGrey, kLighGrey];
+    ));
 
     return FormBuilderField(
-        name: widget.name,
-        initialValue: widget.initialValue,
-        validator: widget.validator,
-        builder: (FormFieldState<bool> field) {
-          return Center(
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  value = !value;
-                  field.didChange(value);
-                });
+      name: name,
+      initialValue: initialValue,
+      validator: validator,
+      builder: (FormFieldState<bool> field) {
+        return Center(
+          child: GestureDetector(
+            onTap: () {
+              current.value = !current.value;
+              field.didChange(current.value);
 
-                if (value)
-                  _animationController.forward();
-                else
-                  _animationController.reverse();
-              },
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  AnimatedBuilder(
-                    animation: _animationController,
-                    builder: (context, child) {
-                      return Container(
-                        width: 40.0,
-                        height: 20.0,
-                        padding: EdgeInsets.all(1.0),
-                        decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(widget.borderRadius),
-                          gradient: LinearGradient(
-                            colors: _switchColor,
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            _toggleAnimation.value == Alignment.centerRight
-                                ? Expanded(
-                                    child: Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 4.0),
-                                    ),
-                                  )
-                                : Container(),
-                            Align(
-                              alignment: _toggleAnimation.value,
+              if (current.value) {
+                _animationController.forward();
+              } else {
+                _animationController.reverse();
+              }
+            },
+            child: Row(
+              children: [
+                AnimatedBuilder(
+                  animation: _animationController,
+                  builder: (context, child) {
+                    return Container(
+                      width: 40.0,
+                      height: 20.0,
+                      padding: const EdgeInsets.all(1.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(borderRadius),
+                        gradient: current.value
+                            ? kPrimaryGradient
+                            : kLighGrey.toLinearGradient(),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          if (_toggleAnimation == Alignment.centerRight)
+                            Expanded(
                               child: Container(
-                                width: widget.toggleSize,
-                                height: widget.toggleSize,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 4.0)),
+                            )
+                          else
+                            Container(),
+                          Align(
+                            alignment: _toggleAnimation,
+                            child: Container(
+                              width: toggleSize,
+                              height: toggleSize,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
                               ),
                             ),
-                            _toggleAnimation.value == Alignment.centerLeft
-                                ? Expanded(
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 4.0),
-                                      alignment: Alignment.centerRight,
-                                    ),
-                                  )
-                                : Container(),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Text(
-                      widget.name,
-                      style: TextStyle(
-                        color: kLighGrey,
-                        fontSize: 16,
+                          ),
+                          if (_toggleAnimation == Alignment.centerLeft)
+                            Expanded(
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 4.0),
+                                alignment: Alignment.centerRight,
+                              ),
+                            )
+                          else
+                            Container(),
+                        ],
                       ),
+                    );
+                  },
+                ),
+                Container(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    name,
+                    style: const TextStyle(
+                      color: kLighGrey,
+                      fontSize: 16,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }

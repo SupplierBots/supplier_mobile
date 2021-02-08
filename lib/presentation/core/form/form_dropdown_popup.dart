@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:supplier_mobile/presentation/core/constants/colors.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/presentation/core/gradient_border_container.dart';
 
 class FormDropdownPopupRoute<T> extends PopupRoute<T> {
@@ -79,8 +79,8 @@ class _DropdownPopupLayout extends SingleChildLayoutDelegate {
       position != oldDelegate.position;
 }
 
-class _DropdownPopup<T> extends StatefulWidget {
-  const _DropdownPopup({
+class _DropdownPopup<T> extends HookWidget {
+  _DropdownPopup({
     Key key,
     this.route,
     this.popupHeight,
@@ -91,12 +91,7 @@ class _DropdownPopup<T> extends StatefulWidget {
   final double popupHeight;
   final double buttonWidth;
 
-  @override
-  _DropdownPopupState<T> createState() => _DropdownPopupState<T>();
-}
-
-class _DropdownPopupState<T> extends State<_DropdownPopup<T>> {
-  final GlobalKey key = GlobalKey();
+  final GlobalKey popupKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -108,10 +103,10 @@ class _DropdownPopupState<T> extends State<_DropdownPopup<T>> {
     return Material(
       color: Colors.transparent,
       child: GradientBorderContainer(
-        key: key,
+        key: popupKey,
         borderRadius: radius,
-        width: widget.buttonWidth,
-        height: widget.popupHeight,
+        width: buttonWidth,
+        height: popupHeight,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(15),
           child: SingleChildScrollView(
@@ -123,7 +118,7 @@ class _DropdownPopupState<T> extends State<_DropdownPopup<T>> {
                   alignment: AlignmentDirectional.topStart,
                   child: SingleChildScrollView(
                     child: ListBody(
-                      children: widget.route.items,
+                      children: route.items,
                     ),
                   ),
                 ),
