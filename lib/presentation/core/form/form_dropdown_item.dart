@@ -1,44 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
-import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
+import 'package:supplier_mobile/presentation/core/color_extensions.dart';
+import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 
 class FormDropdownItem extends StatelessWidget {
-  FormDropdownItem(this.item);
+  const FormDropdownItem({
+    Key key,
+    @required this.value,
+    this.isSelected,
+  }) : super(key: key);
+  static const height = 40.0;
 
-  final String item;
+  final String value;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 400,
-      height: kInputsHeight,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 12, right: 11),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Flexible(
-                child: Text(
-                  item,
-                  style: TextStyle(color: kLighGrey, fontSize: 16),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              SizedBox(
-                child: FittedBox(
-                  fit: BoxFit.fill,
-                  child: Icon(
-                    Icons.expand_more,
-                    size: 35,
-                    color: kDarkGrey,
-                  ),
-                ),
-              ),
-            ],
+    return GestureDetector(
+      onTap: () => Navigator.of(context).pop<String>(value),
+      child: Container(
+        color: kSecondaryBackground,
+        height: FormDropdownItem.height,
+        alignment: Alignment.centerLeft,
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: GradientWidget(
+          gradient: isSelected ? kPrimaryGradient : kLighGrey.toGradient(),
+          child: Text(
+            value,
+            style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
         ),
       ),

@@ -25,9 +25,7 @@ class Header extends StatelessWidget {
           width: underlineWidth,
           child: const DecoratedBox(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [kPinkColor, kVioletColor],
-              ),
+              gradient: kPrimaryGradient,
             ),
           ),
         ),

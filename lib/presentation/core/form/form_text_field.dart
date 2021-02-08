@@ -8,6 +8,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:supplier_mobile/presentation/core/form/masked_text_input_formatter.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
+import 'package:supplier_mobile/presentation/core/color_extensions.dart';
 
 class FormTextField extends FormBuilderField<String> {
   FormTextField({
@@ -51,9 +52,7 @@ class FormTextField extends FormBuilderField<String> {
                 return kRedGradient;
               }
 
-              return const LinearGradient(
-                colors: <Color>[kSecondaryBackground, kSecondaryBackground],
-              );
+              return kSecondaryBackground.toGradient();
             }
 
             return Container(
