@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 
 class Header extends StatelessWidget {
-  const Header({@required this.text, @required this.underlineWidth});
+  const Header({
+    @required this.text,
+    @required this.underlineWidth,
+  });
 
   final String text;
   final double underlineWidth;

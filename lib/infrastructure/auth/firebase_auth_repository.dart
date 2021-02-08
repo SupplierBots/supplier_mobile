@@ -30,9 +30,9 @@ class FirebaseAuthRepository implements AuthRepository {
         'https://us-central1-safedrop-83b20.cloudfunctions.net/createAccount';
 
     try {
-      final response = await Dio().post(url, data: credentials.toJson());
-      final parsedResponse =
-          RegisterResponse.fromJson(response.data as Map<String, dynamic>);
+      final response = await Dio()
+          .post<Map<String, dynamic>>(url, data: credentials.toJson());
+      final parsedResponse = RegisterResponse.fromJson(response.data);
       if (parsedResponse.success) {
         return signIn(SignInCredentials(
           email: credentials.email,

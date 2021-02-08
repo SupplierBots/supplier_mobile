@@ -114,7 +114,7 @@ class _FormDropdownState extends State<FormDropdown> {
             return kRedGradient;
           }
 
-          return kSecondaryBackground.toGradient();
+          return kSecondaryBackground.toLinearGradient();
         }
 
         Color getIconColor() {

@@ -24,7 +24,8 @@ class FormDropdownItem extends StatelessWidget {
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: GradientWidget(
-          gradient: isSelected ? kPrimaryGradient : kLighGrey.toGradient(),
+          gradient:
+              isSelected ? kPrimaryGradient : kLighGrey.toLinearGradient(),
           child: Text(
             value,
             style: const TextStyle(color: Colors.white, fontSize: 16),

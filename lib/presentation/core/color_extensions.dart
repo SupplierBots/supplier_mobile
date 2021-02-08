@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
 extension ColorX on Color {
-  LinearGradient toGradient() => LinearGradient(colors: [this, this]);
+  LinearGradient toLinearGradient() => LinearGradient(colors: [this, this]);
 }

@@ -52,7 +52,7 @@ class FormTextField extends FormBuilderField<String> {
                 return kRedGradient;
               }
 
-              return kSecondaryBackground.toGradient();
+              return kSecondaryBackground.toLinearGradient();
             }
 
             return Container(

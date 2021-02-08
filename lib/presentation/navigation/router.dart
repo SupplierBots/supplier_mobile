@@ -10,13 +10,13 @@ import 'package:supplier_mobile/presentation/tasks/tasks_page.dart';
 @CustomAutoRouter(
   generateNavigationHelperExtension: true,
   routes: <AutoRoute>[
-    CustomRoute(page: SplashPage, initial: true),
-    CustomRoute(page: AuthPage),
-    CustomRoute(page: DashboardPage),
-    CustomRoute(page: TasksPage),
-    CustomRoute(page: ProfilesPage),
-    CustomRoute(page: SettingsPage),
-    CustomRoute(page: HelpPage),
+    CustomRoute<SplashPage>(page: SplashPage, initial: true),
+    CustomRoute<AuthPage>(page: AuthPage),
+    CustomRoute<DashboardPage>(page: DashboardPage),
+    CustomRoute<TasksPage>(page: TasksPage),
+    CustomRoute<ProfilesPage>(page: ProfilesPage),
+    CustomRoute<SettingsPage>(page: SettingsPage),
+    CustomRoute<HelpPage>(page: HelpPage),
   ],
 )
 class $Router {}
