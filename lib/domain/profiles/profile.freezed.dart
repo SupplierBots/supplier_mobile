@@ -23,10 +23,11 @@ class _$ProfileTearOff {
       @required String email,
       @required String phoneNumber,
       @required String address,
-      @required String addressDetails,
+      String addressDetails,
       @required String city,
       @required String postcode,
       @required String country,
+      String state,
       @required String creditCardType,
       @required String creditCardNumber,
       @required String expiryMonth,
@@ -42,6 +43,7 @@ class _$ProfileTearOff {
       city: city,
       postcode: postcode,
       country: country,
+      state: state,
       creditCardType: creditCardType,
       creditCardNumber: creditCardNumber,
       expiryMonth: expiryMonth,
@@ -71,6 +73,7 @@ mixin _$Profile {
   String get city;
   String get postcode;
   String get country;
+  String get state;
   String get creditCardType;
   String get creditCardNumber;
   String get expiryMonth;
@@ -96,6 +99,7 @@ abstract class $ProfileCopyWith<$Res> {
       String city,
       String postcode,
       String country,
+      String state,
       String creditCardType,
       String creditCardNumber,
       String expiryMonth,
@@ -122,6 +126,7 @@ class _$ProfileCopyWithImpl<$Res> implements $ProfileCopyWith<$Res> {
     Object city = freezed,
     Object postcode = freezed,
     Object country = freezed,
+    Object state = freezed,
     Object creditCardType = freezed,
     Object creditCardNumber = freezed,
     Object expiryMonth = freezed,
@@ -141,6 +146,7 @@ class _$ProfileCopyWithImpl<$Res> implements $ProfileCopyWith<$Res> {
       city: city == freezed ? _value.city : city as String,
       postcode: postcode == freezed ? _value.postcode : postcode as String,
       country: country == freezed ? _value.country : country as String,
+      state: state == freezed ? _value.state : state as String,
       creditCardType: creditCardType == freezed
           ? _value.creditCardType
           : creditCardType as String,
@@ -173,6 +179,7 @@ abstract class _$ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       String city,
       String postcode,
       String country,
+      String state,
       String creditCardType,
       String creditCardNumber,
       String expiryMonth,
@@ -200,6 +207,7 @@ class __$ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
     Object city = freezed,
     Object postcode = freezed,
     Object country = freezed,
+    Object state = freezed,
     Object creditCardType = freezed,
     Object creditCardNumber = freezed,
     Object expiryMonth = freezed,
@@ -219,6 +227,7 @@ class __$ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
       city: city == freezed ? _value.city : city as String,
       postcode: postcode == freezed ? _value.postcode : postcode as String,
       country: country == freezed ? _value.country : country as String,
+      state: state == freezed ? _value.state : state as String,
       creditCardType: creditCardType == freezed
           ? _value.creditCardType
           : creditCardType as String,
@@ -246,10 +255,11 @@ class _$_Profile implements _Profile {
       @required this.email,
       @required this.phoneNumber,
       @required this.address,
-      @required this.addressDetails,
+      this.addressDetails,
       @required this.city,
       @required this.postcode,
       @required this.country,
+      this.state,
       @required this.creditCardType,
       @required this.creditCardNumber,
       @required this.expiryMonth,
@@ -260,7 +270,6 @@ class _$_Profile implements _Profile {
         assert(email != null),
         assert(phoneNumber != null),
         assert(address != null),
-        assert(addressDetails != null),
         assert(city != null),
         assert(postcode != null),
         assert(country != null),
@@ -292,6 +301,8 @@ class _$_Profile implements _Profile {
   @override
   final String country;
   @override
+  final String state;
+  @override
   final String creditCardType;
   @override
   final String creditCardNumber;
@@ -304,7 +315,7 @@ class _$_Profile implements _Profile {
 
   @override
   String toString() {
-    return 'Profile(firstName: $firstName, lastName: $lastName, email: $email, phoneNumber: $phoneNumber, address: $address, addressDetails: $addressDetails, city: $city, postcode: $postcode, country: $country, creditCardType: $creditCardType, creditCardNumber: $creditCardNumber, expiryMonth: $expiryMonth, expiryYear: $expiryYear, securityCode: $securityCode)';
+    return 'Profile(firstName: $firstName, lastName: $lastName, email: $email, phoneNumber: $phoneNumber, address: $address, addressDetails: $addressDetails, city: $city, postcode: $postcode, country: $country, state: $state, creditCardType: $creditCardType, creditCardNumber: $creditCardNumber, expiryMonth: $expiryMonth, expiryYear: $expiryYear, securityCode: $securityCode)';
   }
 
   @override
@@ -336,6 +347,8 @@ class _$_Profile implements _Profile {
             (identical(other.country, country) ||
                 const DeepCollectionEquality()
                     .equals(other.country, country)) &&
+            (identical(other.state, state) ||
+                const DeepCollectionEquality().equals(other.state, state)) &&
             (identical(other.creditCardType, creditCardType) ||
                 const DeepCollectionEquality()
                     .equals(other.creditCardType, creditCardType)) &&
@@ -365,6 +378,7 @@ class _$_Profile implements _Profile {
       const DeepCollectionEquality().hash(city) ^
       const DeepCollectionEquality().hash(postcode) ^
       const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(state) ^
       const DeepCollectionEquality().hash(creditCardType) ^
       const DeepCollectionEquality().hash(creditCardNumber) ^
       const DeepCollectionEquality().hash(expiryMonth) ^
@@ -389,10 +403,11 @@ abstract class _Profile implements Profile {
       @required String email,
       @required String phoneNumber,
       @required String address,
-      @required String addressDetails,
+      String addressDetails,
       @required String city,
       @required String postcode,
       @required String country,
+      String state,
       @required String creditCardType,
       @required String creditCardNumber,
       @required String expiryMonth,
@@ -419,6 +434,8 @@ abstract class _Profile implements Profile {
   String get postcode;
   @override
   String get country;
+  @override
+  String get state;
   @override
   String get creditCardType;
   @override

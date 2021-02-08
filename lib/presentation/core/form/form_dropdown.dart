@@ -18,6 +18,7 @@ class FormDropdown extends HookWidget {
     @required this.placeholder,
     this.isRequired = true,
     this.validator,
+    this.onChange,
   }) : super(key: key);
 
   final String name;
@@ -25,13 +26,11 @@ class FormDropdown extends HookWidget {
   final List<String> items;
   final bool isRequired;
   final FormFieldValidator<String> validator;
+  final Function(String) onChange;
 
   @override
   Widget build(BuildContext context) {
     final _isMenuOpened = useState(false);
-    final _selectedItem = useState<String>();
-
-    bool hasSelectedItem() => _selectedItem.value != null;
 
     final radius = BorderRadius.only(
       topLeft: const Radius.circular(10.0),
@@ -43,14 +42,12 @@ class FormDropdown extends HookWidget {
     return FormBuilderField<String>(
       name: name,
       validator: (String value) {
-        if (isRequired && _selectedItem.value == null) {
+        if (isRequired && value == null) {
           return 'Required';
         }
         return validator?.call(value);
       },
       builder: (FormFieldState<String> field) {
-        _selectedItem.value = field.value;
-
         Future<void> toggleMenu() async {
           FocusManager.instance.primaryFocus.unfocus();
           _isMenuOpened.value = !_isMenuOpened.value;
@@ -84,7 +81,7 @@ class FormDropdown extends HookWidget {
               items: items
                   .map((value) => FormDropdownItem(
                         value: value,
-                        isSelected: value == _selectedItem.value,
+                        isSelected: value == field.value,
                       ))
                   .toList(),
               popupHeight: math.min(
@@ -98,7 +95,7 @@ class FormDropdown extends HookWidget {
           _isMenuOpened.value = !_isMenuOpened.value;
           if (valueFromPopup == null) return;
           field.didChange(valueFromPopup);
-          _selectedItem.value = valueFromPopup;
+          onChange?.call(valueFromPopup);
         }
 
         LinearGradient getGradient() {
@@ -138,9 +135,9 @@ class FormDropdown extends HookWidget {
                 children: <Widget>[
                   Flexible(
                     child: Text(
-                      _selectedItem.value ?? placeholder,
+                      field.value ?? placeholder,
                       style: TextStyle(
-                        color: hasSelectedItem() ? kLightPurple : kLighGrey,
+                        color: field.value != null ? kLightPurple : kLighGrey,
                         fontSize: 16,
                       ),
                       overflow: TextOverflow.ellipsis,

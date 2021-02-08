@@ -30,9 +30,9 @@ class FormTextField extends FormBuilderField<String> {
           validator: optional
               ? validator
               : FormBuilderValidators.compose(<String Function(String)>[
-                  validator ?? (String v) => null,
                   (String value) =>
                       value == null || value.isEmpty ? 'Required' : null,
+                  validator ?? (String v) => null,
                 ]),
           valueTransformer: (String value) {
             if (value == null) return null;

@@ -52,44 +52,44 @@ class Router extends RouterBase {
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
     SplashPage: (data) {
-      return PageRouteBuilder<dynamic>(
+      return PageRouteBuilder<SplashPage>(
         pageBuilder: (context, animation, secondaryAnimation) => SplashPage(),
         settings: data,
       );
     },
     AuthPage: (data) {
-      return PageRouteBuilder<dynamic>(
+      return PageRouteBuilder<AuthPage>(
         pageBuilder: (context, animation, secondaryAnimation) => AuthPage(),
         settings: data,
       );
     },
     DashboardPage: (data) {
-      return PageRouteBuilder<dynamic>(
+      return PageRouteBuilder<DashboardPage>(
         pageBuilder: (context, animation, secondaryAnimation) =>
             DashboardPage(),
         settings: data,
       );
     },
     TasksPage: (data) {
-      return PageRouteBuilder<dynamic>(
+      return PageRouteBuilder<TasksPage>(
         pageBuilder: (context, animation, secondaryAnimation) => TasksPage(),
         settings: data,
       );
     },
     ProfilesPage: (data) {
-      return PageRouteBuilder<dynamic>(
+      return PageRouteBuilder<ProfilesPage>(
         pageBuilder: (context, animation, secondaryAnimation) => ProfilesPage(),
         settings: data,
       );
     },
     SettingsPage: (data) {
-      return PageRouteBuilder<dynamic>(
+      return PageRouteBuilder<SettingsPage>(
         pageBuilder: (context, animation, secondaryAnimation) => SettingsPage(),
         settings: data,
       );
     },
     HelpPage: (data) {
-      return PageRouteBuilder<dynamic>(
+      return PageRouteBuilder<HelpPage>(
         pageBuilder: (context, animation, secondaryAnimation) => HelpPage(),
         settings: data,
       );
@@ -102,17 +102,20 @@ class Router extends RouterBase {
 /// *************************************************************************
 
 extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
-  Future<dynamic> pushSplashPage() => push<dynamic>(Routes.splashPage);
+  Future<SplashPage> pushSplashPage() => push<SplashPage>(Routes.splashPage);
 
-  Future<dynamic> pushAuthPage() => push<dynamic>(Routes.authPage);
+  Future<AuthPage> pushAuthPage() => push<AuthPage>(Routes.authPage);
 
-  Future<dynamic> pushDashboardPage() => push<dynamic>(Routes.dashboardPage);
+  Future<DashboardPage> pushDashboardPage() =>
+      push<DashboardPage>(Routes.dashboardPage);
 
-  Future<dynamic> pushTasksPage() => push<dynamic>(Routes.tasksPage);
+  Future<TasksPage> pushTasksPage() => push<TasksPage>(Routes.tasksPage);
 
-  Future<dynamic> pushProfilesPage() => push<dynamic>(Routes.profilesPage);
+  Future<ProfilesPage> pushProfilesPage() =>
+      push<ProfilesPage>(Routes.profilesPage);
 
-  Future<dynamic> pushSettingsPage() => push<dynamic>(Routes.settingsPage);
+  Future<SettingsPage> pushSettingsPage() =>
+      push<SettingsPage>(Routes.settingsPage);
 
-  Future<dynamic> pushHelpPage() => push<dynamic>(Routes.helpPage);
+  Future<HelpPage> pushHelpPage() => push<HelpPage>(Routes.helpPage);
 }

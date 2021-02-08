@@ -86,14 +86,18 @@ class CreateProfileModal extends HookWidget {
                           child: FormTextField(
                             name: 'name',
                             placeholder: 'Profile name',
-                            validator: (String value) {
-                              if (!context
-                                  .read<ProfilesBloc>()
-                                  .state
-                                  .profiles
-                                  .containsKey(value)) return null;
-                              return 'Already exists';
-                            },
+                            validator: FormBuilderValidators.compose([
+                              FormBuilderValidators.maxLength(context, 15,
+                                  errorText: 'Too long'),
+                              (String value) {
+                                if (!context
+                                    .read<ProfilesBloc>()
+                                    .state
+                                    .profiles
+                                    .containsKey(value)) return null;
+                                return 'Already exists';
+                              }
+                            ]),
                           ),
                         ),
                         const SizedBox(height: kPrimaryElementsSpacing),
@@ -129,6 +133,8 @@ class CreateProfileModal extends HookWidget {
                                   color: kLightPurple,
                                 ),
                                 onPressed: () {
+                                  FocusManager.instance.primaryFocus.unfocus();
+
                                   if (!formKey.currentState.saveAndValidate()) {
                                     return;
                                   }

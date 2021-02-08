@@ -1,33 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/application/profiles/profiles_bloc.dart';
 import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_bloc.dart';
+import 'package:supplier_mobile/domain/profiles/profile.dart';
 import 'package:supplier_mobile/presentation/core/form/form_dropdown.dart';
 import 'package:supplier_mobile/presentation/core/form/form_text_field.dart';
-import 'package:supplier_mobile/presentation/core/form/masked_text_input_formatter.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
+import 'package:supplier_mobile/presentation/profiles/widgets/form/profiles_form_dropdown_values.dart';
+import 'package:supplier_mobile/presentation/profiles/widgets/form/profiles_form_masks.dart';
+import 'package:supplier_mobile/presentation/profiles/widgets/form/profiles_form_validators.dart';
 
-class ProfilesForm extends StatelessWidget {
+class ProfilesForm extends HookWidget {
   const ProfilesForm({Key key, this.formKey}) : super(key: key);
   final GlobalKey<FormBuilderState> formKey;
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> _getInitialValues() {
+    final states = useState<List<String>>([]);
+    final initialValues = useState<Map<String, dynamic>>();
+
+    useMemoized(() {
       final profileName =
           context.read<ProfilesEditorBloc>().state.editedProfile;
       final profiles = context.read<ProfilesBloc>().state.profiles;
-
       if (!profiles.containsKey(profileName)) return null;
-      return profiles[profileName].toJson();
-    }
+      initialValues.value = profiles[profileName].toJson();
+      final initialCountry = profiles[profileName].country;
+      states.value = countriesWithStates.containsKey(initialCountry)
+          ? countriesWithStates[initialCountry]
+          : [];
+    });
 
     return FormBuilder(
       key: formKey,
       autovalidateMode: AutovalidateMode.disabled,
-      initialValue: _getInitialValues(),
+      initialValue: initialValues.value,
       child: ListView(
         children: <Widget>[
           const SizedBox(
@@ -46,16 +56,14 @@ class ProfilesForm extends StatelessWidget {
               const FormDropdown(
                 name: 'creditCardType',
                 placeholder: 'Credit Card Type',
-                items: <String>['Mastercard', 'Visa', 'American Express'],
+                items: creditCardTypes,
               ),
               FormTextField(
                 name: 'creditCardNumber',
                 placeholder: 'Credit Card Number',
                 type: TextInputType.number,
-                mask: MaskedTextInputFormatter(
-                    mask: 'xxxx xxxx xxxx xxxx',
-                    separator: ' ',
-                    accept: RegExp('[0-9]')),
+                mask: creditCardNumberMask,
+                validator: creditCardNumberValidator(context),
               ),
               Row(
                 children: const <Widget>[
@@ -63,21 +71,7 @@ class ProfilesForm extends StatelessWidget {
                     child: FormDropdown(
                       name: 'expiryMonth',
                       placeholder: 'Month',
-                      items: <String>[
-                        '01',
-                        '02',
-                        '03',
-                        '04',
-                        '05',
-                        '05',
-                        '05',
-                        '05',
-                        '05',
-                        '05',
-                        '05',
-                        '05',
-                        'dobra i inne tez beda'
-                      ],
+                      items: months,
                     ),
                   ),
                   SizedBox(width: kPrimaryElementsSpacing),
@@ -85,13 +79,7 @@ class ProfilesForm extends StatelessWidget {
                     child: FormDropdown(
                       name: 'expiryYear',
                       placeholder: 'Year',
-                      items: <String>[
-                        '2021',
-                        '2022',
-                        '2023',
-                        '2024',
-                        'dobra i inne tez beda'
-                      ],
+                      items: years,
                     ),
                   ),
                 ],
@@ -102,6 +90,9 @@ class ProfilesForm extends StatelessWidget {
                     child: FormTextField(
                       name: 'securityCode',
                       placeholder: 'CVV',
+                      type: TextInputType.number,
+                      mask: cvvMask,
+                      validator: cvvValidator(context),
                     ),
                   ),
                   const SizedBox(width: kPrimaryElementsSpacing),
@@ -123,33 +114,43 @@ class ProfilesForm extends StatelessWidget {
           Wrap(
             runSpacing: kPrimaryElementsSpacing,
             children: <Widget>[
-              const FormDropdown(
+              FormDropdown(
                 name: 'country',
                 placeholder: 'Country',
-                items: <String>[
-                  'Poland1',
-                  'Poland2',
-                  'Poland3',
-                  'Poland4',
-                ],
+                items: countries,
+                onChange: (String value) {
+                  states.value = countriesWithStates.containsKey(value)
+                      ? countriesWithStates[value]
+                      : [];
+                },
               ),
+              if (states.value.isNotEmpty)
+                FormDropdown(
+                  name: 'state',
+                  placeholder: 'State',
+                  items: states.value,
+                  isRequired: states.value.isNotEmpty,
+                ),
               FormTextField(
                 name: 'firstName',
                 placeholder: 'First Name',
+                validator: nameValidator(context),
               ),
               FormTextField(
                 name: 'lastName',
                 placeholder: 'Last Name',
+                validator: nameValidator(context),
               ),
               FormTextField(
                 name: 'email',
                 placeholder: 'Email',
-                validator: FormBuilderValidators.email(context,
-                    errorText: 'Invalid email'),
+                validator: emailValidator(context),
               ),
               FormTextField(
                 name: 'phoneNumber',
                 placeholder: 'Phone Number',
+                type: TextInputType.phone,
+                validator: phoneValidator(context),
               ),
               FormTextField(
                 name: 'address',
@@ -171,9 +172,6 @@ class ProfilesForm extends StatelessWidget {
               ),
             ],
           ),
-          // const SizedBox(
-          //   height: 75,
-          // ),
         ],
       ),
     );

@@ -13,7 +13,7 @@ import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/profiles/widgets/create_profile_modal.dart';
-import 'package:supplier_mobile/presentation/profiles/widgets/profiles_form.dart';
+import 'package:supplier_mobile/presentation/profiles/widgets/form/profiles_form.dart';
 import 'package:supplier_mobile/presentation/profiles/widgets/profiles_list.dart';
 
 class ProfilesEditor extends HookWidget {
@@ -26,6 +26,7 @@ class ProfilesEditor extends HookWidget {
     );
 
     void _submitProfile() {
+      FocusManager.instance.primaryFocus.unfocus();
       if (!formKey.currentState.saveAndValidate()) return;
 
       final profileName =
