@@ -14,11 +14,13 @@ import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 class CreateProfileModal extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormBuilderState> formKey =
+        useMemoized(() => GlobalKey<FormBuilderState>());
+
     final _controller = useAnimationController(
       duration: const Duration(milliseconds: 300),
     );
 
-    final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
     return BlocConsumer<ProfilesEditorBloc, ProfilesEditorState>(
         listener: (context, state) {
       if (state.isModalOpen) {

@@ -135,7 +135,7 @@ class _FormTextFieldState extends FormBuilderFieldState<FormTextField, String> {
     super.initState();
     _controller = TextEditingController(text: widget.initialValue);
     _controller.addListener(_handleControllerChanged);
-    effectiveFocusNode.addListener(validateOnFocusChange);
+    effectiveFocusNode.addListener(_handleFocusChange);
 
     if (formState.initialValue == null ||
         !formState.initialValue.containsKey(widget.name)) return;
@@ -171,10 +171,13 @@ class _FormTextFieldState extends FormBuilderFieldState<FormTextField, String> {
     }
   }
 
-  void validateOnFocusChange() {
+  void _handleFocusChange() {
     setState(() {
       _isFocused = effectiveFocusNode.hasFocus;
-      if (!_isFocused) {
+      if (_isFocused) {
+        _effectiveController.selection =
+            TextSelection.collapsed(offset: value?.length ?? 0);
+      } else {
         validate();
       }
     });

@@ -91,10 +91,10 @@ class _DropdownPopup<T> extends HookWidget {
   final double popupHeight;
   final double buttonWidth;
 
-  final GlobalKey popupKey = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
+    final GlobalKey popupKey = useMemoized(() => GlobalKey());
+
     const radius = BorderRadius.only(
       bottomLeft: Radius.circular(10),
       bottomRight: Radius.circular(10),

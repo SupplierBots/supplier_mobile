@@ -17,10 +17,9 @@ import 'package:supplier_mobile/presentation/profiles/widgets/form/profiles_form
 import 'package:supplier_mobile/presentation/profiles/widgets/profiles_list.dart';
 
 class ProfilesEditor extends HookWidget {
-  final formKey = GlobalKey<FormBuilderState>();
-
   @override
   Widget build(BuildContext context) {
+    final formKey = useMemoized(() => GlobalKey<FormBuilderState>());
     final _controller = useAnimationController(
       duration: const Duration(milliseconds: 250),
     );
