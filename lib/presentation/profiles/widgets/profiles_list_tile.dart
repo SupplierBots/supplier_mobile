@@ -5,6 +5,7 @@ import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_ed
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/styled_alert_dialog.dart';
+import 'package:supplier_mobile/presentation/core/vibrate.dart';
 
 class ProfilesListTile extends StatelessWidget {
   const ProfilesListTile({
@@ -17,6 +18,7 @@ class ProfilesListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> _showDeleteAlert() {
+      Vibrate.heavyImpactTap();
       return showDialog<void>(
         context: context,
         barrierDismissible: false,
@@ -35,6 +37,7 @@ class ProfilesListTile extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
+        Vibrate.tap();
         context.read<ProfilesEditorBloc>().add(StartedEditing(name));
       },
       child: Container(

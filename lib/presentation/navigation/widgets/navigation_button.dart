@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
+import 'package:supplier_mobile/presentation/core/vibrate.dart';
 
 class NavigationButton extends StatelessWidget {
   const NavigationButton({
@@ -23,6 +24,7 @@ class NavigationButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           if (isActiveRoute) return;
+          Vibrate.tap();
           ExtendedNavigator.of(context).replace(route);
         },
         child: Container(

@@ -10,6 +10,7 @@ import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/form/form_text_field.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
+import 'package:supplier_mobile/presentation/core/vibrate.dart';
 
 class CreateProfileModal extends HookWidget {
   @override
@@ -21,9 +22,10 @@ class CreateProfileModal extends HookWidget {
       FocusManager.instance.primaryFocus.unfocus();
 
       if (!formKey.currentState.saveAndValidate()) {
+        Vibrate.error();
         return;
       }
-
+      Vibrate.tap();
       final name = formKey.currentState.value['name'] as String;
       context.read<ProfilesEditorBloc>().add(StartedEditing(name));
       Navigator.of(context).pop();
@@ -80,6 +82,7 @@ class CreateProfileModal extends HookWidget {
             color: kDarkGrey,
           ),
           onPressed: () {
+            Vibrate.tap();
             Navigator.of(context).pop();
           },
         ),

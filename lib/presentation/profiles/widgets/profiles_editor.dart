@@ -9,6 +9,7 @@ import 'package:supplier_mobile/domain/profiles/profile.dart';
 import 'package:supplier_mobile/presentation/core/edit_header.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
+import 'package:supplier_mobile/presentation/core/vibrate.dart';
 import 'package:supplier_mobile/presentation/navigation/widgets/animated_navigation_bar.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
@@ -73,6 +74,7 @@ class ProfilesEditor extends HookWidget {
                 child: FloatingActionButton(
                   backgroundColor: kSecondaryBackground,
                   onPressed: () {
+                    Vibrate.tap();
                     showDialog<void>(
                       context: context,
                       barrierDismissible: false,

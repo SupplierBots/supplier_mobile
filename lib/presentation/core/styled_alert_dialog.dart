@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
+import 'package:supplier_mobile/presentation/core/vibrate.dart';
 
 class StyledAlertDialog extends StatelessWidget {
   const StyledAlertDialog({
@@ -39,6 +40,7 @@ class StyledAlertDialog extends StatelessWidget {
             color: kDarkGrey,
           ),
           onPressed: () {
+            Vibrate.tap();
             Navigator.of(context).pop();
           },
         ),
@@ -50,6 +52,7 @@ class StyledAlertDialog extends StatelessWidget {
             color: kLightPurple,
           ),
           onPressed: () {
+            Vibrate.tap();
             Navigator.of(context).pop();
             onConfirm();
           },

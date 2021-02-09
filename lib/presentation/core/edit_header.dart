@@ -8,6 +8,7 @@ import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/typography.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
 import 'package:supplier_mobile/presentation/core/styled_alert_dialog.dart';
+import 'package:supplier_mobile/presentation/core/vibrate.dart';
 
 class EditHeader extends HookWidget {
   const EditHeader({
@@ -41,18 +42,14 @@ class EditHeader extends HookWidget {
     double _shake(double animation) =>
         2 * (0.5 - (0.5 - Curves.bounceOut.transform(animation)).abs());
 
-    Future<void> _vibrate() async {
-      HapticFeedback.heavyImpact();
-      sleep(const Duration(milliseconds: 100));
-      HapticFeedback.heavyImpact();
-    }
-
     Future<void> _cancel() async {
       final result = cancelAction();
       if (!result.value1) {
+        Vibrate.tap();
         result.value2();
         return;
       }
+      Vibrate.heavyImpactTap();
       return showDialog<void>(
         context: context,
         barrierDismissible: false,
@@ -103,9 +100,12 @@ class EditHeader extends HookWidget {
               margin: const EdgeInsets.only(left: 25, right: 10),
               child: GestureDetector(
                 onTap: () {
-                  if (confirmAction()) return;
+                  if (confirmAction()) {
+                    Vibrate.tap();
+                    return;
+                  }
                   _controller.forward().whenComplete(() => _controller.reset());
-                  _vibrate();
+                  Vibrate.error();
                 },
                 child: AnimatedBuilder(
                   animation: _controller,
