@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/typography.dart';
+import 'package:flutter/services.dart';
+import 'dart:io';
 
 class EditHeader extends HookWidget {
   const EditHeader({
@@ -31,6 +33,12 @@ class EditHeader extends HookWidget {
 
     double _shake(double animation) =>
         2 * (0.5 - (0.5 - Curves.bounceOut.transform(animation)).abs());
+
+    Future<void> _vibrate() async {
+      HapticFeedback.heavyImpact();
+      sleep(const Duration(milliseconds: 100));
+      HapticFeedback.heavyImpact();
+    }
 
     return Expanded(
       child: Row(
@@ -72,6 +80,7 @@ class EditHeader extends HookWidget {
                 onTap: () {
                   if (confirmAction()) return;
                   _controller.forward().whenComplete(() => _controller.reset());
+                  _vibrate();
                 },
                 child: AnimatedBuilder(
                   animation: _controller,
