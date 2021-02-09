@@ -1,25 +1,30 @@
 import 'dart:io';
 
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/typography.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
+import 'package:supplier_mobile/presentation/core/styled_alert_dialog.dart';
 
 class EditHeader extends HookWidget {
   const EditHeader({
     @required this.primaryText,
     @required this.secondaryText,
     @required this.isEditing,
-    @required this.undoAction,
+    @required this.cancelAction,
     @required this.confirmAction,
   });
 
   final String primaryText;
   final String secondaryText;
   final bool isEditing;
-  final void Function() undoAction;
+
+  /// `Tuple2<showDialog, onConfirm>`
+  ///  If showDialog is false, onConfirm will be called immedietely.
+  final Tuple2<bool, VoidCallback> Function() cancelAction;
   final bool Function() confirmAction;
 
   @override
@@ -42,47 +47,19 @@ class EditHeader extends HookWidget {
       HapticFeedback.heavyImpact();
     }
 
-    Future<void> _showUndoDialog() async {
+    Future<void> _cancel() async {
+      final result = cancelAction();
+      if (!result.value1) {
+        result.value2();
+        return;
+      }
       return showDialog<void>(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return AlertDialog(
-            insetPadding:
-                const EdgeInsets.symmetric(vertical: 30, horizontal: 50),
-            title: const Header(
-              text: 'Are you sure?',
-              underlineWidth: 170,
-            ),
-            content: const Text('Unsaved changes will be lost.',
-                style: TextStyle(
-                  color: kLighGrey,
-                )),
-            backgroundColor: kSecondaryBackground,
-            actions: <Widget>[
-              IconButton(
-                icon: const Icon(
-                  Icons.close,
-                  size: 30,
-                  color: kDarkGrey,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              const SizedBox(width: 10),
-              IconButton(
-                icon: const Icon(
-                  Icons.done,
-                  size: 30,
-                  color: kLightPurple,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  undoAction();
-                },
-              ),
-            ],
+          return StyledAlertDialog(
+            content: 'Unsaved changes will be lost.',
+            onConfirm: result.value2,
           );
         },
       );
@@ -116,7 +93,7 @@ class EditHeader extends HookWidget {
           const Spacer(),
           if (isEditing) ...<Widget>[
             GestureDetector(
-              onTap: _showUndoDialog,
+              onTap: _cancel,
               child: const Icon(
                 Icons.undo,
                 color: kLightPurple,

@@ -4,6 +4,7 @@ import 'package:supplier_mobile/application/profiles/profiles_bloc.dart';
 import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_bloc.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
+import 'package:supplier_mobile/presentation/core/styled_alert_dialog.dart';
 
 class ProfilesListTile extends StatelessWidget {
   const ProfilesListTile({
@@ -15,6 +16,23 @@ class ProfilesListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> _showDeleteAlert() {
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return StyledAlertDialog(
+            content: '$name will be deleted.',
+            onConfirm: () {
+              context
+                  .read<ProfilesBloc>()
+                  .add(ProfilesEvent.deletedProfile(name: name));
+            },
+          );
+        },
+      );
+    }
+
     return GestureDetector(
       onTap: () {
         context.read<ProfilesEditorBloc>().add(StartedEditing(name));
@@ -49,11 +67,7 @@ class ProfilesListTile extends StatelessWidget {
             ),
             GestureDetector(
               behavior: HitTestBehavior.opaque,
-              onTap: () {
-                context
-                    .read<ProfilesBloc>()
-                    .add(ProfilesEvent.deletedProfile(name: name));
-              },
+              onTap: _showDeleteAlert,
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: const Icon(

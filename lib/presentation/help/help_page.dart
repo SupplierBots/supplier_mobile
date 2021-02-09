@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
@@ -22,7 +23,9 @@ class HelpPage extends StatelessWidget {
           primaryText: 'Tasks',
           secondaryText: 'Task #1',
           isEditing: true,
-          undoAction: () {},
+          cancelAction: () {
+            return Tuple2(false, () {});
+          },
           confirmAction: () => true,
         ),
       ),

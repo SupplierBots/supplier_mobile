@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -54,8 +55,14 @@ class ProfilesEditor extends HookWidget {
             primaryText: 'Profiles',
             secondaryText: state.editedProfile,
             isEditing: state.isEditing,
-            undoAction: () {
-              context.read<ProfilesEditorBloc>().add(const Canceled());
+            cancelAction: () {
+              formKey.currentState.save();
+              final showAlert = formKey.currentState.initialValue == null ||
+                  Profile.fromJson(formKey.currentState.initialValue) !=
+                      Profile.fromJson(formKey.currentState.value);
+              return Tuple2(showAlert, () {
+                context.read<ProfilesEditorBloc>().add(const Canceled());
+              });
             },
             confirmAction: _submitProfile,
           ),

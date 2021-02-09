@@ -24,6 +24,7 @@ class CreateProfileModal extends HookWidget {
     return BlocConsumer<ProfilesEditorBloc, ProfilesEditorState>(
         listener: (context, state) {
       if (state.isModalOpen) {
+        formKey.currentState.reset();
         _controller.forward();
       } else if (!state.isEditing) {
         _controller.reverse();
