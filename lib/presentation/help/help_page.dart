@@ -23,7 +23,7 @@ class HelpPage extends StatelessWidget {
           secondaryText: 'Task #1',
           isEditing: true,
           undoAction: () {},
-          confirmAction: () {},
+          confirmAction: () => true,
         ),
       ),
       body: Align(

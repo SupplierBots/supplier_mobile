@@ -9,6 +9,7 @@ const Color kTetiaryBackground = Color(0xFF282629);
 const Color kDarkGrey = Color(0xFF747273);
 const Color kLighGrey = Color(0xFFB4B1B2);
 const Color kRed = Color(0xFFFF0606);
+const Color kDarkRed = Color(0xFF890000);
 
 const LinearGradient kPrimaryGradient = LinearGradient(
   colors: [kPinkColor, kVioletColor],

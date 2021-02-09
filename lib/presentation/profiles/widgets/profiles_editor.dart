@@ -24,9 +24,9 @@ class ProfilesEditor extends HookWidget {
       duration: const Duration(milliseconds: 250),
     );
 
-    void _submitProfile() {
+    bool _submitProfile() {
       FocusManager.instance.primaryFocus.unfocus();
-      if (!formKey.currentState.saveAndValidate()) return;
+      if (!formKey.currentState.saveAndValidate()) return false;
 
       final profileName =
           context.read<ProfilesEditorBloc>().state.editedProfile;
@@ -37,6 +37,7 @@ class ProfilesEditor extends HookWidget {
             profile: profile,
           ));
       context.read<ProfilesEditorBloc>().add(const Saved());
+      return true;
     }
 
     return BlocConsumer<ProfilesEditorBloc, ProfilesEditorState>(
