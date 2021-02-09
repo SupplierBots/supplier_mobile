@@ -25,7 +25,7 @@ class CreateProfileModal extends HookWidget {
         listener: (context, state) {
       if (state.isModalOpen) {
         _controller.forward();
-      } else {
+      } else if (!state.isEditing) {
         _controller.reverse();
       }
     }, builder: (context, state) {
@@ -36,7 +36,7 @@ class CreateProfileModal extends HookWidget {
           color: Colors.black.withOpacity(state.isModalOpen ? 0.35 : 0),
           child: SlideTransition(
             position: Tween<Offset>(
-              begin: const Offset(0, 1),
+              begin: const Offset(0, 3),
               end: Offset.zero,
             ).animate(
               CurvedAnimation(
@@ -141,9 +141,12 @@ class CreateProfileModal extends HookWidget {
                                     return;
                                   }
 
+                                  context
+                                      .read<ProfilesEditorBloc>()
+                                      .add(const ClosedModal());
+
                                   final name = formKey
                                       .currentState.value['name'] as String;
-
                                   context
                                       .read<ProfilesEditorBloc>()
                                       .add(StartedEditing(name));

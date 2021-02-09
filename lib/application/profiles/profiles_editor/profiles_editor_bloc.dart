@@ -25,7 +25,6 @@ class ProfilesEditorBloc
       );
     }, startedEditing: (e) async* {
       yield state.copyWith(
-        isModalOpen: false,
         isEditing: true,
         editedProfile: e.name,
       );
