@@ -67,13 +67,22 @@ class ProfilesEditor extends HookWidget {
             confirmAction: _submitProfile,
           ),
         ),
-        floatingActionButton: !state.isEditing && !state.isModalOpen
+        floatingActionButton: !state.isEditing
             ? Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: FloatingActionButton(
                   backgroundColor: kSecondaryBackground,
                   onPressed: () {
-                    context.read<ProfilesEditorBloc>().add(const OpenedModal());
+                    showDialog<void>(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (_) {
+                        return BlocProvider<ProfilesEditorBloc>.value(
+                          value: context.read<ProfilesEditorBloc>(),
+                          child: CreateProfileModal(),
+                        );
+                      },
+                    );
                   },
                   child: const GradientWidget(
                     child: Icon(
@@ -84,21 +93,16 @@ class ProfilesEditor extends HookWidget {
                 ),
               )
             : null,
-        body: Stack(
-          children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: FractionallySizedBox(
-                widthFactor: kMainContentScreenWidth,
-                child: state.isEditing
-                    ? ProfilesForm(
-                        formKey: formKey,
-                      )
-                    : const ProfilesList(),
-              ),
-            ),
-            CreateProfileModal()
-          ],
+        body: Align(
+          alignment: Alignment.topCenter,
+          child: FractionallySizedBox(
+            widthFactor: kMainContentScreenWidth,
+            child: state.isEditing
+                ? ProfilesForm(
+                    formKey: formKey,
+                  )
+                : const ProfilesList(),
+          ),
         ),
         extendBody: true,
         bottomNavigationBar: AnimatedNavigationBar(_controller),

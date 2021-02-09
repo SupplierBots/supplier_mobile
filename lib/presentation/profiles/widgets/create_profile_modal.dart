@@ -17,154 +17,82 @@ class CreateProfileModal extends HookWidget {
     final GlobalKey<FormBuilderState> formKey =
         useMemoized(() => GlobalKey<FormBuilderState>());
 
-    final _controller = useAnimationController(
-      duration: const Duration(milliseconds: 300),
-    );
+    void _submitProfileName() {
+      FocusManager.instance.primaryFocus.unfocus();
 
-    return BlocConsumer<ProfilesEditorBloc, ProfilesEditorState>(
-        listener: (context, state) {
-      if (state.isModalOpen) {
-        formKey.currentState.reset();
-        _controller.forward();
-      } else if (!state.isEditing) {
-        _controller.reverse();
+      if (!formKey.currentState.saveAndValidate()) {
+        return;
       }
-    }, builder: (context, state) {
-      return IgnorePointer(
-        ignoring: !state.isModalOpen,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          color: Colors.black.withOpacity(state.isModalOpen ? 0.35 : 0),
-          child: SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(0, 3),
-              end: Offset.zero,
-            ).animate(
-              CurvedAnimation(
-                parent: _controller,
-                curve: Curves.easeOut,
-              ),
-            ),
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: FractionallySizedBox(
-                widthFactor: 0.85,
-                child: Container(
-                  margin: const EdgeInsets.only(top: 50),
-                  height: 305,
-                  decoration: BoxDecoration(
-                    gradient: kPrimaryGradient,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: const EdgeInsets.all(1),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: kTetiaryBackground,
-                    ),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 10,
-                          ),
-                          child: Row(
-                            children: [
-                              const Header(
-                                text: 'Create new profile',
-                                underlineWidth: 220,
-                              ),
-                              const Spacer(),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        FormBuilder(
-                          autovalidateMode: AutovalidateMode.disabled,
-                          key: formKey,
-                          child: FormTextField(
-                            name: 'name',
-                            placeholder: 'Profile name',
-                            validator: FormBuilderValidators.compose([
-                              FormBuilderValidators.maxLength(context, 15,
-                                  errorText: 'Too long'),
-                              (String value) {
-                                if (!context
-                                    .read<ProfilesBloc>()
-                                    .state
-                                    .profiles
-                                    .containsKey(value)) return null;
-                                return 'Already exists';
-                              }
-                            ]),
-                          ),
-                        ),
-                        const SizedBox(height: kPrimaryElementsSpacing),
-                        const Text(
-                          'Profile name is only for your usage to easily differentiate this set of data from the others.',
-                          style: TextStyle(
-                            color: kDarkGrey,
-                            fontSize: 15,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 30, right: 7),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.close,
-                                  size: 30,
-                                  color: kDarkGrey,
-                                ),
-                                onPressed: () {
-                                  context
-                                      .read<ProfilesEditorBloc>()
-                                      .add(const ClosedModal());
-                                },
-                              ),
-                              const SizedBox(width: 15),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.done,
-                                  size: 30,
-                                  color: kLightPurple,
-                                ),
-                                onPressed: () {
-                                  FocusManager.instance.primaryFocus.unfocus();
 
-                                  if (!formKey.currentState.saveAndValidate()) {
-                                    return;
-                                  }
+      final name = formKey.currentState.value['name'] as String;
+      context.read<ProfilesEditorBloc>().add(StartedEditing(name));
+      Navigator.of(context).pop();
+    }
 
-                                  context
-                                      .read<ProfilesEditorBloc>()
-                                      .add(const ClosedModal());
-
-                                  final name = formKey
-                                      .currentState.value['name'] as String;
-                                  context
-                                      .read<ProfilesEditorBloc>()
-                                      .add(StartedEditing(name));
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+    return AlertDialog(
+      insetPadding: const EdgeInsets.symmetric(horizontal: 40),
+      title: const Header(
+        text: 'Create new profile',
+        underlineWidth: 220,
+      ),
+      titlePadding: const EdgeInsets.only(top: 30, left: 30),
+      actionsPadding: const EdgeInsets.only(right: 20, bottom: 10),
+      contentPadding: const EdgeInsets.only(left: 30, right: 30, top: 15),
+      backgroundColor: kTertiaryBackground,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FormBuilder(
+            autovalidateMode: AutovalidateMode.disabled,
+            key: formKey,
+            child: FormTextField(
+              name: 'name',
+              placeholder: 'Profile name',
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.maxLength(context, 15,
+                    errorText: 'Too long'),
+                (String value) {
+                  if (!context
+                      .read<ProfilesBloc>()
+                      .state
+                      .profiles
+                      .containsKey(value)) return null;
+                  return 'Already exists';
+                }
+              ]),
             ),
           ),
+          const SizedBox(height: kPrimaryElementsSpacing),
+          const Text(
+            'Profile name is only for your usage to easily differentiate this set of data from the others.',
+            style: TextStyle(
+              color: kDarkGrey,
+              fontSize: 15,
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        IconButton(
+          icon: const Icon(
+            Icons.close,
+            size: 30,
+            color: kDarkGrey,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
-      );
-    });
+        const SizedBox(width: 15),
+        IconButton(
+          icon: const Icon(
+            Icons.done,
+            size: 30,
+            color: kLightPurple,
+          ),
+          onPressed: _submitProfileName,
+        ),
+      ],
+    );
   }
 }

@@ -15,15 +15,7 @@ class ProfilesEditorBloc
   Stream<ProfilesEditorState> mapEventToState(
     ProfilesEditorEvent event,
   ) async* {
-    yield* event.map(openedModal: (e) async* {
-      yield state.copyWith(
-        isModalOpen: true,
-      );
-    }, closedModal: (e) async* {
-      yield state.copyWith(
-        isModalOpen: false,
-      );
-    }, startedEditing: (e) async* {
+    yield* event.map(startedEditing: (e) async* {
       yield state.copyWith(
         isEditing: true,
         editedProfile: e.name,

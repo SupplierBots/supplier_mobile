@@ -27,7 +27,7 @@ class NavigationButton extends StatelessWidget {
         },
         child: Container(
           height: 60,
-          color: isActiveRoute ? kTetiaryBackground : kSecondaryBackground,
+          color: isActiveRoute ? kTertiaryBackground : kSecondaryBackground,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[

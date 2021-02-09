@@ -15,6 +15,10 @@ class StyledAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      titlePadding: const EdgeInsets.only(top: 28, left: 30),
+      contentPadding: const EdgeInsets.only(top: 15, left: 30, right: 30),
+      actionsPadding:
+          const EdgeInsets.only(top: 15, left: 30, right: 15, bottom: 5),
       insetPadding: const EdgeInsets.symmetric(vertical: 30, horizontal: 50),
       title: const Header(
         text: 'Are you sure?',

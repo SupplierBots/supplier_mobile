@@ -14,16 +14,6 @@ class _$ProfilesEditorEventTearOff {
   const _$ProfilesEditorEventTearOff();
 
 // ignore: unused_element
-  OpenedModal openedModal() {
-    return const OpenedModal();
-  }
-
-// ignore: unused_element
-  ClosedModal closedModal() {
-    return const ClosedModal();
-  }
-
-// ignore: unused_element
   StartedEditing startedEditing(String name) {
     return StartedEditing(
       name,
@@ -49,16 +39,12 @@ const $ProfilesEditorEvent = _$ProfilesEditorEventTearOff();
 mixin _$ProfilesEditorEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult openedModal(),
-    @required TResult closedModal(),
     @required TResult startedEditing(String name),
     @required TResult canceled(),
     @required TResult saved(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult openedModal(),
-    TResult closedModal(),
     TResult startedEditing(String name),
     TResult canceled(),
     TResult saved(),
@@ -66,16 +52,12 @@ mixin _$ProfilesEditorEvent {
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult openedModal(OpenedModal value),
-    @required TResult closedModal(ClosedModal value),
     @required TResult startedEditing(StartedEditing value),
     @required TResult canceled(Canceled value),
     @required TResult saved(Saved value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult openedModal(OpenedModal value),
-    TResult closedModal(ClosedModal value),
     TResult startedEditing(StartedEditing value),
     TResult canceled(Canceled value),
     TResult saved(Saved value),
@@ -98,224 +80,6 @@ class _$ProfilesEditorEventCopyWithImpl<$Res>
   final ProfilesEditorEvent _value;
   // ignore: unused_field
   final $Res Function(ProfilesEditorEvent) _then;
-}
-
-/// @nodoc
-abstract class $OpenedModalCopyWith<$Res> {
-  factory $OpenedModalCopyWith(
-          OpenedModal value, $Res Function(OpenedModal) then) =
-      _$OpenedModalCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$OpenedModalCopyWithImpl<$Res>
-    extends _$ProfilesEditorEventCopyWithImpl<$Res>
-    implements $OpenedModalCopyWith<$Res> {
-  _$OpenedModalCopyWithImpl(
-      OpenedModal _value, $Res Function(OpenedModal) _then)
-      : super(_value, (v) => _then(v as OpenedModal));
-
-  @override
-  OpenedModal get _value => super._value as OpenedModal;
-}
-
-/// @nodoc
-class _$OpenedModal implements OpenedModal {
-  const _$OpenedModal();
-
-  @override
-  String toString() {
-    return 'ProfilesEditorEvent.openedModal()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is OpenedModal);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult openedModal(),
-    @required TResult closedModal(),
-    @required TResult startedEditing(String name),
-    @required TResult canceled(),
-    @required TResult saved(),
-  }) {
-    assert(openedModal != null);
-    assert(closedModal != null);
-    assert(startedEditing != null);
-    assert(canceled != null);
-    assert(saved != null);
-    return openedModal();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult openedModal(),
-    TResult closedModal(),
-    TResult startedEditing(String name),
-    TResult canceled(),
-    TResult saved(),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (openedModal != null) {
-      return openedModal();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult openedModal(OpenedModal value),
-    @required TResult closedModal(ClosedModal value),
-    @required TResult startedEditing(StartedEditing value),
-    @required TResult canceled(Canceled value),
-    @required TResult saved(Saved value),
-  }) {
-    assert(openedModal != null);
-    assert(closedModal != null);
-    assert(startedEditing != null);
-    assert(canceled != null);
-    assert(saved != null);
-    return openedModal(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult openedModal(OpenedModal value),
-    TResult closedModal(ClosedModal value),
-    TResult startedEditing(StartedEditing value),
-    TResult canceled(Canceled value),
-    TResult saved(Saved value),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (openedModal != null) {
-      return openedModal(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class OpenedModal implements ProfilesEditorEvent {
-  const factory OpenedModal() = _$OpenedModal;
-}
-
-/// @nodoc
-abstract class $ClosedModalCopyWith<$Res> {
-  factory $ClosedModalCopyWith(
-          ClosedModal value, $Res Function(ClosedModal) then) =
-      _$ClosedModalCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$ClosedModalCopyWithImpl<$Res>
-    extends _$ProfilesEditorEventCopyWithImpl<$Res>
-    implements $ClosedModalCopyWith<$Res> {
-  _$ClosedModalCopyWithImpl(
-      ClosedModal _value, $Res Function(ClosedModal) _then)
-      : super(_value, (v) => _then(v as ClosedModal));
-
-  @override
-  ClosedModal get _value => super._value as ClosedModal;
-}
-
-/// @nodoc
-class _$ClosedModal implements ClosedModal {
-  const _$ClosedModal();
-
-  @override
-  String toString() {
-    return 'ProfilesEditorEvent.closedModal()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is ClosedModal);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult openedModal(),
-    @required TResult closedModal(),
-    @required TResult startedEditing(String name),
-    @required TResult canceled(),
-    @required TResult saved(),
-  }) {
-    assert(openedModal != null);
-    assert(closedModal != null);
-    assert(startedEditing != null);
-    assert(canceled != null);
-    assert(saved != null);
-    return closedModal();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult openedModal(),
-    TResult closedModal(),
-    TResult startedEditing(String name),
-    TResult canceled(),
-    TResult saved(),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (closedModal != null) {
-      return closedModal();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult openedModal(OpenedModal value),
-    @required TResult closedModal(ClosedModal value),
-    @required TResult startedEditing(StartedEditing value),
-    @required TResult canceled(Canceled value),
-    @required TResult saved(Saved value),
-  }) {
-    assert(openedModal != null);
-    assert(closedModal != null);
-    assert(startedEditing != null);
-    assert(canceled != null);
-    assert(saved != null);
-    return closedModal(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult openedModal(OpenedModal value),
-    TResult closedModal(ClosedModal value),
-    TResult startedEditing(StartedEditing value),
-    TResult canceled(Canceled value),
-    TResult saved(Saved value),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (closedModal != null) {
-      return closedModal(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ClosedModal implements ProfilesEditorEvent {
-  const factory ClosedModal() = _$ClosedModal;
 }
 
 /// @nodoc
@@ -379,14 +143,10 @@ class _$StartedEditing implements StartedEditing {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult openedModal(),
-    @required TResult closedModal(),
     @required TResult startedEditing(String name),
     @required TResult canceled(),
     @required TResult saved(),
   }) {
-    assert(openedModal != null);
-    assert(closedModal != null);
     assert(startedEditing != null);
     assert(canceled != null);
     assert(saved != null);
@@ -396,8 +156,6 @@ class _$StartedEditing implements StartedEditing {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult openedModal(),
-    TResult closedModal(),
     TResult startedEditing(String name),
     TResult canceled(),
     TResult saved(),
@@ -413,14 +171,10 @@ class _$StartedEditing implements StartedEditing {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult openedModal(OpenedModal value),
-    @required TResult closedModal(ClosedModal value),
     @required TResult startedEditing(StartedEditing value),
     @required TResult canceled(Canceled value),
     @required TResult saved(Saved value),
   }) {
-    assert(openedModal != null);
-    assert(closedModal != null);
     assert(startedEditing != null);
     assert(canceled != null);
     assert(saved != null);
@@ -430,8 +184,6 @@ class _$StartedEditing implements StartedEditing {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult openedModal(OpenedModal value),
-    TResult closedModal(ClosedModal value),
     TResult startedEditing(StartedEditing value),
     TResult canceled(Canceled value),
     TResult saved(Saved value),
@@ -490,14 +242,10 @@ class _$Canceled implements Canceled {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult openedModal(),
-    @required TResult closedModal(),
     @required TResult startedEditing(String name),
     @required TResult canceled(),
     @required TResult saved(),
   }) {
-    assert(openedModal != null);
-    assert(closedModal != null);
     assert(startedEditing != null);
     assert(canceled != null);
     assert(saved != null);
@@ -507,8 +255,6 @@ class _$Canceled implements Canceled {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult openedModal(),
-    TResult closedModal(),
     TResult startedEditing(String name),
     TResult canceled(),
     TResult saved(),
@@ -524,14 +270,10 @@ class _$Canceled implements Canceled {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult openedModal(OpenedModal value),
-    @required TResult closedModal(ClosedModal value),
     @required TResult startedEditing(StartedEditing value),
     @required TResult canceled(Canceled value),
     @required TResult saved(Saved value),
   }) {
-    assert(openedModal != null);
-    assert(closedModal != null);
     assert(startedEditing != null);
     assert(canceled != null);
     assert(saved != null);
@@ -541,8 +283,6 @@ class _$Canceled implements Canceled {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult openedModal(OpenedModal value),
-    TResult closedModal(ClosedModal value),
     TResult startedEditing(StartedEditing value),
     TResult canceled(Canceled value),
     TResult saved(Saved value),
@@ -596,14 +336,10 @@ class _$Saved implements Saved {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult openedModal(),
-    @required TResult closedModal(),
     @required TResult startedEditing(String name),
     @required TResult canceled(),
     @required TResult saved(),
   }) {
-    assert(openedModal != null);
-    assert(closedModal != null);
     assert(startedEditing != null);
     assert(canceled != null);
     assert(saved != null);
@@ -613,8 +349,6 @@ class _$Saved implements Saved {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult openedModal(),
-    TResult closedModal(),
     TResult startedEditing(String name),
     TResult canceled(),
     TResult saved(),
@@ -630,14 +364,10 @@ class _$Saved implements Saved {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult openedModal(OpenedModal value),
-    @required TResult closedModal(ClosedModal value),
     @required TResult startedEditing(StartedEditing value),
     @required TResult canceled(Canceled value),
     @required TResult saved(Saved value),
   }) {
-    assert(openedModal != null);
-    assert(closedModal != null);
     assert(startedEditing != null);
     assert(canceled != null);
     assert(saved != null);
@@ -647,8 +377,6 @@ class _$Saved implements Saved {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult openedModal(OpenedModal value),
-    TResult closedModal(ClosedModal value),
     TResult startedEditing(StartedEditing value),
     TResult canceled(Canceled value),
     TResult saved(Saved value),
@@ -672,11 +400,8 @@ class _$ProfilesEditorStateTearOff {
 
 // ignore: unused_element
   _ProfilesEditorState call(
-      {@required bool isModalOpen,
-      @required bool isEditing,
-      @required String editedProfile}) {
+      {@required bool isEditing, @required String editedProfile}) {
     return _ProfilesEditorState(
-      isModalOpen: isModalOpen,
       isEditing: isEditing,
       editedProfile: editedProfile,
     );
@@ -689,7 +414,6 @@ const $ProfilesEditorState = _$ProfilesEditorStateTearOff();
 
 /// @nodoc
 mixin _$ProfilesEditorState {
-  bool get isModalOpen;
   bool get isEditing;
   String get editedProfile;
 
@@ -702,7 +426,7 @@ abstract class $ProfilesEditorStateCopyWith<$Res> {
   factory $ProfilesEditorStateCopyWith(
           ProfilesEditorState value, $Res Function(ProfilesEditorState) then) =
       _$ProfilesEditorStateCopyWithImpl<$Res>;
-  $Res call({bool isModalOpen, bool isEditing, String editedProfile});
+  $Res call({bool isEditing, String editedProfile});
 }
 
 /// @nodoc
@@ -716,13 +440,10 @@ class _$ProfilesEditorStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object isModalOpen = freezed,
     Object isEditing = freezed,
     Object editedProfile = freezed,
   }) {
     return _then(_value.copyWith(
-      isModalOpen:
-          isModalOpen == freezed ? _value.isModalOpen : isModalOpen as bool,
       isEditing: isEditing == freezed ? _value.isEditing : isEditing as bool,
       editedProfile: editedProfile == freezed
           ? _value.editedProfile
@@ -738,7 +459,7 @@ abstract class _$ProfilesEditorStateCopyWith<$Res>
           $Res Function(_ProfilesEditorState) then) =
       __$ProfilesEditorStateCopyWithImpl<$Res>;
   @override
-  $Res call({bool isModalOpen, bool isEditing, String editedProfile});
+  $Res call({bool isEditing, String editedProfile});
 }
 
 /// @nodoc
@@ -754,13 +475,10 @@ class __$ProfilesEditorStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object isModalOpen = freezed,
     Object isEditing = freezed,
     Object editedProfile = freezed,
   }) {
     return _then(_ProfilesEditorState(
-      isModalOpen:
-          isModalOpen == freezed ? _value.isModalOpen : isModalOpen as bool,
       isEditing: isEditing == freezed ? _value.isEditing : isEditing as bool,
       editedProfile: editedProfile == freezed
           ? _value.editedProfile
@@ -772,15 +490,10 @@ class __$ProfilesEditorStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_ProfilesEditorState implements _ProfilesEditorState {
   const _$_ProfilesEditorState(
-      {@required this.isModalOpen,
-      @required this.isEditing,
-      @required this.editedProfile})
-      : assert(isModalOpen != null),
-        assert(isEditing != null),
+      {@required this.isEditing, @required this.editedProfile})
+      : assert(isEditing != null),
         assert(editedProfile != null);
 
-  @override
-  final bool isModalOpen;
   @override
   final bool isEditing;
   @override
@@ -788,16 +501,13 @@ class _$_ProfilesEditorState implements _ProfilesEditorState {
 
   @override
   String toString() {
-    return 'ProfilesEditorState(isModalOpen: $isModalOpen, isEditing: $isEditing, editedProfile: $editedProfile)';
+    return 'ProfilesEditorState(isEditing: $isEditing, editedProfile: $editedProfile)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _ProfilesEditorState &&
-            (identical(other.isModalOpen, isModalOpen) ||
-                const DeepCollectionEquality()
-                    .equals(other.isModalOpen, isModalOpen)) &&
             (identical(other.isEditing, isEditing) ||
                 const DeepCollectionEquality()
                     .equals(other.isEditing, isEditing)) &&
@@ -809,7 +519,6 @@ class _$_ProfilesEditorState implements _ProfilesEditorState {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(isModalOpen) ^
       const DeepCollectionEquality().hash(isEditing) ^
       const DeepCollectionEquality().hash(editedProfile);
 
@@ -822,12 +531,9 @@ class _$_ProfilesEditorState implements _ProfilesEditorState {
 
 abstract class _ProfilesEditorState implements ProfilesEditorState {
   const factory _ProfilesEditorState(
-      {@required bool isModalOpen,
-      @required bool isEditing,
+      {@required bool isEditing,
       @required String editedProfile}) = _$_ProfilesEditorState;
 
-  @override
-  bool get isModalOpen;
   @override
   bool get isEditing;
   @override
