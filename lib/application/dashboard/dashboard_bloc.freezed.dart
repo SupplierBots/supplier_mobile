@@ -22,6 +22,20 @@ class _$DashboardEventTearOff {
   _StartedWatchingDroplists startedWatchingDroplists() {
     return const _StartedWatchingDroplists();
   }
+
+// ignore: unused_element
+  _LoadedDroplist loadedDroplists(DroplistCollection droplists) {
+    return _LoadedDroplist(
+      droplists,
+    );
+  }
+
+// ignore: unused_element
+  _LoadedGeneralInfo loadedGeneralInfo(GeneralInfo generalInfo) {
+    return _LoadedGeneralInfo(
+      generalInfo,
+    );
+  }
 }
 
 /// @nodoc
@@ -34,11 +48,15 @@ mixin _$DashboardEvent {
   TResult when<TResult extends Object>({
     @required TResult startedWatchingGeneralInfo(),
     @required TResult startedWatchingDroplists(),
+    @required TResult loadedDroplists(DroplistCollection droplists),
+    @required TResult loadedGeneralInfo(GeneralInfo generalInfo),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult startedWatchingGeneralInfo(),
     TResult startedWatchingDroplists(),
+    TResult loadedDroplists(DroplistCollection droplists),
+    TResult loadedGeneralInfo(GeneralInfo generalInfo),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -46,11 +64,15 @@ mixin _$DashboardEvent {
     @required
         TResult startedWatchingGeneralInfo(_StartedWatchingGeneralInfo value),
     @required TResult startedWatchingDroplists(_StartedWatchingDroplists value),
+    @required TResult loadedDroplists(_LoadedDroplist value),
+    @required TResult loadedGeneralInfo(_LoadedGeneralInfo value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult startedWatchingGeneralInfo(_StartedWatchingGeneralInfo value),
     TResult startedWatchingDroplists(_StartedWatchingDroplists value),
+    TResult loadedDroplists(_LoadedDroplist value),
+    TResult loadedGeneralInfo(_LoadedGeneralInfo value),
     @required TResult orElse(),
   });
 }
@@ -115,9 +137,13 @@ class _$_StartedWatchingGeneralInfo implements _StartedWatchingGeneralInfo {
   TResult when<TResult extends Object>({
     @required TResult startedWatchingGeneralInfo(),
     @required TResult startedWatchingDroplists(),
+    @required TResult loadedDroplists(DroplistCollection droplists),
+    @required TResult loadedGeneralInfo(GeneralInfo generalInfo),
   }) {
     assert(startedWatchingGeneralInfo != null);
     assert(startedWatchingDroplists != null);
+    assert(loadedDroplists != null);
+    assert(loadedGeneralInfo != null);
     return startedWatchingGeneralInfo();
   }
 
@@ -126,6 +152,8 @@ class _$_StartedWatchingGeneralInfo implements _StartedWatchingGeneralInfo {
   TResult maybeWhen<TResult extends Object>({
     TResult startedWatchingGeneralInfo(),
     TResult startedWatchingDroplists(),
+    TResult loadedDroplists(DroplistCollection droplists),
+    TResult loadedGeneralInfo(GeneralInfo generalInfo),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -141,9 +169,13 @@ class _$_StartedWatchingGeneralInfo implements _StartedWatchingGeneralInfo {
     @required
         TResult startedWatchingGeneralInfo(_StartedWatchingGeneralInfo value),
     @required TResult startedWatchingDroplists(_StartedWatchingDroplists value),
+    @required TResult loadedDroplists(_LoadedDroplist value),
+    @required TResult loadedGeneralInfo(_LoadedGeneralInfo value),
   }) {
     assert(startedWatchingGeneralInfo != null);
     assert(startedWatchingDroplists != null);
+    assert(loadedDroplists != null);
+    assert(loadedGeneralInfo != null);
     return startedWatchingGeneralInfo(this);
   }
 
@@ -152,6 +184,8 @@ class _$_StartedWatchingGeneralInfo implements _StartedWatchingGeneralInfo {
   TResult maybeMap<TResult extends Object>({
     TResult startedWatchingGeneralInfo(_StartedWatchingGeneralInfo value),
     TResult startedWatchingDroplists(_StartedWatchingDroplists value),
+    TResult loadedDroplists(_LoadedDroplist value),
+    TResult loadedGeneralInfo(_LoadedGeneralInfo value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -208,9 +242,13 @@ class _$_StartedWatchingDroplists implements _StartedWatchingDroplists {
   TResult when<TResult extends Object>({
     @required TResult startedWatchingGeneralInfo(),
     @required TResult startedWatchingDroplists(),
+    @required TResult loadedDroplists(DroplistCollection droplists),
+    @required TResult loadedGeneralInfo(GeneralInfo generalInfo),
   }) {
     assert(startedWatchingGeneralInfo != null);
     assert(startedWatchingDroplists != null);
+    assert(loadedDroplists != null);
+    assert(loadedGeneralInfo != null);
     return startedWatchingDroplists();
   }
 
@@ -219,6 +257,8 @@ class _$_StartedWatchingDroplists implements _StartedWatchingDroplists {
   TResult maybeWhen<TResult extends Object>({
     TResult startedWatchingGeneralInfo(),
     TResult startedWatchingDroplists(),
+    TResult loadedDroplists(DroplistCollection droplists),
+    TResult loadedGeneralInfo(GeneralInfo generalInfo),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -234,9 +274,13 @@ class _$_StartedWatchingDroplists implements _StartedWatchingDroplists {
     @required
         TResult startedWatchingGeneralInfo(_StartedWatchingGeneralInfo value),
     @required TResult startedWatchingDroplists(_StartedWatchingDroplists value),
+    @required TResult loadedDroplists(_LoadedDroplist value),
+    @required TResult loadedGeneralInfo(_LoadedGeneralInfo value),
   }) {
     assert(startedWatchingGeneralInfo != null);
     assert(startedWatchingDroplists != null);
+    assert(loadedDroplists != null);
+    assert(loadedGeneralInfo != null);
     return startedWatchingDroplists(this);
   }
 
@@ -245,6 +289,8 @@ class _$_StartedWatchingDroplists implements _StartedWatchingDroplists {
   TResult maybeMap<TResult extends Object>({
     TResult startedWatchingGeneralInfo(_StartedWatchingGeneralInfo value),
     TResult startedWatchingDroplists(_StartedWatchingDroplists value),
+    TResult loadedDroplists(_LoadedDroplist value),
+    TResult loadedGeneralInfo(_LoadedGeneralInfo value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -257,6 +303,294 @@ class _$_StartedWatchingDroplists implements _StartedWatchingDroplists {
 
 abstract class _StartedWatchingDroplists implements DashboardEvent {
   const factory _StartedWatchingDroplists() = _$_StartedWatchingDroplists;
+}
+
+/// @nodoc
+abstract class _$LoadedDroplistCopyWith<$Res> {
+  factory _$LoadedDroplistCopyWith(
+          _LoadedDroplist value, $Res Function(_LoadedDroplist) then) =
+      __$LoadedDroplistCopyWithImpl<$Res>;
+  $Res call({DroplistCollection droplists});
+
+  $DroplistCollectionCopyWith<$Res> get droplists;
+}
+
+/// @nodoc
+class __$LoadedDroplistCopyWithImpl<$Res>
+    extends _$DashboardEventCopyWithImpl<$Res>
+    implements _$LoadedDroplistCopyWith<$Res> {
+  __$LoadedDroplistCopyWithImpl(
+      _LoadedDroplist _value, $Res Function(_LoadedDroplist) _then)
+      : super(_value, (v) => _then(v as _LoadedDroplist));
+
+  @override
+  _LoadedDroplist get _value => super._value as _LoadedDroplist;
+
+  @override
+  $Res call({
+    Object droplists = freezed,
+  }) {
+    return _then(_LoadedDroplist(
+      droplists == freezed ? _value.droplists : droplists as DroplistCollection,
+    ));
+  }
+
+  @override
+  $DroplistCollectionCopyWith<$Res> get droplists {
+    if (_value.droplists == null) {
+      return null;
+    }
+    return $DroplistCollectionCopyWith<$Res>(_value.droplists, (value) {
+      return _then(_value.copyWith(droplists: value));
+    });
+  }
+}
+
+/// @nodoc
+class _$_LoadedDroplist implements _LoadedDroplist {
+  const _$_LoadedDroplist(this.droplists) : assert(droplists != null);
+
+  @override
+  final DroplistCollection droplists;
+
+  @override
+  String toString() {
+    return 'DashboardEvent.loadedDroplists(droplists: $droplists)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _LoadedDroplist &&
+            (identical(other.droplists, droplists) ||
+                const DeepCollectionEquality()
+                    .equals(other.droplists, droplists)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(droplists);
+
+  @JsonKey(ignore: true)
+  @override
+  _$LoadedDroplistCopyWith<_LoadedDroplist> get copyWith =>
+      __$LoadedDroplistCopyWithImpl<_LoadedDroplist>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult startedWatchingGeneralInfo(),
+    @required TResult startedWatchingDroplists(),
+    @required TResult loadedDroplists(DroplistCollection droplists),
+    @required TResult loadedGeneralInfo(GeneralInfo generalInfo),
+  }) {
+    assert(startedWatchingGeneralInfo != null);
+    assert(startedWatchingDroplists != null);
+    assert(loadedDroplists != null);
+    assert(loadedGeneralInfo != null);
+    return loadedDroplists(droplists);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult startedWatchingGeneralInfo(),
+    TResult startedWatchingDroplists(),
+    TResult loadedDroplists(DroplistCollection droplists),
+    TResult loadedGeneralInfo(GeneralInfo generalInfo),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (loadedDroplists != null) {
+      return loadedDroplists(droplists);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required
+        TResult startedWatchingGeneralInfo(_StartedWatchingGeneralInfo value),
+    @required TResult startedWatchingDroplists(_StartedWatchingDroplists value),
+    @required TResult loadedDroplists(_LoadedDroplist value),
+    @required TResult loadedGeneralInfo(_LoadedGeneralInfo value),
+  }) {
+    assert(startedWatchingGeneralInfo != null);
+    assert(startedWatchingDroplists != null);
+    assert(loadedDroplists != null);
+    assert(loadedGeneralInfo != null);
+    return loadedDroplists(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult startedWatchingGeneralInfo(_StartedWatchingGeneralInfo value),
+    TResult startedWatchingDroplists(_StartedWatchingDroplists value),
+    TResult loadedDroplists(_LoadedDroplist value),
+    TResult loadedGeneralInfo(_LoadedGeneralInfo value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (loadedDroplists != null) {
+      return loadedDroplists(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadedDroplist implements DashboardEvent {
+  const factory _LoadedDroplist(DroplistCollection droplists) =
+      _$_LoadedDroplist;
+
+  DroplistCollection get droplists;
+  @JsonKey(ignore: true)
+  _$LoadedDroplistCopyWith<_LoadedDroplist> get copyWith;
+}
+
+/// @nodoc
+abstract class _$LoadedGeneralInfoCopyWith<$Res> {
+  factory _$LoadedGeneralInfoCopyWith(
+          _LoadedGeneralInfo value, $Res Function(_LoadedGeneralInfo) then) =
+      __$LoadedGeneralInfoCopyWithImpl<$Res>;
+  $Res call({GeneralInfo generalInfo});
+
+  $GeneralInfoCopyWith<$Res> get generalInfo;
+}
+
+/// @nodoc
+class __$LoadedGeneralInfoCopyWithImpl<$Res>
+    extends _$DashboardEventCopyWithImpl<$Res>
+    implements _$LoadedGeneralInfoCopyWith<$Res> {
+  __$LoadedGeneralInfoCopyWithImpl(
+      _LoadedGeneralInfo _value, $Res Function(_LoadedGeneralInfo) _then)
+      : super(_value, (v) => _then(v as _LoadedGeneralInfo));
+
+  @override
+  _LoadedGeneralInfo get _value => super._value as _LoadedGeneralInfo;
+
+  @override
+  $Res call({
+    Object generalInfo = freezed,
+  }) {
+    return _then(_LoadedGeneralInfo(
+      generalInfo == freezed ? _value.generalInfo : generalInfo as GeneralInfo,
+    ));
+  }
+
+  @override
+  $GeneralInfoCopyWith<$Res> get generalInfo {
+    if (_value.generalInfo == null) {
+      return null;
+    }
+    return $GeneralInfoCopyWith<$Res>(_value.generalInfo, (value) {
+      return _then(_value.copyWith(generalInfo: value));
+    });
+  }
+}
+
+/// @nodoc
+class _$_LoadedGeneralInfo implements _LoadedGeneralInfo {
+  const _$_LoadedGeneralInfo(this.generalInfo) : assert(generalInfo != null);
+
+  @override
+  final GeneralInfo generalInfo;
+
+  @override
+  String toString() {
+    return 'DashboardEvent.loadedGeneralInfo(generalInfo: $generalInfo)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _LoadedGeneralInfo &&
+            (identical(other.generalInfo, generalInfo) ||
+                const DeepCollectionEquality()
+                    .equals(other.generalInfo, generalInfo)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(generalInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  _$LoadedGeneralInfoCopyWith<_LoadedGeneralInfo> get copyWith =>
+      __$LoadedGeneralInfoCopyWithImpl<_LoadedGeneralInfo>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult startedWatchingGeneralInfo(),
+    @required TResult startedWatchingDroplists(),
+    @required TResult loadedDroplists(DroplistCollection droplists),
+    @required TResult loadedGeneralInfo(GeneralInfo generalInfo),
+  }) {
+    assert(startedWatchingGeneralInfo != null);
+    assert(startedWatchingDroplists != null);
+    assert(loadedDroplists != null);
+    assert(loadedGeneralInfo != null);
+    return loadedGeneralInfo(generalInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult startedWatchingGeneralInfo(),
+    TResult startedWatchingDroplists(),
+    TResult loadedDroplists(DroplistCollection droplists),
+    TResult loadedGeneralInfo(GeneralInfo generalInfo),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (loadedGeneralInfo != null) {
+      return loadedGeneralInfo(generalInfo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required
+        TResult startedWatchingGeneralInfo(_StartedWatchingGeneralInfo value),
+    @required TResult startedWatchingDroplists(_StartedWatchingDroplists value),
+    @required TResult loadedDroplists(_LoadedDroplist value),
+    @required TResult loadedGeneralInfo(_LoadedGeneralInfo value),
+  }) {
+    assert(startedWatchingGeneralInfo != null);
+    assert(startedWatchingDroplists != null);
+    assert(loadedDroplists != null);
+    assert(loadedGeneralInfo != null);
+    return loadedGeneralInfo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult startedWatchingGeneralInfo(_StartedWatchingGeneralInfo value),
+    TResult startedWatchingDroplists(_StartedWatchingDroplists value),
+    TResult loadedDroplists(_LoadedDroplist value),
+    TResult loadedGeneralInfo(_LoadedGeneralInfo value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (loadedGeneralInfo != null) {
+      return loadedGeneralInfo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadedGeneralInfo implements DashboardEvent {
+  const factory _LoadedGeneralInfo(GeneralInfo generalInfo) =
+      _$_LoadedGeneralInfo;
+
+  GeneralInfo get generalInfo;
+  @JsonKey(ignore: true)
+  _$LoadedGeneralInfoCopyWith<_LoadedGeneralInfo> get copyWith;
 }
 
 DashboardState _$DashboardStateFromJson(Map<String, dynamic> json) {

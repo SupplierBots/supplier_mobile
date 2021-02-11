@@ -6,4 +6,7 @@ abstract class DashboardEvent with _$DashboardEvent {
       _StartedWatchingGeneralInfo;
   const factory DashboardEvent.startedWatchingDroplists() =
       _StartedWatchingDroplists;
+  const factory DashboardEvent.loadedDroplists(DroplistCollection droplists) =
+      _LoadedDroplist;
+  const factory DashboardEvent.loadedGeneralInfo(GeneralInfo generalInfo) = _LoadedGeneralInfo;
 }

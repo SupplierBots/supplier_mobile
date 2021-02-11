@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:supplier_mobile/domain/dashboard/dashboard_failure.dart';
 import 'package:supplier_mobile/domain/dashboard/dashboard_repository.dart';
 import 'package:supplier_mobile/domain/dashboard/droplists/droplists_collection.dart';
 import 'package:supplier_mobile/domain/dashboard/general_info/general_info.dart';
@@ -18,26 +20,36 @@ class DashboardBloc extends HydratedBloc<DashboardEvent, DashboardState> {
 
   final DashboardRepository _dashboardRepository;
 
+  StreamSubscription<Either<DashboardFailure, DroplistCollection>>
+      _droplistsSubscription;
+  StreamSubscription<Either<DashboardFailure, GeneralInfo>> _infoSubscription;
+
   @override
-  Stream<DashboardState> mapEventToState(
-    DashboardEvent event,
-  ) async* {
+  Stream<DashboardState> mapEventToState(DashboardEvent event) async* {
     yield* event.map(
       startedWatchingDroplists: (e) async* {
-        yield* _dashboardRepository.watchDroplists().map(
+        _droplistsSubscription?.cancel();
+        _droplistsSubscription = _dashboardRepository.watchDroplists().listen(
               (result) => result.fold(
-                (failure) => state,
-                (droplists) => state.copyWith(droplists: droplists),
+                (f) {},
+                (droplists) => add(_LoadedDroplist(droplists)),
               ),
             );
       },
       startedWatchingGeneralInfo: (e) async* {
-        yield* _dashboardRepository.watchGeneralInfo().map(
+        _infoSubscription?.cancel();
+        _infoSubscription = _dashboardRepository.watchGeneralInfo().listen(
               (result) => result.fold(
-                (failure) => state,
-                (info) => state.copyWith(generalInfo: info),
+                (f) {},
+                (generalInfo) => add(_LoadedGeneralInfo(generalInfo)),
               ),
             );
+      },
+      loadedDroplists: (e) async* {
+        yield state.copyWith(droplists: e.droplists);
+      },
+      loadedGeneralInfo: (e) async* {
+        yield state.copyWith(generalInfo: e.generalInfo);
       },
     );
   }
@@ -50,5 +62,12 @@ class DashboardBloc extends HydratedBloc<DashboardEvent, DashboardState> {
   @override
   Map<String, dynamic> toJson(DashboardState state) {
     return state.toJson();
+  }
+
+  @override
+  Future<void> close() {
+    _droplistsSubscription?.cancel();
+    _infoSubscription?.cancel();
+    return super.close();
   }
 }

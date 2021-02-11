@@ -19,20 +19,20 @@ class FirebaseDashboardRepository implements DashboardRepository {
   @override
   Stream<Either<DashboardFailure, DroplistCollection>> watchDroplists() async* {
     yield* Rx.combineLatest2(
-      _getDroplistStream('supreme'),
-      _getDroplistStream('palace'),
-      (
-        Droplist supremeDroplist,
-        Droplist palaceDroplist,
-      ) =>
-          right<DashboardFailure, DroplistCollection>(
-        DroplistCollection(
-          supreme: supremeDroplist,
-          palace: palaceDroplist,
-        ),
-      ),
-    ).onErrorReturnWith(
+        _getDroplistStream('supreme'),
+        _getDroplistStream('palace'),
+        (
+          Droplist supremeDroplist,
+          Droplist palaceDroplist,
+        ) =>
+            right<DashboardFailure, DroplistCollection>(
+              DroplistCollection(
+                supreme: supremeDroplist,
+                palace: palaceDroplist,
+              ),
+            )).onErrorReturnWith(
       (dynamic e) {
+        print(e.toString());
         return left<DashboardFailure, DroplistCollection>(
           const DashboardFailure.unexpected(),
         );

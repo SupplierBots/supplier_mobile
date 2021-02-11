@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:supplier_mobile/domain/tasks/task.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 
-class ExpandedProfileBar extends StatelessWidget {
-  const ExpandedProfileBar({
+class TasksListTile extends StatelessWidget {
+  const TasksListTile({
     Key key,
-    this.profileName,
-    this.itemName,
+    @required this.task,
   }) : super(key: key);
-  final String profileName;
-  final String itemName;
+  final Task task;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@ class ExpandedProfileBar extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  itemName,
+                  task.profileName,
                   style: const TextStyle(
                     color: kLightPurple,
                     fontSize: 18,
@@ -70,7 +69,7 @@ class ExpandedProfileBar extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  profileName,
+                  task.profileName,
                   style: const TextStyle(color: kLightPurple, fontSize: 18),
                 ),
                 const Spacer(),
