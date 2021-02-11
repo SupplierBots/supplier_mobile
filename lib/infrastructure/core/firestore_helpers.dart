@@ -9,8 +9,6 @@ extension FirestoreX on FirebaseFirestore {
     final user = userOption.getOrElse(() => throw NotAuthenticatedError());
     return FirebaseFirestore.instance.collection('users').doc(user.uid);
   }
-}
 
-extension DocumentReferenceX on DocumentReference {
-  CollectionReference get mobileCollection => collection('mobile');
+  CollectionReference get dashboardCollection => collection('dashboard');
 }

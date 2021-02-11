@@ -13,7 +13,10 @@ import 'package:injectable/injectable.dart';
 import 'application/auth/auth_bloc.dart';
 import 'application/auth/auth_forms/auth_forms_bloc.dart';
 import 'domain/auth/auth_repository.dart';
+import 'application/dashboard/dashboard_bloc.dart';
+import 'domain/dashboard/dashboard_repository.dart';
 import 'infrastructure/auth/firebase_auth_repository.dart';
+import 'infrastructure/dashboard/firebase_dashboard_repository.dart';
 import 'infrastructure/core/firebase_injectable_module.dart';
 
 /// adds generated dependencies
@@ -32,8 +35,11 @@ GetIt $initGetIt(
       () => firebaseInjectableModule.cloudFunctions);
   gh.lazySingleton<AuthRepository>(() =>
       FirebaseAuthRepository(get<FirebaseAuth>(), get<FirebaseFunctions>()));
+  gh.lazySingleton<DashboardRepository>(
+      () => FirebaseDashboardRepository(get<FirebaseFirestore>()));
   gh.factory<AuthBloc>(() => AuthBloc(get<AuthRepository>()));
   gh.factory<AuthFormsBloc>(() => AuthFormsBloc(get<AuthRepository>()));
+  gh.factory<DashboardBloc>(() => DashboardBloc(get<DashboardRepository>()));
   return get;
 }
 

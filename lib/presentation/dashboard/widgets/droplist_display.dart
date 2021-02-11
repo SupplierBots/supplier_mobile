@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:supplier_mobile/domain/dashboard/droplists/droplist.dart';
+import 'package:supplier_mobile/presentation/core/constants/colors.dart';
+import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 
-import '../core/constants/colors.dart';
-import '../core/constants/custom_icons.dart';
-import '../core/constants/custom_icons.dart';
-import '../core/gradient_widget.dart';
-
-class DropInformation extends StatelessWidget {
-  const DropInformation({
+class DroplistDisplay extends StatelessWidget {
+  const DroplistDisplay({
     Key key,
-    @required this.week,
-    @required this.date,
-    @required this.brand,
+    @required this.droplist,
+    @required this.icon,
   }) : super(key: key);
-  final String week;
-  final String date;
-  final Widget brand;
+  final Droplist droplist;
+  final Icon icon;
+
+  //! jest jakis overflow z pizdy, jak to ogarniesz po ludzku jak pisałem to pewnie go nie będzie
+  //* link wyciągniesz z droplist.link (gesture detector, onTap url_launcher)
 
   @override
   Widget build(BuildContext context) {
@@ -25,30 +24,29 @@ class DropInformation extends StatelessWidget {
         color: kSecondaryBackground,
       ),
       child: Padding(
-        padding:
+        padding: //!Zamien na EdgeInsets.symmetric
             const EdgeInsets.only(left: 20, top: 13, right: 20, bottom: 13),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             GradientWidget(
-              child: Icon(
-                CustomIcons.profiles,
-                color: Colors.white,
-              ),
+              child: icon,
             ),
             const Spacer(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  week,
+                  'Week ${droplist.week}',
+                  //!brakuje const
                   style: TextStyle(color: kLighGrey, fontSize: 20),
                 ),
                 const SizedBox(
                   height: 8,
                 ),
                 Text(
-                  date,
+                  droplist.date.toString(),
+                  //!brakuje const
                   style: TextStyle(color: kDarkGrey, fontSize: 18),
                 ),
               ],
