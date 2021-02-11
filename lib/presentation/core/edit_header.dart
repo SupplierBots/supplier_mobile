@@ -89,17 +89,26 @@ class EditHeader extends HookWidget {
             ),
           const Spacer(),
           if (isEditing) ...<Widget>[
-            GestureDetector(
-              onTap: _cancel,
-              child: const Icon(
+            IconButton(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              onPressed: _cancel,
+              icon: const Icon(
                 Icons.undo,
                 color: kLightPurple,
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(left: 25, right: 10),
-              child: GestureDetector(
-                onTap: () {
+            AnimatedBuilder(
+              animation: _controller,
+              builder: (BuildContext context, Widget child) {
+                return Transform.translate(
+                  offset: Offset(15 * _shake(_controller.value), 0),
+                  child: child,
+                );
+              },
+              child: IconButton(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                onPressed: () {
                   if (confirmAction()) {
                     Vibrate.tap();
                     return;
@@ -107,18 +116,9 @@ class EditHeader extends HookWidget {
                   _controller.forward().whenComplete(() => _controller.reset());
                   Vibrate.error();
                 },
-                child: AnimatedBuilder(
-                  animation: _controller,
-                  builder: (BuildContext context, Widget child) {
-                    return Transform.translate(
-                      offset: Offset(15 * _shake(_controller.value), 0),
-                      child: child,
-                    );
-                  },
-                  child: Icon(
-                    Icons.save,
-                    color: _colorAnimation,
-                  ),
+                icon: Icon(
+                  Icons.save,
+                  color: _colorAnimation,
                 ),
               ),
             ),

@@ -68,16 +68,13 @@ class ProfilesListTile extends StatelessWidget {
                 ),
               ],
             ),
-            GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: _showDeleteAlert,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: const Icon(
-                  CustomIcons.remove,
-                  color: kLighGrey,
-                  size: 18,
-                ),
+            IconButton(
+              onPressed: _showDeleteAlert,
+              padding: const EdgeInsets.all(20),
+              icon: const Icon(
+                CustomIcons.remove,
+                color: kLighGrey,
+                size: 18,
               ),
             ),
           ],
