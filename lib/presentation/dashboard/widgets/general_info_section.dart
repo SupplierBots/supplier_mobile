@@ -37,9 +37,14 @@ class GeneralInfoSection extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            Text(
-              'Version: ${state.generalInfo.version}',
-              style: const TextStyle(fontSize: 16, color: kLightPurple),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  'Version: ${state.generalInfo.version}',
+                  style: const TextStyle(fontSize: 16, color: kLightPurple),
+                ),
+              ],
             ),
           ],
         );

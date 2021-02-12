@@ -2,25 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:supplier_mobile/domain/dashboard/droplists/droplist.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
-import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DroplistDisplay extends StatelessWidget {
   const DroplistDisplay({
     Key key,
-    //@required this.,
     @required this.icon,
     @required this.droplist,
   }) : super(key: key);
-  //final  ;
   final Icon icon;
   final Droplist droplist;
+
+  Future<void> launchURL() async {
+    if (await canLaunch(droplist.link)) {
+      await launch(droplist.link);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: launchURL,
       child: Container(
         height: 80,
         decoration: BoxDecoration(
@@ -55,16 +58,6 @@ class DroplistDisplay extends StatelessWidget {
           ),
         ),
       ),
-      onTap: _launchURL,
     );
-  }
-}
-
-_launchURL() async {
-  const url = 'https://pl.pornhub.com/gayporn';
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
   }
 }
