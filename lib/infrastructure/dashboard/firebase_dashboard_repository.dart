@@ -44,7 +44,7 @@ class FirebaseDashboardRepository implements DashboardRepository {
     return _firestore.dashboardCollection
         .doc('droplists')
         .collection(page)
-        .orderBy('date')
+        .orderBy('date', descending: true)
         .limit(1)
         .snapshots()
         .map(

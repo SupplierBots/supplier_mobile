@@ -12,7 +12,6 @@ import 'package:supplier_mobile/presentation/core/constants/typography.dart';
 class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print('dash loaded');
     return BlocProvider(
       create: (context) => getIt<DashboardBloc>()
         ..add(const DashboardEvent.startedWatchingGeneralInfo())

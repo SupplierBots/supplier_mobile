@@ -35,10 +35,10 @@ class DroplistsSection extends StatelessWidget {
                 Flexible(
                   child: DroplistDisplay(
                     icon: const Icon(
-                      Icons.access_alarm,
+                      Icons.accessibility_sharp,
                       color: Colors.white,
                     ),
-                    droplist: state.droplists.supreme,
+                    droplist: state.droplists.palace,
                   ),
                 ),
               ],
