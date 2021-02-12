@@ -327,6 +327,8 @@ PODS:
   - path_provider (0.0.1):
     - Flutter
   - PromisesObjC (1.2.12)
+  - url_launcher (0.0.1):
+    - Flutter
   - webview_flutter (0.0.1):
     - Flutter
 
@@ -338,6 +340,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
   - webview_flutter (from `.symlinks/plugins/webview_flutter/ios`)
 
 SPEC REPOS:
@@ -374,6 +377,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
+  url_launcher:
+    :path: ".symlinks/plugins/url_launcher/ios"
   webview_flutter:
     :path: ".symlinks/plugins/webview_flutter/ios"
 
@@ -401,6 +406,7 @@ SPEC CHECKSUMS:
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
   webview_flutter: d2b4d6c66968ad042ad94cbb791f5b72b4678a96
 
 PODFILE CHECKSUM: 651edb89d8643ea2e876b66f0af940615c0e8149
