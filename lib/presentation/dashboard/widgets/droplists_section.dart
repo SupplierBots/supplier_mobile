@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supplier_mobile/application/dashboard/dashboard_bloc.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
-import 'package:supplier_mobile/presentation/dashboard/widgets/droplist_display.dart';
+
+import 'droplist_display.dart';
 
 class DroplistsSection extends StatelessWidget {
   @override
