@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:supplier_mobile/application/auth/auth_forms/auth_forms_bloc.dart
 import 'package:supplier_mobile/presentation/auth/widgets/main_logo.dart';
 import 'package:supplier_mobile/presentation/auth/widgets/register_form.dart';
 import 'package:supplier_mobile/presentation/auth/widgets/sign_in_form.dart';
+import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
 import 'package:supplier_mobile/presentation/core/progress_indicator_header.dart';
 import 'package:supplier_mobile/presentation/navigation/router.gr.dart';
@@ -52,7 +54,25 @@ class FormsContainer extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            if (state.isCreatingAccount) RegisterForm() else SignInForm(),
+            PageTransitionSwitcher(
+              reverse: !state.isCreatingAccount,
+              transitionBuilder: (
+                Widget child,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+              ) {
+                return SharedAxisTransition(
+                  fillColor: kBackgroundColor,
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  transitionType: SharedAxisTransitionType.horizontal,
+                  child: child,
+                );
+              },
+              child: state.isCreatingAccount ? RegisterForm() : SignInForm(),
+            )
+            // else
+            //   SignInForm(),
           ] else
             Center(
               child: Container(
