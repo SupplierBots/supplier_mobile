@@ -101,9 +101,15 @@ class TasksForm extends HookWidget {
           const SizedBox(height: kPrimaryElementsSpacing),
           Row(
             children: [
-              const FormSwitch(name: 'Any color'),
+              const FormSwitch(
+                name: 'anyColor',
+                label: 'Any color',
+              ),
               const SizedBox(width: 70),
-              const FormSwitch(name: 'Any size'),
+              const FormSwitch(
+                name: 'anySize',
+                label: 'Any size',
+              ),
             ],
           ),
         ],

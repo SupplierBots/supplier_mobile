@@ -9,9 +9,9 @@ abstract class Task with _$Task {
     @required String product,
     @required String profileName,
     @required String size,
+    @required bool anyColor,
+    @required bool anySize,
     List<String> colors,
-    bool anyColor,
-    bool anySize,
   }) = _Task;
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 }

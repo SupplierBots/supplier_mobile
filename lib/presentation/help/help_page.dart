@@ -75,9 +75,9 @@ class HelpPage extends StatelessWidget {
                 const SizedBox(height: kPrimaryElementsSpacing),
                 Row(
                   children: [
-                    const FormSwitch(name: 'Any color'),
-                    const SizedBox(width: 70),
-                    const FormSwitch(name: 'Any size'),
+                    // const FormSwitch(name: 'Any color'),
+                    // const SizedBox(width: 70),
+                    // const FormSwitch(name: 'Any size'),
                   ],
                 ),
               ],
