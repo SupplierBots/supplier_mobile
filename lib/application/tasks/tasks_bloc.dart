@@ -17,17 +17,19 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     TasksEvent event,
   ) async* {
     yield* event.map(
-      added: (e) async* {
+      setTask: (e) async* {
         yield TasksState(
-          tasks: [
+          tasks: {
             ...state.tasks,
-            e.task,
-          ],
+            e.uid: e.task,
+          },
         );
       },
-      deleted: (e) async* {
-        yield TasksState(
-          tasks: state.tasks.where((t) => t != e.task).toList(),
+      deletedTask: (e) async* {
+        final copiedTasks = {...state.tasks};
+        copiedTasks.remove(e.uid);
+        yield state.copyWith(
+          tasks: copiedTasks,
         );
       },
     );

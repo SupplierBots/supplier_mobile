@@ -30,7 +30,7 @@ class DashboardPage extends StatelessWidget {
             child: ListView(
               children: <Widget>[
                 const SizedBox(
-                  height: 25,
+                  height: 20,
                 ),
                 DroplistsSection(),
                 const SizedBox(

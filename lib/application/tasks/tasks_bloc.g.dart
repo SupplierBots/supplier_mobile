@@ -8,10 +8,10 @@ part of 'tasks_bloc.dart';
 
 _$_TasksState _$_$_TasksStateFromJson(Map<String, dynamic> json) {
   return _$_TasksState(
-    tasks: (json['tasks'] as List)
-        ?.map(
-            (e) => e == null ? null : Task.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    tasks: (json['tasks'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(
+          k, e == null ? null : Task.fromJson(e as Map<String, dynamic>)),
+    ),
   );
 }
 

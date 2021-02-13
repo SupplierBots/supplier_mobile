@@ -8,6 +8,7 @@ part of 'task.dart';
 
 _$_Task _$_$_TaskFromJson(Map<String, dynamic> json) {
   return _$_Task(
+    product: json['product'] as String,
     profileName: json['profileName'] as String,
     size: json['size'] as String,
     colors: (json['colors'] as List)?.map((e) => e as String)?.toList(),
@@ -17,6 +18,7 @@ _$_Task _$_$_TaskFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$_$_TaskToJson(_$_Task instance) => <String, dynamic>{
+      'product': instance.product,
       'profileName': instance.profileName,
       'size': instance.size,
       'colors': instance.colors,

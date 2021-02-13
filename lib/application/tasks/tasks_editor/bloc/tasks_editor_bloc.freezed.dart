@@ -14,9 +14,9 @@ class _$TasksEditorEventTearOff {
   const _$TasksEditorEventTearOff();
 
 // ignore: unused_element
-  _StartedEditing startedEditing(Option<Task> task) {
+  _StartedEditing startedEditing(Option<String> uid) {
     return _StartedEditing(
-      task,
+      uid,
     );
   }
 
@@ -34,12 +34,12 @@ const $TasksEditorEvent = _$TasksEditorEventTearOff();
 mixin _$TasksEditorEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult startedEditing(Option<Task> task),
+    @required TResult startedEditing(Option<String> uid),
     @required TResult finishedEditing(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult startedEditing(Option<Task> task),
+    TResult startedEditing(Option<String> uid),
     TResult finishedEditing(),
     @required TResult orElse(),
   });
@@ -78,7 +78,7 @@ abstract class _$StartedEditingCopyWith<$Res> {
   factory _$StartedEditingCopyWith(
           _StartedEditing value, $Res Function(_StartedEditing) then) =
       __$StartedEditingCopyWithImpl<$Res>;
-  $Res call({Option<Task> task});
+  $Res call({Option<String> uid});
 }
 
 /// @nodoc
@@ -94,37 +94,37 @@ class __$StartedEditingCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object task = freezed,
+    Object uid = freezed,
   }) {
     return _then(_StartedEditing(
-      task == freezed ? _value.task : task as Option<Task>,
+      uid == freezed ? _value.uid : uid as Option<String>,
     ));
   }
 }
 
 /// @nodoc
 class _$_StartedEditing implements _StartedEditing {
-  const _$_StartedEditing(this.task) : assert(task != null);
+  const _$_StartedEditing(this.uid) : assert(uid != null);
 
   @override
-  final Option<Task> task;
+  final Option<String> uid;
 
   @override
   String toString() {
-    return 'TasksEditorEvent.startedEditing(task: $task)';
+    return 'TasksEditorEvent.startedEditing(uid: $uid)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _StartedEditing &&
-            (identical(other.task, task) ||
-                const DeepCollectionEquality().equals(other.task, task)));
+            (identical(other.uid, uid) ||
+                const DeepCollectionEquality().equals(other.uid, uid)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(task);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(uid);
 
   @JsonKey(ignore: true)
   @override
@@ -134,24 +134,24 @@ class _$_StartedEditing implements _StartedEditing {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult startedEditing(Option<Task> task),
+    @required TResult startedEditing(Option<String> uid),
     @required TResult finishedEditing(),
   }) {
     assert(startedEditing != null);
     assert(finishedEditing != null);
-    return startedEditing(task);
+    return startedEditing(uid);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult startedEditing(Option<Task> task),
+    TResult startedEditing(Option<String> uid),
     TResult finishedEditing(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (startedEditing != null) {
-      return startedEditing(task);
+      return startedEditing(uid);
     }
     return orElse();
   }
@@ -183,9 +183,9 @@ class _$_StartedEditing implements _StartedEditing {
 }
 
 abstract class _StartedEditing implements TasksEditorEvent {
-  const factory _StartedEditing(Option<Task> task) = _$_StartedEditing;
+  const factory _StartedEditing(Option<String> uid) = _$_StartedEditing;
 
-  Option<Task> get task;
+  Option<String> get uid;
   @JsonKey(ignore: true)
   _$StartedEditingCopyWith<_StartedEditing> get copyWith;
 }
@@ -229,7 +229,7 @@ class _$_FinishedEditing implements _FinishedEditing {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult startedEditing(Option<Task> task),
+    @required TResult startedEditing(Option<String> uid),
     @required TResult finishedEditing(),
   }) {
     assert(startedEditing != null);
@@ -240,7 +240,7 @@ class _$_FinishedEditing implements _FinishedEditing {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult startedEditing(Option<Task> task),
+    TResult startedEditing(Option<String> uid),
     TResult finishedEditing(),
     @required TResult orElse(),
   }) {
@@ -287,10 +287,10 @@ class _$TasksEditorStateTearOff {
 
 // ignore: unused_element
   _TasksEditorState call(
-      {@required bool isEditing, @required Option<Task> editedTask}) {
+      {@required bool isEditing, @required Option<String> editedTaskUid}) {
     return _TasksEditorState(
       isEditing: isEditing,
-      editedTask: editedTask,
+      editedTaskUid: editedTaskUid,
     );
   }
 }
@@ -302,7 +302,7 @@ const $TasksEditorState = _$TasksEditorStateTearOff();
 /// @nodoc
 mixin _$TasksEditorState {
   bool get isEditing;
-  Option<Task> get editedTask;
+  Option<String> get editedTaskUid;
 
   @JsonKey(ignore: true)
   $TasksEditorStateCopyWith<TasksEditorState> get copyWith;
@@ -313,7 +313,7 @@ abstract class $TasksEditorStateCopyWith<$Res> {
   factory $TasksEditorStateCopyWith(
           TasksEditorState value, $Res Function(TasksEditorState) then) =
       _$TasksEditorStateCopyWithImpl<$Res>;
-  $Res call({bool isEditing, Option<Task> editedTask});
+  $Res call({bool isEditing, Option<String> editedTaskUid});
 }
 
 /// @nodoc
@@ -328,13 +328,13 @@ class _$TasksEditorStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object isEditing = freezed,
-    Object editedTask = freezed,
+    Object editedTaskUid = freezed,
   }) {
     return _then(_value.copyWith(
       isEditing: isEditing == freezed ? _value.isEditing : isEditing as bool,
-      editedTask: editedTask == freezed
-          ? _value.editedTask
-          : editedTask as Option<Task>,
+      editedTaskUid: editedTaskUid == freezed
+          ? _value.editedTaskUid
+          : editedTaskUid as Option<String>,
     ));
   }
 }
@@ -346,7 +346,7 @@ abstract class _$TasksEditorStateCopyWith<$Res>
           _TasksEditorState value, $Res Function(_TasksEditorState) then) =
       __$TasksEditorStateCopyWithImpl<$Res>;
   @override
-  $Res call({bool isEditing, Option<Task> editedTask});
+  $Res call({bool isEditing, Option<String> editedTaskUid});
 }
 
 /// @nodoc
@@ -363,13 +363,13 @@ class __$TasksEditorStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object isEditing = freezed,
-    Object editedTask = freezed,
+    Object editedTaskUid = freezed,
   }) {
     return _then(_TasksEditorState(
       isEditing: isEditing == freezed ? _value.isEditing : isEditing as bool,
-      editedTask: editedTask == freezed
-          ? _value.editedTask
-          : editedTask as Option<Task>,
+      editedTaskUid: editedTaskUid == freezed
+          ? _value.editedTaskUid
+          : editedTaskUid as Option<String>,
     ));
   }
 }
@@ -377,18 +377,18 @@ class __$TasksEditorStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_TasksEditorState implements _TasksEditorState {
   const _$_TasksEditorState(
-      {@required this.isEditing, @required this.editedTask})
+      {@required this.isEditing, @required this.editedTaskUid})
       : assert(isEditing != null),
-        assert(editedTask != null);
+        assert(editedTaskUid != null);
 
   @override
   final bool isEditing;
   @override
-  final Option<Task> editedTask;
+  final Option<String> editedTaskUid;
 
   @override
   String toString() {
-    return 'TasksEditorState(isEditing: $isEditing, editedTask: $editedTask)';
+    return 'TasksEditorState(isEditing: $isEditing, editedTaskUid: $editedTaskUid)';
   }
 
   @override
@@ -398,16 +398,16 @@ class _$_TasksEditorState implements _TasksEditorState {
             (identical(other.isEditing, isEditing) ||
                 const DeepCollectionEquality()
                     .equals(other.isEditing, isEditing)) &&
-            (identical(other.editedTask, editedTask) ||
+            (identical(other.editedTaskUid, editedTaskUid) ||
                 const DeepCollectionEquality()
-                    .equals(other.editedTask, editedTask)));
+                    .equals(other.editedTaskUid, editedTaskUid)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isEditing) ^
-      const DeepCollectionEquality().hash(editedTask);
+      const DeepCollectionEquality().hash(editedTaskUid);
 
   @JsonKey(ignore: true)
   @override
@@ -418,12 +418,12 @@ class _$_TasksEditorState implements _TasksEditorState {
 abstract class _TasksEditorState implements TasksEditorState {
   const factory _TasksEditorState(
       {@required bool isEditing,
-      @required Option<Task> editedTask}) = _$_TasksEditorState;
+      @required Option<String> editedTaskUid}) = _$_TasksEditorState;
 
   @override
   bool get isEditing;
   @override
-  Option<Task> get editedTask;
+  Option<String> get editedTaskUid;
   @override
   @JsonKey(ignore: true)
   _$TasksEditorStateCopyWith<_TasksEditorState> get copyWith;

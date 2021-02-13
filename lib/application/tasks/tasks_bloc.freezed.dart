@@ -14,16 +14,17 @@ class _$TasksEventTearOff {
   const _$TasksEventTearOff();
 
 // ignore: unused_element
-  _Added added(Task task) {
-    return _Added(
+  _SetTask setTask(String uid, Task task) {
+    return _SetTask(
+      uid,
       task,
     );
   }
 
 // ignore: unused_element
-  _Deleted deleted(Task task) {
-    return _Deleted(
-      task,
+  _DeletedTask deletedTask(String uid) {
+    return _DeletedTask(
+      uid,
     );
   }
 }
@@ -34,28 +35,28 @@ const $TasksEvent = _$TasksEventTearOff();
 
 /// @nodoc
 mixin _$TasksEvent {
-  Task get task;
+  String get uid;
 
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult added(Task task),
-    @required TResult deleted(Task task),
+    @required TResult setTask(String uid, Task task),
+    @required TResult deletedTask(String uid),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult added(Task task),
-    TResult deleted(Task task),
+    TResult setTask(String uid, Task task),
+    TResult deletedTask(String uid),
     @required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult added(_Added value),
-    @required TResult deleted(_Deleted value),
+    @required TResult setTask(_SetTask value),
+    @required TResult deletedTask(_DeletedTask value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult added(_Added value),
-    TResult deleted(_Deleted value),
+    TResult setTask(_SetTask value),
+    TResult deletedTask(_DeletedTask value),
     @required TResult orElse(),
   });
 
@@ -68,9 +69,7 @@ abstract class $TasksEventCopyWith<$Res> {
   factory $TasksEventCopyWith(
           TasksEvent value, $Res Function(TasksEvent) then) =
       _$TasksEventCopyWithImpl<$Res>;
-  $Res call({Task task});
-
-  $TaskCopyWith<$Res> get task;
+  $Res call({String uid});
 }
 
 /// @nodoc
@@ -83,10 +82,41 @@ class _$TasksEventCopyWithImpl<$Res> implements $TasksEventCopyWith<$Res> {
 
   @override
   $Res call({
-    Object task = freezed,
+    Object uid = freezed,
   }) {
     return _then(_value.copyWith(
-      task: task == freezed ? _value.task : task as Task,
+      uid: uid == freezed ? _value.uid : uid as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$SetTaskCopyWith<$Res> implements $TasksEventCopyWith<$Res> {
+  factory _$SetTaskCopyWith(_SetTask value, $Res Function(_SetTask) then) =
+      __$SetTaskCopyWithImpl<$Res>;
+  @override
+  $Res call({String uid, Task task});
+
+  $TaskCopyWith<$Res> get task;
+}
+
+/// @nodoc
+class __$SetTaskCopyWithImpl<$Res> extends _$TasksEventCopyWithImpl<$Res>
+    implements _$SetTaskCopyWith<$Res> {
+  __$SetTaskCopyWithImpl(_SetTask _value, $Res Function(_SetTask) _then)
+      : super(_value, (v) => _then(v as _SetTask));
+
+  @override
+  _SetTask get _value => super._value as _SetTask;
+
+  @override
+  $Res call({
+    Object uid = freezed,
+    Object task = freezed,
+  }) {
+    return _then(_SetTask(
+      uid == freezed ? _value.uid : uid as String,
+      task == freezed ? _value.task : task as Task,
     ));
   }
 
@@ -102,85 +132,63 @@ class _$TasksEventCopyWithImpl<$Res> implements $TasksEventCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$AddedCopyWith<$Res> implements $TasksEventCopyWith<$Res> {
-  factory _$AddedCopyWith(_Added value, $Res Function(_Added) then) =
-      __$AddedCopyWithImpl<$Res>;
-  @override
-  $Res call({Task task});
+class _$_SetTask implements _SetTask {
+  const _$_SetTask(this.uid, this.task)
+      : assert(uid != null),
+        assert(task != null);
 
   @override
-  $TaskCopyWith<$Res> get task;
-}
-
-/// @nodoc
-class __$AddedCopyWithImpl<$Res> extends _$TasksEventCopyWithImpl<$Res>
-    implements _$AddedCopyWith<$Res> {
-  __$AddedCopyWithImpl(_Added _value, $Res Function(_Added) _then)
-      : super(_value, (v) => _then(v as _Added));
-
-  @override
-  _Added get _value => super._value as _Added;
-
-  @override
-  $Res call({
-    Object task = freezed,
-  }) {
-    return _then(_Added(
-      task == freezed ? _value.task : task as Task,
-    ));
-  }
-}
-
-/// @nodoc
-class _$_Added implements _Added {
-  const _$_Added(this.task) : assert(task != null);
-
+  final String uid;
   @override
   final Task task;
 
   @override
   String toString() {
-    return 'TasksEvent.added(task: $task)';
+    return 'TasksEvent.setTask(uid: $uid, task: $task)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Added &&
+        (other is _SetTask &&
+            (identical(other.uid, uid) ||
+                const DeepCollectionEquality().equals(other.uid, uid)) &&
             (identical(other.task, task) ||
                 const DeepCollectionEquality().equals(other.task, task)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(task);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(uid) ^
+      const DeepCollectionEquality().hash(task);
 
   @JsonKey(ignore: true)
   @override
-  _$AddedCopyWith<_Added> get copyWith =>
-      __$AddedCopyWithImpl<_Added>(this, _$identity);
+  _$SetTaskCopyWith<_SetTask> get copyWith =>
+      __$SetTaskCopyWithImpl<_SetTask>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult added(Task task),
-    @required TResult deleted(Task task),
+    @required TResult setTask(String uid, Task task),
+    @required TResult deletedTask(String uid),
   }) {
-    assert(added != null);
-    assert(deleted != null);
-    return added(task);
+    assert(setTask != null);
+    assert(deletedTask != null);
+    return setTask(uid, task);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult added(Task task),
-    TResult deleted(Task task),
+    TResult setTask(String uid, Task task),
+    TResult deletedTask(String uid),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (added != null) {
-      return added(task);
+    if (setTask != null) {
+      return setTask(uid, task);
     }
     return orElse();
   }
@@ -188,119 +196,120 @@ class _$_Added implements _Added {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult added(_Added value),
-    @required TResult deleted(_Deleted value),
+    @required TResult setTask(_SetTask value),
+    @required TResult deletedTask(_DeletedTask value),
   }) {
-    assert(added != null);
-    assert(deleted != null);
-    return added(this);
+    assert(setTask != null);
+    assert(deletedTask != null);
+    return setTask(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult added(_Added value),
-    TResult deleted(_Deleted value),
+    TResult setTask(_SetTask value),
+    TResult deletedTask(_DeletedTask value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (added != null) {
-      return added(this);
+    if (setTask != null) {
+      return setTask(this);
     }
     return orElse();
   }
 }
 
-abstract class _Added implements TasksEvent {
-  const factory _Added(Task task) = _$_Added;
+abstract class _SetTask implements TasksEvent {
+  const factory _SetTask(String uid, Task task) = _$_SetTask;
 
   @override
+  String get uid;
   Task get task;
   @override
   @JsonKey(ignore: true)
-  _$AddedCopyWith<_Added> get copyWith;
+  _$SetTaskCopyWith<_SetTask> get copyWith;
 }
 
 /// @nodoc
-abstract class _$DeletedCopyWith<$Res> implements $TasksEventCopyWith<$Res> {
-  factory _$DeletedCopyWith(_Deleted value, $Res Function(_Deleted) then) =
-      __$DeletedCopyWithImpl<$Res>;
+abstract class _$DeletedTaskCopyWith<$Res>
+    implements $TasksEventCopyWith<$Res> {
+  factory _$DeletedTaskCopyWith(
+          _DeletedTask value, $Res Function(_DeletedTask) then) =
+      __$DeletedTaskCopyWithImpl<$Res>;
   @override
-  $Res call({Task task});
-
-  @override
-  $TaskCopyWith<$Res> get task;
+  $Res call({String uid});
 }
 
 /// @nodoc
-class __$DeletedCopyWithImpl<$Res> extends _$TasksEventCopyWithImpl<$Res>
-    implements _$DeletedCopyWith<$Res> {
-  __$DeletedCopyWithImpl(_Deleted _value, $Res Function(_Deleted) _then)
-      : super(_value, (v) => _then(v as _Deleted));
+class __$DeletedTaskCopyWithImpl<$Res> extends _$TasksEventCopyWithImpl<$Res>
+    implements _$DeletedTaskCopyWith<$Res> {
+  __$DeletedTaskCopyWithImpl(
+      _DeletedTask _value, $Res Function(_DeletedTask) _then)
+      : super(_value, (v) => _then(v as _DeletedTask));
 
   @override
-  _Deleted get _value => super._value as _Deleted;
+  _DeletedTask get _value => super._value as _DeletedTask;
 
   @override
   $Res call({
-    Object task = freezed,
+    Object uid = freezed,
   }) {
-    return _then(_Deleted(
-      task == freezed ? _value.task : task as Task,
+    return _then(_DeletedTask(
+      uid == freezed ? _value.uid : uid as String,
     ));
   }
 }
 
 /// @nodoc
-class _$_Deleted implements _Deleted {
-  const _$_Deleted(this.task) : assert(task != null);
+class _$_DeletedTask implements _DeletedTask {
+  const _$_DeletedTask(this.uid) : assert(uid != null);
 
   @override
-  final Task task;
+  final String uid;
 
   @override
   String toString() {
-    return 'TasksEvent.deleted(task: $task)';
+    return 'TasksEvent.deletedTask(uid: $uid)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Deleted &&
-            (identical(other.task, task) ||
-                const DeepCollectionEquality().equals(other.task, task)));
+        (other is _DeletedTask &&
+            (identical(other.uid, uid) ||
+                const DeepCollectionEquality().equals(other.uid, uid)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(task);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(uid);
 
   @JsonKey(ignore: true)
   @override
-  _$DeletedCopyWith<_Deleted> get copyWith =>
-      __$DeletedCopyWithImpl<_Deleted>(this, _$identity);
+  _$DeletedTaskCopyWith<_DeletedTask> get copyWith =>
+      __$DeletedTaskCopyWithImpl<_DeletedTask>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult added(Task task),
-    @required TResult deleted(Task task),
+    @required TResult setTask(String uid, Task task),
+    @required TResult deletedTask(String uid),
   }) {
-    assert(added != null);
-    assert(deleted != null);
-    return deleted(task);
+    assert(setTask != null);
+    assert(deletedTask != null);
+    return deletedTask(uid);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult added(Task task),
-    TResult deleted(Task task),
+    TResult setTask(String uid, Task task),
+    TResult deletedTask(String uid),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (deleted != null) {
-      return deleted(task);
+    if (deletedTask != null) {
+      return deletedTask(uid);
     }
     return orElse();
   }
@@ -308,37 +317,37 @@ class _$_Deleted implements _Deleted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult added(_Added value),
-    @required TResult deleted(_Deleted value),
+    @required TResult setTask(_SetTask value),
+    @required TResult deletedTask(_DeletedTask value),
   }) {
-    assert(added != null);
-    assert(deleted != null);
-    return deleted(this);
+    assert(setTask != null);
+    assert(deletedTask != null);
+    return deletedTask(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult added(_Added value),
-    TResult deleted(_Deleted value),
+    TResult setTask(_SetTask value),
+    TResult deletedTask(_DeletedTask value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (deleted != null) {
-      return deleted(this);
+    if (deletedTask != null) {
+      return deletedTask(this);
     }
     return orElse();
   }
 }
 
-abstract class _Deleted implements TasksEvent {
-  const factory _Deleted(Task task) = _$_Deleted;
+abstract class _DeletedTask implements TasksEvent {
+  const factory _DeletedTask(String uid) = _$_DeletedTask;
 
   @override
-  Task get task;
+  String get uid;
   @override
   @JsonKey(ignore: true)
-  _$DeletedCopyWith<_Deleted> get copyWith;
+  _$DeletedTaskCopyWith<_DeletedTask> get copyWith;
 }
 
 TasksState _$TasksStateFromJson(Map<String, dynamic> json) {
@@ -350,7 +359,7 @@ class _$TasksStateTearOff {
   const _$TasksStateTearOff();
 
 // ignore: unused_element
-  _TasksState call({List<Task> tasks}) {
+  _TasksState call({Map<String, Task> tasks}) {
     return _TasksState(
       tasks: tasks,
     );
@@ -368,7 +377,7 @@ const $TasksState = _$TasksStateTearOff();
 
 /// @nodoc
 mixin _$TasksState {
-  List<Task> get tasks;
+  Map<String, Task> get tasks;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -380,7 +389,7 @@ abstract class $TasksStateCopyWith<$Res> {
   factory $TasksStateCopyWith(
           TasksState value, $Res Function(TasksState) then) =
       _$TasksStateCopyWithImpl<$Res>;
-  $Res call({List<Task> tasks});
+  $Res call({Map<String, Task> tasks});
 }
 
 /// @nodoc
@@ -396,7 +405,7 @@ class _$TasksStateCopyWithImpl<$Res> implements $TasksStateCopyWith<$Res> {
     Object tasks = freezed,
   }) {
     return _then(_value.copyWith(
-      tasks: tasks == freezed ? _value.tasks : tasks as List<Task>,
+      tasks: tasks == freezed ? _value.tasks : tasks as Map<String, Task>,
     ));
   }
 }
@@ -407,7 +416,7 @@ abstract class _$TasksStateCopyWith<$Res> implements $TasksStateCopyWith<$Res> {
           _TasksState value, $Res Function(_TasksState) then) =
       __$TasksStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<Task> tasks});
+  $Res call({Map<String, Task> tasks});
 }
 
 /// @nodoc
@@ -425,7 +434,7 @@ class __$TasksStateCopyWithImpl<$Res> extends _$TasksStateCopyWithImpl<$Res>
     Object tasks = freezed,
   }) {
     return _then(_TasksState(
-      tasks: tasks == freezed ? _value.tasks : tasks as List<Task>,
+      tasks: tasks == freezed ? _value.tasks : tasks as Map<String, Task>,
     ));
   }
 }
@@ -440,7 +449,7 @@ class _$_TasksState implements _TasksState {
       _$_$_TasksStateFromJson(json);
 
   @override
-  final List<Task> tasks;
+  final Map<String, Task> tasks;
 
   @override
   String toString() {
@@ -471,13 +480,13 @@ class _$_TasksState implements _TasksState {
 }
 
 abstract class _TasksState implements TasksState {
-  const factory _TasksState({List<Task> tasks}) = _$_TasksState;
+  const factory _TasksState({Map<String, Task> tasks}) = _$_TasksState;
 
   factory _TasksState.fromJson(Map<String, dynamic> json) =
       _$_TasksState.fromJson;
 
   @override
-  List<Task> get tasks;
+  Map<String, Task> get tasks;
   @override
   @JsonKey(ignore: true)
   _$TasksStateCopyWith<_TasksState> get copyWith;

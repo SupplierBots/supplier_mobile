@@ -18,12 +18,14 @@ class _$TaskTearOff {
 
 // ignore: unused_element
   _Task call(
-      {@required String profileName,
+      {@required String product,
+      @required String profileName,
       @required String size,
-      @required List<String> colors,
-      @required bool anyColor,
-      @required bool anySize}) {
+      List<String> colors,
+      bool anyColor,
+      bool anySize}) {
     return _Task(
+      product: product,
       profileName: profileName,
       size: size,
       colors: colors,
@@ -44,6 +46,7 @@ const $Task = _$TaskTearOff();
 
 /// @nodoc
 mixin _$Task {
+  String get product;
   String get profileName;
   String get size;
   List<String> get colors;
@@ -60,7 +63,8 @@ abstract class $TaskCopyWith<$Res> {
   factory $TaskCopyWith(Task value, $Res Function(Task) then) =
       _$TaskCopyWithImpl<$Res>;
   $Res call(
-      {String profileName,
+      {String product,
+      String profileName,
       String size,
       List<String> colors,
       bool anyColor,
@@ -77,6 +81,7 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
 
   @override
   $Res call({
+    Object product = freezed,
     Object profileName = freezed,
     Object size = freezed,
     Object colors = freezed,
@@ -84,6 +89,7 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
     Object anySize = freezed,
   }) {
     return _then(_value.copyWith(
+      product: product == freezed ? _value.product : product as String,
       profileName:
           profileName == freezed ? _value.profileName : profileName as String,
       size: size == freezed ? _value.size : size as String,
@@ -100,7 +106,8 @@ abstract class _$TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
       __$TaskCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String profileName,
+      {String product,
+      String profileName,
       String size,
       List<String> colors,
       bool anyColor,
@@ -118,6 +125,7 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object product = freezed,
     Object profileName = freezed,
     Object size = freezed,
     Object colors = freezed,
@@ -125,6 +133,7 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
     Object anySize = freezed,
   }) {
     return _then(_Task(
+      product: product == freezed ? _value.product : product as String,
       profileName:
           profileName == freezed ? _value.profileName : profileName as String,
       size: size == freezed ? _value.size : size as String,
@@ -140,20 +149,21 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
 /// @nodoc
 class _$_Task implements _Task {
   const _$_Task(
-      {@required this.profileName,
+      {@required this.product,
+      @required this.profileName,
       @required this.size,
-      @required this.colors,
-      @required this.anyColor,
-      @required this.anySize})
-      : assert(profileName != null),
-        assert(size != null),
-        assert(colors != null),
-        assert(anyColor != null),
-        assert(anySize != null);
+      this.colors,
+      this.anyColor,
+      this.anySize})
+      : assert(product != null),
+        assert(profileName != null),
+        assert(size != null);
 
   factory _$_Task.fromJson(Map<String, dynamic> json) =>
       _$_$_TaskFromJson(json);
 
+  @override
+  final String product;
   @override
   final String profileName;
   @override
@@ -167,13 +177,16 @@ class _$_Task implements _Task {
 
   @override
   String toString() {
-    return 'Task(profileName: $profileName, size: $size, colors: $colors, anyColor: $anyColor, anySize: $anySize)';
+    return 'Task(product: $product, profileName: $profileName, size: $size, colors: $colors, anyColor: $anyColor, anySize: $anySize)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Task &&
+            (identical(other.product, product) ||
+                const DeepCollectionEquality()
+                    .equals(other.product, product)) &&
             (identical(other.profileName, profileName) ||
                 const DeepCollectionEquality()
                     .equals(other.profileName, profileName)) &&
@@ -191,6 +204,7 @@ class _$_Task implements _Task {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(product) ^
       const DeepCollectionEquality().hash(profileName) ^
       const DeepCollectionEquality().hash(size) ^
       const DeepCollectionEquality().hash(colors) ^
@@ -210,14 +224,17 @@ class _$_Task implements _Task {
 
 abstract class _Task implements Task {
   const factory _Task(
-      {@required String profileName,
+      {@required String product,
+      @required String profileName,
       @required String size,
-      @required List<String> colors,
-      @required bool anyColor,
-      @required bool anySize}) = _$_Task;
+      List<String> colors,
+      bool anyColor,
+      bool anySize}) = _$_Task;
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$_Task.fromJson;
 
+  @override
+  String get product;
   @override
   String get profileName;
   @override

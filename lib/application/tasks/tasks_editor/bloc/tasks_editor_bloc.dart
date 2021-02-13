@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:supplier_mobile/domain/tasks/task.dart';
 
 part 'tasks_editor_event.dart';
 part 'tasks_editor_state.dart';
@@ -20,7 +19,7 @@ class TasksEditorBloc extends Bloc<TasksEditorEvent, TasksEditorState> {
       startedEditing: (e) async* {
         yield TasksEditorState(
           isEditing: true,
-          editedTask: e.task,
+          editedTaskUid: e.uid,
         );
       },
       finishedEditing: (e) async* {
