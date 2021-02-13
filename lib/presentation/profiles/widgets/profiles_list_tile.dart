@@ -20,11 +20,10 @@ class ProfilesListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> _showDeleteAlert() {
-      Vibrate.heavyImpactTap();
-
       if (context.read<TasksBloc>().state.tasks.values.any(
             (task) => task.profileName == name,
           )) {
+        Vibrate.error();
         return showDialog<void>(
           context: context,
           barrierDismissible: true,
@@ -35,6 +34,8 @@ class ProfilesListTile extends StatelessWidget {
           },
         );
       }
+      Vibrate.heavyImpactTap();
+
       return showDialog<void>(
         context: context,
         barrierDismissible: false,
