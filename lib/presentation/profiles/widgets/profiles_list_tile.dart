@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supplier_mobile/application/profiles/profiles_bloc.dart';
 import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_bloc.dart';
+import 'package:supplier_mobile/application/tasks/tasks_bloc.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/styled_alert_dialog.dart';
+import 'package:supplier_mobile/presentation/core/styled_error_dialog.dart';
 import 'package:supplier_mobile/presentation/core/vibrate.dart';
 
 class ProfilesListTile extends StatelessWidget {
@@ -19,6 +21,20 @@ class ProfilesListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     Future<void> _showDeleteAlert() {
       Vibrate.heavyImpactTap();
+
+      if (context.read<TasksBloc>().state.tasks.values.any(
+            (task) => task.profileName == name,
+          )) {
+        return showDialog<void>(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext context) {
+            return StyledErrorDialong(
+              content: "Couldn't delete $name. It is used in one of the tasks.",
+            );
+          },
+        );
+      }
       return showDialog<void>(
         context: context,
         barrierDismissible: false,

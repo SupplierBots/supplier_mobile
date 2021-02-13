@@ -5,10 +5,12 @@ class Header extends StatelessWidget {
   const Header({
     @required this.text,
     @required this.underlineWidth,
+    this.underlineGradient = kPrimaryGradient,
   });
 
   final String text;
   final double underlineWidth;
+  final Gradient underlineGradient;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +28,9 @@ class Header extends StatelessWidget {
         SizedBox(
           height: 2.0,
           width: underlineWidth,
-          child: const DecoratedBox(
+          child: DecoratedBox(
             decoration: BoxDecoration(
-              gradient: kPrimaryGradient,
+              gradient: underlineGradient,
             ),
           ),
         ),
