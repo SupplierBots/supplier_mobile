@@ -30,7 +30,11 @@ class ProfilesList extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 125),
                   child: const Text(
                     "You haven't created any profiles yet",
-                    style: TextStyle(color: kDarkGrey),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: kDarkGrey,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
               );

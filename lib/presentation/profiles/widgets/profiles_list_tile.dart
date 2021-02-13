@@ -29,13 +29,14 @@ class ProfilesListTile extends StatelessWidget {
           barrierDismissible: true,
           builder: (BuildContext context) {
             return StyledErrorDialong(
-              content: "Couldn't delete $name. It is used in one of the tasks.",
+              content:
+                  "Couldn't delete $name. It is selected in one of the tasks.",
             );
           },
         );
       }
-      Vibrate.heavyImpactTap();
 
+      Vibrate.heavyImpactTap();
       return showDialog<void>(
         context: context,
         barrierDismissible: false,
