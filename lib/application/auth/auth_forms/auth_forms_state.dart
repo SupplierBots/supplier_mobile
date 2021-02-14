@@ -1,4 +1,4 @@
-part of 'auth_forms_bloc.dart';
+part of 'auth_forms_cubit.dart';
 
 @freezed
 abstract class AuthFormsState implements _$AuthFormsState {

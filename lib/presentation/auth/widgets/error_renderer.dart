@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supplier_mobile/application/auth/auth_forms/auth_forms_bloc.dart';
+import 'package:supplier_mobile/application/auth/auth_forms/auth_forms_cubit.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 
 class ErrorRenderer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthFormsBloc, AuthFormsState>(
+    return BlocBuilder<AuthFormsCubit, AuthFormsState>(
       builder: (context, state) {
         return Column(
           children: state.failureOrSuccessOption.fold(

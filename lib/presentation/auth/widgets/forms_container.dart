@@ -3,7 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supplier_mobile/application/auth/auth_bloc.dart';
-import 'package:supplier_mobile/application/auth/auth_forms/auth_forms_bloc.dart';
+import 'package:supplier_mobile/application/auth/auth_forms/auth_forms_cubit.dart';
 import 'package:supplier_mobile/presentation/auth/widgets/main_logo.dart';
 import 'package:supplier_mobile/presentation/auth/widgets/register_form.dart';
 import 'package:supplier_mobile/presentation/auth/widgets/sign_in_form.dart';
@@ -19,7 +19,7 @@ class FormsContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthFormsBloc, AuthFormsState>(
+    return BlocConsumer<AuthFormsCubit, AuthFormsState>(
         listener: (context, state) {
       state.failureOrSuccessOption.fold(
         () {},

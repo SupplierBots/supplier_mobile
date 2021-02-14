@@ -11,7 +11,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
 import 'application/auth/auth_bloc.dart';
-import 'application/auth/auth_forms/auth_forms_bloc.dart';
+import 'application/auth/auth_forms/auth_forms_cubit.dart';
 import 'domain/auth/auth_repository.dart';
 import 'application/dashboard/dashboard_bloc.dart';
 import 'domain/dashboard/dashboard_repository.dart';
@@ -38,7 +38,7 @@ GetIt $initGetIt(
   gh.lazySingleton<DashboardRepository>(
       () => FirebaseDashboardRepository(get<FirebaseFirestore>()));
   gh.factory<AuthBloc>(() => AuthBloc(get<AuthRepository>()));
-  gh.factory<AuthFormsBloc>(() => AuthFormsBloc(get<AuthRepository>()));
+  gh.factory<AuthFormsCubit>(() => AuthFormsCubit(get<AuthRepository>()));
   gh.factory<DashboardBloc>(() => DashboardBloc(get<DashboardRepository>()));
   return get;
 }

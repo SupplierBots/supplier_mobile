@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:supplier_mobile/application/auth/auth_forms/auth_forms_bloc.dart';
+import 'package:supplier_mobile/application/auth/auth_forms/auth_forms_cubit.dart';
 import 'package:supplier_mobile/domain/auth/sign_in_credentials.dart';
 import 'package:supplier_mobile/presentation/auth/widgets/error_renderer.dart';
 import 'package:supplier_mobile/presentation/core/buttons/primary_button.dart';
@@ -28,10 +28,10 @@ class SignInForm extends StatelessWidget {
       final credentials =
           SignInCredentials.fromJson(formKey.currentState.value);
 
-      context.read<AuthFormsBloc>().add(SignInPressed(credentials));
+      context.read<AuthFormsCubit>().signInPressed(credentials);
     }
 
-    return BlocBuilder<AuthFormsBloc, AuthFormsState>(
+    return BlocBuilder<AuthFormsCubit, AuthFormsState>(
         builder: (context, state) {
       return FormBuilder(
         key: formKey,
@@ -90,9 +90,7 @@ class SignInForm extends StatelessWidget {
                     height: 45,
                     width: 115,
                     onTap: () {
-                      context
-                          .read<AuthFormsBloc>()
-                          .add(const SignInOrRegisterToggled());
+                      context.read<AuthFormsCubit>().signInOrRegisterToggled();
                     },
                   ),
                 ],
