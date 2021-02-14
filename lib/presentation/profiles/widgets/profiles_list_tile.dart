@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supplier_mobile/application/profiles/profiles_bloc.dart';
+import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_bloc.dart';
 import 'package:supplier_mobile/application/tasks/tasks_bloc.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
@@ -43,9 +43,7 @@ class ProfilesListTile extends StatelessWidget {
           return StyledAlertDialog(
             content: '$name will be deleted.',
             onConfirm: () {
-              context
-                  .read<ProfilesBloc>()
-                  .add(ProfilesEvent.deletedProfile(name: name));
+              context.read<ProfilesCubit>().deletedProfile(name: name);
             },
           );
         },

@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:supplier_mobile/application/profiles/profiles_bloc.dart';
+import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_bloc.dart';
 import 'package:supplier_mobile/application/tasks/tasks_editor/bloc/tasks_editor_bloc.dart';
-import 'package:supplier_mobile/domain/tasks/task.dart';
 import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/form/form_dropdown.dart';
@@ -49,7 +48,7 @@ class TasksForm extends HookWidget {
           ),
           FormDropdown(
             name: 'profileName',
-            items: context.read<ProfilesBloc>().state.profiles.keys.toList(),
+            items: context.read<ProfilesCubit>().state.profiles.keys.toList(),
             placeholder: 'Profile',
           ),
           const SizedBox(

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'profiles_bloc.dart';
+part of 'profiles_cubit.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

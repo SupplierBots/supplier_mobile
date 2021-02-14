@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:supplier_mobile/application/profiles/profiles_bloc.dart';
+import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_bloc.dart';
 import 'package:supplier_mobile/application/tasks/tasks_editor/bloc/tasks_editor_bloc.dart';
 import 'package:supplier_mobile/domain/tasks/task.dart';
@@ -102,7 +102,7 @@ class TasksEditor extends HookWidget {
             ),
           ),
           floatingActionButton: !state.isEditing &&
-                  context.read<ProfilesBloc>().state.profiles.isNotEmpty
+                  context.read<ProfilesCubit>().state.profiles.isNotEmpty
               ? Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: FloatingActionButton(

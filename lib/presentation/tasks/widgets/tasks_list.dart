@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supplier_mobile/application/profiles/profiles_bloc.dart';
+import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_bloc.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
@@ -42,7 +42,11 @@ class TasksList extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 120),
                     child: FractionallySizedBox(
                       widthFactor: 0.8,
-                      child: context.read<ProfilesBloc>().state.profiles.isEmpty
+                      child: context
+                              .read<ProfilesCubit>()
+                              .state
+                              .profiles
+                              .isEmpty
                           ? GestureDetector(
                               onTap: () {
                                 ExtendedNavigator.of(context)

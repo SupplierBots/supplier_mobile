@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:supplier_mobile/application/profiles/profiles_bloc.dart';
+import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_bloc.dart';
 import 'package:supplier_mobile/domain/profiles/profile.dart';
 import 'package:supplier_mobile/presentation/core/edit_header.dart';
@@ -34,10 +34,10 @@ class ProfilesEditor extends HookWidget {
           context.read<ProfilesEditorBloc>().state.editedProfile;
       final profile = Profile.fromJson(formKey.currentState.value);
 
-      context.read<ProfilesBloc>().add(ProfilesEvent.setProfile(
+      context.read<ProfilesCubit>().setProfile(
             name: profileName,
             profile: profile,
-          ));
+          );
       context.read<ProfilesEditorBloc>().add(const Saved());
       return true;
     }

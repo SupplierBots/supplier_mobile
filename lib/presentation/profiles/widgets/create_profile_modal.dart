@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:supplier_mobile/application/profiles/profiles_bloc.dart';
+import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_bloc.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/form/form_text_field.dart';
@@ -55,7 +55,7 @@ class CreateProfileModal extends HookWidget {
                     errorText: 'Too long'),
                 (String value) {
                   if (!context
-                      .read<ProfilesBloc>()
+                      .read<ProfilesCubit>()
                       .state
                       .profiles
                       .containsKey(value)) return null;

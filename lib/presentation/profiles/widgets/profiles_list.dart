@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supplier_mobile/application/profiles/profiles_bloc.dart';
+import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/profiles/widgets/profiles_list_tile.dart';
@@ -12,7 +12,7 @@ class ProfilesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfilesBloc, ProfilesState>(
+    return BlocBuilder<ProfilesCubit, ProfilesState>(
       builder: (context, state) {
         final container = state.profiles.isNotEmpty
             ? Container(
