@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
-import 'package:supplier_mobile/application/tasks/tasks_bloc.dart';
+import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_editor/bloc/tasks_editor_bloc.dart';
 import 'package:supplier_mobile/domain/tasks/task.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
@@ -41,7 +41,7 @@ class TasksEditor extends HookWidget {
             (uid) => uid,
           );
 
-      context.read<TasksBloc>().add(TasksEvent.setTask(uid, task));
+      context.read<TasksCubit>().setTask(uid, task);
       context
           .read<TasksEditorBloc>()
           .add(const TasksEditorEvent.finishedEditing());
@@ -59,7 +59,7 @@ class TasksEditor extends HookWidget {
       },
       builder: (context, state) {
         int _getEditedIndex() {
-          final tasks = context.read<TasksBloc>().state.tasks;
+          final tasks = context.read<TasksCubit>().state.tasks;
           final index = state.editedTaskUid.fold(
             () => tasks.length,
             (uid) => tasks.entries.toList().indexWhere((t) => t.key == uid),

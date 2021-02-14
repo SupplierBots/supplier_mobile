@@ -1,4 +1,4 @@
-part of 'tasks_bloc.dart';
+part of 'tasks_cubit.dart';
 
 @freezed
 abstract class TasksState implements _$TasksState {

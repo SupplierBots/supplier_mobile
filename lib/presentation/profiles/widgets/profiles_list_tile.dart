@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_cubit.dart';
-import 'package:supplier_mobile/application/tasks/tasks_bloc.dart';
+import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/styled_alert_dialog.dart';
@@ -20,7 +20,7 @@ class ProfilesListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> _showDeleteAlert() {
-      final tasks = context.read<TasksBloc>().state.tasks;
+      final tasks = context.read<TasksCubit>().state.tasks;
       if (tasks.values.any((task) => task.profileName == name)) {
         Vibrate.error();
         return showDialog<void>(
@@ -43,7 +43,7 @@ class ProfilesListTile extends StatelessWidget {
           return StyledAlertDialog(
             content: '$name will be deleted.',
             onConfirm: () {
-              context.read<ProfilesCubit>().deletedProfile(name: name);
+              context.read<ProfilesCubit>().deletedProfile(name);
             },
           );
         },

@@ -9,10 +9,7 @@ part 'profiles_cubit.g.dart';
 class ProfilesCubit extends HydratedCubit<ProfilesState> {
   ProfilesCubit() : super(ProfilesState.initial());
 
-  void setProfile({
-    @required String name,
-    @required Profile profile,
-  }) {
+  void setProfile(String name, Profile profile) {
     emit(state.copyWith(
       profiles: {
         ...state.profiles,
@@ -21,14 +18,10 @@ class ProfilesCubit extends HydratedCubit<ProfilesState> {
     ));
   }
 
-  void deletedProfile({
-    @required String name,
-  }) {
+  void deletedProfile(String name) {
     final copiedProfiles = {...state.profiles};
     copiedProfiles.remove(name);
-    emit(state.copyWith(
-      profiles: copiedProfiles,
-    ));
+    emit(ProfilesState(profiles: copiedProfiles));
   }
 
   @override

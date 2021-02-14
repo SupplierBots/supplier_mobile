@@ -34,10 +34,7 @@ class ProfilesEditor extends HookWidget {
           context.read<ProfilesEditorCubit>().state.editedProfile;
       final profile = Profile.fromJson(formKey.currentState.value);
 
-      context.read<ProfilesCubit>().setProfile(
-            name: profileName,
-            profile: profile,
-          );
+      context.read<ProfilesCubit>().setProfile(profileName, profile);
       context.read<ProfilesEditorCubit>().finishedEditing();
       return true;
     }

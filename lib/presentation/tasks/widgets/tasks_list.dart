@@ -4,7 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
-import 'package:supplier_mobile/application/tasks/tasks_bloc.dart';
+import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
@@ -18,7 +18,7 @@ class TasksList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TasksBloc, TasksState>(
+    return BlocBuilder<TasksCubit, TasksState>(
       builder: (context, state) {
         final container = state.tasks.isNotEmpty
             ? Container(

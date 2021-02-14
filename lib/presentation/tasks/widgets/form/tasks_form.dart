@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
-import 'package:supplier_mobile/application/tasks/tasks_bloc.dart';
+import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_editor/bloc/tasks_editor_bloc.dart';
 import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
@@ -25,7 +25,7 @@ class TasksForm extends HookWidget {
 
     useMemoized(() {
       final uidOption = context.read<TasksEditorBloc>().state.editedTaskUid;
-      final tasks = context.read<TasksBloc>().state.tasks;
+      final tasks = context.read<TasksCubit>().state.tasks;
 
       initialValues.value = uidOption.fold(
         () => null,
