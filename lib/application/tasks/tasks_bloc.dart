@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:supplier_mobile/domain/tasks/task.dart';
+import 'package:supplier_mobile/presentation/tasks/widgets/task_state.dart';
 
 part 'tasks_event.dart';
 part 'tasks_state.dart';

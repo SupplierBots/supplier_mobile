@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/application/profiles/profiles_bloc.dart';
 import 'package:supplier_mobile/application/tasks/tasks_bloc.dart';
 import 'package:supplier_mobile/application/tasks/tasks_editor/bloc/tasks_editor_bloc.dart';
+import 'package:supplier_mobile/domain/tasks/task.dart';
 import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/form/form_dropdown.dart';
@@ -100,13 +101,13 @@ class TasksForm extends HookWidget {
           ),
           const SizedBox(height: kPrimaryElementsSpacing),
           Row(
-            children: [
-              const FormSwitch(
+            children: const [
+              FormSwitch(
                 name: 'anyColor',
                 label: 'Any color',
               ),
-              const SizedBox(width: 70),
-              const FormSwitch(
+              SizedBox(width: 70),
+              FormSwitch(
                 name: 'anySize',
                 label: 'Any size',
               ),

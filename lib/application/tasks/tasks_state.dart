@@ -1,13 +1,18 @@
 part of 'tasks_bloc.dart';
 
 @freezed
-abstract class TasksState with _$TasksState {
+abstract class TasksState implements _$TasksState {
   const factory TasksState({
     Map<String, Task> tasks,
   }) = _TasksState;
+
+  const TasksState._();
 
   factory TasksState.initial() => const TasksState(tasks: {});
 
   factory TasksState.fromJson(Map<String, dynamic> json) =>
       _$TasksStateFromJson(json);
+
+  int indexOf(String uid) =>
+      tasks.entries.toList().indexWhere((t) => t.key == uid);
 }

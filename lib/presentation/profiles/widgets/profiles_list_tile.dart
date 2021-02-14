@@ -20,9 +20,8 @@ class ProfilesListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> _showDeleteAlert() {
-      if (context.read<TasksBloc>().state.tasks.values.any(
-            (task) => task.profileName == name,
-          )) {
+      final tasks = context.read<TasksBloc>().state.tasks;
+      if (tasks.values.any((task) => task.profileName == name)) {
         Vibrate.error();
         return showDialog<void>(
           context: context,

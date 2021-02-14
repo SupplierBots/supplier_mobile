@@ -442,8 +442,8 @@ class __$TasksStateCopyWithImpl<$Res> extends _$TasksStateCopyWithImpl<$Res>
 @JsonSerializable()
 
 /// @nodoc
-class _$_TasksState implements _TasksState {
-  const _$_TasksState({this.tasks});
+class _$_TasksState extends _TasksState {
+  const _$_TasksState({this.tasks}) : super._();
 
   factory _$_TasksState.fromJson(Map<String, dynamic> json) =>
       _$_$_TasksStateFromJson(json);
@@ -479,7 +479,8 @@ class _$_TasksState implements _TasksState {
   }
 }
 
-abstract class _TasksState implements TasksState {
+abstract class _TasksState extends TasksState {
+  const _TasksState._() : super._();
   const factory _TasksState({Map<String, Task> tasks}) = _$_TasksState;
 
   factory _TasksState.fromJson(Map<String, dynamic> json) =

@@ -28,6 +28,9 @@ class FormSwitch extends StatelessWidget {
     return FormBuilderField(
       name: name,
       validator: validator,
+      valueTransformer: (bool value) {
+        return value ?? false;
+      },
       builder: (FormFieldState<bool> field) {
         final current = field.value ?? false;
 

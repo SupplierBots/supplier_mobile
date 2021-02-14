@@ -58,12 +58,21 @@ class TasksEditor extends HookWidget {
         }
       },
       builder: (context, state) {
+        int _getEditedIndex() {
+          final tasks = context.read<TasksBloc>().state.tasks;
+          final index = state.editedTaskUid.fold(
+            () => tasks.length,
+            (uid) => tasks.entries.toList().indexWhere((t) => t.key == uid),
+          );
+          return index + 1;
+        }
+
         return Scaffold(
           backgroundColor: kBackgroundColor,
           appBar: TopBar(
             content: EditHeader(
               primaryText: 'Tasks',
-              secondaryText: 'Editor',
+              secondaryText: 'Editing #${_getEditedIndex()} Task',
               isEditing: state.isEditing,
               confirmAction: _submit,
               cancelAction: () {
