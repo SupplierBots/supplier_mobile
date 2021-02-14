@@ -13,7 +13,7 @@ import 'package:injectable/injectable.dart';
 import 'application/auth/auth_cubit.dart';
 import 'application/auth/auth_forms/auth_forms_cubit.dart';
 import 'domain/auth/auth_repository.dart';
-import 'application/dashboard/dashboard_bloc.dart';
+import 'application/dashboard/dashboard_cubit.dart';
 import 'domain/dashboard/dashboard_repository.dart';
 import 'infrastructure/auth/firebase_auth_repository.dart';
 import 'infrastructure/dashboard/firebase_dashboard_repository.dart';
@@ -39,7 +39,7 @@ GetIt $initGetIt(
       () => FirebaseDashboardRepository(get<FirebaseFirestore>()));
   gh.factory<AuthCubit>(() => AuthCubit(get<AuthRepository>()));
   gh.factory<AuthFormsCubit>(() => AuthFormsCubit(get<AuthRepository>()));
-  gh.factory<DashboardBloc>(() => DashboardBloc(get<DashboardRepository>()));
+  gh.factory<DashboardCubit>(() => DashboardCubit(get<DashboardRepository>()));
   return get;
 }
 

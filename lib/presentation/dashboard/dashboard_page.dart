@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supplier_mobile/application/dashboard/dashboard_bloc.dart';
+import 'package:supplier_mobile/application/dashboard/dashboard_cubit.dart';
 import 'package:supplier_mobile/inject.dart';
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
 import 'package:supplier_mobile/presentation/dashboard/widgets/droplists_section.dart';
@@ -13,9 +13,9 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<DashboardBloc>()
-        ..add(const DashboardEvent.startedWatchingGeneralInfo())
-        ..add(const DashboardEvent.startedWatchingDroplists()),
+      create: (context) => getIt<DashboardCubit>()
+        ..startedWatchingGeneralInfo()
+        ..startedWatchingDroplists(),
       child: Scaffold(
         appBar: TopBar(
           content: Text(
