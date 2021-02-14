@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:supplier_mobile/application/auth/auth_bloc.dart';
+import 'package:supplier_mobile/application/auth/auth_cubit.dart';
 import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +14,7 @@ class SignOutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void signOut() {
-      context.read<AuthBloc>().add(const AuthEvent.pressedSignOutButton());
+      context.read<AuthCubit>().pressedSignOutButton();
       ExtendedNavigator.of(context).replace(Routes.splashPage);
     }
 

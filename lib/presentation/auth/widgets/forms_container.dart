@@ -2,7 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supplier_mobile/application/auth/auth_bloc.dart';
+import 'package:supplier_mobile/application/auth/auth_cubit.dart';
 import 'package:supplier_mobile/application/auth/auth_forms/auth_forms_cubit.dart';
 import 'package:supplier_mobile/presentation/auth/widgets/main_logo.dart';
 import 'package:supplier_mobile/presentation/auth/widgets/register_form.dart';
@@ -27,9 +27,7 @@ class FormsContainer extends StatelessWidget {
           either.fold(
             (failure) {},
             (success) {
-              context
-                  .read<AuthBloc>()
-                  .add(const AuthEvent.authCheckRequested());
+              context.read<AuthCubit>().authCheckRequested();
               ExtendedNavigator.of(context).replace(Routes.dashboardPage);
             },
           )
