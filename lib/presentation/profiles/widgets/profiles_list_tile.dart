@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
-import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_bloc.dart';
+import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_bloc.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
@@ -53,7 +53,7 @@ class ProfilesListTile extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Vibrate.tap();
-        context.read<ProfilesEditorBloc>().add(StartedEditing(name));
+        context.read<ProfilesEditorCubit>().startedEditing(name);
       },
       child: Container(
         padding: const EdgeInsets.only(left: 18),

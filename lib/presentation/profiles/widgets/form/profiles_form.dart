@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
-import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_bloc.dart';
+import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_cubit.dart';
 import 'package:supplier_mobile/presentation/core/form/form_dropdown.dart';
 import 'package:supplier_mobile/presentation/core/form/form_text_field.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
@@ -23,7 +23,7 @@ class ProfilesForm extends HookWidget {
 
     useMemoized(() {
       final profileName =
-          context.read<ProfilesEditorBloc>().state.editedProfile;
+          context.read<ProfilesEditorCubit>().state.editedProfile;
       final profiles = context.read<ProfilesCubit>().state.profiles;
       if (!profiles.containsKey(profileName)) return null;
       initialValues.value = profiles[profileName].toJson();

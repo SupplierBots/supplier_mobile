@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
-import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_bloc.dart';
+import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_cubit.dart';
 import 'package:supplier_mobile/domain/profiles/profile.dart';
 import 'package:supplier_mobile/presentation/core/edit_header.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
@@ -31,18 +31,18 @@ class ProfilesEditor extends HookWidget {
       if (!formKey.currentState.saveAndValidate()) return false;
 
       final profileName =
-          context.read<ProfilesEditorBloc>().state.editedProfile;
+          context.read<ProfilesEditorCubit>().state.editedProfile;
       final profile = Profile.fromJson(formKey.currentState.value);
 
       context.read<ProfilesCubit>().setProfile(
             name: profileName,
             profile: profile,
           );
-      context.read<ProfilesEditorBloc>().add(const Saved());
+      context.read<ProfilesEditorCubit>().finishedEditing();
       return true;
     }
 
-    return BlocConsumer<ProfilesEditorBloc, ProfilesEditorState>(
+    return BlocConsumer<ProfilesEditorCubit, ProfilesEditorState>(
         listener: (context, state) {
       if (state.isEditing) {
         _controller.forward();
@@ -62,7 +62,7 @@ class ProfilesEditor extends HookWidget {
                   Profile.fromJson(formKey.currentState.initialValue) !=
                       Profile.fromJson(formKey.currentState.value);
               return Tuple2(showAlert, () {
-                context.read<ProfilesEditorBloc>().add(const Canceled());
+                context.read<ProfilesEditorCubit>().finishedEditing();
               });
             },
             confirmAction: _submitProfile,
@@ -79,8 +79,8 @@ class ProfilesEditor extends HookWidget {
                       context: context,
                       barrierDismissible: false,
                       builder: (_) {
-                        return BlocProvider<ProfilesEditorBloc>.value(
-                          value: context.read<ProfilesEditorBloc>(),
+                        return BlocProvider<ProfilesEditorCubit>.value(
+                          value: context.read<ProfilesEditorCubit>(),
                           child: CreateProfileModal(),
                         );
                       },

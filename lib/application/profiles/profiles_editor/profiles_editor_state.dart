@@ -1,4 +1,4 @@
-part of 'profiles_editor_bloc.dart';
+part of 'profiles_editor_cubit.dart';
 
 @freezed
 abstract class ProfilesEditorState with _$ProfilesEditorState {

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
-import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_bloc.dart';
+import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_cubit.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/form/form_text_field.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
@@ -27,7 +27,7 @@ class CreateProfileModal extends HookWidget {
       }
       Vibrate.tap();
       final name = formKey.currentState.value['name'] as String;
-      context.read<ProfilesEditorBloc>().add(StartedEditing(name));
+      context.read<ProfilesEditorCubit>().startedEditing(name);
       Navigator.of(context).pop();
     }
 
