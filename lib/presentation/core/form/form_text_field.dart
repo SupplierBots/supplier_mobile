@@ -12,19 +12,20 @@ import 'package:supplier_mobile/presentation/core/color_extensions.dart';
 import 'package:supplier_mobile/presentation/core/gradient_border_container.dart';
 
 class FormTextField extends FormBuilderField<String> {
-  FormTextField({
-    Key key,
-    @required String name,
-    FormFieldValidator<String> validator,
-    ValueTransformer<String> valueTransformer,
-    MaskedTextInputFormatter mask,
-    String initialValue,
-    bool isLast = false,
-    @required this.placeholder,
-    this.obscure = false,
-    this.type = TextInputType.text,
-    this.optional = false,
-  }) : super(
+  FormTextField(
+      {Key key,
+      @required String name,
+      FormFieldValidator<String> validator,
+      ValueTransformer<String> valueTransformer,
+      MaskedTextInputFormatter mask,
+      String initialValue,
+      bool isLast = false,
+      @required this.placeholder,
+      this.obscure = false,
+      this.type = TextInputType.text,
+      this.optional = false,
+      this.backgroundColor = kSecondaryBackground})
+      : super(
           key: key,
           name: name,
           validator: optional
@@ -53,7 +54,7 @@ class FormTextField extends FormBuilderField<String> {
                 return kRedGradient;
               }
 
-              return kSecondaryBackground.toLinearGradient();
+              return backgroundColor.toLinearGradient();
             }
 
             return GradientBorderContainer(
@@ -102,7 +103,7 @@ class FormTextField extends FormBuilderField<String> {
                     ),
                   ),
                   filled: true,
-                  fillColor: kSecondaryBackground,
+                  fillColor: backgroundColor,
                   hintStyle: const TextStyle(color: kLighGrey),
                   hintText: placeholder,
                   errorStyle: const TextStyle(
@@ -119,6 +120,7 @@ class FormTextField extends FormBuilderField<String> {
   final TextInputType type;
   final bool obscure;
   final bool optional;
+  final Color backgroundColor;
 
   @override
   _FormTextFieldState createState() => _FormTextFieldState();
