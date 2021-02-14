@@ -32,7 +32,6 @@ class FirebaseDashboardRepository implements DashboardRepository {
               ),
             )).onErrorReturnWith(
       (dynamic e) {
-        print(e.toString());
         return left<DashboardFailure, DroplistCollection>(
           const DashboardFailure.unexpected(),
         );
@@ -65,7 +64,6 @@ class FirebaseDashboardRepository implements DashboardRepository {
         )
         .onErrorReturnWith(
       (dynamic e) {
-        print(e.toString());
         return left<DashboardFailure, GeneralInfo>(
           const DashboardFailure.unexpected(),
         );
