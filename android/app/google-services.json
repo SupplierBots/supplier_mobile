@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "741398503521",
+    "firebase_url": "https://safedrop-83b20.firebaseio.com",
+    "project_id": "safedrop-83b20",
+    "storage_bucket": "safedrop-83b20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:741398503521:android:edd3d3b46a10d21651ca20",
+        "android_client_info": {
+          "package_name": "io.supplierbots.supplier"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "741398503521-ru4enrlosjd3u1kqn1lhc8jt83hbosc2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbF1l9M6gZ7zORsDHGUIxuyaKgJp1uV7I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "741398503521-ru4enrlosjd3u1kqn1lhc8jt83hbosc2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "741398503521-4p09k4247gnk6edsmkue2bnf3rsles8u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.supplierbots.supplier"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

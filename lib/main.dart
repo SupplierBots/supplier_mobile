@@ -21,7 +21,8 @@ Future<void> main() async {
 Future<void> initializeStorage() async {
   const secureStorage = FlutterSecureStorage();
   const secureStorageKey = 'encryptionKey';
-  if (!await secureStorage.containsKey(key: secureStorageKey)) {
+  final containsKey = await secureStorage.containsKey(key: secureStorageKey);
+  if (!containsKey) {
     await secureStorage.write(
       key: secureStorageKey,
       value: base64UrlEncode(Hive.generateSecureKey()),

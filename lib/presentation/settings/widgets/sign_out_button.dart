@@ -20,8 +20,8 @@ class SignOutButton extends StatelessWidget {
 
     return SecondaryButton(
       gradient: kRedGradient,
-      text: 'Logout',
-      width: 100,
+      text: 'Sign out',
+      width: 110,
       height: 45,
       onTap: signOut,
     );
