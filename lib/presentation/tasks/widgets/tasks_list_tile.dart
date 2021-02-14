@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
-import 'package:supplier_mobile/application/tasks/tasks_editor/bloc/tasks_editor_bloc.dart';
+import 'package:supplier_mobile/application/tasks/tasks_editor/tasks_editor_cubit.dart';
 import 'package:supplier_mobile/domain/tasks/task.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
@@ -40,9 +40,7 @@ class TasksListTile extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Vibrate.tap();
-        context
-            .read<TasksEditorBloc>()
-            .add(TasksEditorEvent.startedEditing(optionOf(uid)));
+        context.read<TasksEditorCubit>().startedEditing(optionOf(uid));
       },
       child: Container(
         width: double.infinity,

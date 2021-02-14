@@ -1,4 +1,4 @@
-part of 'tasks_editor_bloc.dart';
+part of 'tasks_editor_cubit.dart';
 
 @freezed
 abstract class TasksEditorState implements _$TasksEditorState {

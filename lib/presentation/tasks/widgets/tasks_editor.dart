@@ -5,7 +5,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
-import 'package:supplier_mobile/application/tasks/tasks_editor/bloc/tasks_editor_bloc.dart';
+import 'package:supplier_mobile/application/tasks/tasks_editor/tasks_editor_cubit.dart';
 import 'package:supplier_mobile/domain/tasks/task.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
@@ -36,20 +36,18 @@ class TasksEditor extends HookWidget {
       if (!formKey.currentState.saveAndValidate()) return false;
 
       final task = Task.fromJson(formKey.currentState.value);
-      final uid = context.read<TasksEditorBloc>().state.editedTaskUid.fold(
+      final uid = context.read<TasksEditorCubit>().state.editedTaskUid.fold(
             () => Uuid().v4(),
             (uid) => uid,
           );
 
       context.read<TasksCubit>().setTask(uid, task);
-      context
-          .read<TasksEditorBloc>()
-          .add(const TasksEditorEvent.finishedEditing());
+      context.read<TasksEditorCubit>().finishedEditing();
 
       return true;
     }
 
-    return BlocConsumer<TasksEditorBloc, TasksEditorState>(
+    return BlocConsumer<TasksEditorCubit, TasksEditorState>(
       listener: (context, state) {
         if (state.isEditing) {
           _controller.forward();
@@ -81,9 +79,7 @@ class TasksEditor extends HookWidget {
                     Task.fromJson(formKey.currentState.initialValue) !=
                         Task.fromJson(formKey.currentState.value);
                 return Tuple2(showAlert, () {
-                  context
-                      .read<TasksEditorBloc>()
-                      .add(const TasksEditorEvent.finishedEditing());
+                  context.read<TasksEditorCubit>().finishedEditing();
                 });
               },
             ),
@@ -109,9 +105,7 @@ class TasksEditor extends HookWidget {
                     backgroundColor: kSecondaryBackground,
                     onPressed: () {
                       Vibrate.tap();
-                      context
-                          .read<TasksEditorBloc>()
-                          .add(TasksEditorEvent.startedEditing(none()));
+                      context.read<TasksEditorCubit>().startedEditing(none());
                     },
                     child: const GradientWidget(
                       child: Icon(
