@@ -8,6 +8,7 @@ import 'package:supplier_mobile/presentation/core/buttons/primary_button.dart';
 import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
 import 'package:supplier_mobile/presentation/core/form/form_text_field.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
+import 'package:supplier_mobile/presentation/core/vibrate.dart';
 
 class RegisterForm extends StatelessWidget {
   RegisterForm({
@@ -22,9 +23,10 @@ class RegisterForm extends StatelessWidget {
 
     void submit() {
       if (!formKey.currentState.saveAndValidate()) {
+        Vibrate.error();
         return;
       }
-
+      Vibrate.tap();
       final credentials =
           RegisterCredentials.fromJson(formKey.currentState.value);
       context.read<AuthFormsCubit>().createAccountPressed(credentials);
@@ -92,6 +94,7 @@ class RegisterForm extends StatelessWidget {
                 height: 45,
                 width: 115,
                 onTap: () {
+                  Vibrate.tap();
                   context.read<AuthFormsCubit>().signInOrRegisterToggled();
                 },
               ),

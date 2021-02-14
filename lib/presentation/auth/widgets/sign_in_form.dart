@@ -10,6 +10,7 @@ import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/form/form_text_field.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
+import 'package:supplier_mobile/presentation/core/vibrate.dart';
 
 class SignInForm extends StatelessWidget {
   SignInForm({
@@ -22,9 +23,10 @@ class SignInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     void submit() {
       if (!formKey.currentState.saveAndValidate()) {
+        Vibrate.error();
         return;
       }
-
+      Vibrate.tap();
       final credentials =
           SignInCredentials.fromJson(formKey.currentState.value);
 
@@ -88,6 +90,7 @@ class SignInForm extends StatelessWidget {
                   height: 45,
                   width: 115,
                   onTap: () {
+                    Vibrate.tap();
                     context.read<AuthFormsCubit>().signInOrRegisterToggled();
                   },
                 ),
