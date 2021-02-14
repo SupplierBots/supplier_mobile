@@ -12,34 +12,33 @@ class ProfilesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfilesCubit, ProfilesState>(
-      builder: (context, state) {
-        final container = state.profiles.isNotEmpty
-            ? Container(
-                margin: const EdgeInsets.only(top: 20.0),
-                child: Wrap(
-                  alignment: WrapAlignment.center,
-                  runSpacing: kPrimaryElementsSpacing,
-                  children: state.profiles.entries
-                      .map((profile) => ProfilesListTile(name: profile.key))
-                      .toList(),
-                ),
-              )
-            : Center(
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 125),
-                  child: const Text(
-                    "You haven't created any profiles yet",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: kDarkGrey,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-              );
-        return container;
-      },
+    final state = context.watch<ProfilesCubit>().state;
+
+    if (state.profiles.isNotEmpty) {
+      return Container(
+        margin: const EdgeInsets.only(top: 20.0),
+        child: Wrap(
+          alignment: WrapAlignment.center,
+          runSpacing: kPrimaryElementsSpacing,
+          children: state.profiles.entries
+              .map((profile) => ProfilesListTile(name: profile.key))
+              .toList(),
+        ),
+      );
+    }
+
+    return Center(
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 125),
+        child: const Text(
+          "You haven't created any profiles yet",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: kDarkGrey,
+            fontSize: 18,
+          ),
+        ),
+      ),
     );
   }
 }

@@ -31,74 +31,71 @@ class SignInForm extends StatelessWidget {
       context.read<AuthFormsCubit>().signInPressed(credentials);
     }
 
-    return BlocBuilder<AuthFormsCubit, AuthFormsState>(
-        builder: (context, state) {
-      return FormBuilder(
-        key: formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            FormTextField(
-              name: 'email',
-              placeholder: 'Email',
-              type: TextInputType.emailAddress,
-              validator: FormBuilderValidators.email(context,
-                  errorText: 'Invalid email'),
-            ),
-            const SizedBox(
-              height: kPrimaryElementsSpacing,
-            ),
-            FormTextField(
-              isLast: true,
-              name: 'password',
-              placeholder: 'Password',
-              obscure: true,
-            ),
-            const SizedBox(height: 15),
-            ErrorRenderer(),
-            PrimaryButton(
-              text: 'Sign in',
-              height: 45,
-              width: 120,
-              onTap: submit,
-            ),
-            Center(
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  const SizedBox(
-                    width: 35,
-                    child: GradientWidget(
-                      child: Divider(
-                        thickness: 1,
-                        height: 25,
-                        color: Colors.white,
-                      ),
+    return FormBuilder(
+      key: formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          FormTextField(
+            name: 'email',
+            placeholder: 'Email',
+            type: TextInputType.emailAddress,
+            validator: FormBuilderValidators.email(context,
+                errorText: 'Invalid email'),
+          ),
+          const SizedBox(
+            height: kPrimaryElementsSpacing,
+          ),
+          FormTextField(
+            isLast: true,
+            name: 'password',
+            placeholder: 'Password',
+            obscure: true,
+          ),
+          const SizedBox(height: 15),
+          ErrorRenderer(),
+          PrimaryButton(
+            text: 'Sign in',
+            height: 45,
+            width: 120,
+            onTap: submit,
+          ),
+          Center(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 40,
+                ),
+                const SizedBox(
+                  width: 35,
+                  child: GradientWidget(
+                    child: Divider(
+                      thickness: 1,
+                      height: 25,
+                      color: Colors.white,
                     ),
                   ),
-                  const Text(
-                    "Don't have an account yet?",
-                    style: TextStyle(fontSize: 17, color: kLightPurple),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  SecondaryButton(
-                    text: 'Create',
-                    height: 45,
-                    width: 115,
-                    onTap: () {
-                      context.read<AuthFormsCubit>().signInOrRegisterToggled();
-                    },
-                  ),
-                ],
-              ),
+                ),
+                const Text(
+                  "Don't have an account yet?",
+                  style: TextStyle(fontSize: 17, color: kLightPurple),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                SecondaryButton(
+                  text: 'Create',
+                  height: 45,
+                  width: 115,
+                  onTap: () {
+                    context.read<AuthFormsCubit>().signInOrRegisterToggled();
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-      );
-    });
+          ),
+        ],
+      ),
+    );
   }
 }

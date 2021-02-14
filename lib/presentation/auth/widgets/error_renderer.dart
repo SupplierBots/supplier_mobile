@@ -7,40 +7,37 @@ import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 class ErrorRenderer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthFormsCubit, AuthFormsState>(
-      builder: (context, state) {
-        return Column(
-          children: state.failureOrSuccessOption.fold(
-            () => [],
-            (either) => either.fold((failure) {
-              final message = failure.map(
-                  serverError: (_) => 'Something went wrong. Try again later.',
-                  emailAlreadyInUse: (_) => 'Email already in use.',
-                  invalidCredentials: (_) => 'Invalid email or password.',
-                  incorrectLicense: (_) => 'Incorrect license key.',
-                  maxInstancesNumberExceeded: (f) =>
-                      'Already signed in on ${f.maxInstances} other phones.');
-              return [
-                Column(
-                  children: [
-                    GradientWidget(
-                      gradient: kRedGradient,
-                      child: Text(
-                        message,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
+    final state = context.watch<AuthFormsCubit>().state;
+    return Column(
+      children: state.failureOrSuccessOption.fold(
+        () => [],
+        (either) => either.fold((failure) {
+          final message = failure.map(
+              serverError: (_) => 'Something went wrong. Try again later.',
+              emailAlreadyInUse: (_) => 'Email already in use.',
+              invalidCredentials: (_) => 'Invalid email or password.',
+              incorrectLicense: (_) => 'Incorrect license key.',
+              maxInstancesNumberExceeded: (f) =>
+                  'Already signed in on ${f.maxInstances} other phones.');
+          return [
+            Column(
+              children: [
+                GradientWidget(
+                  gradient: kRedGradient,
+                  child: Text(
+                    message,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
                     ),
-                    const SizedBox(height: 15)
-                  ],
+                  ),
                 ),
-              ];
-            }, (u) => []),
-          ),
-        );
-      },
+                const SizedBox(height: 15)
+              ],
+            ),
+          ];
+        }, (u) => []),
+      ),
     );
   }
 }
