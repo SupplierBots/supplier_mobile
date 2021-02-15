@@ -53,20 +53,6 @@ class HelpPage extends StatelessWidget {
                 const SizedBox(
                   height: kPrimaryElementsSpacing,
                 ),
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: FormTextField(
-                            name: 'enter colors', placeholder: 'Enter colors'),
-                      ),
-                    ),
-                    const SecondaryButton(
-                        text: 'Add', width: 85, height: 50, onTap: null),
-                  ],
-                ),
                 const SizedBox(height: kPrimaryElementsSpacing),
                 const FormDropdown(
                     name: 'Select Size',
