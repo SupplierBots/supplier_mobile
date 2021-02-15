@@ -15,7 +15,10 @@
     "build": true,
     ".vscode": true,
     "pubspec.lock": true,
-    "README.md": true
+    "README.md": true,
+    "symbols": true,
+    ".idea": true,
+    "supplier_mobile.iml": true
   },
   "explorerExclude.backup": null,
 }
