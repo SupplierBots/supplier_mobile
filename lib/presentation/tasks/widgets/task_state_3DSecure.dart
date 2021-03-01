@@ -24,7 +24,7 @@ class SecureState extends StatelessWidget {
           ),
           const Divider(height: 15),
           const SecondaryButton(
-              text: 'Solve', width: 90, height: 30, onTap: null),
+              text: 'Confirm', width: 90, height: 30, onTap: null),
         ],
       ),
     );
