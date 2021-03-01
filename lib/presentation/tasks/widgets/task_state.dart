@@ -3,20 +3,36 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
+import 'package:supplier_mobile/presentation/tasks/widgets/inprogress_state.dart';
+import 'package:supplier_mobile/presentation/tasks/widgets/task_state_3DSecure.dart';
+import 'package:supplier_mobile/presentation/tasks/widgets/task_state_captcha.dart';
+import 'package:supplier_mobile/presentation/tasks/widgets/task_state_enum.dart';
 
 class TaskState extends HookWidget {
+  Widget getTaskState() {
+    var state = TaskProgress.inProgress;
+    switch (state) {
+      case TaskProgress.captcha:
+        return const CaptchaState();
+      case TaskProgress.secure:
+        return const SecureState();
+      default:
+        return const InProgressState();
+    }
+  }
+
   String get itemName => 'Swaggowe Bogo';
 
   String get profileName => 'Mefedron';
 
-  String get statusName => 'Waiting for confirmation';
+  String get statusName => 'Added to card';
 
   double get status => 1;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 145,
+      height: 110,
       width: double.infinity,
       decoration: const BoxDecoration(
         color: kSecondaryBackground,
@@ -31,13 +47,14 @@ class TaskState extends HookWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 15),
+                const SizedBox(height: 16),
                 Row(
                   children: [
                     const GradientWidget(
                       child: Icon(
                         CustomIcons.tshirt,
                         color: Colors.white,
+                        size: 18,
                       ),
                     ),
                     const SizedBox(
@@ -45,11 +62,11 @@ class TaskState extends HookWidget {
                     ),
                     Text(
                       itemName,
-                      style: const TextStyle(fontSize: 20, color: kLightPurple),
+                      style: const TextStyle(fontSize: 14, color: kLightPurple),
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 12),
                 Row(
                   children: [
                     const GradientWidget(
@@ -58,17 +75,18 @@ class TaskState extends HookWidget {
                         child: Icon(
                           CustomIcons.profiles,
                           color: Colors.white,
+                          size: 18,
                         ),
                       ),
                     ),
                     const SizedBox(width: 17),
                     Text(
                       profileName,
-                      style: const TextStyle(fontSize: 20, color: kLightPurple),
+                      style: const TextStyle(fontSize: 14, color: kLightPurple),
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 12),
                 Row(
                   children: [
                     const GradientWidget(
@@ -77,29 +95,21 @@ class TaskState extends HookWidget {
                         child: Icon(
                           Icons.info_outline,
                           color: Colors.white,
+                          size: 18,
                         ),
                       ),
                     ),
                     const SizedBox(width: 17),
                     Text(
                       statusName,
-                      style: const TextStyle(fontSize: 15, color: kLighGrey),
+                      style: const TextStyle(fontSize: 14, color: kLighGrey),
                     ),
                   ],
                 ),
               ],
             ),
             const Spacer(),
-            Container(
-              padding: const EdgeInsets.only(right: 40),
-              child: const SizedBox(
-                height: 50,
-                width: 50,
-                child: CircularProgressIndicator(
-                  strokeWidth: 4,
-                ),
-              ),
-            ),
+            getTaskState(),
           ],
         ),
       ),

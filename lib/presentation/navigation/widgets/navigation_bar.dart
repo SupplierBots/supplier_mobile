@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
-import 'package:supplier_mobile/presentation/dashboard/dashboard_page.dart';
-import 'package:supplier_mobile/presentation/help/help_page.dart';
 import 'package:supplier_mobile/presentation/navigation/router.gr.dart';
-import 'package:supplier_mobile/presentation/settings/settings_page.dart';
-import 'package:supplier_mobile/presentation/tasks/tasks_page.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'navigation_button.dart';
 

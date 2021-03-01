@@ -1,12 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/edit_header.dart';
 import 'package:supplier_mobile/presentation/core/form/form_dropdown.dart';
-import 'package:supplier_mobile/presentation/core/form/form_switch.dart';
-import 'package:supplier_mobile/presentation/core/form/form_text_field.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
 
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
