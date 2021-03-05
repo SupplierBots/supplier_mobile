@@ -87,18 +87,14 @@ class TasksEditor extends HookWidget {
           body: Center(
             child: FractionallySizedBox(
               widthFactor: kMainContentScreenWidth,
-              child: Column(
-                children: [
-                  if (state.isEditing)
-                    TasksForm(formKey: formKey)
-                  else
-                    const TasksList(),
-                ],
-              ),
+              child: state.isEditing
+                  ? TasksForm(formKey: formKey)
+                  : const TasksList(),
             ),
           ),
           floatingActionButton: !state.isEditing &&
-                  context.read<ProfilesCubit>().state.profiles.isNotEmpty
+                  context.read<ProfilesCubit>().state.profiles.isNotEmpty &&
+                  context.read<TasksCubit>().state.tasks.length < 4
               ? Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: FloatingActionButton(

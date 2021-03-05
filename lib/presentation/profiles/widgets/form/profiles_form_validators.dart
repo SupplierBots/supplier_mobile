@@ -22,6 +22,16 @@ String Function(String) nameValidator(BuildContext context) => (String value) {
       return null;
     };
 
+String Function(String) addressValidator(BuildContext context) =>
+    (String value) {
+      const nameRegex =
+          r'^[(?-mix:a-zA-Z 0-9àèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ)\-\.]+$';
+      if (value.isEmpty || !RegExp(nameRegex).hasMatch(value.trim())) {
+        return 'Invalid format';
+      }
+      return null;
+    };
+
 String Function(String) phoneValidator(BuildContext context) => (String value) {
       const phoneRegex = r'^[0-9]{9,10}$';
       final parsed = value.replaceAll(RegExp(r'-|\(|\)|\s'), '');

@@ -155,15 +155,18 @@ class ProfilesForm extends HookWidget {
               FormTextField(
                 name: 'address',
                 placeholder: 'Address',
+                validator: addressValidator(context),
               ),
               FormTextField(
                 name: 'addressDetails',
                 placeholder: 'Address Details',
+                validator: addressValidator(context),
                 optional: true,
               ),
               FormTextField(
                 name: 'city',
                 placeholder: 'City',
+                validator: addressValidator(context),
               ),
               FormTextField(
                 isLast: true,

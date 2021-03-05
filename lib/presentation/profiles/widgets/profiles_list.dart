@@ -15,15 +15,14 @@ class ProfilesList extends StatelessWidget {
     final state = context.watch<ProfilesCubit>().state;
 
     if (state.profiles.isNotEmpty) {
-      return Container(
-        margin: const EdgeInsets.only(top: 20.0),
-        child: Wrap(
-          alignment: WrapAlignment.center,
-          runSpacing: kPrimaryElementsSpacing,
-          children: state.profiles.entries
-              .map((profile) => ProfilesListTile(name: profile.key))
-              .toList(),
-        ),
+      return ListView(
+        children: [
+          const SizedBox(height: 20),
+          for (var profile in state.profiles.entries) ...[
+            ProfilesListTile(name: profile.key),
+            const SizedBox(height: kPrimaryElementsSpacing)
+          ]
+        ],
       );
     }
 

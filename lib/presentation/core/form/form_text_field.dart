@@ -12,20 +12,21 @@ import 'package:supplier_mobile/presentation/core/color_extensions.dart';
 import 'package:supplier_mobile/presentation/core/gradient_border_container.dart';
 
 class FormTextField extends FormBuilderField<String> {
-  FormTextField(
-      {Key key,
-      @required String name,
-      FormFieldValidator<String> validator,
-      ValueTransformer<String> valueTransformer,
-      MaskedTextInputFormatter mask,
-      String initialValue,
-      bool isLast = false,
-      @required this.placeholder,
-      this.obscure = false,
-      this.type = TextInputType.text,
-      this.optional = false,
-      this.backgroundColor = kSecondaryBackground})
-      : super(
+  FormTextField({
+    Key key,
+    @required String name,
+    FormFieldValidator<String> validator,
+    ValueTransformer<String> valueTransformer,
+    MaskedTextInputFormatter mask,
+    String initialValue,
+    bool isLast = false,
+    @required this.placeholder,
+    this.obscure = false,
+    this.type = TextInputType.text,
+    this.optional = false,
+    this.backgroundColor = kSecondaryBackground,
+    this.validateOnFocusChange = true,
+  }) : super(
           key: key,
           name: name,
           validator: optional
@@ -120,6 +121,7 @@ class FormTextField extends FormBuilderField<String> {
   final TextInputType type;
   final bool obscure;
   final bool optional;
+  final bool validateOnFocusChange;
   final Color backgroundColor;
 
   @override
@@ -179,7 +181,7 @@ class _FormTextFieldState extends FormBuilderFieldState<FormTextField, String> {
       if (_isFocused) {
         _effectiveController.selection =
             TextSelection.collapsed(offset: value?.length ?? 0);
-      } else {
+      } else if (widget.validateOnFocusChange) {
         validate();
       }
     });

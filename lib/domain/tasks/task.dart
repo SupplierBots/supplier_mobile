@@ -11,7 +11,7 @@ abstract class Task with _$Task {
     @required String size,
     @required bool anyColor,
     @required bool anySize,
-    List<String> colors,
+    @required List<String> colors,
   }) = _Task;
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 }

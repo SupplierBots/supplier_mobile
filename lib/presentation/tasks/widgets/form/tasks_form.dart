@@ -5,12 +5,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_editor/tasks_editor_cubit.dart';
-import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/form/form_dropdown.dart';
 import 'package:supplier_mobile/presentation/core/form/form_switch.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
-import 'package:supplier_mobile/presentation/tasks/widgets/choosing_color_widget.dart';
+import 'package:supplier_mobile/presentation/core/form/form_multi_select_field.dart';
 
 class TasksForm extends HookWidget {
   const TasksForm({
@@ -29,22 +28,24 @@ class TasksForm extends HookWidget {
 
       initialValues.value = uidOption.fold(
         () => null,
-        (uid) => tasks[uid].toJson(),
+        (uid) {
+          print(tasks[uid].toJson());
+          return tasks[uid].toJson();
+        },
       );
     });
 
     return FormBuilder(
       key: formKey,
       initialValue: initialValues.value,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
         children: [
           const SizedBox(
-            height: 15,
+            height: 20,
           ),
           const Header(text: 'Product details', underlineWidth: 220),
           const SizedBox(
-            height: kPrimaryElementsSpacing,
+            height: 15,
           ),
           FormDropdown(
             name: 'profileName',
@@ -64,28 +65,11 @@ class TasksForm extends HookWidget {
             placeholder: 'Product',
           ),
           const SizedBox(height: kPrimaryElementsSpacing),
-          const ColorChoosing(),
-          const SizedBox(
-            height: kPrimaryElementsSpacing,
-          ),
-          Row(
-            children: [
-              Flexible(
-                child: Container(
-                  margin: const EdgeInsets.only(right: kPrimaryElementsSpacing),
-                  // child: FormTextField(
-                  //   name: 'enter colors',
-                  //   placeholder: 'Enter colors',
-                  // ),
-                ),
-              ),
-              const SecondaryButton(
-                text: 'Add',
-                width: 85,
-                height: 50,
-                onTap: null,
-              ),
-            ],
+          FormMultiSelectField(
+            name: 'colors',
+            title: 'Colors',
+            placeholder: 'Enter color',
+            formKey: formKey,
           ),
           const SizedBox(height: kPrimaryElementsSpacing),
           const FormDropdown(

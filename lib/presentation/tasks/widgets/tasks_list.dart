@@ -21,21 +21,16 @@ class TasksList extends StatelessWidget {
     final state = context.watch<TasksCubit>().state;
 
     if (state.tasks.isNotEmpty) {
-      return Container(
-        margin: const EdgeInsets.only(top: 20.0),
-        child: Wrap(
-          alignment: WrapAlignment.center,
-          runSpacing: kPrimaryElementsSpacing,
-          children: state.tasks.entries
-              .map(
-                (task) => TasksListTile(
-                  uid: task.key,
-                  task: task.value,
-                ),
-              )
-              .toList(),
-        ),
-      );
+      return ListView(children: [
+        const SizedBox(height: 20),
+        for (var task in state.tasks.entries) ...[
+          TasksListTile(
+            uid: task.key,
+            task: task.value,
+          ),
+          const SizedBox(height: kPrimaryElementsSpacing),
+        ]
+      ]);
     }
     return Expanded(
       child: Center(

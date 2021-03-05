@@ -3,10 +3,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
-import 'package:supplier_mobile/presentation/tasks/widgets/inprogress_state.dart';
+import 'package:supplier_mobile/presentation/tasks/widgets/in_progress_state.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/task_state_3DSecure.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/task_state_captcha.dart';
-import 'package:supplier_mobile/presentation/tasks/widgets/task_state_enum.dart';
+import 'package:supplier_mobile/presentation/tasks/widgets/task_progress.dart';
 
 class TaskState extends HookWidget {
   Widget getTaskState() {

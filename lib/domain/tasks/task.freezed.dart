@@ -23,7 +23,7 @@ class _$TaskTearOff {
       @required String size,
       @required bool anyColor,
       @required bool anySize,
-      List<String> colors}) {
+      @required List<String> colors}) {
     return _Task(
       product: product,
       profileName: profileName,
@@ -154,12 +154,13 @@ class _$_Task implements _Task {
       @required this.size,
       @required this.anyColor,
       @required this.anySize,
-      this.colors})
+      @required this.colors})
       : assert(product != null),
         assert(profileName != null),
         assert(size != null),
         assert(anyColor != null),
-        assert(anySize != null);
+        assert(anySize != null),
+        assert(colors != null);
 
   factory _$_Task.fromJson(Map<String, dynamic> json) =>
       _$_$_TaskFromJson(json);
@@ -232,7 +233,7 @@ abstract class _Task implements Task {
       @required String size,
       @required bool anyColor,
       @required bool anySize,
-      List<String> colors}) = _$_Task;
+      @required List<String> colors}) = _$_Task;
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$_Task.fromJson;
 
