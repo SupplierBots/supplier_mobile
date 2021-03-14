@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:supplier_mobile/application/runner/cubit/runner_cubit.dart';
+import 'package:supplier_mobile/application/runner/cubit/task_progress.dart';
+import 'package:supplier_mobile/domain/tasks/task.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
@@ -8,31 +12,29 @@ import 'package:supplier_mobile/presentation/tasks/widgets/task_state_3DSecure.d
 import 'package:supplier_mobile/presentation/tasks/widgets/task_state_captcha.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/task_progress.dart';
 
-class TaskState extends HookWidget {
-  Widget getTaskState() {
-    var state = TaskProgress.inProgress;
-    switch (state) {
-      case TaskProgress.captcha:
-        return const CaptchaState();
-      case TaskProgress.secure:
-        return const SecureState();
-      default:
-        return const InProgressState();
-    }
-  }
+class TaskView extends HookWidget {
+  const TaskView({
+    @required this.task,
+  });
 
-  String get itemName => 'Swaggowe Bogo';
-
-  String get profileName => 'Mefedron';
-
-  String get statusName => 'Added to card';
-
-  double get status => 1;
+  final MapEntry<Task, TaskProgress> task;
 
   @override
   Widget build(BuildContext context) {
+    Widget getTaskState() {
+      switch (task.value.action) {
+        case TaskAction.captcha:
+          return CaptchaState(solveAction: () {
+            context.read<RunnerCubit>().setVisibleTask(task.key);
+          });
+        case TaskAction.secure:
+          return const SecureState();
+        default:
+          return const InProgressState();
+      }
+    }
+
     return Container(
-      height: 110,
       width: double.infinity,
       decoration: const BoxDecoration(
         color: kSecondaryBackground,
@@ -41,13 +43,13 @@ class TaskState extends HookWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(left: 20),
+        padding:
+            const EdgeInsets.only(top: 15, bottom: 15, left: 20, right: 40),
         child: Row(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 16),
                 Row(
                   children: [
                     const GradientWidget(
@@ -61,7 +63,7 @@ class TaskState extends HookWidget {
                       width: 20,
                     ),
                     Text(
-                      itemName,
+                      task.key.product,
                       style: const TextStyle(fontSize: 14, color: kLightPurple),
                     ),
                   ],
@@ -81,7 +83,7 @@ class TaskState extends HookWidget {
                     ),
                     const SizedBox(width: 17),
                     Text(
-                      profileName,
+                      task.key.profileName,
                       style: const TextStyle(fontSize: 14, color: kLightPurple),
                     ),
                   ],
@@ -101,7 +103,7 @@ class TaskState extends HookWidget {
                     ),
                     const SizedBox(width: 17),
                     Text(
-                      statusName,
+                      task.value.message,
                       style: const TextStyle(fontSize: 14, color: kLighGrey),
                     ),
                   ],

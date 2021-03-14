@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
+import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
@@ -29,56 +30,60 @@ class TasksList extends StatelessWidget {
             task: task.value,
           ),
           const SizedBox(height: kPrimaryElementsSpacing),
-        ]
+        ],
+        SecondaryButton(
+          text: 'Start tasks',
+          width: 180,
+          height: 45,
+          onTap: () {
+            ExtendedNavigator.of(context).replace(Routes.runnerPage);
+          },
+        )
       ]);
     }
-    return Expanded(
-      child: Center(
-        child: Container(
-          margin: const EdgeInsets.only(bottom: 120),
-          child: FractionallySizedBox(
-            widthFactor: 0.8,
-            child: context.read<ProfilesCubit>().state.profiles.isEmpty
-                ? GestureDetector(
-                    onTap: () {
-                      ExtendedNavigator.of(context)
-                          .replace(Routes.profilesPage);
-                    },
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: const TextSpan(
-                        style: TextStyle(
-                          color: kLighGrey,
-                          fontSize: 18,
-                          fontFamily: 'Lato',
-                        ),
-                        children: [
-                          TextSpan(text: 'Firstly, head on to'),
-                          WidgetSpan(
-                            alignment: ui.PlaceholderAlignment.middle,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Icon(
-                                CustomIcons.profiles,
-                                color: kLighGrey,
-                              ),
+    return Center(
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 120),
+        child: FractionallySizedBox(
+          widthFactor: 0.8,
+          child: context.read<ProfilesCubit>().state.profiles.isEmpty
+              ? GestureDetector(
+                  onTap: () {
+                    ExtendedNavigator.of(context).replace(Routes.profilesPage);
+                  },
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: const TextSpan(
+                      style: TextStyle(
+                        color: kLighGrey,
+                        fontSize: 18,
+                        fontFamily: 'Lato',
+                      ),
+                      children: [
+                        TextSpan(text: 'Firstly, head on to'),
+                        WidgetSpan(
+                          alignment: ui.PlaceholderAlignment.middle,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Icon(
+                              CustomIcons.profiles,
+                              color: kLighGrey,
                             ),
                           ),
-                          TextSpan(
-                              text: 'page and create at least one profile'),
-                        ],
-                      ),
-                    ),
-                  )
-                : const Text(
-                    "You haven't created any task yet",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: kDarkGrey,
-                      fontSize: 18,
+                        ),
+                        TextSpan(text: 'page and create at least one profile'),
+                      ],
                     ),
                   ),
-          ),
+                )
+              : const Text(
+                  "You haven't created any task yet",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: kDarkGrey,
+                    fontSize: 18,
+                  ),
+                ),
         ),
       ),
     );

@@ -1,4 +1,4 @@
-enum TaskProgress {
+enum TaskAction {
   inProgress,
   captcha,
   secure,

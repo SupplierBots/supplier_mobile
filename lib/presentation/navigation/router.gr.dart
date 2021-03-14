@@ -13,6 +13,7 @@ import '../auth/auth_page.dart';
 import '../dashboard/dashboard_page.dart';
 import '../help/help_page.dart';
 import '../profiles/profiles_page.dart';
+import '../runner/runner_page.dart';
 import '../settings/settings_page.dart';
 import '../splash/splash_page.dart';
 import '../tasks/tasks_page.dart';
@@ -22,6 +23,7 @@ class Routes {
   static const String authPage = '/auth-page';
   static const String dashboardPage = '/dashboard-page';
   static const String tasksPage = '/tasks-page';
+  static const String runnerPage = '/runner-page';
   static const String profilesPage = '/profiles-page';
   static const String settingsPage = '/settings-page';
   static const String helpPage = '/help-page';
@@ -30,6 +32,7 @@ class Routes {
     authPage,
     dashboardPage,
     tasksPage,
+    runnerPage,
     profilesPage,
     settingsPage,
     helpPage,
@@ -44,6 +47,7 @@ class Router extends RouterBase {
     RouteDef(Routes.authPage, page: AuthPage),
     RouteDef(Routes.dashboardPage, page: DashboardPage),
     RouteDef(Routes.tasksPage, page: TasksPage),
+    RouteDef(Routes.runnerPage, page: RunnerPage),
     RouteDef(Routes.profilesPage, page: ProfilesPage),
     RouteDef(Routes.settingsPage, page: SettingsPage),
     RouteDef(Routes.helpPage, page: HelpPage),
@@ -73,6 +77,12 @@ class Router extends RouterBase {
     TasksPage: (data) {
       return PageRouteBuilder<TasksPage>(
         pageBuilder: (context, animation, secondaryAnimation) => TasksPage(),
+        settings: data,
+      );
+    },
+    RunnerPage: (data) {
+      return PageRouteBuilder<RunnerPage>(
+        pageBuilder: (context, animation, secondaryAnimation) => RunnerPage(),
         settings: data,
       );
     },
@@ -110,6 +120,8 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
       push<DashboardPage>(Routes.dashboardPage);
 
   Future<TasksPage> pushTasksPage() => push<TasksPage>(Routes.tasksPage);
+
+  Future<RunnerPage> pushRunnerPage() => push<RunnerPage>(Routes.runnerPage);
 
   Future<ProfilesPage> pushProfilesPage() =>
       push<ProfilesPage>(Routes.profilesPage);

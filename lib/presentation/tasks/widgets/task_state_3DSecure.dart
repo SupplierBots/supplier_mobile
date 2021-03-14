@@ -6,12 +6,14 @@ import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 class SecureState extends StatelessWidget {
   const SecureState({
     Key key,
+    this.confirmAction,
   }) : super(key: key);
+
+  final VoidCallback confirmAction;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(right: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -23,8 +25,12 @@ class SecureState extends StatelessWidget {
             ),
           ),
           const Divider(height: 15),
-          const SecondaryButton(
-              text: 'Confirm', width: 90, height: 30, onTap: null),
+          SecondaryButton(
+            text: 'Confirm',
+            width: 90,
+            height: 30,
+            onTap: confirmAction,
+          ),
         ],
       ),
     );
