@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:supplier_mobile/application/runner/cubit/runner_cubit.dart';
 
 class BrowserInstance extends HookWidget {
@@ -25,6 +26,12 @@ class BrowserInstance extends HookWidget {
             'https://recaptcha-demo.appspot.com/recaptcha-v2-invisible.php',
           ),
         ),
+        initialUserScripts: UnmodifiableListView<UserScript>([
+          UserScript(
+            source: '',
+            injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
+          )
+        ]),
         onWebViewCreated: (controller) {
           webViewController = controller;
           webViewController.addJavaScriptHandler(
@@ -69,7 +76,7 @@ class BrowserInstance extends HookWidget {
 
   try {
 
-
+      window.flutter_inappwebview.callHandler('supplierConnection', window.sranie);
       const watchCaptchaChallenge = async () => {
           while (!document.querySelector("iframe[title='recaptcha challenge']")) {
               await new Promise(r => setTimeout(r, 250));
