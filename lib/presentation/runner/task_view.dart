@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/application/runner/cubit/runner_cubit.dart';
 import 'package:supplier_mobile/application/runner/cubit/task_progress.dart';
-import 'package:supplier_mobile/domain/tasks/task.dart';
+import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
@@ -14,18 +14,22 @@ import 'package:supplier_mobile/presentation/tasks/widgets/task_progress.dart';
 
 class TaskView extends HookWidget {
   const TaskView({
-    @required this.task,
+    @required this.taskProgress,
   });
 
-  final MapEntry<Task, TaskProgress> task;
+  final MapEntry<String, TaskProgress> taskProgress;
 
   @override
   Widget build(BuildContext context) {
+    final task = BlocProvider.of<TasksCubit>(context, listen: false)
+        .state
+        .tasks[taskProgress.key];
+
     Widget getTaskState() {
-      switch (task.value.action) {
+      switch (taskProgress.value.action) {
         case TaskAction.captcha:
           return CaptchaState(solveAction: () {
-            context.read<RunnerCubit>().setVisibleTask(task.key);
+            context.read<RunnerCubit>().setVisibleTask(taskProgress.key);
           });
         case TaskAction.secure:
           return const SecureState();
@@ -44,7 +48,7 @@ class TaskView extends HookWidget {
       ),
       child: Padding(
         padding:
-            const EdgeInsets.only(top: 15, bottom: 15, left: 20, right: 40),
+            const EdgeInsets.only(top: 18, bottom: 18, left: 20, right: 40),
         child: Row(
           children: [
             Column(
@@ -63,8 +67,8 @@ class TaskView extends HookWidget {
                       width: 20,
                     ),
                     Text(
-                      task.key.product,
-                      style: const TextStyle(fontSize: 14, color: kLightPurple),
+                      task.product,
+                      style: const TextStyle(fontSize: 16, color: kLightPurple),
                     ),
                   ],
                 ),
@@ -83,8 +87,8 @@ class TaskView extends HookWidget {
                     ),
                     const SizedBox(width: 17),
                     Text(
-                      task.key.profileName,
-                      style: const TextStyle(fontSize: 14, color: kLightPurple),
+                      task.profileName,
+                      style: const TextStyle(fontSize: 16, color: kLightPurple),
                     ),
                   ],
                 ),
@@ -103,8 +107,8 @@ class TaskView extends HookWidget {
                     ),
                     const SizedBox(width: 17),
                     Text(
-                      task.value.message,
-                      style: const TextStyle(fontSize: 14, color: kLighGrey),
+                      taskProgress.value.message,
+                      style: const TextStyle(fontSize: 16, color: kLighGrey),
                     ),
                   ],
                 ),

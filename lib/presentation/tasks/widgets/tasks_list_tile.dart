@@ -44,7 +44,7 @@ class TasksListTile extends StatelessWidget {
       },
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         decoration: const BoxDecoration(
           color: kSecondaryBackground,
           borderRadius: BorderRadius.all(
@@ -59,7 +59,7 @@ class TasksListTile extends StatelessWidget {
                   child: Icon(
                     CustomIcons.tshirt,
                     color: Colors.white,
-                    size: 24,
+                    size: 18,
                   ),
                 ),
                 const SizedBox(width: 20),
@@ -67,21 +67,24 @@ class TasksListTile extends StatelessWidget {
                   task.product,
                   style: const TextStyle(
                     color: kLightPurple,
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
                 const Spacer(),
-                IconButton(
-                  padding: const EdgeInsets.all(6),
-                  onPressed: _showDeleteAlert,
-                  icon: const Icon(
-                    CustomIcons.remove,
-                    color: kLighGrey,
-                    size: 20,
+                GestureDetector(
+                  onTap: _showDeleteAlert,
+                  child: const Padding(
+                    padding: EdgeInsets.all(6),
+                    child: Icon(
+                      CustomIcons.remove,
+                      color: kLighGrey,
+                      size: 16,
+                    ),
                   ),
-                ),
+                )
               ],
             ),
+            const SizedBox(height: 6),
             Row(
               children: <Widget>[
                 const SizedBox(width: 2),
@@ -89,21 +92,21 @@ class TasksListTile extends StatelessWidget {
                   child: Icon(
                     CustomIcons.profiles,
                     color: Colors.white,
-                    size: 24,
+                    size: 18,
                   ),
                 ),
                 const SizedBox(width: 18),
                 Text(
                   task.profileName,
-                  style: const TextStyle(color: kLightPurple, fontSize: 18),
+                  style: const TextStyle(color: kLightPurple, fontSize: 16),
                 ),
                 const Spacer(),
                 const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 12),
+                  padding: EdgeInsets.all(6),
                   child: Icon(
                     CustomIcons.edit,
                     color: kLighGrey,
-                    size: 20,
+                    size: 16,
                   ),
                 ),
               ],

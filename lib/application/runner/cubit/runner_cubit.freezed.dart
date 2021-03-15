@@ -15,8 +15,8 @@ class _$RunnerStateTearOff {
 
 // ignore: unused_element
   _RunnerState call(
-      {@required Map<Task, TaskProgress> tasksProgress,
-      @required Option<Task> visibleTask}) {
+      {@required Map<String, TaskProgress> tasksProgress,
+      @required Option<String> visibleTask}) {
     return _RunnerState(
       tasksProgress: tasksProgress,
       visibleTask: visibleTask,
@@ -30,8 +30,8 @@ const $RunnerState = _$RunnerStateTearOff();
 
 /// @nodoc
 mixin _$RunnerState {
-  Map<Task, TaskProgress> get tasksProgress;
-  Option<Task> get visibleTask;
+  Map<String, TaskProgress> get tasksProgress;
+  Option<String> get visibleTask;
 
   @JsonKey(ignore: true)
   $RunnerStateCopyWith<RunnerState> get copyWith;
@@ -42,7 +42,8 @@ abstract class $RunnerStateCopyWith<$Res> {
   factory $RunnerStateCopyWith(
           RunnerState value, $Res Function(RunnerState) then) =
       _$RunnerStateCopyWithImpl<$Res>;
-  $Res call({Map<Task, TaskProgress> tasksProgress, Option<Task> visibleTask});
+  $Res call(
+      {Map<String, TaskProgress> tasksProgress, Option<String> visibleTask});
 }
 
 /// @nodoc
@@ -61,10 +62,10 @@ class _$RunnerStateCopyWithImpl<$Res> implements $RunnerStateCopyWith<$Res> {
     return _then(_value.copyWith(
       tasksProgress: tasksProgress == freezed
           ? _value.tasksProgress
-          : tasksProgress as Map<Task, TaskProgress>,
+          : tasksProgress as Map<String, TaskProgress>,
       visibleTask: visibleTask == freezed
           ? _value.visibleTask
-          : visibleTask as Option<Task>,
+          : visibleTask as Option<String>,
     ));
   }
 }
@@ -76,7 +77,8 @@ abstract class _$RunnerStateCopyWith<$Res>
           _RunnerState value, $Res Function(_RunnerState) then) =
       __$RunnerStateCopyWithImpl<$Res>;
   @override
-  $Res call({Map<Task, TaskProgress> tasksProgress, Option<Task> visibleTask});
+  $Res call(
+      {Map<String, TaskProgress> tasksProgress, Option<String> visibleTask});
 }
 
 /// @nodoc
@@ -97,10 +99,10 @@ class __$RunnerStateCopyWithImpl<$Res> extends _$RunnerStateCopyWithImpl<$Res>
     return _then(_RunnerState(
       tasksProgress: tasksProgress == freezed
           ? _value.tasksProgress
-          : tasksProgress as Map<Task, TaskProgress>,
+          : tasksProgress as Map<String, TaskProgress>,
       visibleTask: visibleTask == freezed
           ? _value.visibleTask
-          : visibleTask as Option<Task>,
+          : visibleTask as Option<String>,
     ));
   }
 }
@@ -113,9 +115,9 @@ class _$_RunnerState implements _RunnerState {
         assert(visibleTask != null);
 
   @override
-  final Map<Task, TaskProgress> tasksProgress;
+  final Map<String, TaskProgress> tasksProgress;
   @override
-  final Option<Task> visibleTask;
+  final Option<String> visibleTask;
 
   @override
   String toString() {
@@ -148,13 +150,13 @@ class _$_RunnerState implements _RunnerState {
 
 abstract class _RunnerState implements RunnerState {
   const factory _RunnerState(
-      {@required Map<Task, TaskProgress> tasksProgress,
-      @required Option<Task> visibleTask}) = _$_RunnerState;
+      {@required Map<String, TaskProgress> tasksProgress,
+      @required Option<String> visibleTask}) = _$_RunnerState;
 
   @override
-  Map<Task, TaskProgress> get tasksProgress;
+  Map<String, TaskProgress> get tasksProgress;
   @override
-  Option<Task> get visibleTask;
+  Option<String> get visibleTask;
   @override
   @JsonKey(ignore: true)
   _$RunnerStateCopyWith<_RunnerState> get copyWith;

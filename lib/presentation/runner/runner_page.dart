@@ -10,7 +10,7 @@ class RunnerPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => RunnerCubit()
         ..startTasks(
-          context.read<TasksCubit>().state.tasks.values.toList(),
+          context.read<TasksCubit>().state.tasks.keys.toList(),
         ),
       child: TasksProgressList(),
     );

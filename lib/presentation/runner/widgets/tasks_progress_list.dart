@@ -10,13 +10,17 @@ import 'package:supplier_mobile/presentation/core/top_bar.dart';
 import 'package:supplier_mobile/presentation/navigation/router.gr.dart';
 import 'package:supplier_mobile/presentation/runner/task_view.dart';
 import 'package:supplier_mobile/presentation/runner/widgets/browser_instance.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class TasksProgressList extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final activeTask =
         context.select((RunnerCubit runner) => runner.state.visibleTask);
+
+    final tasks = BlocProvider.of<RunnerCubit>(context, listen: false)
+        .state
+        .tasksProgress;
+
     return Scaffold(
       appBar: TopBar(
         content: Text(
@@ -40,7 +44,7 @@ class TasksProgressList extends HookWidget {
                             const SizedBox(height: 20),
                             for (var task in state.tasksProgress.entries) ...[
                               TaskView(
-                                task: task,
+                                taskProgress: task,
                               ),
                               const SizedBox(height: kPrimaryElementsSpacing),
                             ]
@@ -50,7 +54,7 @@ class TasksProgressList extends HookWidget {
                     ),
                   ),
                 ),
-                BrowserInstance(),
+                for (final task in tasks.keys) BrowserInstance(task),
               ],
             ),
           ),

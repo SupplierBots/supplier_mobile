@@ -31,7 +31,10 @@ class App extends StatelessWidget {
         },
         child: MaterialApp(
           title: 'Supplier Mobile',
-          builder: ExtendedNavigator.builder(router: app_router.Router()),
+          home: Container(),
+          builder: ExtendedNavigator.builder(
+            router: app_router.Router(),
+          ),
           theme: ThemeData(
             scaffoldBackgroundColor: kBackgroundColor,
             fontFamily: 'Lato',

@@ -3,8 +3,8 @@ part of 'runner_cubit.dart';
 @freezed
 abstract class RunnerState with _$RunnerState {
   const factory RunnerState({
-    @required Map<Task, TaskProgress> tasksProgress,
-    @required Option<Task> visibleTask,
+    @required Map<String, TaskProgress> tasksProgress,
+    @required Option<String> visibleTask,
   }) = _RunnerState;
 
   factory RunnerState.initial() => RunnerState(

@@ -12,14 +12,14 @@ class RunnerCubit extends Cubit<RunnerState> {
   RunnerCubit() : super(RunnerState.initial());
 
   void setTaskProgress({
-    @required Task task,
+    @required String uid,
     @required String message,
   }) {
     emit(
       state.copyWith(
         tasksProgress: {
           ...state.tasksProgress,
-          task: TaskProgress(
+          uid: TaskProgress(
             message: message,
             action: TaskAction.inProgress,
           ),
@@ -28,11 +28,11 @@ class RunnerCubit extends Cubit<RunnerState> {
     );
   }
 
-  void startTasks(List<Task> tasks) {
-    final tasksProgress = <Task, TaskProgress>{};
+  void startTasks(List<String> tasksUids) {
+    final tasksProgress = <String, TaskProgress>{};
 
-    for (final task in tasks) {
-      tasksProgress[task] = const TaskProgress(
+    for (final uid in tasksUids) {
+      tasksProgress[uid] = const TaskProgress(
         message: 'Started',
         action: TaskAction.inProgress,
       );
@@ -46,20 +46,20 @@ class RunnerCubit extends Cubit<RunnerState> {
     );
   }
 
-  void setVisibleTask(Task task) {
+  void setVisibleTask(String uid) {
     emit(
       state.copyWith(
-        visibleTask: optionOf(task),
+        visibleTask: optionOf(uid),
       ),
     );
   }
 
-  void setCaptcha(Task task) {
+  void setCaptcha(String uid) {
     emit(
       state.copyWith(
         tasksProgress: {
           ...state.tasksProgress,
-          task: const TaskProgress(
+          uid: const TaskProgress(
             message: 'Waiting for captcha',
             action: TaskAction.captcha,
           ),
