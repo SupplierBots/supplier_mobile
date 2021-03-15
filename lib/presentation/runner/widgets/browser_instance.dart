@@ -13,6 +13,16 @@ class BrowserInstance extends HookWidget {
   Widget build(BuildContext context) {
     InAppWebViewController webViewController;
 
+    final _options = InAppWebViewGroupOptions(
+      crossPlatform: InAppWebViewOptions(
+        useShouldOverrideUrlLoading: true,
+        mediaPlaybackRequiresUserGesture: false,
+      ),
+      ios: IOSInAppWebViewOptions(
+        allowsInlineMediaPlayback: true,
+      ),
+    );
+
     final finished = useState(false);
 
     final activeTask =
@@ -21,10 +31,11 @@ class BrowserInstance extends HookWidget {
     return Transform.scale(
       scale: activeTask.fold(() => 0.00001, (a) => a == uid ? 1 : 0.0001),
       child: InAppWebView(
+        initialOptions: _options,
         initialUrlRequest: URLRequest(
           url: Uri.parse(
-            'https://recaptcha-demo.appspot.com/recaptcha-v2-invisible.php',
-          ),
+              //'https://recaptcha-demo.appspot.com/recaptcha-v2-invisible.php',
+              'https://bot.sannysoft.com/'),
         ),
         initialUserScripts: UnmodifiableListView<UserScript>([
           UserScript(
@@ -73,7 +84,9 @@ class BrowserInstance extends HookWidget {
           await controller.evaluateJavascript(source: '''
 
 (function() {
+                window.flutter_inappwebview.callHandler('supplierConnection', "captcha");
 
+  return 0;
   try {
 
       window.flutter_inappwebview.callHandler('supplierConnection', window.sranie);
