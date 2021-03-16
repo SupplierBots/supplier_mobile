@@ -66,6 +66,7 @@ flutter:
 
   assets:
     - assets/javascript/supremeInject.js
+    - assets/javascript/stealth.min.js
 
   fonts:
     - family: Lato

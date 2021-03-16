@@ -1,20 +1,23 @@
+import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:supplier_mobile/application/runner/cubit/runner_cubit.dart';
+import 'package:supplier_mobile/presentation/runner/widgets/browser_message.dart';
 
 class BrowserInstance extends HookWidget {
   const BrowserInstance(this.uid);
-
   final String uid;
+
   @override
   Widget build(BuildContext context) {
     InAppWebViewController webViewController;
 
     final _options = InAppWebViewGroupOptions(
       crossPlatform: InAppWebViewOptions(
+        incognito: true,
         useShouldOverrideUrlLoading: true,
         mediaPlaybackRequiresUserGesture: false,
       ),
@@ -24,107 +27,96 @@ class BrowserInstance extends HookWidget {
     );
 
     final finished = useState(false);
-
     final activeTask =
         context.select((RunnerCubit runner) => runner.state.visibleTask);
+
+    void _updateProgress(String status) {
+      context.read<RunnerCubit>().setTaskProgress(
+            uid: uid,
+            message: status,
+          );
+    }
+
+    void _messagesHandler(List<dynamic> messages) {
+      final runner = context.read<RunnerCubit>();
+
+      final message =
+          BrowserMessage.fromJson(messages.first as Map<String, dynamic>);
+
+      switch (message.action) {
+        case 'update-status':
+          {
+            _updateProgress(message.details);
+            break;
+          }
+        case 'captcha':
+          {
+            runner.setCaptcha(uid);
+            break;
+          }
+        case 'captcha-solved':
+          {
+            if (runner.state.visibleTask.fold(() => false, (a) => a == uid)) {
+              runner.closeVisibleTask();
+            }
+            break;
+          }
+        case 'failed':
+          {
+            if (message.details == 'Sold out') {
+              _updateProgress('Sold out');
+            } else {
+              _updateProgress('Failed');
+            }
+            finished.value = true;
+            break;
+          }
+        case 'success':
+          {
+            _updateProgress('Success');
+            finished.value = true;
+            break;
+          }
+      }
+    }
 
     return Transform.scale(
       scale: activeTask.fold(() => 0.00001, (a) => a == uid ? 1 : 0.0001),
       child: InAppWebView(
         initialOptions: _options,
-        initialUrlRequest: URLRequest(
-          url: Uri.parse(
-              //'https://recaptcha-demo.appspot.com/recaptcha-v2-invisible.php',
-              'https://bot.sannysoft.com/'),
-        ),
-        initialUserScripts: UnmodifiableListView<UserScript>([
-          UserScript(
-            source: '',
-            injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
-          )
-        ]),
-        onWebViewCreated: (controller) {
+        onWebViewCreated: (controller) async {
           webViewController = controller;
           webViewController.addJavaScriptHandler(
-              handlerName: 'supplierConnection',
-              callback: (List<dynamic> messages) {
-                final message = messages.first as String;
-                print(message);
-                final runner = context.read<RunnerCubit>();
-
-                if (message == 'captcha') {
-                  runner.setCaptcha(uid);
-                } else if (message == 'captcha-solved') {
-                  if (runner.state.visibleTask
-                      .fold(() => false, (a) => a == uid)) {
-                    runner.closeVisibleTask();
-                  }
-                  runner.setTaskProgress(
-                    uid: uid,
-                    message: 'Done (solved captcha)',
-                  );
-                  finished.value = true;
-                } else if (message == 'finished') {
-                  runner.setTaskProgress(
-                    uid: uid,
-                    message: 'Done (no captcha challenge)',
-                  );
-                  finished.value = true;
-                }
-              });
+            handlerName: 'supplierConnection',
+            callback: _messagesHandler,
+          );
+          webViewController.clearCache();
+          _updateProgress('Loading page');
+          webViewController.loadUrl(
+              urlRequest: URLRequest(
+            url: Uri.parse('https://www.supremenewyork.com/mobile'),
+          ));
+        },
+        onLoadStart: (InAppWebViewController controller, Uri url) async {
+          if (!Platform.isAndroid) return;
+          final stealthJs =
+              await rootBundle.loadString('assets/javascript/stealth.min.js');
+          controller.evaluateJavascript(source: stealthJs);
         },
         onLoadStop: (InAppWebViewController controller, Uri url) async {
           if (finished.value) return;
-          final runner = context.read<RunnerCubit>();
+          if (url.toString() != 'https://www.supremenewyork.com/mobile') return;
+          _updateProgress('Waiting for product');
+          final injection =
+              await rootBundle.loadString('assets/javascript/supremeInject.js');
 
-          runner.setTaskProgress(
-            uid: uid,
-            message: 'Loaded page',
+          controller.evaluateJavascript(source: injection);
+        },
+        androidOnPermissionRequest: (controller, origin, resources) async {
+          return PermissionRequestResponse(
+            resources: resources,
+            action: PermissionRequestResponseAction.GRANT,
           );
-          await controller.evaluateJavascript(source: '''
-
-(function() {
-                window.flutter_inappwebview.callHandler('supplierConnection', "captcha");
-
-  return 0;
-  try {
-
-      window.flutter_inappwebview.callHandler('supplierConnection', window.sranie);
-      const watchCaptchaChallenge = async () => {
-          while (!document.querySelector("iframe[title='recaptcha challenge']")) {
-              await new Promise(r => setTimeout(r, 250));
-          }
-          const captchaIFrame = document.querySelector("iframe[title='recaptcha challenge']");
-          while (captchaIFrame.style.height == "100%") {
-              await new Promise(r => setTimeout(r, 250));
-          }
-
-          if (captchaIFrame.style.height != "0px") {
-              window.flutter_inappwebview.callHandler('supplierConnection', "captcha");
-              const callbackName = document.querySelector("#g-recaptcha, .g-recaptcha").dataset.callback;
-              const orginalCallback = window[callbackName];
-              window[callbackName] = (res) => {
-                  window.flutter_inappwebview.callHandler('supplierConnection', "captcha-solved");
-                  orginalCallback(res);
-              }
-          }
-      }
-      watchCaptchaChallenge();
-      if (document.querySelector('.g-recaptcha')) {
-          document.querySelector('.g-recaptcha').click();
-      }
-
-      if(document.querySelector('pre') && document.querySelector('pre').textContent.includes('g-recaptcha-response')) {
-        window.flutter_inappwebview.callHandler('supplierConnection', "finished");
-      }
-    } catch (ex) {
-       window.flutter_inappwebview.callHandler('supplierConnection', ex.toString());
-    }
-
-    return 0;
-})();
-
-              ''');
         },
       ),
     );

@@ -66,9 +66,17 @@ class TaskView extends HookWidget {
                     const SizedBox(
                       width: 20,
                     ),
-                    Text(
-                      task.product,
-                      style: const TextStyle(fontSize: 16, color: kLightPurple),
+                    GestureDetector(
+                      onTap: () {
+                        context
+                            .read<RunnerCubit>()
+                            .setVisibleTask(taskProgress.key);
+                      },
+                      child: Text(
+                        task.product,
+                        style:
+                            const TextStyle(fontSize: 16, color: kLightPurple),
+                      ),
                     ),
                   ],
                 ),

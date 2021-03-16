@@ -6,26 +6,26 @@
 
     setCookie(
       "js-address",
-      "John%20Kowalsky|johnkowalsky%40gmail.com|544543234|Zielona%2023||Wilimy|undefined|12345|PL|",
+      "John%20Kowalsky|johnkowalsky%40gmail.com|544543234|Zielona%2023||Srajewo|undefined|12345|PL|",
       181
     );
 
     const payload = {
       id: "385b0c1b-fc44-47e4-ad45-0c9c782382c7",
       keywords: {
-        positive: ["script", "logos"],
+        positive: ["boxer", "briefs", "4 pack"],
         negative: [],
         multi: [],
         keywordsAmount: 2,
       },
       colors: {
-        positive: ["black"],
+        positive: ["white"],
         negative: [],
         keywordsAmount: 1,
       },
       size: {
-        value: "Large",
-        label: "Large",
+        value: "Small",
+        label: "Small",
       },
       anySize: true,
       anyColor: true,
@@ -33,14 +33,15 @@
         value: "largest",
         label: "The Largest",
       },
-      name: "test",
-      site: {
-        value: "supreme",
-        label: "Supreme",
-      },
     };
+
     const externalStock = {};
-    const restocks = { enabled: true, delay: 750 };
+
+    const restocks = {
+      enabled: true,
+      delay: 750,
+    };
+
     const region = "eu";
     const items = [];
 
@@ -53,23 +54,21 @@
 
     let item = findItem(keywords);
 
-    // if (!item && externalStock) {
-    //   loadExternalStock(externalStock);
-    //   item = findItem(keywords);
-    // }
-
     if (!item) {
       return await reload();
     }
+    updateStatus("Product found");
 
     items.push(item.attributes.name);
 
     try {
       setSessionIDs();
-      Backbone.history.fragment = `products/${item.attributes.id}`;
+      const hash = `products/${item.attributes.id}`;
+      Backbone.history.fragment = hash;
+      window.history.pushState({}, document.title, "#" + hash);
       setLastVisitedFragment();
     } catch {}
-
+    updateStatus("Fetching product details");
     const styles = await fetchStyles(item);
     if (!styles) {
       return await reload();
@@ -78,12 +77,7 @@
     const selectedStyle = selectStyle(styles, colors, anyColor);
     if (!selectedStyle) {
       if (!restocks.enabled) {
-        notifyTask("Sold out", "Error", {
-          name: item.attributes.name,
-          image: item.attributes.image_url.replace("//", "https://"),
-          style: "sold-out",
-          size: "sold-out",
-        });
+        updateStatus("Product sold out");
         return;
       }
       waitForRestock();
@@ -101,31 +95,166 @@
 
     if (!size) {
       if (!restocks.enabled) {
-        notifyTask("Sold out", "Error", {
-          name: item.attributes.name,
-          image: selectedStyle.attributes.image_url.replace("//", "https://"),
-          style: "sold-out",
-          size: "sold-out",
-        });
+        updateStatus("Size sold out");
         return;
       }
       waitForRestock();
       return;
     }
+    updateStatus("Adding to cart");
 
-    try {
-      Backbone.history.fragment = `products/${item.attributes.id}/${selectedStyle.attributes.id}`;
-      setLastVisitedFragment();
-    } catch {}
-    await addToCart(size);
-    await sleep(500);
-    notifyTask("ATC", "Action", {
-      name: item.attributes.name,
-      image: selectedStyle.attributes.image_url.replace("//", "https://"),
-      style: selectedStyle.attributes.name,
-      size: size.attributes.name,
+    const hash = `products/${item.attributes.id}/${selectedStyle.attributes.id}`;
+    Backbone.history.fragment = hash;
+    window.history.pushState({}, document.title, "#" + hash);
+    setLastVisitedFragment();
+
+    const s = Supreme.getProductOverviewDetailsForId(
+      item.attributes.id,
+      allCategoriesAndProducts
+    );
+
+    _currentViewHash.product = JSON.stringify(s).hashCode();
+    _currentCategory = singularCategoryName(s.categoryName);
+    _currentCategoryPlural = s.categoryName;
+
+    const template =
+      '<div id="product"><h2 id="name">' +
+      item.attributes.name +
+      '</h2><p id="style-name">&nbsp;</p><div id="style-image"><div id="style-image-container" class="swipe loading" style="visibility: visible; "></div><div class="clearfix"></div></div></div><div id="product-widgets" class="clearfix  "><div id="widgets-container"><span class="price">&nbsp;</span><span id="cart-update"></span></div></div><div style="margin-bottom:' +
+      $(window).height() +
+      'px;" id="product-details"><div id="product-details-content"><div id="styles"><ul class="style-selector"><li><div class="style-images"></div></li></ul><div class="clearfix"></div></div><p style="height:150px;" id="description">&nbsp;</p></div></div>';
+
+    $("#main").html(template);
+
+    item.set("selectedStyle", selectedStyle);
+    const productDetailView = new ProductDetailView({
+      model: item,
     });
-    Supreme.app.navigate("#checkout", { trigger: true });
+
+    markItemTimeViewed(item.attributes.id);
+    $("footer").show();
+    $("#main").html(productDetailView.render().el);
+    productDetailView.addToCartButton.$el.click();
+    lookForModifiedButtons();
+    await waitForElement('a:contains("CHECK")');
+    await sleep(600);
+
+    updateStatus("Loading checkout");
+    $('a:contains("CHECK")').click();
+    await waitForElement("#credit-card-information-header");
+    await sleep(500);
+
+    updateStatus("Filling in checkout");
+    $("#credit-card-information-header")[0].scrollIntoView();
+    await type("#credit_card_n", "4111432143214321");
+    await selectOption("08");
+    await selectOption("2023");
+    await type("#credit_card_cvv", "414");
+    $("#order_terms_label").click();
+    await sleep(250);
+
+    window.addEventListener(
+      "hashchange",
+      () => {
+        const hash = location.hash;
+        if (hash.includes("chargeError")) {
+          window.flutter_inappwebview.callHandler("supplierConnection", {
+            action: "failed",
+            details: "Charge error",
+          });
+        } else if (hash.includes("confirmOrder")) {
+          window.flutter_inappwebview.callHandler("supplierConnection", {
+            action: "success",
+          });
+        } else if (hash.includes("cart")) {
+          window.flutter_inappwebview.callHandler("supplierConnection", {
+            action: "failed",
+            details: "Sold out",
+          });
+        }
+      },
+      false
+    );
+
+    $("button:contains('process')").click();
+    watchCaptchaChallenge();
+
+    async function watchCaptchaChallenge() {
+      await waitForElement("iframe[title='recaptcha challenge']");
+      const captchaIFrame = $("iframe[title='recaptcha challenge']")[0];
+      while (captchaIFrame.style.height == "100%") {
+        await new Promise((r) => setTimeout(r, 250));
+      }
+
+      if (captchaIFrame.style.height != "0px") {
+        const orginalCallback = window.recaptchaCallback;
+        window.recaptchaCallback = (res) => {
+          updateStatus("Processing");
+          window.flutter_inappwebview.callHandler("supplierConnection", {
+            action: "captcha-solved",
+          });
+          orginalCallback(res);
+        };
+
+        window.flutter_inappwebview.callHandler("supplierConnection", {
+          action: "captcha",
+        });
+      }
+    }
+
+    function updateStatus(status) {
+      window.flutter_inappwebview.callHandler("supplierConnection", {
+        action: "update-status",
+        details: status,
+      });
+    }
+
+    async function type(fieldSelector, text) {
+      $(fieldSelector).focus();
+      for (const character of text.split("")) {
+        document.execCommand("insertHTML", false, character);
+        await sleep(getRandomRange(35, 65));
+      }
+      createChangeEvent($(fieldSelector));
+    }
+
+    async function selectOption(option) {
+      const optionElement = $(`option:contains("${option}")`);
+      const select = optionElement.parent();
+      select.val(optionElement.val());
+      createChangeEvent(select);
+      await sleep(100);
+    }
+
+    function createChangeEvent(element) {
+      var node = document.getElementsByTagName("body")[0];
+      var scr = document.createElement("script");
+      scr.setAttribute("type", "text/javascript");
+      $(scr).text("$('#" + $(element).attr("id") + "').change()");
+      node.appendChild(scr);
+    }
+
+    function lookForModifiedButtons() {
+      const names = ["continue", "confirm", "proceed", "add", "accept"];
+
+      for (const name of names) {
+        var button = $(`button:contains("${name}")`);
+        if (button.length === 0) continue;
+        button.click();
+        return;
+      }
+    }
+
+    async function waitForElement(selector) {
+      while ($(selector).length == 0) {
+        await sleep(250);
+      }
+    }
+
+    function getRandomRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
     function setCookie(name, value, days) {
       var expires = "";
       if (days) {
@@ -141,42 +270,9 @@
     }
 
     async function waitForRestock() {
-      notifyTask("Waiting for restock", "Action");
+      updateStatus("Waiting for restock");
       await sleep(restocks.delay);
       window.location.reload();
-    }
-
-    async function addToCart(size) {
-      notifyTask("Adding to cart", "Action");
-      const result = await Promise.race([atcListener(size), atcRequest(size)]);
-
-      if (!Supreme.app.cart.attributes.sizes.contains(size)) {
-        Supreme.app.cart.addSizeToLocalStorage(size, 1);
-        Supreme.app.cart.attributes.sizes.add(size, 1);
-      }
-      return result;
-    }
-
-    async function atcRequest(size) {
-      const id = size.attributes.id.toString();
-
-      while (!localStorage.hasOwnProperty(id)) {
-        Supreme.app.cart.removeSizeDirectly(id);
-        Supreme.app.cart.addSize(size);
-        await sleep(1500);
-      }
-
-      return true;
-    }
-
-    async function atcListener(size) {
-      const id = size.attributes.id.toString();
-
-      while (!localStorage.hasOwnProperty(id)) {
-        await sleep(10);
-      }
-
-      return true;
     }
 
     function selectSize(sizes, sizeToFind, anySize) {
@@ -263,17 +359,6 @@
       }
 
       return true;
-    }
-
-    function notifyTask(message, type, item) {
-      // fetch("http://127.0.0.1:2140/supplier.json", {
-      //   method: "POST",
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ message, type, item }),
-      // });
     }
 
     function filterStyles(colors, styles) {

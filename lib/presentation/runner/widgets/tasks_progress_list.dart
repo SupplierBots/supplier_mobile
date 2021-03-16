@@ -8,7 +8,7 @@ import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/constants/typography.dart';
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
 import 'package:supplier_mobile/presentation/navigation/router.gr.dart';
-import 'package:supplier_mobile/presentation/runner/task_view.dart';
+import 'package:supplier_mobile/presentation/runner/widgets/task_view.dart';
 import 'package:supplier_mobile/presentation/runner/widgets/browser_instance.dart';
 
 class TasksProgressList extends HookWidget {

@@ -7,7 +7,7 @@ import 'package:supplier_mobile/presentation/navigation/widgets/navigation_bar.d
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/constants/typography.dart';
 import 'package:supplier_mobile/presentation/settings/widgets/sign_out_button.dart';
-import 'package:supplier_mobile/presentation/runner/task_view.dart';
+import 'package:supplier_mobile/presentation/runner/widgets/task_view.dart';
 
 class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
