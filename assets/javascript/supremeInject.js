@@ -180,8 +180,9 @@
     watchCaptchaChallenge();
 
     async function watchCaptchaChallenge() {
-      await waitForElement("iframe[title='recaptcha challenge']");
-      const captchaIFrame = $("iframe[title='recaptcha challenge']")[0];
+      const iframeSelector = "iframe[src*='recaptcha/api2/b']";
+      await waitForElement(iframeSelector);
+      const captchaIFrame = $(iframeSelector)[0];
       while (captchaIFrame.style.height == "100%") {
         await new Promise((r) => setTimeout(r, 250));
       }
