@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supplier_mobile/application/cookies/cookies_cubit.dart';
+import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/form/form_switch.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
@@ -7,9 +10,9 @@ import 'package:supplier_mobile/presentation/navigation/widgets/navigation_bar.d
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/constants/typography.dart';
 import 'package:supplier_mobile/presentation/settings/widgets/sign_out_button.dart';
-import 'package:supplier_mobile/presentation/runner/widgets/task_view.dart';
 
 class SettingsPage extends StatelessWidget {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(
@@ -37,6 +40,15 @@ class SettingsPage extends StatelessWidget {
               const Text(
                 'Coś tam pierdolenie coming soon. Coś tam pierdolenie coming soon. Coś tam pierdolenie coming soon. Coś tam pierdolenie coming soon. Coś tam pierdolenie coming soon.',
                 style: TextStyle(color: kLighGrey, fontSize: 15),
+              ),
+              const SizedBox(height: 25),
+              SecondaryButton(
+                text: 'Clear gmail',
+                width: 120,
+                height: 45,
+                onTap: () {
+                  context.read<CookiesCubit>().clearGmailCookies();
+                },
               ),
               const SizedBox(height: 25),
               const SignOutButton(),

@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 import '../auth/auth_page.dart';
 import '../dashboard/dashboard_page.dart';
+import '../gmail/gmail_page.dart';
 import '../help/help_page.dart';
 import '../profiles/profiles_page.dart';
 import '../runner/runner_page.dart';
@@ -27,6 +28,7 @@ class Routes {
   static const String profilesPage = '/profiles-page';
   static const String settingsPage = '/settings-page';
   static const String helpPage = '/help-page';
+  static const String gmailPage = '/gmail-page';
   static const all = <String>{
     splashPage,
     authPage,
@@ -36,6 +38,7 @@ class Routes {
     profilesPage,
     settingsPage,
     helpPage,
+    gmailPage,
   };
 }
 
@@ -51,6 +54,7 @@ class Router extends RouterBase {
     RouteDef(Routes.profilesPage, page: ProfilesPage),
     RouteDef(Routes.settingsPage, page: SettingsPage),
     RouteDef(Routes.helpPage, page: HelpPage),
+    RouteDef(Routes.gmailPage, page: GmailPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -104,6 +108,12 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    GmailPage: (data) {
+      return PageRouteBuilder<GmailPage>(
+        pageBuilder: (context, animation, secondaryAnimation) => GmailPage(),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -130,4 +140,6 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
       push<SettingsPage>(Routes.settingsPage);
 
   Future<HelpPage> pushHelpPage() => push<HelpPage>(Routes.helpPage);
+
+  Future<GmailPage> pushGmailPage() => push<GmailPage>(Routes.gmailPage);
 }

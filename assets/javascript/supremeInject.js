@@ -1,41 +1,14 @@
 (() => {
   (async () => {
-    localStorage.clear();
-
     if (typeof Supreme === "undefined") return await reload();
 
-    setCookie(
-      "js-address",
-      "John%20Kowalsky|johnkowalsky%40gmail.com|544543234|Zielona%2023||Srajewo|undefined|12345|PL|",
-      181
-    );
-
-    const payload = {
-      id: "385b0c1b-fc44-47e4-ad45-0c9c782382c7",
-      keywords: {
-        positive: ["boxer", "briefs", "4 pack"],
-        negative: [],
-        multi: [],
-        keywordsAmount: 2,
-      },
-      colors: {
-        positive: ["white"],
-        negative: [],
-        keywordsAmount: 1,
-      },
-      size: {
-        value: "Small",
-        label: "Small",
-      },
-      anySize: true,
-      anyColor: true,
-      anySizeOption: {
-        value: "largest",
-        label: "The Largest",
-      },
-    };
-
-    const externalStock = {};
+    await sleep(1000);
+    const product = $PRODUCT$;
+    const colors = $COLORS$;
+    const anySize = $ANY_SIZE$;
+    const anyColor = $ANY_COLOR$;
+    const productSize = $SIZE$;
+    const paymentDetails = $PAYMENT_DETAILS$;
 
     const restocks = {
       enabled: true,
@@ -45,14 +18,11 @@
     const region = "eu";
     const items = [];
 
-    const { keywords, colors, anySize, anyColor, anySizeOption } = payload;
-    const sizeValue = payload.size.value;
+    const sizeToFind = productSize.includes("SHOE")
+      ? convertShoeSize(productSize, region)
+      : productSize;
 
-    const sizeToFind = sizeValue.includes("SHOE")
-      ? convertShoeSize(sizeValue, region)
-      : sizeValue;
-
-    let item = findItem(keywords);
+    let item = findItem(product);
 
     if (!item) {
       return await reload();
@@ -89,7 +59,8 @@
     );
 
     const size =
-      selectedStyle.attributes.sizes.models.length > 1
+      selectedStyle.attributes.sizes.models.length > 1 &&
+      productSize != "None/One-Size"
         ? selectSize(availableSizes, sizeToFind, anySize)
         : availableSizes[0];
 
@@ -134,24 +105,54 @@
     markItemTimeViewed(item.attributes.id);
     $("footer").show();
     $("#main").html(productDetailView.render().el);
+    await sleep(500);
+
+    if (
+      selectedStyle.attributes.sizes.models.length > 1 &&
+      productSize != "None/One-Size"
+    ) {
+      await selectOption(size.attributes.name);
+    }
     productDetailView.addToCartButton.$el.click();
     lookForModifiedButtons();
-    await waitForElement('a:contains("CHECK")');
-    await sleep(600);
 
+    const checkoutButtonSelectors = [
+      'a:contains("CHECK")',
+      'button:contains("CHECK")',
+    ];
+
+    await waitForElement(checkoutButtonSelectors);
+    await sleep(750);
     updateStatus("Loading checkout");
-    $('a:contains("CHECK")').click();
-    await waitForElement("#credit-card-information-header");
+    findElement(checkoutButtonSelectors).click();
+
+    const cardHeaderSelectors = [
+      "h2:contains('card information')",
+      "h3:contains('card information')",
+      "h1:contains('card information')",
+      "p:contains('card information')",
+    ];
+
+    await waitForElement(cardHeaderSelectors);
     await sleep(500);
 
     updateStatus("Filling in checkout");
-    $("#credit-card-information-header")[0].scrollIntoView();
-    await type("#credit_card_n", "4111432143214321");
-    await selectOption("08");
-    await selectOption("2023");
-    await type("#credit_card_cvv", "414");
-    $("#order_terms_label").click();
-    await sleep(250);
+    findElement(cardHeaderSelectors)[0].scrollIntoView();
+
+    await type(
+      ["[placeholder*='credit card']", "[maxlength='19']"],
+      paymentDetails.number
+    );
+    await selectOption(paymentDetails.month);
+    await selectOption(paymentDetails.year);
+    await type(["[placeholder*='cvv']", "[maxlength='4']"], paymentDetails.cvv);
+    findElement([
+      "label:contains('and agree')",
+      "label:contains('return policy')",
+    ]).click();
+
+    updateStatus("Checkout delay");
+    await sleep(getRandomRange(2000, 3000));
 
     window.addEventListener(
       "hashchange",
@@ -176,12 +177,16 @@
       false
     );
 
-    $("button:contains('process')").click();
+    findElement([
+      "button:contains('process')",
+      "button:contains('payment')",
+    ]).click();
+    updateStatus("Processing");
     watchCaptchaChallenge();
 
     async function watchCaptchaChallenge() {
       const iframeSelector = "iframe[src*='recaptcha/api2/b']";
-      await waitForElement(iframeSelector);
+      await waitForElement([iframeSelector]);
       const captchaIFrame = $(iframeSelector)[0];
       while (captchaIFrame.style.height == "100%") {
         await new Promise((r) => setTimeout(r, 250));
@@ -210,13 +215,23 @@
       });
     }
 
-    async function type(fieldSelector, text) {
-      $(fieldSelector).focus();
+    function findElement(selectors) {
+      for (const selector of selectors) {
+        const element = $(selector);
+        if (element.length > 0) return element;
+      }
+      return null;
+    }
+
+    async function type(fieldSelectors, text) {
+      const element = findElement(fieldSelectors);
+      if (!element) return;
+      element.focus();
       for (const character of text.split("")) {
         document.execCommand("insertHTML", false, character);
         await sleep(getRandomRange(35, 65));
       }
-      createChangeEvent($(fieldSelector));
+      createChangeEvent(element);
     }
 
     async function selectOption(option) {
@@ -246,8 +261,8 @@
       }
     }
 
-    async function waitForElement(selector) {
-      while ($(selector).length == 0) {
+    async function waitForElement(selectors) {
+      while (!findElement(selectors)) {
         await sleep(250);
       }
     }
@@ -256,15 +271,6 @@
       return Math.random() * (max - min) + min;
     }
 
-    function setCookie(name, value, days) {
-      var expires = "";
-      if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-        expires = "; expires=" + date.toUTCString();
-      }
-      document.cookie = name + "=" + (value || "") + expires + "; path=/";
-    }
     async function reload() {
       await sleep(1500);
       window.location.reload();
@@ -277,42 +283,28 @@
     }
 
     function selectSize(sizes, sizeToFind, anySize) {
-      const primary = sizes.find(
-        (s) => s.attributes.name.toLowerCase() === sizeToFind.toLowerCase()
+      const primary = sizes.find((s) =>
+        s.attributes.name.toLowerCase().includes(sizeToFind.toLowerCase())
       );
-      if (primary || !anySize || !anySizeOption || sizes.length === 0)
-        return primary;
-      switch (anySizeOption.value) {
-        case "smallest": {
-          return sizes[0];
-        }
-        case "largest": {
-          return sizes[sizes.length - 1];
-        }
-        case "random": {
-          return sizes[Math.floor(Math.random() * sizes.length)];
-        }
-        default: {
-          return sizes[Math.floor(Math.random() * sizes.length)];
-        }
-      }
+      if (primary || !anySize || sizes.length === 0) return primary;
+
+      return sizes[Math.floor(Math.random() * sizes.length)];
     }
 
     function selectStyle(styles, colors, anyColor) {
-      const filteredStyles = filterStyles(colors, styles);
-      const primary = findMatchingStyle(colors, filteredStyles);
+      const primary = findMatchingStyle(colors, styles);
 
       if (primary || !anyColor) return primary;
-      const secondary =
-        filteredStyles[Math.floor(Math.random() * filteredStyles.length)];
+
+      const secondary = styles[Math.floor(Math.random() * styles.length)];
       return secondary;
     }
 
-    function findItem(keywords) {
+    function findItem(product) {
       const stock = Supreme.categories.models.flatMap((c) =>
         c.attributes.products.models.flat()
       );
-      return stock.find((item) => isMatch(item.attributes.name, keywords));
+      return stock.find((item) => isMatch(item.attributes.name, product));
     }
 
     async function sleep(ms) {
@@ -362,17 +354,8 @@
       return true;
     }
 
-    function filterStyles(colors, styles) {
-      for (let negative of colors.negative) {
-        styles = styles.filter(
-          (s) => !s.attributes.name.toLowerCase().includes(negative)
-        );
-      }
-      return styles;
-    }
-
     function findMatchingStyle(colors, styles) {
-      for (let targetColor of colors.positive) {
+      for (let targetColor of colors) {
         const match = styles.find((s) =>
           s.attributes.name.toLowerCase().includes(targetColor)
         );
@@ -381,15 +364,6 @@
       }
       return null;
     }
-
-    function loadExternalStock(externalStock) {
-      allCategoriesAndProducts = externalStock;
-      window.release_week = externalStock.release_week;
-      window.release_date = externalStock.release_date;
-      Supreme.categories = new Categories();
-      Supreme.categories.populate(externalStock);
-    }
-
     function convertShoeSize(size, region) {
       switch (size) {
         case "SHOE-US4": {

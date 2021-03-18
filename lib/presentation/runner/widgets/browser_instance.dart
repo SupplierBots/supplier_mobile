@@ -1,11 +1,17 @@
+import 'dart:convert' show json;
 import 'dart:io';
-import 'package:flutter/services.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:supplier_mobile/application/cookies/cookies_cubit.dart';
+import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/application/runner/cubit/runner_cubit.dart';
+import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
 import 'package:supplier_mobile/presentation/runner/widgets/browser_message.dart';
+import 'package:supplier_mobile/presentation/tasks/widgets/form/predefined_products.dart';
 
 class BrowserInstance extends HookWidget {
   const BrowserInstance(this.uid);
@@ -37,16 +43,79 @@ class BrowserInstance extends HookWidget {
           );
     }
 
-    void _messagesHandler(List<dynamic> messages) {
+    String _createAddressCookie() {
+      final task = context.read<TasksCubit>().state.tasks[uid];
+      final profile =
+          context.read<ProfilesCubit>().state.profiles[task.profileName];
+
+      return '${profile.firstName}%20${profile.lastName}|${profile.email}|${profile.phoneNumber.replaceAll(' ', '')}|${profile.address}||${profile.city}|undefined|${profile.postcode}|PL|'
+          .replaceAll(' ', '%20')
+          .replaceAll('@', '%40');
+    }
+
+    void _startTask() async {
+      await webViewController.loadUrl(
+          urlRequest: URLRequest(
+        url: Uri.parse('about:blank'),
+      ));
+      await webViewController.clearCache();
+      await webViewController.ios.cookieHandler.deleteAllCookies();
+
+      final cookies = context.read<CookiesCubit>().state.getGmailCookies();
+
+      if (cookies.isNotEmpty) {
+        for (final cookie in cookies) {
+          await webViewController.ios.cookieHandler.setCookie(
+            url: Uri(host: cookie.domain, path: cookie.path),
+            name: cookie.name,
+            value: cookie.value as String,
+            domain: cookie.domain,
+            path: cookie.path,
+            expiresDate: cookie.expiresDate,
+            isSecure: cookie.isSecure,
+            isHttpOnly: cookie.isHttpOnly,
+            sameSite: cookie.sameSite,
+          );
+        }
+      }
+
+      await webViewController.ios.cookieHandler.setCookie(
+        url: Uri(host: 'www.supremenewyork.com', path: '/'),
+        name: 'js-address',
+        value: _createAddressCookie(),
+        domain: 'www.supremenewyork.com',
+        expiresDate: DateTime.now()
+            .add(const Duration(days: 180))
+            .millisecondsSinceEpoch,
+        isSecure: false,
+        isHttpOnly: false,
+      );
+
+      _updateProgress('Loading page');
+      webViewController.loadUrl(
+          urlRequest: URLRequest(
+        url: Uri.parse('https://www.supremenewyork.com/mobile'),
+      ));
+    }
+
+    void _printCookies() async {
+      final cookies =
+          await webViewController.ios.cookieHandler.ios.getAllCookies();
+      print(cookies.firstWhere((c) => c.name == 'cart'));
+    }
+
+    Future<void> _messagesHandler(List<dynamic> messages) async {
       final runner = context.read<RunnerCubit>();
 
       final message =
           BrowserMessage.fromJson(messages.first as Map<String, dynamic>);
-
       switch (message.action) {
         case 'update-status':
           {
             _updateProgress(message.details);
+            if (message.details == 'cookie-check') {
+              _printCookies();
+            }
             break;
           }
         case 'captcha':
@@ -68,7 +137,7 @@ class BrowserInstance extends HookWidget {
             } else {
               _updateProgress('Failed');
             }
-            finished.value = true;
+            _startTask();
             break;
           }
         case 'success':
@@ -90,12 +159,7 @@ class BrowserInstance extends HookWidget {
             handlerName: 'supplierConnection',
             callback: _messagesHandler,
           );
-          webViewController.clearCache();
-          _updateProgress('Loading page');
-          webViewController.loadUrl(
-              urlRequest: URLRequest(
-            url: Uri.parse('https://www.supremenewyork.com/mobile'),
-          ));
+          _startTask();
         },
         onLoadStart: (InAppWebViewController controller, Uri url) async {
           if (!Platform.isAndroid) return;
@@ -106,11 +170,52 @@ class BrowserInstance extends HookWidget {
         onLoadStop: (InAppWebViewController controller, Uri url) async {
           if (finished.value) return;
           if (url.toString() != 'https://www.supremenewyork.com/mobile') return;
+
           _updateProgress('Waiting for product');
-          final injection =
+
+          final task = context.read<TasksCubit>().state.tasks[uid];
+          final profile =
+              context.read<ProfilesCubit>().state.profiles[task.profileName];
+
+          final injectionTemplate =
               await rootBundle.loadString('assets/javascript/supremeInject.js');
 
-          controller.evaluateJavascript(source: injection);
+          final injection = injectionTemplate
+              .replaceFirst(
+                '\$PRODUCT\$',
+                json.encode(
+                  predefinedProducts.firstWhere((p) => p.name == task.product),
+                ),
+              )
+              .replaceFirst(
+                '\$COLORS\$',
+                json.encode(task.colors),
+              )
+              .replaceFirst(
+                '\$ANY_SIZE\$',
+                json.encode(task.anySize),
+              )
+              .replaceFirst(
+                '\$ANY_COLOR\$',
+                json.encode(task.anyColor),
+              )
+              .replaceFirst(
+                '\$SIZE\$',
+                json.encode(task.size),
+              )
+              .replaceFirst(
+                '\$PAYMENT_DETAILS\$',
+                json.encode({
+                  'number': profile.creditCardNumber,
+                  'month': profile.expiryMonth,
+                  'year': profile.expiryYear,
+                  'cvv': profile.securityCode,
+                }),
+              );
+
+          controller.evaluateJavascript(
+            source: injection,
+          );
         },
         androidOnPermissionRequest: (controller, origin, resources) async {
           return PermissionRequestResponse(

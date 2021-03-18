@@ -48,7 +48,7 @@ class NavigationBar extends StatelessWidget {
             NavigationButton(
               icon: Icons.help_outline,
               iconSize: 25,
-              route: Routes.helpPage,
+              route: Routes.gmailPage,
             ),
           ],
         ),

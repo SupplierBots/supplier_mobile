@@ -10,6 +10,7 @@ import 'package:supplier_mobile/presentation/core/form/form_dropdown.dart';
 import 'package:supplier_mobile/presentation/core/form/form_switch.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
 import 'package:supplier_mobile/presentation/core/form/form_multi_select_field.dart';
+import 'package:supplier_mobile/presentation/tasks/widgets/form/predefined_products.dart';
 
 class TasksForm extends HookWidget {
   const TasksForm({
@@ -55,13 +56,9 @@ class TasksForm extends HookWidget {
           const SizedBox(
             height: kPrimaryElementsSpacing,
           ),
-          const FormDropdown(
+          FormDropdown(
             name: 'product',
-            items: [
-              'Swag',
-              'Swag2',
-              'Swag3',
-            ],
+            items: predefinedProducts.map((p) => p.name).toList(),
             placeholder: 'Product',
           ),
           const SizedBox(height: kPrimaryElementsSpacing),
@@ -75,10 +72,15 @@ class TasksForm extends HookWidget {
           const FormDropdown(
             name: 'size',
             items: [
+              'None/One-Size',
               'Small',
               'Medium',
               'Large',
               'XLarge',
+              '30',
+              '32',
+              '34',
+              '36'
             ],
             placeholder: 'Size',
           ),
