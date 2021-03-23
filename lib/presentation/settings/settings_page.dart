@@ -42,15 +42,6 @@ class SettingsPage extends StatelessWidget {
                 style: TextStyle(color: kLighGrey, fontSize: 15),
               ),
               const SizedBox(height: 25),
-              SecondaryButton(
-                text: 'Clear gmail',
-                width: 120,
-                height: 45,
-                onTap: () {
-                  context.read<CookiesCubit>().clearGoogleCookies();
-                },
-              ),
-              const SizedBox(height: 25),
               const SignOutButton(),
               const SizedBox(height: 25),
             ],

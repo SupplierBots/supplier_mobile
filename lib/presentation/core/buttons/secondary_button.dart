@@ -12,6 +12,7 @@ class SecondaryButton extends StatelessWidget {
     @required this.onTap,
     this.gradient = kPrimaryGradient,
     this.fontSize = 16,
+    this.icon,
   }) : super(key: key);
 
   final String text;
@@ -20,6 +21,7 @@ class SecondaryButton extends StatelessWidget {
   final double fontSize;
   final VoidCallback onTap;
   final Gradient gradient;
+  final Icon icon;
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +44,24 @@ class SecondaryButton extends StatelessWidget {
             ),
           ),
           child: Center(
-            child: Text(
-              text,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: fontSize,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                if (icon != null) ...[
+                  icon,
+                ],
+                Padding(
+                  padding: EdgeInsets.only(right: icon != null ? 10.0 : 0),
+                  child: Text(
+                    text,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: fontSize,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

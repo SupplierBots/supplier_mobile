@@ -93,13 +93,6 @@ class GoogleLoginPage extends HookWidget {
                         'https://accounts.google.com/signin/v2/identifier?flowName=GlifWebSignIn&flowEntry=ServiceLogin&hl=en'),
                   ));
                 },
-                onLoadStart:
-                    (InAppWebViewController controller, Uri url) async {
-                  if (!Platform.isAndroid) return;
-                  final stealthJs = await rootBundle
-                      .loadString('assets/javascript/stealth.min.js');
-                  controller.evaluateJavascript(source: stealthJs);
-                },
                 onLoadStop: (InAppWebViewController controller, Uri url) async {
                   if (!url
                       .toString()
@@ -129,7 +122,7 @@ class GoogleLoginPage extends HookWidget {
                     height: 45,
                     onTap: _saveCookies,
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   const Flexible(
                     child: Text(
                       'Enter your account details. All data is secure and stored only on your phone.',

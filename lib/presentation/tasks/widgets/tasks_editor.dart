@@ -92,26 +92,6 @@ class TasksEditor extends HookWidget {
                   : const TasksList(),
             ),
           ),
-          floatingActionButton: !state.isEditing &&
-                  context.read<ProfilesCubit>().state.profiles.isNotEmpty &&
-                  context.read<TasksCubit>().state.tasks.length < 4
-              ? Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: FloatingActionButton(
-                    backgroundColor: kSecondaryBackground,
-                    onPressed: () {
-                      Vibrate.tap();
-                      context.read<TasksEditorCubit>().startedEditing(none());
-                    },
-                    child: const GradientWidget(
-                      child: Icon(
-                        CustomIcons.plus,
-                        size: 20,
-                      ),
-                    ),
-                  ),
-                )
-              : null,
           extendBody: true,
           bottomNavigationBar: AnimatedNavigationBar(_controller),
         );
