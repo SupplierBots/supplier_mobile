@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 import '../auth/auth_page.dart';
 import '../dashboard/dashboard_page.dart';
-import '../gmail/gmail_page.dart';
+import '../google_login/google_login_page.dart';
 import '../help/help_page.dart';
 import '../profiles/profiles_page.dart';
 import '../runner/runner_page.dart';
@@ -28,7 +28,7 @@ class Routes {
   static const String profilesPage = '/profiles-page';
   static const String settingsPage = '/settings-page';
   static const String helpPage = '/help-page';
-  static const String gmailPage = '/gmail-page';
+  static const String googleLoginPage = '/google-login-page';
   static const all = <String>{
     splashPage,
     authPage,
@@ -38,7 +38,7 @@ class Routes {
     profilesPage,
     settingsPage,
     helpPage,
-    gmailPage,
+    googleLoginPage,
   };
 }
 
@@ -54,7 +54,7 @@ class Router extends RouterBase {
     RouteDef(Routes.profilesPage, page: ProfilesPage),
     RouteDef(Routes.settingsPage, page: SettingsPage),
     RouteDef(Routes.helpPage, page: HelpPage),
-    RouteDef(Routes.gmailPage, page: GmailPage),
+    RouteDef(Routes.googleLoginPage, page: GoogleLoginPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -108,9 +108,10 @@ class Router extends RouterBase {
         settings: data,
       );
     },
-    GmailPage: (data) {
-      return PageRouteBuilder<GmailPage>(
-        pageBuilder: (context, animation, secondaryAnimation) => GmailPage(),
+    GoogleLoginPage: (data) {
+      return PageRouteBuilder<GoogleLoginPage>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            GoogleLoginPage(),
         settings: data,
       );
     },
@@ -141,5 +142,6 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<HelpPage> pushHelpPage() => push<HelpPage>(Routes.helpPage);
 
-  Future<GmailPage> pushGmailPage() => push<GmailPage>(Routes.gmailPage);
+  Future<GoogleLoginPage> pushGoogleLoginPage() =>
+      push<GoogleLoginPage>(Routes.googleLoginPage);
 }

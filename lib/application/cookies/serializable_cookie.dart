@@ -22,7 +22,7 @@ abstract class SerializableCookie implements _$SerializableCookie {
 
   const SerializableCookie._();
 
-  Cookie toWebviewFormat() => Cookie(
+  Cookie toWebViewFormat() => Cookie(
         name: name,
         value: value,
         expiresDate: expiresDate,

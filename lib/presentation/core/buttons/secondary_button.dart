@@ -4,18 +4,20 @@ import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 
 class SecondaryButton extends StatelessWidget {
-  const SecondaryButton(
-      {Key key,
-      @required this.text,
-      @required this.width,
-      @required this.height,
-      @required this.onTap,
-      this.gradient = kPrimaryGradient})
-      : super(key: key);
+  const SecondaryButton({
+    Key key,
+    @required this.text,
+    @required this.width,
+    @required this.height,
+    @required this.onTap,
+    this.gradient = kPrimaryGradient,
+    this.fontSize = 16,
+  }) : super(key: key);
 
   final String text;
   final double width;
   final double height;
+  final double fontSize;
   final VoidCallback onTap;
   final Gradient gradient;
 
@@ -43,7 +45,10 @@ class SecondaryButton extends StatelessWidget {
             child: Text(
               text,
               textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white, fontSize: 16),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: fontSize,
+              ),
             ),
           ),
         ),

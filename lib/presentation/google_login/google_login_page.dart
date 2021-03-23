@@ -7,11 +7,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:supplier_mobile/application/cookies/cookies_cubit.dart';
 import 'package:supplier_mobile/presentation/core/buttons/primary_button.dart';
+import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/typography.dart';
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
 import 'package:supplier_mobile/presentation/navigation/router.gr.dart';
 
-class GmailPage extends HookWidget {
+class GoogleLoginPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final webViewController = useState<InAppWebViewController>(null);
@@ -30,21 +31,28 @@ class GmailPage extends HookWidget {
       ),
     );
 
-    Future<void> _messagesHandler(List<dynamic> messages) async {}
-
     Future<void> _saveCookies() async {
       final cookies =
           await webViewController.value.ios.cookieHandler.ios.getAllCookies();
-      print(cookies);
-      context.read<CookiesCubit>().setGmailCookies(cookies);
+      context.read<CookiesCubit>().setGoogleCookies(cookies);
       ExtendedNavigator.of(context).replace(Routes.tasksPage);
+    }
+
+    Future<void> _messagesHandler(List<dynamic> messages) async {
+      try {
+        final email = messages.first as String;
+        context.read<CookiesCubit>().setGoogleAccount(email);
+        _saveCookies();
+      } catch (ex) {
+        print(ex.toString());
+      }
     }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: TopBar(
           content: Text(
-        'Gmail login',
+        'Google Login',
         style: kHeader,
       )),
       body: SafeArea(
@@ -61,7 +69,7 @@ class GmailPage extends HookWidget {
                   );
                   webViewController.value.clearCache();
                   final cookies =
-                      context.read<CookiesCubit>().state.getGmailCookies();
+                      context.read<CookiesCubit>().state.getGoogleCookies();
 
                   if (cookies.isNotEmpty) {
                     for (final cookie in cookies) {
@@ -81,7 +89,8 @@ class GmailPage extends HookWidget {
 
                   webViewController.value.loadUrl(
                       urlRequest: URLRequest(
-                    url: Uri.parse('https://accounts.google.com/login'),
+                    url: Uri.parse(
+                        'https://accounts.google.com/signin/v2/identifier?flowName=GlifWebSignIn&flowEntry=ServiceLogin&hl=en'),
                   ));
                 },
                 onLoadStart:
@@ -91,8 +100,16 @@ class GmailPage extends HookWidget {
                       .loadString('assets/javascript/stealth.min.js');
                   controller.evaluateJavascript(source: stealthJs);
                 },
-                onLoadStop:
-                    (InAppWebViewController controller, Uri url) async {},
+                onLoadStop: (InAppWebViewController controller, Uri url) async {
+                  if (!url
+                      .toString()
+                      .contains('https://myaccount.google.com/')) {
+                    return;
+                  }
+                  final source = await rootBundle
+                      .loadString('assets/javascript/googleLogin.js');
+                  controller.evaluateJavascript(source: source);
+                },
                 androidOnPermissionRequest:
                     (controller, origin, resources) async {
                   return PermissionRequestResponse(
@@ -104,11 +121,22 @@ class GmailPage extends HookWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(20.0),
-              child: PrimaryButton(
-                text: 'Close',
-                width: 160,
-                height: 45,
-                onTap: _saveCookies,
+              child: Row(
+                children: [
+                  PrimaryButton(
+                    text: 'Close',
+                    width: 120,
+                    height: 45,
+                    onTap: _saveCookies,
+                  ),
+                  SizedBox(width: 20),
+                  const Flexible(
+                    child: Text(
+                      'Enter your account details. All data is secure and stored only on your phone.',
+                      style: TextStyle(color: kLightPurple),
+                    ),
+                  )
+                ],
               ),
             )
           ],

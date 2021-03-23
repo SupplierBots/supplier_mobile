@@ -17,9 +17,12 @@ class _$CookiesStateTearOff {
   const _$CookiesStateTearOff();
 
 // ignore: unused_element
-  _CookiesState call({@required List<SerializableCookie> gmailCookies}) {
+  _CookiesState call(
+      {@required List<SerializableCookie> googleCookies,
+      String googleAccountEmail}) {
     return _CookiesState(
-      gmailCookies: gmailCookies,
+      googleCookies: googleCookies,
+      googleAccountEmail: googleAccountEmail,
     );
   }
 
@@ -35,7 +38,8 @@ const $CookiesState = _$CookiesStateTearOff();
 
 /// @nodoc
 mixin _$CookiesState {
-  List<SerializableCookie> get gmailCookies;
+  List<SerializableCookie> get googleCookies;
+  String get googleAccountEmail;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -47,7 +51,8 @@ abstract class $CookiesStateCopyWith<$Res> {
   factory $CookiesStateCopyWith(
           CookiesState value, $Res Function(CookiesState) then) =
       _$CookiesStateCopyWithImpl<$Res>;
-  $Res call({List<SerializableCookie> gmailCookies});
+  $Res call(
+      {List<SerializableCookie> googleCookies, String googleAccountEmail});
 }
 
 /// @nodoc
@@ -60,12 +65,16 @@ class _$CookiesStateCopyWithImpl<$Res> implements $CookiesStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object gmailCookies = freezed,
+    Object googleCookies = freezed,
+    Object googleAccountEmail = freezed,
   }) {
     return _then(_value.copyWith(
-      gmailCookies: gmailCookies == freezed
-          ? _value.gmailCookies
-          : gmailCookies as List<SerializableCookie>,
+      googleCookies: googleCookies == freezed
+          ? _value.googleCookies
+          : googleCookies as List<SerializableCookie>,
+      googleAccountEmail: googleAccountEmail == freezed
+          ? _value.googleAccountEmail
+          : googleAccountEmail as String,
     ));
   }
 }
@@ -77,7 +86,8 @@ abstract class _$CookiesStateCopyWith<$Res>
           _CookiesState value, $Res Function(_CookiesState) then) =
       __$CookiesStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<SerializableCookie> gmailCookies});
+  $Res call(
+      {List<SerializableCookie> googleCookies, String googleAccountEmail});
 }
 
 /// @nodoc
@@ -92,12 +102,16 @@ class __$CookiesStateCopyWithImpl<$Res> extends _$CookiesStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object gmailCookies = freezed,
+    Object googleCookies = freezed,
+    Object googleAccountEmail = freezed,
   }) {
     return _then(_CookiesState(
-      gmailCookies: gmailCookies == freezed
-          ? _value.gmailCookies
-          : gmailCookies as List<SerializableCookie>,
+      googleCookies: googleCookies == freezed
+          ? _value.googleCookies
+          : googleCookies as List<SerializableCookie>,
+      googleAccountEmail: googleAccountEmail == freezed
+          ? _value.googleAccountEmail
+          : googleAccountEmail as String,
     ));
   }
 }
@@ -106,33 +120,40 @@ class __$CookiesStateCopyWithImpl<$Res> extends _$CookiesStateCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_CookiesState extends _CookiesState {
-  const _$_CookiesState({@required this.gmailCookies})
-      : assert(gmailCookies != null),
+  const _$_CookiesState({@required this.googleCookies, this.googleAccountEmail})
+      : assert(googleCookies != null),
         super._();
 
   factory _$_CookiesState.fromJson(Map<String, dynamic> json) =>
       _$_$_CookiesStateFromJson(json);
 
   @override
-  final List<SerializableCookie> gmailCookies;
+  final List<SerializableCookie> googleCookies;
+  @override
+  final String googleAccountEmail;
 
   @override
   String toString() {
-    return 'CookiesState(gmailCookies: $gmailCookies)';
+    return 'CookiesState(googleCookies: $googleCookies, googleAccountEmail: $googleAccountEmail)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _CookiesState &&
-            (identical(other.gmailCookies, gmailCookies) ||
+            (identical(other.googleCookies, googleCookies) ||
                 const DeepCollectionEquality()
-                    .equals(other.gmailCookies, gmailCookies)));
+                    .equals(other.googleCookies, googleCookies)) &&
+            (identical(other.googleAccountEmail, googleAccountEmail) ||
+                const DeepCollectionEquality()
+                    .equals(other.googleAccountEmail, googleAccountEmail)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(gmailCookies);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(googleCookies) ^
+      const DeepCollectionEquality().hash(googleAccountEmail);
 
   @JsonKey(ignore: true)
   @override
@@ -148,13 +169,16 @@ class _$_CookiesState extends _CookiesState {
 abstract class _CookiesState extends CookiesState {
   const _CookiesState._() : super._();
   const factory _CookiesState(
-      {@required List<SerializableCookie> gmailCookies}) = _$_CookiesState;
+      {@required List<SerializableCookie> googleCookies,
+      String googleAccountEmail}) = _$_CookiesState;
 
   factory _CookiesState.fromJson(Map<String, dynamic> json) =
       _$_CookiesState.fromJson;
 
   @override
-  List<SerializableCookie> get gmailCookies;
+  List<SerializableCookie> get googleCookies;
+  @override
+  String get googleAccountEmail;
   @override
   @JsonKey(ignore: true)
   _$CookiesStateCopyWith<_CookiesState> get copyWith;

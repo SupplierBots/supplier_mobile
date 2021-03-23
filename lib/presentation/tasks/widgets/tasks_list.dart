@@ -9,7 +9,9 @@ import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart'
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
+import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 import 'package:supplier_mobile/presentation/navigation/router.gr.dart';
+import 'package:supplier_mobile/presentation/tasks/widgets/google_account_bar.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/tasks_list_tile.dart';
 
 class TasksList extends StatelessWidget {
@@ -24,13 +26,6 @@ class TasksList extends StatelessWidget {
     if (state.tasks.isNotEmpty) {
       return ListView(children: [
         const SizedBox(height: 20),
-        for (var task in state.tasks.entries) ...[
-          TasksListTile(
-            uid: task.key,
-            task: task.value,
-          ),
-          const SizedBox(height: kPrimaryElementsSpacing),
-        ],
         SecondaryButton(
           text: 'Start tasks',
           width: 180,
@@ -38,7 +33,17 @@ class TasksList extends StatelessWidget {
           onTap: () {
             ExtendedNavigator.of(context).replace(Routes.runnerPage);
           },
-        )
+        ),
+        const SizedBox(height: kPrimaryElementsSpacing),
+        const GoogleAccountBar(),
+        const SizedBox(height: kPrimaryElementsSpacing),
+        for (var task in state.tasks.entries) ...[
+          TasksListTile(
+            uid: task.key,
+            task: task.value,
+          ),
+          const SizedBox(height: kPrimaryElementsSpacing),
+        ],
       ]);
     }
     return Center(

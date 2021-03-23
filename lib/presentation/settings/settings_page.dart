@@ -47,7 +47,7 @@ class SettingsPage extends StatelessWidget {
                 width: 120,
                 height: 45,
                 onTap: () {
-                  context.read<CookiesCubit>().clearGmailCookies();
+                  context.read<CookiesCubit>().clearGoogleCookies();
                 },
               ),
               const SizedBox(height: 25),

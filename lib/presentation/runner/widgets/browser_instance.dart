@@ -61,7 +61,7 @@ class BrowserInstance extends HookWidget {
       await webViewController.clearCache();
       await webViewController.ios.cookieHandler.deleteAllCookies();
 
-      final cookies = context.read<CookiesCubit>().state.getGmailCookies();
+      final cookies = context.read<CookiesCubit>().state.getGoogleCookies();
 
       if (cookies.isNotEmpty) {
         for (final cookie in cookies) {
@@ -146,6 +146,11 @@ class BrowserInstance extends HookWidget {
             finished.value = true;
             break;
           }
+        case 'debug':
+          {
+            print(message.details);
+            break;
+          }
       }
     }
 
@@ -213,7 +218,7 @@ class BrowserInstance extends HookWidget {
                 }),
               );
 
-          controller.evaluateJavascript(
+          await controller.evaluateJavascript(
             source: injection,
           );
         },

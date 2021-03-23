@@ -8,15 +8,17 @@ part of 'cookies_cubit.dart';
 
 _$_CookiesState _$_$_CookiesStateFromJson(Map<String, dynamic> json) {
   return _$_CookiesState(
-    gmailCookies: (json['gmailCookies'] as List)
+    googleCookies: (json['googleCookies'] as List)
         ?.map((e) => e == null
             ? null
             : SerializableCookie.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    googleAccountEmail: json['googleAccountEmail'] as String,
   );
 }
 
 Map<String, dynamic> _$_$_CookiesStateToJson(_$_CookiesState instance) =>
     <String, dynamic>{
-      'gmailCookies': instance.gmailCookies,
+      'googleCookies': instance.googleCookies,
+      'googleAccountEmail': instance.googleAccountEmail,
     };

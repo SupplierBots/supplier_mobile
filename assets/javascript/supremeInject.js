@@ -1,8 +1,9 @@
 (() => {
   (async () => {
+    updateStatus("Script loaded");
+
     if (typeof Supreme === "undefined") return await reload();
 
-    await sleep(1000);
     const product = $PRODUCT$;
     const colors = $COLORS$;
     const anySize = $ANY_SIZE$;
@@ -27,24 +28,27 @@
     if (!item) {
       return await reload();
     }
+
+    const startTime = Date.now();
+
     updateStatus("Product found");
 
-    items.push(item.attributes.name);
+    items.push(item.name);
 
-    try {
-      setSessionIDs();
-      const hash = `products/${item.attributes.id}`;
-      Backbone.history.fragment = hash;
-      window.history.pushState({}, document.title, "#" + hash);
-      setLastVisitedFragment();
-    } catch {}
-    updateStatus("Fetching product details");
-    const styles = await fetchStyles(item);
-    if (!styles) {
-      return await reload();
-    }
+    findElement([`li:contains('${item.category}')`]).click();
+    await waitForElement(["li:has(img)"]);
+    await sleep(400);
+    updateStatus(item.name);
 
-    const selectedStyle = selectStyle(styles, colors, anyColor);
+    findElement([`li:contains('${item.name}')`]).click();
+    await waitForProduct();
+    await sleep(400);
+
+    const selectedStyle = selectStyle(
+      productDetailView.model.attributes.styles,
+      colors,
+      anyColor
+    );
     if (!selectedStyle) {
       if (!restocks.enabled) {
         updateStatus("Product sold out");
@@ -53,6 +57,10 @@
       waitForRestock();
       return;
     }
+
+    findElement([`[id*='${selectedStyle.attributes.id}'] img`]).click();
+    await waitForElement([`p:contains('${selectedStyle.attributes.name}')`]);
+    await sleep(200);
 
     const availableSizes = selectedStyle.attributes.sizes.models.filter(
       (s) => s.attributes.stock_level !== 0
@@ -72,40 +80,6 @@
       waitForRestock();
       return;
     }
-    updateStatus("Adding to cart");
-
-    const hash = `products/${item.attributes.id}/${selectedStyle.attributes.id}`;
-    Backbone.history.fragment = hash;
-    window.history.pushState({}, document.title, "#" + hash);
-    setLastVisitedFragment();
-
-    const s = Supreme.getProductOverviewDetailsForId(
-      item.attributes.id,
-      allCategoriesAndProducts
-    );
-
-    _currentViewHash.product = JSON.stringify(s).hashCode();
-    _currentCategory = singularCategoryName(s.categoryName);
-    _currentCategoryPlural = s.categoryName;
-
-    const template =
-      '<div id="product"><h2 id="name">' +
-      item.attributes.name +
-      '</h2><p id="style-name">&nbsp;</p><div id="style-image"><div id="style-image-container" class="swipe loading" style="visibility: visible; "></div><div class="clearfix"></div></div></div><div id="product-widgets" class="clearfix  "><div id="widgets-container"><span class="price">&nbsp;</span><span id="cart-update"></span></div></div><div style="margin-bottom:' +
-      $(window).height() +
-      'px;" id="product-details"><div id="product-details-content"><div id="styles"><ul class="style-selector"><li><div class="style-images"></div></li></ul><div class="clearfix"></div></div><p style="height:150px;" id="description">&nbsp;</p></div></div>';
-
-    $("#main").html(template);
-
-    item.set("selectedStyle", selectedStyle);
-    const productDetailView = new ProductDetailView({
-      model: item,
-    });
-
-    markItemTimeViewed(item.attributes.id);
-    $("footer").show();
-    $("#main").html(productDetailView.render().el);
-    await sleep(500);
 
     if (
       selectedStyle.attributes.sizes.models.length > 1 &&
@@ -113,17 +87,16 @@
     ) {
       await selectOption(size.attributes.name);
     }
+
     productDetailView.addToCartButton.$el.click();
     lookForModifiedButtons();
-
     const checkoutButtonSelectors = [
       'a:contains("CHECK")',
       'button:contains("CHECK")',
     ];
 
     await waitForElement(checkoutButtonSelectors);
-    await sleep(750);
-    updateStatus("Loading checkout");
+    await sleep(300);
     findElement(checkoutButtonSelectors).click();
 
     const cardHeaderSelectors = [
@@ -134,7 +107,7 @@
     ];
 
     await waitForElement(cardHeaderSelectors);
-    await sleep(500);
+    await sleep(300);
 
     updateStatus("Filling in checkout");
     findElement(cardHeaderSelectors)[0].scrollIntoView();
@@ -152,7 +125,7 @@
     ]).click();
 
     updateStatus("Checkout delay");
-    await sleep(getRandomRange(2000, 3000));
+    await sleep(getRandomRange(4000, 5000));
 
     window.addEventListener(
       "hashchange",
@@ -183,6 +156,14 @@
     ]).click();
     updateStatus("Processing");
     watchCaptchaChallenge();
+
+    async function waitForProduct() {
+      let price = findElement([".price"]);
+      while (!price || price.text().length <= 0) {
+        await sleep(250);
+        price = findElement([".price"]);
+      }
+    }
 
     async function watchCaptchaChallenge() {
       const iframeSelector = "iframe[src*='recaptcha/api2/b']";
@@ -243,11 +224,7 @@
     }
 
     function createChangeEvent(element) {
-      var node = document.getElementsByTagName("body")[0];
-      var scr = document.createElement("script");
-      scr.setAttribute("type", "text/javascript");
-      $(scr).text("$('#" + $(element).attr("id") + "').change()");
-      node.appendChild(scr);
+      element.change();
     }
 
     function lookForModifiedButtons() {
@@ -301,10 +278,14 @@
     }
 
     function findItem(product) {
-      const stock = Supreme.categories.models.flatMap((c) =>
-        c.attributes.products.models.flat()
-      );
-      return stock.find((item) => isMatch(item.attributes.name, product));
+      const stock = Supreme.categories.models.flatMap((c) => {
+        return c.attributes.products.models.map((p) => ({
+          name: p.attributes.name,
+          category: c.attributes.name,
+          product: p,
+        }));
+      });
+      return stock.find((item) => isMatch(item.name, product));
     }
 
     async function sleep(ms) {

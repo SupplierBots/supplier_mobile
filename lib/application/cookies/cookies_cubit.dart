@@ -10,16 +10,20 @@ part 'cookies_cubit.g.dart';
 class CookiesCubit extends HydratedCubit<CookiesState> {
   CookiesCubit() : super(CookiesState.initial());
 
-  void setGmailCookies(List<Cookie> cookies) {
+  void setGoogleCookies(List<Cookie> cookies) {
     emit(state.copyWith(
-      gmailCookies: cookies.map((c) => c.toSerializable()).toList(),
+      googleCookies: cookies.map((c) => c.toSerializable()).toList(),
     ));
   }
 
-  void clearGmailCookies() {
+  void setGoogleAccount(String email) {
     emit(state.copyWith(
-      gmailCookies: [],
+      googleAccountEmail: email,
     ));
+  }
+
+  void clearGoogleCookies() {
+    emit(CookiesState.initial());
   }
 
   @override

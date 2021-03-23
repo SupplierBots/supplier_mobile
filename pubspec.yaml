@@ -1,7 +1,7 @@
 name: supplier_mobile
 description: Supreme & Palace Bot.
 publish_to: "none"
-version: 0.6.1+7
+version: 0.6.2+8
 
 environment:
   sdk: ">=2.8.0 <3.0.0"
@@ -69,6 +69,7 @@ flutter:
   assets:
     - assets/javascript/supremeInject.js
     - assets/javascript/stealth.min.js
+    - assets/javascript/googleLogin.js
 
   fonts:
     - family: Lato
