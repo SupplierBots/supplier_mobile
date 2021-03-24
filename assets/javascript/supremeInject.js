@@ -1,8 +1,29 @@
 (() => {
   (async () => {
-    updateStatus("Script loaded");
-
     if (typeof Supreme === "undefined") return await reload();
+
+    // window.flutter_inappwebview = {
+    //   callHandler: function (connection, status) {
+    //     console.log(status);
+    //   },
+    // };
+
+    // const product = {
+    //   name: "Hanes Boxers",
+    //   positive: ["work", "pant"],
+    //   negative: [],
+    //   multi: [],
+    // };
+    // const colors = ["purple"];
+    // const anySize = false;
+    // const anyColor = false;
+    // const productSize = "32";
+    // const paymentDetails = {
+    //   number: "4111 1111 1111 1111",
+    //   month: "02",
+    //   year: "2022",
+    //   cvv: "432",
+    // };
 
     const product = $PRODUCT$;
     const colors = $COLORS$;
@@ -18,149 +39,204 @@
 
     const region = "eu";
     const items = [];
-
     const sizeToFind = productSize.includes("SHOE")
       ? convertShoeSize(productSize, region)
       : productSize;
 
-    let item = findItem(product);
-
-    if (!item) {
-      return await reload();
-    }
+    const url = document.location.href;
 
     const startTime = Date.now();
 
-    updateStatus("Product found");
+    if (!url.includes("product")) {
+      await productSearch();
+    }
 
-    items.push(item.name);
+    await addProductToCart();
+    await checkout();
 
-    findElement([`li:contains('${item.category}')`]).click();
-    await waitForElement(["li:has(img)"]);
-    await sleep(400);
-    updateStatus(item.name);
+    async function productSearch() {
+      let item = findItem(product);
 
-    findElement([`li:contains('${item.name}')`]).click();
-    await waitForProduct();
-    await sleep(400);
-
-    const selectedStyle = selectStyle(
-      productDetailView.model.attributes.styles,
-      colors,
-      anyColor
-    );
-    if (!selectedStyle) {
-      if (!restocks.enabled) {
-        updateStatus("Product sold out");
-        return;
+      if (!item) {
+        return await reload();
       }
-      waitForRestock();
-      return;
+
+      updateStatus("Product found");
+
+      items.push(item.name);
+
+      $("li")
+        .filter(function () {
+          return $(this).children().html() == item.category;
+        })
+        .click();
+
+      await waitForElement(["li:has(img)"]);
+      await sleep(400);
+
+      updateStatus("Loading product details");
+
+      $("li")
+        .filter(function () {
+          return $(this).find(".name").html() == item.name;
+        })
+        .click();
     }
 
-    findElement([`[id*='${selectedStyle.attributes.id}'] img`]).click();
-    await waitForElement([`p:contains('${selectedStyle.attributes.name}')`]);
-    await sleep(200);
+    async function addProductToCart() {
+      await waitForProduct();
+      await sleep(400);
 
-    const availableSizes = selectedStyle.attributes.sizes.models.filter(
-      (s) => s.attributes.stock_level !== 0
-    );
-
-    const size =
-      selectedStyle.attributes.sizes.models.length > 1 &&
-      productSize != "None/One-Size"
-        ? selectSize(availableSizes, sizeToFind, anySize)
-        : availableSizes[0];
-
-    if (!size) {
-      if (!restocks.enabled) {
-        updateStatus("Size sold out");
-        return;
-      }
-      waitForRestock();
-      return;
-    }
-
-    if (
-      selectedStyle.attributes.sizes.models.length > 1 &&
-      productSize != "None/One-Size"
-    ) {
-      await selectOption(size.attributes.name);
-    }
-
-    productDetailView.addToCartButton.$el.click();
-    lookForModifiedButtons();
-    const checkoutButtonSelectors = [
-      'a:contains("CHECK")',
-      'button:contains("CHECK")',
-    ];
-
-    await waitForElement(checkoutButtonSelectors);
-    await sleep(300);
-    findElement(checkoutButtonSelectors).click();
-
-    const cardHeaderSelectors = [
-      "h2:contains('card information')",
-      "h3:contains('card information')",
-      "h1:contains('card information')",
-      "p:contains('card information')",
-    ];
-
-    await waitForElement(cardHeaderSelectors);
-    await sleep(300);
-
-    updateStatus("Filling in checkout");
-    findElement(cardHeaderSelectors)[0].scrollIntoView();
-
-    await type(
-      ["[placeholder*='credit card']", "[maxlength='19']"],
-      paymentDetails.number
-    );
-    await selectOption(paymentDetails.month);
-    await selectOption(paymentDetails.year);
-    await type(["[placeholder*='cvv']", "[maxlength='4']"], paymentDetails.cvv);
-    findElement([
-      "label:contains('and agree')",
-      "label:contains('return policy')",
-    ]).click();
-
-    updateStatus("Checkout delay");
-    await sleep(getRandomRange(4000, 5000));
-
-    window.addEventListener(
-      "hashchange",
-      () => {
-        const hash = location.hash;
-        if (hash.includes("chargeError")) {
-          window.flutter_inappwebview.callHandler("supplierConnection", {
-            action: "failed",
-            details: "Charge error",
-          });
-        } else if (hash.includes("confirmOrder")) {
-          window.flutter_inappwebview.callHandler("supplierConnection", {
-            action: "success",
-          });
-        } else if (hash.includes("cart")) {
-          window.flutter_inappwebview.callHandler("supplierConnection", {
-            action: "failed",
-            details: "Sold out",
-          });
+      const selectedStyle = selectStyle(
+        productDetailView.model.attributes.styles,
+        colors,
+        anyColor
+      );
+      if (!selectedStyle) {
+        if (!restocks.enabled) {
+          updateStatus("Product sold out");
+          return;
         }
-      },
-      false
-    );
+        waitForRestock();
+        return;
+      }
 
-    findElement([
-      "button:contains('process')",
-      "button:contains('payment')",
-    ]).click();
-    updateStatus("Processing");
-    watchCaptchaChallenge();
+      findElement([`[id*='${selectedStyle.attributes.id}'] img`]).click();
+      await waitForElement([`p:contains('${selectedStyle.attributes.name}')`]);
+      await sleep(200);
+
+      const availableSizes = selectedStyle.attributes.sizes.models.filter(
+        (s) => s.attributes.stock_level !== 0
+      );
+
+      const size =
+        selectedStyle.attributes.sizes.models.length > 1 &&
+        productSize != "None/One-Size"
+          ? selectSize(availableSizes, sizeToFind, anySize)
+          : availableSizes[0];
+
+      if (!size) {
+        if (!restocks.enabled) {
+          updateStatus("Size sold out");
+          return;
+        }
+        waitForRestock();
+        return;
+      }
+
+      if (
+        selectedStyle.attributes.sizes.models.length > 1 &&
+        productSize != "None/One-Size"
+      ) {
+        await selectOption(size.attributes.name);
+      }
+
+      updateStatus("Adding to cart");
+
+      productDetailView.addToCartButton.$el.click();
+      lookForModifiedButtons();
+
+      await waitForAtcResponse();
+
+      await sleep(300);
+      const checkoutButtonSelectors = [
+        'a:contains("CHECK")',
+        'button:contains("CHECK")',
+      ];
+      await waitForElement(checkoutButtonSelectors);
+      findElement(checkoutButtonSelectors).click();
+    }
+
+    async function checkout() {
+      const cardHeaderSelectors = [
+        "h2:contains('card information')",
+        "h3:contains('card information')",
+        "h1:contains('card information')",
+        "p:contains('card information')",
+      ];
+
+      await waitForElement(cardHeaderSelectors);
+      await sleep(300);
+
+      updateStatus("Filling in checkout");
+      findElement(cardHeaderSelectors)[0].scrollIntoView();
+
+      await type(
+        ["[placeholder*='credit card']", "[maxlength='19']"],
+        paymentDetails.number
+      );
+      await selectOption(paymentDetails.month);
+      await selectOption(paymentDetails.year);
+      await type(
+        ["[placeholder*='cvv']", "[maxlength='4']"],
+        paymentDetails.cvv
+      );
+      findElement([
+        "label:contains('and agree')",
+        "label:contains('return policy')",
+      ]).click();
+
+      updateStatus("Checkout delay");
+      await sleep(getRandomRange(4000, 5000));
+
+      window.addEventListener(
+        "hashchange",
+        () => {
+          const hash = location.hash;
+          if (hash.includes("chargeError")) {
+            window.flutter_inappwebview.callHandler("supplierConnection", {
+              action: "failed",
+              details: "Charge error",
+            });
+          } else if (hash.includes("confirmOrder")) {
+            window.flutter_inappwebview.callHandler("supplierConnection", {
+              action: "success",
+            });
+          } else if (hash.includes("cart")) {
+            window.flutter_inappwebview.callHandler("supplierConnection", {
+              action: "failed",
+              details: "Sold out",
+            });
+          }
+        },
+        false
+      );
+
+      findElement([
+        "button:contains('process')",
+        "button:contains('payment')",
+      ]).click();
+      updateStatus("Processing");
+      watchCaptchaChallenge();
+    }
+
+    async function waitForAtcResponse() {
+      const removeButtonSelectors = [
+        ".cart-button:contains('remove')",
+        ".delete",
+      ];
+      let removeButton = findElement(removeButtonSelectors);
+      let waitingTime = 0;
+      while (!removeButton) {
+        await sleep(250);
+        waitingTime += 250;
+        if (waitingTime >= 3000) {
+          window.location.reload();
+        }
+        removeButton = findElement(removeButtonSelectors);
+      }
+    }
 
     async function waitForProduct() {
       let price = findElement([".price"]);
-      while (!price || price.text().length <= 0) {
+      let waitingTime = 0;
+      while (!price || price.text().length <= 1) {
         await sleep(250);
+        waitingTime += 250;
+
+        if (waitingTime >= 2000) {
+          window.location.reload();
+        }
         price = findElement([".price"]);
       }
     }
@@ -292,35 +368,6 @@
       await new Promise((resolve) => setTimeout(resolve, ms));
     }
 
-    async function fetchStyles(item) {
-      const styles = await Promise.race([
-        stylesListener(item),
-        stylesRequest(item),
-      ]);
-      if (!styles) {
-        return null;
-      }
-      const availableStyles = styles.filter((st) =>
-        st.attributes.sizes.models.some((s) => s.attributes.stock_level !== 0)
-      );
-      return availableStyles;
-    }
-
-    async function stylesListener(item) {
-      while (!item.attributes.styles) {
-        await sleep(10);
-      }
-
-      return item.attributes.styles.models;
-    }
-
-    async function stylesRequest(item) {
-      while (!item.attributes.styles) {
-        item.fetch();
-        await sleep(1000);
-      }
-    }
-
     function isMatch(name, { positive, negative, multi }) {
       name = name.toLowerCase();
       if (!positive.every((p) => name.includes(p))) return false;
@@ -345,6 +392,7 @@
       }
       return null;
     }
+
     function convertShoeSize(size, region) {
       switch (size) {
         case "SHOE-US4": {

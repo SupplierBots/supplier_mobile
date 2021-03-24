@@ -70,6 +70,7 @@ flutter:
     - assets/javascript/supremeInject.js
     - assets/javascript/stealth.min.js
     - assets/javascript/googleLogin.js
+    - assets/javascript/cardinalPatch.js
 
   fonts:
     - family: Lato

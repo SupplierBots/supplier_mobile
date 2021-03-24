@@ -217,9 +217,13 @@ class BrowserInstance extends HookWidget {
                   'cvv': profile.securityCode,
                 }),
               );
-
-          await controller.evaluateJavascript(
+          controller.evaluateJavascript(
             source: injection,
+          );
+          final cardinalPatch =
+              await rootBundle.loadString('assets/javascript/cardinalPatch.js');
+          controller.evaluateJavascript(
+            source: cardinalPatch,
           );
         },
         androidOnPermissionRequest: (controller, origin, resources) async {

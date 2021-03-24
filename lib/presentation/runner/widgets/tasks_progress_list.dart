@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/application/runner/cubit/runner_cubit.dart';
 import 'package:supplier_mobile/presentation/core/buttons/primary_button.dart';
+import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/constants/typography.dart';
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
@@ -75,10 +76,14 @@ class TasksProgressList extends HookWidget {
                       },
                     ),
                   const SizedBox(width: 10),
-                  PrimaryButton(
-                    text: 'Stop tasks',
-                    width: 150,
+                  SecondaryButton(
+                    text: 'Stop',
+                    width: 110,
                     height: 45,
+                    icon: const Icon(
+                      Icons.stop,
+                      color: Colors.white,
+                    ),
                     onTap: () {
                       ExtendedNavigator.of(context).replace(Routes.tasksPage);
                     },
