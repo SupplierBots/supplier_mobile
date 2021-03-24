@@ -29,10 +29,7 @@ class TasksForm extends HookWidget {
 
       initialValues.value = uidOption.fold(
         () => null,
-        (uid) {
-          print(tasks[uid].toJson());
-          return tasks[uid].toJson();
-        },
+        (uid) => tasks[uid].toJson(),
       );
     });
 

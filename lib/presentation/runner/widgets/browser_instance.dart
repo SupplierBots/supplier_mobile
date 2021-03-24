@@ -174,9 +174,7 @@ class BrowserInstance extends HookWidget {
         },
         onLoadStop: (InAppWebViewController controller, Uri url) async {
           if (finished.value) return;
-          if (url.toString() != 'https://www.supremenewyork.com/mobile') return;
-
-          _updateProgress('Waiting for product');
+          if (!url.toString().contains('www.supremenewyork.com')) return;
 
           final task = context.read<TasksCubit>().state.tasks[uid];
           final profile =
@@ -219,11 +217,6 @@ class BrowserInstance extends HookWidget {
               );
           controller.evaluateJavascript(
             source: injection,
-          );
-          final cardinalPatch =
-              await rootBundle.loadString('assets/javascript/cardinalPatch.js');
-          controller.evaluateJavascript(
-            source: cardinalPatch,
           );
         },
         androidOnPermissionRequest: (controller, origin, resources) async {

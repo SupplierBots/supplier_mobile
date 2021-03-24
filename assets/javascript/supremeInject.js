@@ -55,6 +55,8 @@
     await checkout();
 
     async function productSearch() {
+      updateStatus("Waiting for product");
+
       let item = findItem(product);
 
       if (!item) {
@@ -88,15 +90,12 @@
       await sleep(400);
 
       const selectedStyle = selectStyle(
-        productDetailView.model.attributes.styles,
+        productDetailView.model.attributes.styles.models,
         colors,
         anyColor
       );
+
       if (!selectedStyle) {
-        if (!restocks.enabled) {
-          updateStatus("Product sold out");
-          return;
-        }
         waitForRestock();
         return;
       }
@@ -116,10 +115,6 @@
           : availableSizes[0];
 
       if (!size) {
-        if (!restocks.enabled) {
-          updateStatus("Size sold out");
-          return;
-        }
         waitForRestock();
         return;
       }
@@ -132,12 +127,8 @@
       }
 
       updateStatus("Adding to cart");
-
       productDetailView.addToCartButton.$el.click();
-      lookForModifiedButtons();
-
       await waitForAtcResponse();
-
       await sleep(300);
       const checkoutButtonSelectors = [
         'a:contains("CHECK")',
@@ -206,6 +197,18 @@
         "button:contains('process')",
         "button:contains('payment')",
       ]).click();
+      lookForModifiedButtons([
+        "checkout",
+        "finish",
+        "place",
+        "submit",
+        "continue",
+        "confirm",
+        "proceed",
+        "accept",
+        "charge",
+        "order",
+      ]);
       updateStatus("Processing");
       watchCaptchaChallenge();
     }
@@ -218,6 +221,13 @@
       let removeButton = findElement(removeButtonSelectors);
       let waitingTime = 0;
       while (!removeButton) {
+        lookForModifiedButtons([
+          "continue",
+          "confirm",
+          "proceed",
+          "add",
+          "accept",
+        ]);
         await sleep(250);
         waitingTime += 250;
         if (waitingTime >= 3000) {
@@ -303,9 +313,7 @@
       element.change();
     }
 
-    function lookForModifiedButtons() {
-      const names = ["continue", "confirm", "proceed", "add", "accept"];
-
+    function lookForModifiedButtons(names) {
       for (const name of names) {
         var button = $(`button:contains("${name}")`);
         if (button.length === 0) continue;
@@ -347,7 +355,9 @@
     function selectStyle(styles, colors, anyColor) {
       const primary = findMatchingStyle(colors, styles);
 
-      if (primary || !anyColor) return primary;
+      if (primary || !anyColor) {
+        return primary;
+      }
 
       const secondary = styles[Math.floor(Math.random() * styles.length)];
       return secondary;
