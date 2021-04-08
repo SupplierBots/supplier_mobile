@@ -69,6 +69,8 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/Supreme.png
+    - assets/images/Frame.png
     - assets/javascript/supremeInject.js
     - assets/javascript/stealth.min.js
     - assets/javascript/googleLogin.js
@@ -81,3 +83,4 @@ flutter:
     - family: CustomIcons
       fonts:
         - asset: assets/icons/CustomIcons.ttf
+

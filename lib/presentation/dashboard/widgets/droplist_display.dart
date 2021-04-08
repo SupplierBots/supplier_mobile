@@ -8,11 +8,13 @@ import 'package:url_launcher/url_launcher.dart';
 class DroplistDisplay extends StatelessWidget {
   const DroplistDisplay({
     Key key,
-    @required this.icon,
+    this.icon,
     @required this.droplist,
+    this.image,
   }) : super(key: key);
   final Icon icon;
   final Droplist droplist;
+  final Image image;
 
   Future<void> launchURL() async {
     if (await canLaunch(droplist.link)) {
@@ -37,9 +39,14 @@ class DroplistDisplay extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  GradientWidget(
-                    child: icon,
+                  Container(
+                    height: 20,
+                    width: 20,
+                    child: image,
                   ),
+                  //GradientWidget(
+                  //child: icon,
+                  //),
                   const Spacer(),
                   Text(
                     'Week ${droplist.week}',
