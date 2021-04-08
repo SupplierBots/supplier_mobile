@@ -50,9 +50,11 @@ class DroplistDisplay extends StatelessWidget {
               const SizedBox(
                 height: 11,
               ),
-              Text(
-                Jiffy(droplist.date).format('do MMMM yy'),
-                style: const TextStyle(color: kDarkGrey, fontSize: 15),
+              FittedBox(
+                child: Text(
+                  Jiffy(droplist.date).format('do MMMM yy'),
+                  style: const TextStyle(color: kDarkGrey, fontSize: 15),
+                ),
               ),
             ],
           ),
