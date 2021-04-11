@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
-import 'package:supplier_mobile/presentation/core/vibrate.dart';
 
 class StyledAlertDialog extends StatelessWidget {
   const StyledAlertDialog({

@@ -20,6 +20,9 @@ class App extends StatelessWidget {
           create: (context) => getIt<AuthCubit>()..authCheckRequested(),
         ),
         BlocProvider(
+          create: (context) => SettingsCubit(),
+        ),
+        BlocProvider(
           create: (context) => ProfilesCubit(),
         ),
         BlocProvider(
@@ -28,9 +31,6 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (context) => CookiesCubit(),
         ),
-        BlocProvider(
-          create: (context) => SettingsCubit(),
-        )
       ],
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,

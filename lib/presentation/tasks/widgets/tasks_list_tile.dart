@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart' hide Task;
+import 'package:supplier_mobile/application/settings/settings_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_editor/tasks_editor_cubit.dart';
 import 'package:supplier_mobile/domain/tasks/task.dart';
+import 'package:supplier_mobile/inject.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
@@ -22,7 +24,12 @@ class TasksListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> _showDeleteAlert() {
-      Vibrate.heavyImpactTap();
+      if (!context.read<SettingsCubit>().state.settings.enableWarnings) {
+        context.read<TasksCubit>().deletedTask(uid);
+        return Future.value();
+      }
+
+      getIt<Vibrate>().heavyImpactTap(context);
       return showDialog<void>(
         context: context,
         barrierDismissible: false,

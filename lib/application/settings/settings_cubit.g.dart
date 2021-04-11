@@ -8,7 +8,9 @@ part of 'settings_cubit.dart';
 
 _$_SettingsState _$_$_SettingsStateFromJson(Map<String, dynamic> json) {
   return _$_SettingsState(
-    settings: json['settings'],
+    settings: json['settings'] == null
+        ? null
+        : Settings.fromJson(json['settings'] as Map<String, dynamic>),
   );
 }
 

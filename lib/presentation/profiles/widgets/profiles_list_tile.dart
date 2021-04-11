@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_cubit.dart';
+import 'package:supplier_mobile/application/settings/settings_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
+import 'package:supplier_mobile/inject.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/styled_alert_dialog.dart';
@@ -22,7 +24,7 @@ class ProfilesListTile extends StatelessWidget {
     Future<void> _showDeleteAlert() {
       final tasks = context.read<TasksCubit>().state.tasks;
       if (tasks.values.any((task) => task.profileName == name)) {
-        Vibrate.error();
+        getIt<Vibrate>().error(context);
         return showDialog<void>(
           context: context,
           barrierDismissible: true,
@@ -35,7 +37,12 @@ class ProfilesListTile extends StatelessWidget {
         );
       }
 
-      Vibrate.heavyImpactTap();
+      if (!context.read<SettingsCubit>().state.settings.enableWarnings) {
+        context.read<ProfilesCubit>().deletedProfile(name);
+        return Future.value();
+      }
+
+      getIt<Vibrate>().heavyImpactTap(context);
       return showDialog<void>(
         context: context,
         barrierDismissible: false,

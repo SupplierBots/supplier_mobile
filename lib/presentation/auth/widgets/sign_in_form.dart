@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:supplier_mobile/application/auth/auth_forms/auth_forms_cubit.dart';
 import 'package:supplier_mobile/domain/auth/sign_in_credentials.dart';
+import 'package:supplier_mobile/inject.dart';
 import 'package:supplier_mobile/presentation/auth/widgets/error_renderer.dart';
 import 'package:supplier_mobile/presentation/core/buttons/primary_button.dart';
 import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
@@ -23,7 +24,7 @@ class SignInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     void submit() {
       if (!formKey.currentState.saveAndValidate()) {
-        Vibrate.error();
+        getIt<Vibrate>().error(context);
         return;
       }
       final credentials =

@@ -48,6 +48,8 @@ abstract class $SettingsStateCopyWith<$Res> {
           SettingsState value, $Res Function(SettingsState) then) =
       _$SettingsStateCopyWithImpl<$Res>;
   $Res call({Settings settings});
+
+  $SettingsCopyWith<$Res> get settings;
 }
 
 /// @nodoc
@@ -67,6 +69,16 @@ class _$SettingsStateCopyWithImpl<$Res>
       settings: settings == freezed ? _value.settings : settings as Settings,
     ));
   }
+
+  @override
+  $SettingsCopyWith<$Res> get settings {
+    if (_value.settings == null) {
+      return null;
+    }
+    return $SettingsCopyWith<$Res>(_value.settings, (value) {
+      return _then(_value.copyWith(settings: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -77,6 +89,9 @@ abstract class _$SettingsStateCopyWith<$Res>
       __$SettingsStateCopyWithImpl<$Res>;
   @override
   $Res call({Settings settings});
+
+  @override
+  $SettingsCopyWith<$Res> get settings;
 }
 
 /// @nodoc

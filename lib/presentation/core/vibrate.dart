@@ -1,13 +1,20 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+import 'package:supplier_mobile/application/settings/settings_cubit.dart';
 
-abstract class Vibrate {
-  static Future<void> error() async {
+@LazySingleton()
+class Vibrate {
+  Future<void> error(BuildContext context) async {
+    if (!context.read<SettingsCubit>().state.settings.enableVibrations) return;
     HapticFeedback.heavyImpact();
     await Future<void>.delayed(const Duration(milliseconds: 100));
     HapticFeedback.heavyImpact();
   }
 
-  static void heavyImpactTap() {
+  void heavyImpactTap(BuildContext context) {
+    if (!context.read<SettingsCubit>().state.settings.enableVibrations) return;
     HapticFeedback.heavyImpact();
   }
 }
