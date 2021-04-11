@@ -11,7 +11,7 @@ abstract class DashboardState with _$DashboardState {
           //TODO: Set init info
           news: 'init news',
           tips: 'init tips',
-          version: 'init version',
+          version: '0.0.0',
         ),
       );
 

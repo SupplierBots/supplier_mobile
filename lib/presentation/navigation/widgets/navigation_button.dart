@@ -24,7 +24,6 @@ class NavigationButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           if (isActiveRoute) return;
-          Vibrate.tap();
           ExtendedNavigator.of(context).replace(route);
         },
         child: Container(

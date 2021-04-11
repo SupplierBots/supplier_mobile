@@ -40,7 +40,6 @@ class StyledAlertDialog extends StatelessWidget {
             color: kDarkGrey,
           ),
           onPressed: () {
-            Vibrate.tap();
             Navigator.of(context).pop();
           },
         ),
@@ -52,7 +51,6 @@ class StyledAlertDialog extends StatelessWidget {
             color: kLightPurple,
           ),
           onPressed: () {
-            Vibrate.tap();
             Navigator.of(context).pop();
             onConfirm();
           },

@@ -52,7 +52,6 @@ class ProfilesListTile extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Vibrate.tap();
         context.read<ProfilesEditorCubit>().startedEditing(name);
       },
       child: Container(

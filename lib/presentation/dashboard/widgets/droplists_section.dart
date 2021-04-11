@@ -26,10 +26,6 @@ class DroplistsSection extends StatelessWidget {
             Flexible(
               child: DroplistDisplay(
                 image: Image.asset('assets/images/Supreme.png'),
-                // icon: const Icon(
-                //   Icons.access_alarm,
-                //   color: Colors.white,
-                // ),
                 droplist: state.droplists.supreme,
               ),
             ),
@@ -39,10 +35,6 @@ class DroplistsSection extends StatelessWidget {
             Flexible(
               child: DroplistDisplay(
                 image: Image.asset('assets/images/Frame.png'),
-                // icon: const Icon(
-                //   Icons.accessibility_sharp,
-                //   color: Colors.white,
-                // ),
                 droplist: state.droplists.palace,
               ),
             ),

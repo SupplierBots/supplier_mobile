@@ -44,9 +44,6 @@ class DroplistDisplay extends StatelessWidget {
                     width: 20,
                     child: image,
                   ),
-                  //GradientWidget(
-                  //child: icon,
-                  //),
                   const Spacer(),
                   Text(
                     'Week ${droplist.week}',

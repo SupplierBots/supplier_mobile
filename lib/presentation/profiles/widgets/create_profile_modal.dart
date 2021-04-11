@@ -25,7 +25,6 @@ class CreateProfileModal extends HookWidget {
         Vibrate.error();
         return;
       }
-      Vibrate.tap();
       final name = formKey.currentState.value['name'] as String;
       context.read<ProfilesEditorCubit>().startedEditing(name);
       Navigator.of(context).pop();
@@ -82,7 +81,6 @@ class CreateProfileModal extends HookWidget {
             color: kDarkGrey,
           ),
           onPressed: () {
-            Vibrate.tap();
             Navigator.of(context).pop();
           },
         ),

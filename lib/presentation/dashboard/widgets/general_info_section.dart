@@ -8,7 +8,7 @@ import 'package:supplier_mobile/application/dashboard/dashboard_cubit.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
-import 'package:supplier_mobile/presentation/dashboard/widgets/versionID.dart';
+import 'package:supplier_mobile/presentation/dashboard/widgets/version_id.dart';
 import 'package:version/version.dart';
 
 class GeneralInfoSection extends HookWidget {

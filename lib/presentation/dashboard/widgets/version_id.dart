@@ -2,7 +2,6 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
-import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 
 class VersionID extends StatelessWidget {

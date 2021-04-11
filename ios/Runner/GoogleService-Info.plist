@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>741398503521-vmp3ndf0kqo7psscu7dgfs82jdbce0c9.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.741398503521-vmp3ndf0kqo7psscu7dgfs82jdbce0c9</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCz4Zi-DSJ672Nfx9-4wnH3lpplYYS4c8s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>741398503521</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>io.supplierbot.mobile</string>
+	<key>PROJECT_ID</key>
+	<string>safedrop-83b20</string>
+	<key>STORAGE_BUCKET</key>
+	<string>safedrop-83b20.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:741398503521:ios:c037d91c3bd2566751ca20</string>
+	<key>DATABASE_URL</key>
+	<string>https://safedrop-83b20.firebaseio.com</string>
+</dict>
+</plist>

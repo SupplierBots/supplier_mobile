@@ -43,7 +43,6 @@ class EditHeader extends HookWidget {
     Future<void> _cancel() async {
       final result = cancelAction();
       if (!result.value1) {
-        Vibrate.tap();
         result.value2();
         return;
       }
@@ -108,7 +107,6 @@ class EditHeader extends HookWidget {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                 onPressed: () {
                   if (confirmAction()) {
-                    Vibrate.tap();
                     return;
                   }
                   _controller.forward().whenComplete(() => _controller.reset());

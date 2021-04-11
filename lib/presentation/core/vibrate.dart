@@ -7,10 +7,6 @@ abstract class Vibrate {
     HapticFeedback.heavyImpact();
   }
 
-  static void tap() {
-    HapticFeedback.lightImpact();
-  }
-
   static void heavyImpactTap() {
     HapticFeedback.heavyImpact();
   }

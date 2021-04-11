@@ -26,7 +26,6 @@ class SignInForm extends StatelessWidget {
         Vibrate.error();
         return;
       }
-      Vibrate.tap();
       final credentials =
           SignInCredentials.fromJson(formKey.currentState.value);
 
@@ -90,7 +89,6 @@ class SignInForm extends StatelessWidget {
                   height: 45,
                   width: 115,
                   onTap: () {
-                    Vibrate.tap();
                     context.read<AuthFormsCubit>().signInOrRegisterToggled();
                   },
                 ),

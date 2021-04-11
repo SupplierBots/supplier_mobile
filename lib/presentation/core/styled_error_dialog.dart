@@ -39,7 +39,6 @@ class StyledErrorDialong extends StatelessWidget {
             color: kLightPurple,
           ),
           onPressed: () {
-            Vibrate.tap();
             Navigator.of(context).pop();
           },
         ),

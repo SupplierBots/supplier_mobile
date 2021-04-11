@@ -71,7 +71,6 @@ class ProfilesEditor extends HookWidget {
                 child: FloatingActionButton(
                   backgroundColor: kSecondaryBackground,
                   onPressed: () {
-                    Vibrate.tap();
                     showDialog<void>(
                       context: context,
                       barrierDismissible: false,

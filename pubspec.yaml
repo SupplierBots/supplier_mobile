@@ -83,4 +83,3 @@ flutter:
     - family: CustomIcons
       fonts:
         - asset: assets/icons/CustomIcons.ttf
-

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supplier_mobile/application/auth/auth_cubit.dart';
 import 'package:supplier_mobile/application/cookies/cookies_cubit.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
+import 'package:supplier_mobile/application/settings/settings_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
 import 'package:supplier_mobile/inject.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
@@ -26,6 +27,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => CookiesCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SettingsCubit(),
         )
       ],
       child: GestureDetector(

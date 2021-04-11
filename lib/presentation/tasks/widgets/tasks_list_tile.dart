@@ -39,7 +39,6 @@ class TasksListTile extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Vibrate.tap();
         context.read<TasksEditorCubit>().startedEditing(optionOf(uid));
       },
       child: Container(

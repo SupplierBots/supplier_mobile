@@ -26,7 +26,6 @@ class RegisterForm extends StatelessWidget {
         Vibrate.error();
         return;
       }
-      Vibrate.tap();
       final credentials =
           RegisterCredentials.fromJson(formKey.currentState.value);
       context.read<AuthFormsCubit>().createAccountPressed(credentials);
@@ -94,7 +93,6 @@ class RegisterForm extends StatelessWidget {
                 height: 45,
                 width: 115,
                 onTap: () {
-                  Vibrate.tap();
                   context.read<AuthFormsCubit>().signInOrRegisterToggled();
                 },
               ),
