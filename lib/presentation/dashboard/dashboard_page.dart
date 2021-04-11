@@ -5,7 +5,6 @@ import 'package:supplier_mobile/inject.dart';
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
 import 'package:supplier_mobile/presentation/dashboard/widgets/droplists_section.dart';
 import 'package:supplier_mobile/presentation/dashboard/widgets/general_info_section.dart';
-import 'package:supplier_mobile/presentation/dashboard/widgets/version_id.dart';
 import 'package:supplier_mobile/presentation/navigation/widgets/navigation_bar.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/constants/typography.dart';

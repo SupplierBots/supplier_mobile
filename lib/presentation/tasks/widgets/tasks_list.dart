@@ -12,6 +12,7 @@ import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
+import 'package:supplier_mobile/presentation/dashboard/widgets/update_warning.dart';
 import 'package:supplier_mobile/presentation/navigation/router.gr.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/google_account_bar.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/tasks_list_tile.dart';
@@ -41,7 +42,7 @@ class TasksList extends StatelessWidget {
                 const SizedBox(height: kPrimaryElementsSpacing),
               ],
               if (state.tasks.isEmpty) ...[
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 if (context.read<ProfilesCubit>().state.profiles.isEmpty)
                   GestureDetector(
                     onTap: () {
