@@ -7,7 +7,7 @@ part 'browser_message.g.dart';
 abstract class BrowserMessage with _$BrowserMessage {
   const factory BrowserMessage({
     @required String action,
-    String details,
+    dynamic details,
   }) = _BrowserMessage;
   factory BrowserMessage.fromJson(Map<String, dynamic> json) =>
       _$BrowserMessageFromJson(json);

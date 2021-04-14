@@ -1,5 +1,5 @@
 import 'dart:convert' show json;
-import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,10 +8,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:supplier_mobile/application/cookies/cookies_cubit.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
+import 'package:supplier_mobile/application/remote/remote_cubit.dart';
 import 'package:supplier_mobile/application/runner/cubit/runner_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
-import 'package:supplier_mobile/presentation/runner/widgets/browser_message.dart';
-import 'package:supplier_mobile/presentation/tasks/widgets/form/predefined_products.dart';
+import 'package:supplier_mobile/presentation/runner/widgets/message_bridge/browser_message.dart';
+import 'package:supplier_mobile/presentation/runner/widgets/message_bridge/item_details.dart';
+import 'package:supplier_mobile/presentation/runner/widgets/message_bridge/task_result.dart';
 
 class BrowserInstance extends HookWidget {
   const BrowserInstance(this.uid);
@@ -32,7 +34,19 @@ class BrowserInstance extends HookWidget {
       ),
     );
 
+    final taskAttempt = useState(1);
+    final restockMode = useState(false);
+    final checkoutDelay = useState(0);
     final finished = useState(false);
+    final itemDetals = useState<ItemDetails>(
+      const ItemDetails(
+        name: '',
+        style: '',
+        size: '',
+        image: '',
+      ),
+    );
+
     final activeTask =
         context.select((RunnerCubit runner) => runner.state.visibleTask);
 
@@ -53,7 +67,8 @@ class BrowserInstance extends HookWidget {
           .replaceAll('@', '%40');
     }
 
-    void _startTask() async {
+    Future<void> _startTask() async {
+      taskAttempt.value++;
       await webViewController.loadUrl(
           urlRequest: URLRequest(
         url: Uri.parse('about:blank'),
@@ -98,24 +113,16 @@ class BrowserInstance extends HookWidget {
       ));
     }
 
-    void _printCookies() async {
-      final cookies =
-          await webViewController.ios.cookieHandler.ios.getAllCookies();
-      print(cookies.firstWhere((c) => c.name == 'cart'));
-    }
-
     Future<void> _messagesHandler(List<dynamic> messages) async {
       final runner = context.read<RunnerCubit>();
 
       final message =
           BrowserMessage.fromJson(messages.first as Map<String, dynamic>);
+
       switch (message.action) {
         case 'update-status':
           {
-            _updateProgress(message.details);
-            if (message.details == 'cookie-check') {
-              _printCookies();
-            }
+            _updateProgress(message.details as String);
             break;
           }
         case 'captcha':
@@ -132,11 +139,15 @@ class BrowserInstance extends HookWidget {
           }
         case 'failed':
           {
-            if (message.details == 'Sold out') {
+            final result =
+                TaskResult.fromJson(message.details as Map<String, dynamic>);
+
+            if (result.reason == 'Sold out') {
               _updateProgress('Sold out');
             } else {
               _updateProgress('Failed');
             }
+            print(result);
             _startTask();
             break;
           }
@@ -144,6 +155,19 @@ class BrowserInstance extends HookWidget {
           {
             _updateProgress('Success');
             finished.value = true;
+            break;
+          }
+        case 'item-details':
+          {
+            itemDetals.value =
+                ItemDetails.fromJson(message.details as Map<String, dynamic>);
+            print(itemDetals.value);
+            break;
+          }
+        case 'enable-restocks':
+          {
+            restockMode.value = true;
+            print('enable restocks');
             break;
           }
         case 'debug':
@@ -160,17 +184,19 @@ class BrowserInstance extends HookWidget {
         initialOptions: _options,
         onWebViewCreated: (controller) async {
           webViewController = controller;
+          final nativeFunctionsCache = await rootBundle
+              .loadString('assets/javascript/nativeFunctionsCache.js');
+          await webViewController.addUserScript(
+            userScript: UserScript(
+              source: nativeFunctionsCache,
+              injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
+            ),
+          );
           webViewController.addJavaScriptHandler(
             handlerName: 'supplierConnection',
             callback: _messagesHandler,
           );
           _startTask();
-        },
-        onLoadStart: (InAppWebViewController controller, Uri url) async {
-          if (!Platform.isAndroid) return;
-          final stealthJs =
-              await rootBundle.loadString('assets/javascript/stealth.min.js');
-          controller.evaluateJavascript(source: stealthJs);
         },
         onLoadStop: (InAppWebViewController controller, Uri url) async {
           if (finished.value) return;
@@ -179,6 +205,15 @@ class BrowserInstance extends HookWidget {
           final task = context.read<TasksCubit>().state.tasks[uid];
           final profile =
               context.read<ProfilesCubit>().state.profiles[task.profileName];
+          final remote = context.read<RemoteCubit>().state;
+
+          checkoutDelay.value = restockMode.value
+              ? remote.delays.restocksCheckout
+              : remote.delays.minCheckout +
+                  Random().nextInt(
+                      remote.delays.maxCheckout - remote.delays.minCheckout);
+
+          print(checkoutDelay.value);
 
           final injectionTemplate =
               await rootBundle.loadString('assets/javascript/supremeInject.js');
@@ -187,7 +222,7 @@ class BrowserInstance extends HookWidget {
               .replaceFirst(
                 '\$PRODUCT\$',
                 json.encode(
-                  predefinedProducts.firstWhere((p) => p.name == task.product),
+                  remote.products[task.product],
                 ),
               )
               .replaceFirst(
@@ -207,6 +242,13 @@ class BrowserInstance extends HookWidget {
                 json.encode(task.size),
               )
               .replaceFirst(
+                '\$DELAYS\$',
+                json.encode({
+                  'checkout': checkoutDelay.value,
+                  'refresh': remote.delays.refresh,
+                }),
+              )
+              .replaceFirst(
                 '\$PAYMENT_DETAILS\$',
                 json.encode({
                   'number': profile.creditCardNumber,
@@ -214,15 +256,15 @@ class BrowserInstance extends HookWidget {
                   'year': profile.expiryYear,
                   'cvv': profile.securityCode,
                 }),
+              )
+              .replaceFirst(
+                '\$REGION\$',
+                json.encode('eu'),
               );
+
+          print("start");
           controller.evaluateJavascript(
             source: injection,
-          );
-        },
-        androidOnPermissionRequest: (controller, origin, resources) async {
-          return PermissionRequestResponse(
-            resources: resources,
-            action: PermissionRequestResponseAction.GRANT,
           );
         },
       ),

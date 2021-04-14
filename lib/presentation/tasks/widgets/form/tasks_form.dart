@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
+import 'package:supplier_mobile/application/remote/remote_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_editor/tasks_editor_cubit.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
@@ -22,6 +23,9 @@ class TasksForm extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final initialValues = useState<Map<String, dynamic>>();
+    final products = useMemoized(() {
+      return context.read<RemoteCubit>().state.products.keys.toList();
+    });
 
     useMemoized(() {
       final uidOption = context.read<TasksEditorCubit>().state.editedTaskUid;
@@ -55,7 +59,7 @@ class TasksForm extends HookWidget {
           ),
           FormDropdown(
             name: 'product',
-            items: predefinedProducts.map((p) => p.name).toList(),
+            items: products,
             placeholder: 'Product',
           ),
           const SizedBox(height: kPrimaryElementsSpacing),

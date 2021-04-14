@@ -9,7 +9,7 @@ part of 'browser_message.dart';
 _$_BrowserMessage _$_$_BrowserMessageFromJson(Map<String, dynamic> json) {
   return _$_BrowserMessage(
     action: json['action'] as String,
-    details: json['details'] as String,
+    details: json['details'],
   );
 }
 

@@ -39,7 +39,7 @@ class DroplistDisplay extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Container(
+                  SizedBox(
                     height: 20,
                     width: 20,
                     child: image,

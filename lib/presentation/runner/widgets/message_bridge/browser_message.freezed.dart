@@ -17,7 +17,7 @@ class _$BrowserMessageTearOff {
   const _$BrowserMessageTearOff();
 
 // ignore: unused_element
-  _BrowserMessage call({@required String action, String details}) {
+  _BrowserMessage call({@required String action, dynamic details}) {
     return _BrowserMessage(
       action: action,
       details: details,
@@ -37,7 +37,7 @@ const $BrowserMessage = _$BrowserMessageTearOff();
 /// @nodoc
 mixin _$BrowserMessage {
   String get action;
-  String get details;
+  dynamic get details;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -49,7 +49,7 @@ abstract class $BrowserMessageCopyWith<$Res> {
   factory $BrowserMessageCopyWith(
           BrowserMessage value, $Res Function(BrowserMessage) then) =
       _$BrowserMessageCopyWithImpl<$Res>;
-  $Res call({String action, String details});
+  $Res call({String action, dynamic details});
 }
 
 /// @nodoc
@@ -68,7 +68,7 @@ class _$BrowserMessageCopyWithImpl<$Res>
   }) {
     return _then(_value.copyWith(
       action: action == freezed ? _value.action : action as String,
-      details: details == freezed ? _value.details : details as String,
+      details: details == freezed ? _value.details : details as dynamic,
     ));
   }
 }
@@ -80,7 +80,7 @@ abstract class _$BrowserMessageCopyWith<$Res>
           _BrowserMessage value, $Res Function(_BrowserMessage) then) =
       __$BrowserMessageCopyWithImpl<$Res>;
   @override
-  $Res call({String action, String details});
+  $Res call({String action, dynamic details});
 }
 
 /// @nodoc
@@ -101,7 +101,7 @@ class __$BrowserMessageCopyWithImpl<$Res>
   }) {
     return _then(_BrowserMessage(
       action: action == freezed ? _value.action : action as String,
-      details: details == freezed ? _value.details : details as String,
+      details: details == freezed ? _value.details : details as dynamic,
     ));
   }
 }
@@ -119,7 +119,7 @@ class _$_BrowserMessage implements _BrowserMessage {
   @override
   final String action;
   @override
-  final String details;
+  final dynamic details;
 
   @override
   String toString() {
@@ -154,7 +154,7 @@ class _$_BrowserMessage implements _BrowserMessage {
 }
 
 abstract class _BrowserMessage implements BrowserMessage {
-  const factory _BrowserMessage({@required String action, String details}) =
+  const factory _BrowserMessage({@required String action, dynamic details}) =
       _$_BrowserMessage;
 
   factory _BrowserMessage.fromJson(Map<String, dynamic> json) =
@@ -163,7 +163,7 @@ abstract class _BrowserMessage implements BrowserMessage {
   @override
   String get action;
   @override
-  String get details;
+  dynamic get details;
   @override
   @JsonKey(ignore: true)
   _$BrowserMessageCopyWith<_BrowserMessage> get copyWith;

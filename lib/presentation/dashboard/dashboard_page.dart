@@ -16,6 +16,7 @@ class DashboardPage extends StatelessWidget {
       create: (context) => getIt<DashboardCubit>()
         ..startedWatchingGeneralInfo()
         ..startedWatchingDroplists(),
+      lazy: false,
       child: Scaffold(
         appBar: TopBar(
           content: Text(

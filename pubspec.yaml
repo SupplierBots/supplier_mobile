@@ -72,9 +72,8 @@ flutter:
     - assets/images/Supreme.png
     - assets/images/Frame.png
     - assets/javascript/supremeInject.js
-    - assets/javascript/stealth.min.js
     - assets/javascript/googleLogin.js
-    - assets/javascript/cardinalPatch.js
+    - assets/javascript/nativeFunctionsCache.js
 
   fonts:
     - family: Lato
