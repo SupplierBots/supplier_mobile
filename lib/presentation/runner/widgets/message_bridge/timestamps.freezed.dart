@@ -18,7 +18,7 @@ class _$TimestampsTearOff {
 
 // ignore: unused_element
   _Timestamps call(
-      {@required String start, @required String atc, @required String submit}) {
+      {@required int start, @required int atc, @required int submit}) {
     return _Timestamps(
       start: start,
       atc: atc,
@@ -38,9 +38,9 @@ const $Timestamps = _$TimestampsTearOff();
 
 /// @nodoc
 mixin _$Timestamps {
-  String get start;
-  String get atc;
-  String get submit;
+  int get start;
+  int get atc;
+  int get submit;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -52,7 +52,7 @@ abstract class $TimestampsCopyWith<$Res> {
   factory $TimestampsCopyWith(
           Timestamps value, $Res Function(Timestamps) then) =
       _$TimestampsCopyWithImpl<$Res>;
-  $Res call({String start, String atc, String submit});
+  $Res call({int start, int atc, int submit});
 }
 
 /// @nodoc
@@ -70,9 +70,9 @@ class _$TimestampsCopyWithImpl<$Res> implements $TimestampsCopyWith<$Res> {
     Object submit = freezed,
   }) {
     return _then(_value.copyWith(
-      start: start == freezed ? _value.start : start as String,
-      atc: atc == freezed ? _value.atc : atc as String,
-      submit: submit == freezed ? _value.submit : submit as String,
+      start: start == freezed ? _value.start : start as int,
+      atc: atc == freezed ? _value.atc : atc as int,
+      submit: submit == freezed ? _value.submit : submit as int,
     ));
   }
 }
@@ -83,7 +83,7 @@ abstract class _$TimestampsCopyWith<$Res> implements $TimestampsCopyWith<$Res> {
           _Timestamps value, $Res Function(_Timestamps) then) =
       __$TimestampsCopyWithImpl<$Res>;
   @override
-  $Res call({String start, String atc, String submit});
+  $Res call({int start, int atc, int submit});
 }
 
 /// @nodoc
@@ -103,9 +103,9 @@ class __$TimestampsCopyWithImpl<$Res> extends _$TimestampsCopyWithImpl<$Res>
     Object submit = freezed,
   }) {
     return _then(_Timestamps(
-      start: start == freezed ? _value.start : start as String,
-      atc: atc == freezed ? _value.atc : atc as String,
-      submit: submit == freezed ? _value.submit : submit as String,
+      start: start == freezed ? _value.start : start as int,
+      atc: atc == freezed ? _value.atc : atc as int,
+      submit: submit == freezed ? _value.submit : submit as int,
     ));
   }
 }
@@ -124,11 +124,11 @@ class _$_Timestamps implements _Timestamps {
       _$_$_TimestampsFromJson(json);
 
   @override
-  final String start;
+  final int start;
   @override
-  final String atc;
+  final int atc;
   @override
-  final String submit;
+  final int submit;
 
   @override
   String toString() {
@@ -167,19 +167,19 @@ class _$_Timestamps implements _Timestamps {
 
 abstract class _Timestamps implements Timestamps {
   const factory _Timestamps(
-      {@required String start,
-      @required String atc,
-      @required String submit}) = _$_Timestamps;
+      {@required int start,
+      @required int atc,
+      @required int submit}) = _$_Timestamps;
 
   factory _Timestamps.fromJson(Map<String, dynamic> json) =
       _$_Timestamps.fromJson;
 
   @override
-  String get start;
+  int get start;
   @override
-  String get atc;
+  int get atc;
   @override
-  String get submit;
+  int get submit;
   @override
   @JsonKey(ignore: true)
   _$TimestampsCopyWith<_Timestamps> get copyWith;

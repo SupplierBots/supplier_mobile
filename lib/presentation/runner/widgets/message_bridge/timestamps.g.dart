@@ -8,9 +8,9 @@ part of 'timestamps.dart';
 
 _$_Timestamps _$_$_TimestampsFromJson(Map<String, dynamic> json) {
   return _$_Timestamps(
-    start: json['start'] as String,
-    atc: json['atc'] as String,
-    submit: json['submit'] as String,
+    start: json['start'] as int,
+    atc: json['atc'] as int,
+    submit: json['submit'] as int,
   );
 }
 

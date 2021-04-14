@@ -48,7 +48,7 @@
         await productSearch();
       }
 
-      timestamps.start = Date.now().toString();
+      timestamps.start = Date.now();
       await waitForProduct();
       await wait(400);
 
@@ -67,9 +67,9 @@
         }
       }
       sendItemDetails();
-      timestamps.atc = Date.now().toString();
+      timestamps.atc = Date.now();
       await checkout();
-      timestamps.submit = Date.now().toString();
+      timestamps.submit = Date.now();
     }
 
     //* STEPS
@@ -573,7 +573,7 @@
     async function type(fieldSelectors, text) {
       const element = findElement(fieldSelectors);
       if (!element) return;
-      element.focus();
+      focusElement(element);
       for (const character of text.split("")) {
         window.__nativeCache.execCommand("insertHTML", false, character);
         await wait(getRandomRange(35, 65));
@@ -604,6 +604,10 @@
         })
       );
       await wait(100);
+    }
+
+    function focusElement(element) {
+      window.__nativeCache.elementFocus.bind(element)();
     }
     //INTERACTIONS *
   })();

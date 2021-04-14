@@ -11,6 +11,9 @@ import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/application/remote/remote_cubit.dart';
 import 'package:supplier_mobile/application/runner/cubit/runner_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
+import 'package:supplier_mobile/domain/remote/checkout_report_payload/checkout_report_payload.dart';
+import 'package:supplier_mobile/domain/remote/remote_repository.dart';
+import 'package:supplier_mobile/inject.dart';
 import 'package:supplier_mobile/presentation/runner/widgets/message_bridge/browser_message.dart';
 import 'package:supplier_mobile/presentation/runner/widgets/message_bridge/item_details.dart';
 import 'package:supplier_mobile/presentation/runner/widgets/message_bridge/task_result.dart';
@@ -34,7 +37,7 @@ class BrowserInstance extends HookWidget {
       ),
     );
 
-    final taskAttempt = useState(1);
+    final taskAttempt = useState(0);
     final restockMode = useState(false);
     final checkoutDelay = useState(0);
     final finished = useState(false);
@@ -147,13 +150,30 @@ class BrowserInstance extends HookWidget {
             } else {
               _updateProgress('Failed');
             }
-            print(result);
+            getIt<RemoteRepository>().reportCheckout(CheckoutReportPayload(
+              attempt: taskAttempt.value,
+              checkoutDelay: checkoutDelay.value,
+              status: 'failed',
+              result: result,
+              item: itemDetals.value,
+              region: 'eu',
+            ));
             _startTask();
             break;
           }
         case 'success':
           {
             _updateProgress('Success');
+            final result =
+                TaskResult.fromJson(message.details as Map<String, dynamic>);
+            getIt<RemoteRepository>().reportCheckout(CheckoutReportPayload(
+              attempt: taskAttempt.value,
+              checkoutDelay: checkoutDelay.value,
+              status: 'paid',
+              result: result,
+              item: itemDetals.value,
+              region: 'eu',
+            ));
             finished.value = true;
             break;
           }
@@ -161,13 +181,11 @@ class BrowserInstance extends HookWidget {
           {
             itemDetals.value =
                 ItemDetails.fromJson(message.details as Map<String, dynamic>);
-            print(itemDetals.value);
             break;
           }
         case 'enable-restocks':
           {
             restockMode.value = true;
-            print('enable restocks');
             break;
           }
         case 'debug':
@@ -212,8 +230,6 @@ class BrowserInstance extends HookWidget {
               : remote.delays.minCheckout +
                   Random().nextInt(
                       remote.delays.maxCheckout - remote.delays.minCheckout);
-
-          print(checkoutDelay.value);
 
           final injectionTemplate =
               await rootBundle.loadString('assets/javascript/supremeInject.js');
@@ -262,7 +278,6 @@ class BrowserInstance extends HookWidget {
                 json.encode('eu'),
               );
 
-          print("start");
           controller.evaluateJavascript(
             source: injection,
           );

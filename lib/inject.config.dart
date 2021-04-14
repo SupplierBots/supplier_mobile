@@ -37,7 +37,7 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i5.FirebaseFunctions>(
       () => firebaseInjectableModule.cloudFunctions);
   gh.lazySingleton<_i6.RemoteRepository>(
-      () => _i7.FirebaseDashboardRepository(get<_i4.FirebaseFirestore>()));
+      () => _i7.FirebaseRemoteRepository(get<_i4.FirebaseFirestore>()));
   gh.lazySingleton<_i8.Vibrate>(() => _i8.Vibrate());
   gh.lazySingleton<_i9.AuthRepository>(() => _i10.FirebaseAuthRepository(
       get<_i3.FirebaseAuth>(), get<_i5.FirebaseFunctions>()));
