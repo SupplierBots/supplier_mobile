@@ -293,12 +293,9 @@ class BrowserInstance extends HookWidget {
                 '\$REGION\$',
                 json.encode('eu'),
               );
-
-          final runner = context.read<RunnerCubit>();
-          runner.setCaptcha(uid);
-          // controller.evaluateJavascript(
-          //   source: injection,
-          // );
+          controller.evaluateJavascript(
+            source: injection,
+          );
         },
       ),
     );
