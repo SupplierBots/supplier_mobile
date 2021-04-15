@@ -10,7 +10,6 @@ abstract class CheckoutReportPayload with _$CheckoutReportPayload {
   const factory CheckoutReportPayload({
     @required int attempt,
     @required int checkoutDelay,
-    @required String status,
     @required String region,
     @required TaskResult result,
     @required ItemDetails item,

@@ -23,22 +23,35 @@
       atc: "",
       submit: "",
     };
+    const processingDetails = {
+      billingErrors: "None",
+      slug: "",
+      processingAttempt: 0,
+      highTraffic: false,
+      bParameter: false,
+      queued: false,
+      cca: false,
+    };
     const modifiedButtons = [];
 
     window.addEventListener(
       "hashchange",
       () => {
-        const hash = location.hash;
-        if (hash.includes("chargeError")) {
-          sendTaskResult("failed", "Charge error");
-        } else if (hash.includes("confirmOrder")) {
-          sendTaskResult("success", "Paid");
-        } else if (hash.includes("cart")) {
+        if (location.hash.includes("cart")) {
           sendTaskResult("failed", "Sold out");
         }
       },
       false
     );
+
+    window.__nativeCache.onResponse((response) => {
+      if (!/.*(checkout|status).json$/.test(response.url)) return;
+      try {
+        const data = JSON.parse(response.text);
+        if (!data.status) return;
+        parseOrderStatus(data);
+      } catch {}
+    });
 
     await main();
     async function main() {
@@ -190,6 +203,7 @@
     }
 
     async function checkout() {
+      updateStatus("Loading checkout");
       const checkoutButtonSelectors = [
         {
           selector: "a",
@@ -225,7 +239,7 @@
       await waitForElement(cardHeaderSelectors);
       await wait(300);
 
-      updateStatus("Filling in checkout");
+      updateStatus("Checkout autofill");
       findElement(cardHeaderSelectors).scrollIntoView();
       const checkoutLoadTimestamp = Date.now();
 
@@ -297,7 +311,7 @@
         "charge",
         "order",
       ]);
-      updateStatus("Processing");
+      updateStatus("Waiting for response");
     }
     // STEPS *
 
@@ -349,7 +363,7 @@
       if (captchaIFrame.style.height != "0px") {
         const orginalCallback = window.recaptchaCallback;
         window.recaptchaCallback = (res) => {
-          updateStatus("Processing");
+          updateStatus("Waiting for response");
           setTaskAction("captcha-solved");
           orginalCallback(res);
         };
@@ -525,8 +539,14 @@
       setTaskAction("item-details", itemDetails);
     }
 
-    function sendTaskResult(status, reason) {
-      setTaskAction(status, { reason, timestamps, modifiedButtons });
+    function sendTaskResult(status, message) {
+      setTaskAction("task-result", {
+        status,
+        message,
+        timestamps,
+        modifiedButtons,
+        processingDetails,
+      });
     }
 
     function setTaskAction(action, details = "") {
@@ -534,6 +554,73 @@
         action,
         details,
       });
+    }
+
+    function parseOrderStatus(response) {
+      switch (response.status) {
+        case "cardinal_queued":
+        case "queued": {
+          if (!processingDetails.slug && response.slug) {
+            processingDetails.slug = response.slug;
+          }
+          processingDetails.queued = true;
+          processingDetails.processingAttempt++;
+          updateStatus(`Processing (${processingDetails.processingAttempt})`);
+          break;
+        }
+        case "paid": {
+          sendTaskResult("paid", "Success");
+          break;
+        }
+        case "dup": {
+          sendTaskResult("dup", "Duplicate order");
+          break;
+        }
+        case "blacklisted":
+        case "canada":
+        case "blocked_country": {
+          sendTaskResult("blacklisted", "Blacklisted");
+          break;
+        }
+        case "cca": {
+          processingDetails.cca = true;
+          processingDetails.processingAttempt++;
+          updateStatus(`Processing (${processingDetails.processingAttempt})`);
+          try {
+            $.post(
+              `/checkout/${processingDetails.slug}/cardinal.json`,
+              $("#mobile_checkout_form").serialize(),
+              function (e) {
+                e["status"] == "failed"
+                  ? ($("body")
+                      .removeClass("checkout_page")
+                      .addClass("cart-confirm"),
+                    $("#content").replaceWith(e.page))
+                  : e["status"] == "cardinal_queued" &&
+                    window.pollOrderStatus(e.slug);
+              }
+            );
+          } catch {}
+          break;
+        }
+        case "500":
+        case "404":
+        case "outOfStock":
+        case "failed": {
+          const message =
+            response.status === "outOfStock" ? "Sold out" : "Failed. Retrying";
+          processingDetails.highTraffic =
+            response.page?.includes("high traffic") ?? false;
+          processingDetails.bParameter = !!response.b;
+          if (response.errors) {
+            try {
+              processingDetails.billingErrors = JSON.stringify(response.errors);
+            } catch {}
+          }
+          sendTaskResult(response.status, message);
+          break;
+        }
+      }
     }
     //CORE *
 

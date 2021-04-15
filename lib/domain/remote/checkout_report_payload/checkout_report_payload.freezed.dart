@@ -21,14 +21,12 @@ class _$CheckoutReportPayloadTearOff {
   _CheckoutReportPayload call(
       {@required int attempt,
       @required int checkoutDelay,
-      @required String status,
       @required String region,
       @required TaskResult result,
       @required ItemDetails item}) {
     return _CheckoutReportPayload(
       attempt: attempt,
       checkoutDelay: checkoutDelay,
-      status: status,
       region: region,
       result: result,
       item: item,
@@ -49,7 +47,6 @@ const $CheckoutReportPayload = _$CheckoutReportPayloadTearOff();
 mixin _$CheckoutReportPayload {
   int get attempt;
   int get checkoutDelay;
-  String get status;
   String get region;
   TaskResult get result;
   ItemDetails get item;
@@ -67,7 +64,6 @@ abstract class $CheckoutReportPayloadCopyWith<$Res> {
   $Res call(
       {int attempt,
       int checkoutDelay,
-      String status,
       String region,
       TaskResult result,
       ItemDetails item});
@@ -89,7 +85,6 @@ class _$CheckoutReportPayloadCopyWithImpl<$Res>
   $Res call({
     Object attempt = freezed,
     Object checkoutDelay = freezed,
-    Object status = freezed,
     Object region = freezed,
     Object result = freezed,
     Object item = freezed,
@@ -99,7 +94,6 @@ class _$CheckoutReportPayloadCopyWithImpl<$Res>
       checkoutDelay: checkoutDelay == freezed
           ? _value.checkoutDelay
           : checkoutDelay as int,
-      status: status == freezed ? _value.status : status as String,
       region: region == freezed ? _value.region : region as String,
       result: result == freezed ? _value.result : result as TaskResult,
       item: item == freezed ? _value.item : item as ItemDetails,
@@ -137,7 +131,6 @@ abstract class _$CheckoutReportPayloadCopyWith<$Res>
   $Res call(
       {int attempt,
       int checkoutDelay,
-      String status,
       String region,
       TaskResult result,
       ItemDetails item});
@@ -163,7 +156,6 @@ class __$CheckoutReportPayloadCopyWithImpl<$Res>
   $Res call({
     Object attempt = freezed,
     Object checkoutDelay = freezed,
-    Object status = freezed,
     Object region = freezed,
     Object result = freezed,
     Object item = freezed,
@@ -173,7 +165,6 @@ class __$CheckoutReportPayloadCopyWithImpl<$Res>
       checkoutDelay: checkoutDelay == freezed
           ? _value.checkoutDelay
           : checkoutDelay as int,
-      status: status == freezed ? _value.status : status as String,
       region: region == freezed ? _value.region : region as String,
       result: result == freezed ? _value.result : result as TaskResult,
       item: item == freezed ? _value.item : item as ItemDetails,
@@ -188,13 +179,11 @@ class _$_CheckoutReportPayload implements _CheckoutReportPayload {
   const _$_CheckoutReportPayload(
       {@required this.attempt,
       @required this.checkoutDelay,
-      @required this.status,
       @required this.region,
       @required this.result,
       @required this.item})
       : assert(attempt != null),
         assert(checkoutDelay != null),
-        assert(status != null),
         assert(region != null),
         assert(result != null),
         assert(item != null);
@@ -207,8 +196,6 @@ class _$_CheckoutReportPayload implements _CheckoutReportPayload {
   @override
   final int checkoutDelay;
   @override
-  final String status;
-  @override
   final String region;
   @override
   final TaskResult result;
@@ -217,7 +204,7 @@ class _$_CheckoutReportPayload implements _CheckoutReportPayload {
 
   @override
   String toString() {
-    return 'CheckoutReportPayload(attempt: $attempt, checkoutDelay: $checkoutDelay, status: $status, region: $region, result: $result, item: $item)';
+    return 'CheckoutReportPayload(attempt: $attempt, checkoutDelay: $checkoutDelay, region: $region, result: $result, item: $item)';
   }
 
   @override
@@ -230,8 +217,6 @@ class _$_CheckoutReportPayload implements _CheckoutReportPayload {
             (identical(other.checkoutDelay, checkoutDelay) ||
                 const DeepCollectionEquality()
                     .equals(other.checkoutDelay, checkoutDelay)) &&
-            (identical(other.status, status) ||
-                const DeepCollectionEquality().equals(other.status, status)) &&
             (identical(other.region, region) ||
                 const DeepCollectionEquality().equals(other.region, region)) &&
             (identical(other.result, result) ||
@@ -245,7 +230,6 @@ class _$_CheckoutReportPayload implements _CheckoutReportPayload {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(attempt) ^
       const DeepCollectionEquality().hash(checkoutDelay) ^
-      const DeepCollectionEquality().hash(status) ^
       const DeepCollectionEquality().hash(region) ^
       const DeepCollectionEquality().hash(result) ^
       const DeepCollectionEquality().hash(item);
@@ -266,7 +250,6 @@ abstract class _CheckoutReportPayload implements CheckoutReportPayload {
   const factory _CheckoutReportPayload(
       {@required int attempt,
       @required int checkoutDelay,
-      @required String status,
       @required String region,
       @required TaskResult result,
       @required ItemDetails item}) = _$_CheckoutReportPayload;
@@ -278,8 +261,6 @@ abstract class _CheckoutReportPayload implements CheckoutReportPayload {
   int get attempt;
   @override
   int get checkoutDelay;
-  @override
-  String get status;
   @override
   String get region;
   @override

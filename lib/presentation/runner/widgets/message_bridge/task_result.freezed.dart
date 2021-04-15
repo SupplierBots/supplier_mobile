@@ -18,13 +18,17 @@ class _$TaskResultTearOff {
 
 // ignore: unused_element
   _TaskResult call(
-      {@required String reason,
+      {@required String status,
+      @required String message,
       @required List<String> modifiedButtons,
-      @required Timestamps timestamps}) {
+      @required Timestamps timestamps,
+      @required ProcessingDetails processingDetails}) {
     return _TaskResult(
-      reason: reason,
+      status: status,
+      message: message,
       modifiedButtons: modifiedButtons,
       timestamps: timestamps,
+      processingDetails: processingDetails,
     );
   }
 
@@ -40,9 +44,11 @@ const $TaskResult = _$TaskResultTearOff();
 
 /// @nodoc
 mixin _$TaskResult {
-  String get reason;
+  String get status;
+  String get message;
   List<String> get modifiedButtons;
   Timestamps get timestamps;
+  ProcessingDetails get processingDetails;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -55,9 +61,14 @@ abstract class $TaskResultCopyWith<$Res> {
           TaskResult value, $Res Function(TaskResult) then) =
       _$TaskResultCopyWithImpl<$Res>;
   $Res call(
-      {String reason, List<String> modifiedButtons, Timestamps timestamps});
+      {String status,
+      String message,
+      List<String> modifiedButtons,
+      Timestamps timestamps,
+      ProcessingDetails processingDetails});
 
   $TimestampsCopyWith<$Res> get timestamps;
+  $ProcessingDetailsCopyWith<$Res> get processingDetails;
 }
 
 /// @nodoc
@@ -70,17 +81,23 @@ class _$TaskResultCopyWithImpl<$Res> implements $TaskResultCopyWith<$Res> {
 
   @override
   $Res call({
-    Object reason = freezed,
+    Object status = freezed,
+    Object message = freezed,
     Object modifiedButtons = freezed,
     Object timestamps = freezed,
+    Object processingDetails = freezed,
   }) {
     return _then(_value.copyWith(
-      reason: reason == freezed ? _value.reason : reason as String,
+      status: status == freezed ? _value.status : status as String,
+      message: message == freezed ? _value.message : message as String,
       modifiedButtons: modifiedButtons == freezed
           ? _value.modifiedButtons
           : modifiedButtons as List<String>,
       timestamps:
           timestamps == freezed ? _value.timestamps : timestamps as Timestamps,
+      processingDetails: processingDetails == freezed
+          ? _value.processingDetails
+          : processingDetails as ProcessingDetails,
     ));
   }
 
@@ -93,6 +110,16 @@ class _$TaskResultCopyWithImpl<$Res> implements $TaskResultCopyWith<$Res> {
       return _then(_value.copyWith(timestamps: value));
     });
   }
+
+  @override
+  $ProcessingDetailsCopyWith<$Res> get processingDetails {
+    if (_value.processingDetails == null) {
+      return null;
+    }
+    return $ProcessingDetailsCopyWith<$Res>(_value.processingDetails, (value) {
+      return _then(_value.copyWith(processingDetails: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -102,10 +129,16 @@ abstract class _$TaskResultCopyWith<$Res> implements $TaskResultCopyWith<$Res> {
       __$TaskResultCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String reason, List<String> modifiedButtons, Timestamps timestamps});
+      {String status,
+      String message,
+      List<String> modifiedButtons,
+      Timestamps timestamps,
+      ProcessingDetails processingDetails});
 
   @override
   $TimestampsCopyWith<$Res> get timestamps;
+  @override
+  $ProcessingDetailsCopyWith<$Res> get processingDetails;
 }
 
 /// @nodoc
@@ -120,17 +153,23 @@ class __$TaskResultCopyWithImpl<$Res> extends _$TaskResultCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object reason = freezed,
+    Object status = freezed,
+    Object message = freezed,
     Object modifiedButtons = freezed,
     Object timestamps = freezed,
+    Object processingDetails = freezed,
   }) {
     return _then(_TaskResult(
-      reason: reason == freezed ? _value.reason : reason as String,
+      status: status == freezed ? _value.status : status as String,
+      message: message == freezed ? _value.message : message as String,
       modifiedButtons: modifiedButtons == freezed
           ? _value.modifiedButtons
           : modifiedButtons as List<String>,
       timestamps:
           timestamps == freezed ? _value.timestamps : timestamps as Timestamps,
+      processingDetails: processingDetails == freezed
+          ? _value.processingDetails
+          : processingDetails as ProcessingDetails,
     ));
   }
 }
@@ -140,48 +179,64 @@ class __$TaskResultCopyWithImpl<$Res> extends _$TaskResultCopyWithImpl<$Res>
 /// @nodoc
 class _$_TaskResult implements _TaskResult {
   const _$_TaskResult(
-      {@required this.reason,
+      {@required this.status,
+      @required this.message,
       @required this.modifiedButtons,
-      @required this.timestamps})
-      : assert(reason != null),
+      @required this.timestamps,
+      @required this.processingDetails})
+      : assert(status != null),
+        assert(message != null),
         assert(modifiedButtons != null),
-        assert(timestamps != null);
+        assert(timestamps != null),
+        assert(processingDetails != null);
 
   factory _$_TaskResult.fromJson(Map<String, dynamic> json) =>
       _$_$_TaskResultFromJson(json);
 
   @override
-  final String reason;
+  final String status;
+  @override
+  final String message;
   @override
   final List<String> modifiedButtons;
   @override
   final Timestamps timestamps;
+  @override
+  final ProcessingDetails processingDetails;
 
   @override
   String toString() {
-    return 'TaskResult(reason: $reason, modifiedButtons: $modifiedButtons, timestamps: $timestamps)';
+    return 'TaskResult(status: $status, message: $message, modifiedButtons: $modifiedButtons, timestamps: $timestamps, processingDetails: $processingDetails)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _TaskResult &&
-            (identical(other.reason, reason) ||
-                const DeepCollectionEquality().equals(other.reason, reason)) &&
+            (identical(other.status, status) ||
+                const DeepCollectionEquality().equals(other.status, status)) &&
+            (identical(other.message, message) ||
+                const DeepCollectionEquality()
+                    .equals(other.message, message)) &&
             (identical(other.modifiedButtons, modifiedButtons) ||
                 const DeepCollectionEquality()
                     .equals(other.modifiedButtons, modifiedButtons)) &&
             (identical(other.timestamps, timestamps) ||
                 const DeepCollectionEquality()
-                    .equals(other.timestamps, timestamps)));
+                    .equals(other.timestamps, timestamps)) &&
+            (identical(other.processingDetails, processingDetails) ||
+                const DeepCollectionEquality()
+                    .equals(other.processingDetails, processingDetails)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(reason) ^
+      const DeepCollectionEquality().hash(status) ^
+      const DeepCollectionEquality().hash(message) ^
       const DeepCollectionEquality().hash(modifiedButtons) ^
-      const DeepCollectionEquality().hash(timestamps);
+      const DeepCollectionEquality().hash(timestamps) ^
+      const DeepCollectionEquality().hash(processingDetails);
 
   @JsonKey(ignore: true)
   @override
@@ -196,19 +251,25 @@ class _$_TaskResult implements _TaskResult {
 
 abstract class _TaskResult implements TaskResult {
   const factory _TaskResult(
-      {@required String reason,
+      {@required String status,
+      @required String message,
       @required List<String> modifiedButtons,
-      @required Timestamps timestamps}) = _$_TaskResult;
+      @required Timestamps timestamps,
+      @required ProcessingDetails processingDetails}) = _$_TaskResult;
 
   factory _TaskResult.fromJson(Map<String, dynamic> json) =
       _$_TaskResult.fromJson;
 
   @override
-  String get reason;
+  String get status;
+  @override
+  String get message;
   @override
   List<String> get modifiedButtons;
   @override
   Timestamps get timestamps;
+  @override
+  ProcessingDetails get processingDetails;
   @override
   @JsonKey(ignore: true)
   _$TaskResultCopyWith<_TaskResult> get copyWith;

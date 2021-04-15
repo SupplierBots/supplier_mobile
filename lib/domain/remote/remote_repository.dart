@@ -7,5 +7,5 @@ import 'package:supplier_mobile/domain/remote/remote_failure.dart';
 abstract class RemoteRepository {
   Stream<Either<RemoteFailure, Delays>> watchDelays();
   Stream<Either<RemoteFailure, List<Product>>> watchProducts();
-  void reportCheckout(CheckoutReportPayload payload);
+  Future<void> reportCheckout(CheckoutReportPayload payload);
 }

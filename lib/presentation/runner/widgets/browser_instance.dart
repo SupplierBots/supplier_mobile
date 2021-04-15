@@ -60,6 +60,38 @@ class BrowserInstance extends HookWidget {
           );
     }
 
+    String _convertToCode(String country) {
+      switch (country) {
+        case 'USA':
+          return 'USA';
+        case 'Canada':
+          return 'CANADA';
+        case 'Austria':
+          return 'AT';
+        case 'Belarus':
+          return 'BY';
+        case 'Belgium':
+          return 'BE';
+        case 'Bulgaria':
+          return 'BG';
+        case 'Croatia':
+          return 'HR';
+        case 'Czech Republic':
+          return 'CZ';
+        case 'Denmark':
+          return 'DK';
+        case 'Estonia':
+          return 'EE';
+        case 'Finland':
+          return 'FI';
+        case 'France':
+          return 'FR';
+        case 'Germany':
+          return 'DE';
+      }
+      return country;
+    }
+
     String _createAddressCookie() {
       final task = context.read<TasksCubit>().state.tasks[uid];
       final profile =
@@ -140,41 +172,25 @@ class BrowserInstance extends HookWidget {
             }
             break;
           }
-        case 'failed':
+        case 'task-result':
           {
             final result =
                 TaskResult.fromJson(message.details as Map<String, dynamic>);
 
-            if (result.reason == 'Sold out') {
-              _updateProgress('Sold out');
+            _updateProgress(result.message);
+            getIt<RemoteRepository>().reportCheckout(CheckoutReportPayload(
+              attempt: taskAttempt.value,
+              checkoutDelay: checkoutDelay.value,
+              item: itemDetals.value,
+              result: result,
+              region: 'eu',
+            ));
+            final retryStatus = ['failed', '404', '500', 'outOfStock'];
+            if (retryStatus.contains(result.status)) {
+              _startTask();
             } else {
-              _updateProgress('Failed');
+              finished.value = true;
             }
-            getIt<RemoteRepository>().reportCheckout(CheckoutReportPayload(
-              attempt: taskAttempt.value,
-              checkoutDelay: checkoutDelay.value,
-              status: 'failed',
-              result: result,
-              item: itemDetals.value,
-              region: 'eu',
-            ));
-            _startTask();
-            break;
-          }
-        case 'success':
-          {
-            _updateProgress('Success');
-            final result =
-                TaskResult.fromJson(message.details as Map<String, dynamic>);
-            getIt<RemoteRepository>().reportCheckout(CheckoutReportPayload(
-              attempt: taskAttempt.value,
-              checkoutDelay: checkoutDelay.value,
-              status: 'paid',
-              result: result,
-              item: itemDetals.value,
-              region: 'eu',
-            ));
-            finished.value = true;
             break;
           }
         case 'item-details':

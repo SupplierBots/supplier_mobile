@@ -11,7 +11,6 @@ _$_CheckoutReportPayload _$_$_CheckoutReportPayloadFromJson(
   return _$_CheckoutReportPayload(
     attempt: json['attempt'] as int,
     checkoutDelay: json['checkoutDelay'] as int,
-    status: json['status'] as String,
     region: json['region'] as String,
     result: json['result'] == null
         ? null
@@ -27,7 +26,6 @@ Map<String, dynamic> _$_$_CheckoutReportPayloadToJson(
     <String, dynamic>{
       'attempt': instance.attempt,
       'checkoutDelay': instance.checkoutDelay,
-      'status': instance.status,
       'region': instance.region,
       'result': instance.result,
       'item': instance.item,
