@@ -13,26 +13,37 @@ class CaptchaState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const GradientWidget(
-            child: Icon(
-              CustomIcons.dashboard,
-              color: Colors.white,
-              size: 30,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          'assets/images/Captcha.png',
+          height: 46,
+        ),
+        const Divider(height: 5),
+        Stack(
+          clipBehavior: Clip.none,
+          children: [
+            SecondaryButton(
+              text: 'Solve',
+              width: 85,
+              height: 28,
+              fontSize: 13,
+              onTap: solveAction,
             ),
-          ),
-          const Divider(height: 15),
-          SecondaryButton(
-            text: 'Solve',
-            width: 90,
-            height: 30,
-            onTap: solveAction,
-          ),
-        ],
-      ),
+            const Positioned(
+              top: -10,
+              right: -14,
+              child: GradientWidget(
+                child: Icon(
+                  Icons.error,
+                  color: Colors.white,
+                ),
+              ),
+            )
+          ],
+        ),
+      ],
     );
   }
 }

@@ -7,11 +7,14 @@ class InProgressState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      height: 40,
-      width: 40,
-      child: CircularProgressIndicator(
-        strokeWidth: 3,
+    return const Padding(
+      padding: EdgeInsets.only(right: 15.0),
+      child: SizedBox(
+        height: 40,
+        width: 40,
+        child: CircularProgressIndicator(
+          strokeWidth: 3,
+        ),
       ),
     );
   }

@@ -48,7 +48,7 @@ class TaskView extends HookWidget {
       ),
       child: Padding(
         padding:
-            const EdgeInsets.only(top: 18, bottom: 18, left: 20, right: 40),
+            const EdgeInsets.only(top: 18, bottom: 18, left: 20, right: 25),
         child: Row(
           children: [
             Column(

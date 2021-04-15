@@ -70,7 +70,8 @@ flutter:
 
   assets:
     - assets/images/Supreme.png
-    - assets/images/Frame.png
+    - assets/images/Palace.png
+    - assets/images/Captcha.png
     - assets/javascript/supremeInject.js
     - assets/javascript/googleLogin.js
     - assets/javascript/nativeFunctionsCache.js

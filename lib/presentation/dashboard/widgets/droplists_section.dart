@@ -34,7 +34,7 @@ class DroplistsSection extends StatelessWidget {
             ),
             Flexible(
               child: DroplistDisplay(
-                image: Image.asset('assets/images/Frame.png'),
+                image: Image.asset('assets/images/Palace.png'),
                 droplist: state.droplists.palace,
               ),
             ),
