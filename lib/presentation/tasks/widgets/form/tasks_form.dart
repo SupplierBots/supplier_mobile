@@ -11,7 +11,6 @@ import 'package:supplier_mobile/presentation/core/form/form_dropdown.dart';
 import 'package:supplier_mobile/presentation/core/form/form_switch.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
 import 'package:supplier_mobile/presentation/core/form/form_multi_select_field.dart';
-import 'package:supplier_mobile/presentation/tasks/widgets/form/predefined_products.dart';
 
 class TasksForm extends HookWidget {
   const TasksForm({

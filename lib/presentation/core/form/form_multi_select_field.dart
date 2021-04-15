@@ -26,7 +26,7 @@ class FormMultiSelectField extends StatelessWidget {
     return FormBuilderField(
       name: name,
       validator: (List<String> items) {
-        if (items.isEmpty) {
+        if (items == null || items.isEmpty) {
           return 'You have to add at least one';
         }
         return null;
@@ -97,7 +97,8 @@ class FormMultiSelectField extends StatelessWidget {
                               .toList(),
                     ),
                     SizedBox(
-                      height: !field.hasError && field.value == null ||
+                      height: !field.hasError ||
+                              field.value == null ||
                               field.value.isEmpty
                           ? 60
                           : 20,
