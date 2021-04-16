@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:supplier_mobile/inject.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/color_extensions.dart';
+import 'package:supplier_mobile/presentation/core/vibrate.dart';
 
 class FormSwitch extends StatelessWidget {
   const FormSwitch({
@@ -55,6 +57,7 @@ class FormSwitch extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   field.didChange(!current);
+                  getIt<Vibrate>().heavyImpactTap(context);
 
                   if (field.value) {
                     _animationController.forward();

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:supplier_mobile/domain/webhooks/webhook_config.dart';
+import 'package:supplier_mobile/domain/webhooks/webhooks_repository.dart';
+import 'package:supplier_mobile/inject.dart';
+import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
@@ -24,18 +28,32 @@ class SettingsPage extends StatelessWidget {
           widthFactor: kMainContentScreenWidth,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              SizedBox(height: 20),
-              SettingsForm(),
-              Header(text: 'Discord Webhooks', underlineWidth: 220),
-              SizedBox(height: 15),
-              Text(
+            children: [
+              const SizedBox(height: 20),
+              const SettingsForm(),
+              const Header(text: 'Discord Webhooks', underlineWidth: 220),
+              const SizedBox(height: 15),
+              const Text(
                 'Coś tam pierdolenie coming soon. Coś tam pierdolenie coming soon. Coś tam pierdolenie coming soon. Coś tam pierdolenie coming soon. Coś tam pierdolenie coming soon.',
                 style: TextStyle(color: kLighGrey, fontSize: 15),
               ),
-              SizedBox(height: 25),
-              SignOutButton(),
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
+              SecondaryButton(
+                text: 'Test webhook',
+                width: 180,
+                height: 40,
+                onTap: () {
+                  getIt<WebhooksRepository>()
+                      .sendTestWebhook(const WebhookConfig(
+                    url:
+                        'https://discord.com/api/webhooks/705888200249442434/nXKNB03K8i2zqxpNXK6CjSpmr_YBSaV7ntIBY14S3O3wrQiD4o29T8S31JiNUZ7vPSwu',
+                    successOnly: false,
+                  ));
+                },
+              ),
+              const SizedBox(height: 25),
+              const SignOutButton(),
+              const SizedBox(height: 25),
             ],
           ),
         ),
