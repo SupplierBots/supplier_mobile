@@ -13,6 +13,7 @@ abstract class CheckoutReportPayload with _$CheckoutReportPayload {
     @required String region,
     @required TaskResult result,
     @required ItemDetails item,
+    @required String profileName,
   }) = _CheckoutReportPayload;
   factory CheckoutReportPayload.fromJson(Map<String, dynamic> json) =>
       _$CheckoutReportPayloadFromJson(json);

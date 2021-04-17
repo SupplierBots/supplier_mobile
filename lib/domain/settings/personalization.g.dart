@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'settings.dart';
+part of 'personalization.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Settings _$_$_SettingsFromJson(Map<String, dynamic> json) {
-  return _$_Settings(
+_$_Personalization _$_$_PersonalizationFromJson(Map<String, dynamic> json) {
+  return _$_Personalization(
     enableVibrations: json['enableVibrations'] as bool,
     enableWarnings: json['enableWarnings'] as bool,
   );
 }
 
-Map<String, dynamic> _$_$_SettingsToJson(_$_Settings instance) =>
+Map<String, dynamic> _$_$_PersonalizationToJson(_$_Personalization instance) =>
     <String, dynamic>{
       'enableVibrations': instance.enableVibrations,
       'enableWarnings': instance.enableWarnings,

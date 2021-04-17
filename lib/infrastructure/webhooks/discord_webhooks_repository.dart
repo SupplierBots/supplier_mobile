@@ -21,10 +21,63 @@ class DiscordWebhooksRepository implements WebhooksRepository {
   Future<void> sendCheckoutWebhook(
     CheckoutReportPayload payload,
     WebhookConfig config,
-  ) async {}
+  ) async {
+    if (!webhookUrlRegex.hasMatch(config.url)) return;
+
+    final success = payload.result.status == 'paid';
+    final title =
+        success ? 'Successful checkout!' : 'Failed - ${payload.result.message}';
+
+    final message = MessageEmbed(
+      title: title,
+      color: success ? _successColor : _failColor,
+      footer: await _getFooter(),
+      thumbnail: MessageEmbedThumbnail(url: payload.item.image),
+      fields: [
+        EmbedField(
+          name: 'Date',
+          value: Jiffy(DateTime.now()).format('do MMM yyyy | HH:mm:ss'),
+        ),
+        EmbedField(
+          name: 'Product',
+          value: payload.item.name,
+          inline: true,
+        ),
+        EmbedField(
+          name: 'Style',
+          value: payload.item.style,
+          inline: true,
+        ),
+        EmbedField(
+          name: 'Size',
+          value: payload.item.size,
+          inline: true,
+        ),
+        EmbedField(
+          name: 'Version',
+          value: 'Mobile',
+          inline: true,
+        ),
+        EmbedField(
+          name: 'Profile',
+          value: '|| ${payload.profileName} ||',
+          inline: true,
+        ),
+        EmbedField(
+          name: 'Order number',
+          value: '|| ${payload.result.processingDetails.orderNumber} ||',
+          inline: true,
+        )
+      ],
+      timestamp: DateTime.now(),
+    );
+    await _sendWebhook(config.url, message);
+  }
 
   @override
   Future<void> sendTestWebhook(WebhookConfig config) async {
+    if (!webhookUrlRegex.hasMatch(config.url)) return;
+
     final message = MessageEmbed(
       title: 'Successfully configured mobile webhook!',
       color: _successColor,
@@ -38,8 +91,8 @@ class DiscordWebhooksRepository implements WebhooksRepository {
         EmbedField(
           name: 'Message',
           value: config.successOnly
-              ? 'If you want to receive all checkout messages, please disable ` Success Only ` option'
-              : 'If you only want to receive notifications about successful checkouts, please enable ` Success Only ` option',
+              ? 'If you want to receive notifications about all checkout messages disable ` Success Only ` option'
+              : 'If you want to receive notifications only about successful checkouts enable ` Success Only ` option',
         ),
         EmbedField(
           name: 'Date',
@@ -48,21 +101,27 @@ class DiscordWebhooksRepository implements WebhooksRepository {
       ],
       timestamp: DateTime.now(),
     );
+    await _sendWebhook(config.url, message);
+  }
 
-    await Dio().post<String>(
-      config.url,
-      data: {
-        'username': 'Supplier',
-        'avatar_url': _logoUrl,
-        'embeds': [message.toJson()],
-      },
-      options: Options(
-        headers: <String, String>{
-          'Content-Type': 'application/json',
+  Future<void> _sendWebhook(String url, MessageEmbed message) async {
+    try {
+      await Dio().post<String>(
+        url,
+        data: {
+          'username': 'Supplier',
+          'avatar_url': _logoUrl,
+          'embeds': [message.toJson()],
         },
-      ),
-    );
-    return Future.value();
+        options: Options(
+          headers: <String, String>{
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+    } catch (e) {
+      //Ignore webhook errors
+    }
   }
 
   Future<MessageEmbedFooter> _getFooter() async {

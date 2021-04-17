@@ -7,14 +7,18 @@ import 'package:supplier_mobile/application/settings/settings_cubit.dart';
 @LazySingleton()
 class Vibrate {
   Future<void> error(BuildContext context) async {
-    if (!context.read<SettingsCubit>().state.settings.enableVibrations) return;
+    if (!context.read<SettingsCubit>().state.personalization.enableVibrations) {
+      return;
+    }
     HapticFeedback.heavyImpact();
     await Future<void>.delayed(const Duration(milliseconds: 100));
     HapticFeedback.heavyImpact();
   }
 
   void heavyImpactTap(BuildContext context) {
-    if (!context.read<SettingsCubit>().state.settings.enableVibrations) return;
+    if (!context.read<SettingsCubit>().state.personalization.enableVibrations) {
+      return;
+    }
     HapticFeedback.heavyImpact();
   }
 }

@@ -37,7 +37,7 @@ class ProfilesListTile extends StatelessWidget {
         );
       }
 
-      if (!context.read<SettingsCubit>().state.settings.enableWarnings) {
+      if (!context.read<SettingsCubit>().state.personalization.enableWarnings) {
         context.read<ProfilesCubit>().deletedProfile(name);
         return Future.value();
       }

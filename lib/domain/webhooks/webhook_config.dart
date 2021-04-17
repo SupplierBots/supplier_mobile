@@ -12,3 +12,5 @@ abstract class WebhookConfig with _$WebhookConfig {
   factory WebhookConfig.fromJson(Map<String, dynamic> json) =>
       _$WebhookConfigFromJson(json);
 }
+
+final webhookUrlRegex = RegExp(r'\/webhooks\/.+\/.+$');

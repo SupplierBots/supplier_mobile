@@ -10,9 +10,12 @@ import 'package:supplier_mobile/application/cookies/cookies_cubit.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/application/remote/remote_cubit.dart';
 import 'package:supplier_mobile/application/runner/cubit/runner_cubit.dart';
+import 'package:supplier_mobile/application/settings/settings_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
 import 'package:supplier_mobile/domain/remote/checkout_report_payload/checkout_report_payload.dart';
 import 'package:supplier_mobile/domain/remote/remote_repository.dart';
+import 'package:supplier_mobile/domain/webhooks/webhook_config.dart';
+import 'package:supplier_mobile/domain/webhooks/webhooks_repository.dart';
 import 'package:supplier_mobile/inject.dart';
 import 'package:supplier_mobile/presentation/runner/widgets/message_bridge/browser_message.dart';
 import 'package:supplier_mobile/presentation/runner/widgets/message_bridge/item_details.dart';
@@ -176,15 +179,31 @@ class BrowserInstance extends HookWidget {
           {
             final result =
                 TaskResult.fromJson(message.details as Map<String, dynamic>);
+            final task = context.read<TasksCubit>().state.tasks[uid];
+            final settings = context.read<SettingsCubit>().state;
 
-            _updateProgress(result.message);
-            getIt<RemoteRepository>().reportCheckout(CheckoutReportPayload(
+            final checkoutPayload = CheckoutReportPayload(
               attempt: taskAttempt.value,
               checkoutDelay: checkoutDelay.value,
               item: itemDetals.value,
               result: result,
+              profileName: task.profileName,
               region: 'eu',
-            ));
+            );
+
+            _updateProgress(result.message);
+
+            getIt<RemoteRepository>().reportCheckout(checkoutPayload);
+
+            if (settings.webhookConfig.url.isNotEmpty &&
+                (!settings.webhookConfig.successOnly ||
+                    result.status == 'paid')) {
+              getIt<WebhooksRepository>().sendCheckoutWebhook(
+                checkoutPayload,
+                settings.webhookConfig,
+              );
+            }
+
             final retryStatus = ['failed', '404', '500', 'outOfStock'];
             if (retryStatus.contains(result.status)) {
               _startTask();

@@ -17,9 +17,12 @@ class _$SettingsStateTearOff {
   const _$SettingsStateTearOff();
 
 // ignore: unused_element
-  _SettingsState call({@required Settings settings}) {
+  _SettingsState call(
+      {@required Personalization personalization,
+      @required WebhookConfig webhookConfig}) {
     return _SettingsState(
-      settings: settings,
+      personalization: personalization,
+      webhookConfig: webhookConfig,
     );
   }
 
@@ -35,7 +38,8 @@ const $SettingsState = _$SettingsStateTearOff();
 
 /// @nodoc
 mixin _$SettingsState {
-  Settings get settings;
+  Personalization get personalization;
+  WebhookConfig get webhookConfig;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -47,9 +51,10 @@ abstract class $SettingsStateCopyWith<$Res> {
   factory $SettingsStateCopyWith(
           SettingsState value, $Res Function(SettingsState) then) =
       _$SettingsStateCopyWithImpl<$Res>;
-  $Res call({Settings settings});
+  $Res call({Personalization personalization, WebhookConfig webhookConfig});
 
-  $SettingsCopyWith<$Res> get settings;
+  $PersonalizationCopyWith<$Res> get personalization;
+  $WebhookConfigCopyWith<$Res> get webhookConfig;
 }
 
 /// @nodoc
@@ -63,20 +68,36 @@ class _$SettingsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object settings = freezed,
+    Object personalization = freezed,
+    Object webhookConfig = freezed,
   }) {
     return _then(_value.copyWith(
-      settings: settings == freezed ? _value.settings : settings as Settings,
+      personalization: personalization == freezed
+          ? _value.personalization
+          : personalization as Personalization,
+      webhookConfig: webhookConfig == freezed
+          ? _value.webhookConfig
+          : webhookConfig as WebhookConfig,
     ));
   }
 
   @override
-  $SettingsCopyWith<$Res> get settings {
-    if (_value.settings == null) {
+  $PersonalizationCopyWith<$Res> get personalization {
+    if (_value.personalization == null) {
       return null;
     }
-    return $SettingsCopyWith<$Res>(_value.settings, (value) {
-      return _then(_value.copyWith(settings: value));
+    return $PersonalizationCopyWith<$Res>(_value.personalization, (value) {
+      return _then(_value.copyWith(personalization: value));
+    });
+  }
+
+  @override
+  $WebhookConfigCopyWith<$Res> get webhookConfig {
+    if (_value.webhookConfig == null) {
+      return null;
+    }
+    return $WebhookConfigCopyWith<$Res>(_value.webhookConfig, (value) {
+      return _then(_value.copyWith(webhookConfig: value));
     });
   }
 }
@@ -88,10 +109,12 @@ abstract class _$SettingsStateCopyWith<$Res>
           _SettingsState value, $Res Function(_SettingsState) then) =
       __$SettingsStateCopyWithImpl<$Res>;
   @override
-  $Res call({Settings settings});
+  $Res call({Personalization personalization, WebhookConfig webhookConfig});
 
   @override
-  $SettingsCopyWith<$Res> get settings;
+  $PersonalizationCopyWith<$Res> get personalization;
+  @override
+  $WebhookConfigCopyWith<$Res> get webhookConfig;
 }
 
 /// @nodoc
@@ -107,10 +130,16 @@ class __$SettingsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object settings = freezed,
+    Object personalization = freezed,
+    Object webhookConfig = freezed,
   }) {
     return _then(_SettingsState(
-      settings: settings == freezed ? _value.settings : settings as Settings,
+      personalization: personalization == freezed
+          ? _value.personalization
+          : personalization as Personalization,
+      webhookConfig: webhookConfig == freezed
+          ? _value.webhookConfig
+          : webhookConfig as WebhookConfig,
     ));
   }
 }
@@ -119,31 +148,41 @@ class __$SettingsStateCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_SettingsState implements _SettingsState {
-  const _$_SettingsState({@required this.settings}) : assert(settings != null);
+  const _$_SettingsState(
+      {@required this.personalization, @required this.webhookConfig})
+      : assert(personalization != null),
+        assert(webhookConfig != null);
 
   factory _$_SettingsState.fromJson(Map<String, dynamic> json) =>
       _$_$_SettingsStateFromJson(json);
 
   @override
-  final Settings settings;
+  final Personalization personalization;
+  @override
+  final WebhookConfig webhookConfig;
 
   @override
   String toString() {
-    return 'SettingsState(settings: $settings)';
+    return 'SettingsState(personalization: $personalization, webhookConfig: $webhookConfig)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _SettingsState &&
-            (identical(other.settings, settings) ||
+            (identical(other.personalization, personalization) ||
                 const DeepCollectionEquality()
-                    .equals(other.settings, settings)));
+                    .equals(other.personalization, personalization)) &&
+            (identical(other.webhookConfig, webhookConfig) ||
+                const DeepCollectionEquality()
+                    .equals(other.webhookConfig, webhookConfig)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(settings);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(personalization) ^
+      const DeepCollectionEquality().hash(webhookConfig);
 
   @JsonKey(ignore: true)
   @override
@@ -157,14 +196,17 @@ class _$_SettingsState implements _SettingsState {
 }
 
 abstract class _SettingsState implements SettingsState {
-  const factory _SettingsState({@required Settings settings}) =
-      _$_SettingsState;
+  const factory _SettingsState(
+      {@required Personalization personalization,
+      @required WebhookConfig webhookConfig}) = _$_SettingsState;
 
   factory _SettingsState.fromJson(Map<String, dynamic> json) =
       _$_SettingsState.fromJson;
 
   @override
-  Settings get settings;
+  Personalization get personalization;
+  @override
+  WebhookConfig get webhookConfig;
   @override
   @JsonKey(ignore: true)
   _$SettingsStateCopyWith<_SettingsState> get copyWith;

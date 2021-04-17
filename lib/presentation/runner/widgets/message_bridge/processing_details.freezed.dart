@@ -24,7 +24,8 @@ class _$ProcessingDetailsTearOff {
       @required bool highTraffic,
       @required bool bParameter,
       @required bool queued,
-      @required bool cca}) {
+      @required bool cca,
+      @required String orderNumber}) {
     return _ProcessingDetails(
       billingErrors: billingErrors,
       slug: slug,
@@ -33,6 +34,7 @@ class _$ProcessingDetailsTearOff {
       bParameter: bParameter,
       queued: queued,
       cca: cca,
+      orderNumber: orderNumber,
     );
   }
 
@@ -55,6 +57,7 @@ mixin _$ProcessingDetails {
   bool get bParameter;
   bool get queued;
   bool get cca;
+  String get orderNumber;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -73,7 +76,8 @@ abstract class $ProcessingDetailsCopyWith<$Res> {
       bool highTraffic,
       bool bParameter,
       bool queued,
-      bool cca});
+      bool cca,
+      String orderNumber});
 }
 
 /// @nodoc
@@ -94,6 +98,7 @@ class _$ProcessingDetailsCopyWithImpl<$Res>
     Object bParameter = freezed,
     Object queued = freezed,
     Object cca = freezed,
+    Object orderNumber = freezed,
   }) {
     return _then(_value.copyWith(
       billingErrors: billingErrors == freezed
@@ -109,6 +114,8 @@ class _$ProcessingDetailsCopyWithImpl<$Res>
           bParameter == freezed ? _value.bParameter : bParameter as bool,
       queued: queued == freezed ? _value.queued : queued as bool,
       cca: cca == freezed ? _value.cca : cca as bool,
+      orderNumber:
+          orderNumber == freezed ? _value.orderNumber : orderNumber as String,
     ));
   }
 }
@@ -127,7 +134,8 @@ abstract class _$ProcessingDetailsCopyWith<$Res>
       bool highTraffic,
       bool bParameter,
       bool queued,
-      bool cca});
+      bool cca,
+      String orderNumber});
 }
 
 /// @nodoc
@@ -150,6 +158,7 @@ class __$ProcessingDetailsCopyWithImpl<$Res>
     Object bParameter = freezed,
     Object queued = freezed,
     Object cca = freezed,
+    Object orderNumber = freezed,
   }) {
     return _then(_ProcessingDetails(
       billingErrors: billingErrors == freezed
@@ -165,6 +174,8 @@ class __$ProcessingDetailsCopyWithImpl<$Res>
           bParameter == freezed ? _value.bParameter : bParameter as bool,
       queued: queued == freezed ? _value.queued : queued as bool,
       cca: cca == freezed ? _value.cca : cca as bool,
+      orderNumber:
+          orderNumber == freezed ? _value.orderNumber : orderNumber as String,
     ));
   }
 }
@@ -180,14 +191,16 @@ class _$_ProcessingDetails implements _ProcessingDetails {
       @required this.highTraffic,
       @required this.bParameter,
       @required this.queued,
-      @required this.cca})
+      @required this.cca,
+      @required this.orderNumber})
       : assert(billingErrors != null),
         assert(slug != null),
         assert(processingAttempt != null),
         assert(highTraffic != null),
         assert(bParameter != null),
         assert(queued != null),
-        assert(cca != null);
+        assert(cca != null),
+        assert(orderNumber != null);
 
   factory _$_ProcessingDetails.fromJson(Map<String, dynamic> json) =>
       _$_$_ProcessingDetailsFromJson(json);
@@ -206,10 +219,12 @@ class _$_ProcessingDetails implements _ProcessingDetails {
   final bool queued;
   @override
   final bool cca;
+  @override
+  final String orderNumber;
 
   @override
   String toString() {
-    return 'ProcessingDetails(billingErrors: $billingErrors, slug: $slug, processingAttempt: $processingAttempt, highTraffic: $highTraffic, bParameter: $bParameter, queued: $queued, cca: $cca)';
+    return 'ProcessingDetails(billingErrors: $billingErrors, slug: $slug, processingAttempt: $processingAttempt, highTraffic: $highTraffic, bParameter: $bParameter, queued: $queued, cca: $cca, orderNumber: $orderNumber)';
   }
 
   @override
@@ -233,7 +248,10 @@ class _$_ProcessingDetails implements _ProcessingDetails {
             (identical(other.queued, queued) ||
                 const DeepCollectionEquality().equals(other.queued, queued)) &&
             (identical(other.cca, cca) ||
-                const DeepCollectionEquality().equals(other.cca, cca)));
+                const DeepCollectionEquality().equals(other.cca, cca)) &&
+            (identical(other.orderNumber, orderNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.orderNumber, orderNumber)));
   }
 
   @override
@@ -245,7 +263,8 @@ class _$_ProcessingDetails implements _ProcessingDetails {
       const DeepCollectionEquality().hash(highTraffic) ^
       const DeepCollectionEquality().hash(bParameter) ^
       const DeepCollectionEquality().hash(queued) ^
-      const DeepCollectionEquality().hash(cca);
+      const DeepCollectionEquality().hash(cca) ^
+      const DeepCollectionEquality().hash(orderNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -266,7 +285,8 @@ abstract class _ProcessingDetails implements ProcessingDetails {
       @required bool highTraffic,
       @required bool bParameter,
       @required bool queued,
-      @required bool cca}) = _$_ProcessingDetails;
+      @required bool cca,
+      @required String orderNumber}) = _$_ProcessingDetails;
 
   factory _ProcessingDetails.fromJson(Map<String, dynamic> json) =
       _$_ProcessingDetails.fromJson;
@@ -285,6 +305,8 @@ abstract class _ProcessingDetails implements ProcessingDetails {
   bool get queued;
   @override
   bool get cca;
+  @override
+  String get orderNumber;
   @override
   @JsonKey(ignore: true)
   _$ProcessingDetailsCopyWith<_ProcessingDetails> get copyWith;

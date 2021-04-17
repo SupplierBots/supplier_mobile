@@ -15,6 +15,7 @@ _$_ProcessingDetails _$_$_ProcessingDetailsFromJson(Map<String, dynamic> json) {
     bParameter: json['bParameter'] as bool,
     queued: json['queued'] as bool,
     cca: json['cca'] as bool,
+    orderNumber: json['orderNumber'] as String,
   );
 }
 
@@ -28,4 +29,5 @@ Map<String, dynamic> _$_$_ProcessingDetailsToJson(
       'bParameter': instance.bParameter,
       'queued': instance.queued,
       'cca': instance.cca,
+      'orderNumber': instance.orderNumber,
     };

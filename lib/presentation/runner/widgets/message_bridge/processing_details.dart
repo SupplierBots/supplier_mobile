@@ -13,6 +13,7 @@ abstract class ProcessingDetails with _$ProcessingDetails {
     @required bool bParameter,
     @required bool queued,
     @required bool cca,
+    @required String orderNumber,
   }) = _ProcessingDetails;
   factory ProcessingDetails.fromJson(Map<String, dynamic> json) =>
       _$ProcessingDetailsFromJson(json);

@@ -24,7 +24,7 @@ class TasksListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> _showDeleteAlert() {
-      if (!context.read<SettingsCubit>().state.settings.enableWarnings) {
+      if (!context.read<SettingsCubit>().state.personalization.enableWarnings) {
         context.read<TasksCubit>().deletedTask(uid);
         return Future.value();
       }

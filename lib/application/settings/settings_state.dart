@@ -3,13 +3,18 @@ part of 'settings_cubit.dart';
 @freezed
 abstract class SettingsState with _$SettingsState {
   const factory SettingsState({
-    @required Settings settings,
+    @required Personalization personalization,
+    @required WebhookConfig webhookConfig,
   }) = _SettingsState;
 
   factory SettingsState.initial() => const SettingsState(
-        settings: Settings(
+        personalization: Personalization(
           enableVibrations: true,
           enableWarnings: true,
+        ),
+        webhookConfig: WebhookConfig(
+          url: '',
+          successOnly: false,
         ),
       );
 

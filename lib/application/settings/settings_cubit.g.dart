@@ -8,13 +8,18 @@ part of 'settings_cubit.dart';
 
 _$_SettingsState _$_$_SettingsStateFromJson(Map<String, dynamic> json) {
   return _$_SettingsState(
-    settings: json['settings'] == null
+    personalization: json['personalization'] == null
         ? null
-        : Settings.fromJson(json['settings'] as Map<String, dynamic>),
+        : Personalization.fromJson(
+            json['personalization'] as Map<String, dynamic>),
+    webhookConfig: json['webhookConfig'] == null
+        ? null
+        : WebhookConfig.fromJson(json['webhookConfig'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$_$_SettingsStateToJson(_$_SettingsState instance) =>
     <String, dynamic>{
-      'settings': instance.settings,
+      'personalization': instance.personalization,
+      'webhookConfig': instance.webhookConfig,
     };

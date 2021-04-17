@@ -16,7 +16,7 @@
       name: "",
       style: "",
       size: "N/A",
-      image: "",
+      image: "https://i.imgur.com/fUUYrFx.png", //Logo fallback
     };
     const timestamps = {
       start: "",
@@ -26,6 +26,7 @@
     const processingDetails = {
       billingErrors: "None",
       slug: "",
+      orderNumber: "#Unknown",
       processingAttempt: 0,
       highTraffic: false,
       bParameter: false,
@@ -557,6 +558,10 @@
     }
 
     function parseOrderStatus(response) {
+      if (response.id) {
+        processingDetails.orderNumber = `#${response.id}`;
+      }
+
       switch (response.status) {
         case "cardinal_queued":
         case "queued": {
@@ -608,7 +613,7 @@
         case "outOfStock":
         case "failed": {
           const message =
-            response.status === "outOfStock" ? "Sold out" : "Failed. Retrying";
+            response.status === "outOfStock" ? "Sold out" : "Card decline";
           processingDetails.highTraffic =
             response.page?.includes("high traffic") ?? false;
           processingDetails.bParameter = !!response.b;

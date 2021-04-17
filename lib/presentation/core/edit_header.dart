@@ -46,7 +46,7 @@ class EditHeader extends HookWidget {
     Future<void> _cancel() async {
       final result = cancelAction();
       if (!result.value1 ||
-          !context.read<SettingsCubit>().state.settings.enableWarnings) {
+          !context.read<SettingsCubit>().state.personalization.enableWarnings) {
         result.value2();
         return;
       }

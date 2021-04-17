@@ -18,6 +18,7 @@ _$_CheckoutReportPayload _$_$_CheckoutReportPayloadFromJson(
     item: json['item'] == null
         ? null
         : ItemDetails.fromJson(json['item'] as Map<String, dynamic>),
+    profileName: json['profileName'] as String,
   );
 }
 
@@ -29,4 +30,5 @@ Map<String, dynamic> _$_$_CheckoutReportPayloadToJson(
       'region': instance.region,
       'result': instance.result,
       'item': instance.item,
+      'profileName': instance.profileName,
     };
