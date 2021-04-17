@@ -5,6 +5,7 @@ part 'profile.g.dart';
 
 @freezed
 abstract class Profile with _$Profile {
+  const Profile._();
   const factory Profile({
     @required String firstName,
     @required String lastName,
@@ -24,4 +25,6 @@ abstract class Profile with _$Profile {
   }) = _Profile;
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);
+
+  String get region => country == 'USA' || country == 'Canada' ? 'us' : 'eu';
 }

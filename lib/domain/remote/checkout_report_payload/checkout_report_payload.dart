@@ -11,9 +11,8 @@ abstract class CheckoutReportPayload with _$CheckoutReportPayload {
     @required int attempt,
     @required int checkoutDelay,
     @required String region,
-    @required TaskResult result,
-    @required ItemDetails item,
     @required String profileName,
+    @required TaskResult result,
   }) = _CheckoutReportPayload;
   factory CheckoutReportPayload.fromJson(Map<String, dynamic> json) =>
       _$CheckoutReportPayloadFromJson(json);

@@ -22,16 +22,14 @@ class _$CheckoutReportPayloadTearOff {
       {@required int attempt,
       @required int checkoutDelay,
       @required String region,
-      @required TaskResult result,
-      @required ItemDetails item,
-      @required String profileName}) {
+      @required String profileName,
+      @required TaskResult result}) {
     return _CheckoutReportPayload(
       attempt: attempt,
       checkoutDelay: checkoutDelay,
       region: region,
-      result: result,
-      item: item,
       profileName: profileName,
+      result: result,
     );
   }
 
@@ -50,9 +48,8 @@ mixin _$CheckoutReportPayload {
   int get attempt;
   int get checkoutDelay;
   String get region;
-  TaskResult get result;
-  ItemDetails get item;
   String get profileName;
+  TaskResult get result;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -68,12 +65,10 @@ abstract class $CheckoutReportPayloadCopyWith<$Res> {
       {int attempt,
       int checkoutDelay,
       String region,
-      TaskResult result,
-      ItemDetails item,
-      String profileName});
+      String profileName,
+      TaskResult result});
 
   $TaskResultCopyWith<$Res> get result;
-  $ItemDetailsCopyWith<$Res> get item;
 }
 
 /// @nodoc
@@ -90,9 +85,8 @@ class _$CheckoutReportPayloadCopyWithImpl<$Res>
     Object attempt = freezed,
     Object checkoutDelay = freezed,
     Object region = freezed,
-    Object result = freezed,
-    Object item = freezed,
     Object profileName = freezed,
+    Object result = freezed,
   }) {
     return _then(_value.copyWith(
       attempt: attempt == freezed ? _value.attempt : attempt as int,
@@ -100,10 +94,9 @@ class _$CheckoutReportPayloadCopyWithImpl<$Res>
           ? _value.checkoutDelay
           : checkoutDelay as int,
       region: region == freezed ? _value.region : region as String,
-      result: result == freezed ? _value.result : result as TaskResult,
-      item: item == freezed ? _value.item : item as ItemDetails,
       profileName:
           profileName == freezed ? _value.profileName : profileName as String,
+      result: result == freezed ? _value.result : result as TaskResult,
     ));
   }
 
@@ -114,16 +107,6 @@ class _$CheckoutReportPayloadCopyWithImpl<$Res>
     }
     return $TaskResultCopyWith<$Res>(_value.result, (value) {
       return _then(_value.copyWith(result: value));
-    });
-  }
-
-  @override
-  $ItemDetailsCopyWith<$Res> get item {
-    if (_value.item == null) {
-      return null;
-    }
-    return $ItemDetailsCopyWith<$Res>(_value.item, (value) {
-      return _then(_value.copyWith(item: value));
     });
   }
 }
@@ -139,14 +122,11 @@ abstract class _$CheckoutReportPayloadCopyWith<$Res>
       {int attempt,
       int checkoutDelay,
       String region,
-      TaskResult result,
-      ItemDetails item,
-      String profileName});
+      String profileName,
+      TaskResult result});
 
   @override
   $TaskResultCopyWith<$Res> get result;
-  @override
-  $ItemDetailsCopyWith<$Res> get item;
 }
 
 /// @nodoc
@@ -165,9 +145,8 @@ class __$CheckoutReportPayloadCopyWithImpl<$Res>
     Object attempt = freezed,
     Object checkoutDelay = freezed,
     Object region = freezed,
-    Object result = freezed,
-    Object item = freezed,
     Object profileName = freezed,
+    Object result = freezed,
   }) {
     return _then(_CheckoutReportPayload(
       attempt: attempt == freezed ? _value.attempt : attempt as int,
@@ -175,10 +154,9 @@ class __$CheckoutReportPayloadCopyWithImpl<$Res>
           ? _value.checkoutDelay
           : checkoutDelay as int,
       region: region == freezed ? _value.region : region as String,
-      result: result == freezed ? _value.result : result as TaskResult,
-      item: item == freezed ? _value.item : item as ItemDetails,
       profileName:
           profileName == freezed ? _value.profileName : profileName as String,
+      result: result == freezed ? _value.result : result as TaskResult,
     ));
   }
 }
@@ -191,15 +169,13 @@ class _$_CheckoutReportPayload implements _CheckoutReportPayload {
       {@required this.attempt,
       @required this.checkoutDelay,
       @required this.region,
-      @required this.result,
-      @required this.item,
-      @required this.profileName})
+      @required this.profileName,
+      @required this.result})
       : assert(attempt != null),
         assert(checkoutDelay != null),
         assert(region != null),
-        assert(result != null),
-        assert(item != null),
-        assert(profileName != null);
+        assert(profileName != null),
+        assert(result != null);
 
   factory _$_CheckoutReportPayload.fromJson(Map<String, dynamic> json) =>
       _$_$_CheckoutReportPayloadFromJson(json);
@@ -211,15 +187,13 @@ class _$_CheckoutReportPayload implements _CheckoutReportPayload {
   @override
   final String region;
   @override
-  final TaskResult result;
-  @override
-  final ItemDetails item;
-  @override
   final String profileName;
+  @override
+  final TaskResult result;
 
   @override
   String toString() {
-    return 'CheckoutReportPayload(attempt: $attempt, checkoutDelay: $checkoutDelay, region: $region, result: $result, item: $item, profileName: $profileName)';
+    return 'CheckoutReportPayload(attempt: $attempt, checkoutDelay: $checkoutDelay, region: $region, profileName: $profileName, result: $result)';
   }
 
   @override
@@ -234,13 +208,11 @@ class _$_CheckoutReportPayload implements _CheckoutReportPayload {
                     .equals(other.checkoutDelay, checkoutDelay)) &&
             (identical(other.region, region) ||
                 const DeepCollectionEquality().equals(other.region, region)) &&
-            (identical(other.result, result) ||
-                const DeepCollectionEquality().equals(other.result, result)) &&
-            (identical(other.item, item) ||
-                const DeepCollectionEquality().equals(other.item, item)) &&
             (identical(other.profileName, profileName) ||
                 const DeepCollectionEquality()
-                    .equals(other.profileName, profileName)));
+                    .equals(other.profileName, profileName)) &&
+            (identical(other.result, result) ||
+                const DeepCollectionEquality().equals(other.result, result)));
   }
 
   @override
@@ -249,9 +221,8 @@ class _$_CheckoutReportPayload implements _CheckoutReportPayload {
       const DeepCollectionEquality().hash(attempt) ^
       const DeepCollectionEquality().hash(checkoutDelay) ^
       const DeepCollectionEquality().hash(region) ^
-      const DeepCollectionEquality().hash(result) ^
-      const DeepCollectionEquality().hash(item) ^
-      const DeepCollectionEquality().hash(profileName);
+      const DeepCollectionEquality().hash(profileName) ^
+      const DeepCollectionEquality().hash(result);
 
   @JsonKey(ignore: true)
   @override
@@ -270,9 +241,8 @@ abstract class _CheckoutReportPayload implements CheckoutReportPayload {
       {@required int attempt,
       @required int checkoutDelay,
       @required String region,
-      @required TaskResult result,
-      @required ItemDetails item,
-      @required String profileName}) = _$_CheckoutReportPayload;
+      @required String profileName,
+      @required TaskResult result}) = _$_CheckoutReportPayload;
 
   factory _CheckoutReportPayload.fromJson(Map<String, dynamic> json) =
       _$_CheckoutReportPayload.fromJson;
@@ -284,11 +254,9 @@ abstract class _CheckoutReportPayload implements CheckoutReportPayload {
   @override
   String get region;
   @override
-  TaskResult get result;
-  @override
-  ItemDetails get item;
-  @override
   String get profileName;
+  @override
+  TaskResult get result;
   @override
   @JsonKey(ignore: true)
   _$CheckoutReportPayloadCopyWith<_CheckoutReportPayload> get copyWith;

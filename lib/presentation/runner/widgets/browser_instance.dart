@@ -14,11 +14,10 @@ import 'package:supplier_mobile/application/settings/settings_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
 import 'package:supplier_mobile/domain/remote/checkout_report_payload/checkout_report_payload.dart';
 import 'package:supplier_mobile/domain/remote/remote_repository.dart';
-import 'package:supplier_mobile/domain/webhooks/webhook_config.dart';
 import 'package:supplier_mobile/domain/webhooks/webhooks_repository.dart';
 import 'package:supplier_mobile/inject.dart';
+import 'package:supplier_mobile/presentation/runner/widgets/address_cookie_generator.dart';
 import 'package:supplier_mobile/presentation/runner/widgets/message_bridge/browser_message.dart';
-import 'package:supplier_mobile/presentation/runner/widgets/message_bridge/item_details.dart';
 import 'package:supplier_mobile/presentation/runner/widgets/message_bridge/task_result.dart';
 
 class BrowserInstance extends HookWidget {
@@ -44,14 +43,6 @@ class BrowserInstance extends HookWidget {
     final restockMode = useState(false);
     final checkoutDelay = useState(0);
     final finished = useState(false);
-    final itemDetals = useState<ItemDetails>(
-      const ItemDetails(
-        name: '',
-        style: '',
-        size: '',
-        image: '',
-      ),
-    );
 
     final activeTask =
         context.select((RunnerCubit runner) => runner.state.visibleTask);
@@ -61,48 +52,6 @@ class BrowserInstance extends HookWidget {
             uid: uid,
             message: status,
           );
-    }
-
-    String _convertToCode(String country) {
-      switch (country) {
-        case 'USA':
-          return 'USA';
-        case 'Canada':
-          return 'CANADA';
-        case 'Austria':
-          return 'AT';
-        case 'Belarus':
-          return 'BY';
-        case 'Belgium':
-          return 'BE';
-        case 'Bulgaria':
-          return 'BG';
-        case 'Croatia':
-          return 'HR';
-        case 'Czech Republic':
-          return 'CZ';
-        case 'Denmark':
-          return 'DK';
-        case 'Estonia':
-          return 'EE';
-        case 'Finland':
-          return 'FI';
-        case 'France':
-          return 'FR';
-        case 'Germany':
-          return 'DE';
-      }
-      return country;
-    }
-
-    String _createAddressCookie() {
-      final task = context.read<TasksCubit>().state.tasks[uid];
-      final profile =
-          context.read<ProfilesCubit>().state.profiles[task.profileName];
-
-      return '${profile.firstName}%20${profile.lastName}|${profile.email}|${profile.phoneNumber.replaceAll(' ', '')}|${profile.address}||${profile.city}|undefined|${profile.postcode}|PL|'
-          .replaceAll(' ', '%20')
-          .replaceAll('@', '%40');
     }
 
     Future<void> _startTask() async {
@@ -135,7 +84,7 @@ class BrowserInstance extends HookWidget {
       await webViewController.ios.cookieHandler.setCookie(
         url: Uri(host: 'www.supremenewyork.com', path: '/'),
         name: 'js-address',
-        value: _createAddressCookie(),
+        value: generateAddressCookie(context, uid),
         domain: 'www.supremenewyork.com',
         expiresDate: DateTime.now()
             .add(const Duration(days: 180))
@@ -181,14 +130,15 @@ class BrowserInstance extends HookWidget {
                 TaskResult.fromJson(message.details as Map<String, dynamic>);
             final task = context.read<TasksCubit>().state.tasks[uid];
             final settings = context.read<SettingsCubit>().state;
+            final profile =
+                context.read<ProfilesCubit>().state.profiles[task.profileName];
 
             final checkoutPayload = CheckoutReportPayload(
               attempt: taskAttempt.value,
               checkoutDelay: checkoutDelay.value,
-              item: itemDetals.value,
               result: result,
               profileName: task.profileName,
-              region: 'eu',
+              region: profile.region,
             );
 
             _updateProgress(result.message);
@@ -210,12 +160,6 @@ class BrowserInstance extends HookWidget {
             } else {
               finished.value = true;
             }
-            break;
-          }
-        case 'item-details':
-          {
-            itemDetals.value =
-                ItemDetails.fromJson(message.details as Map<String, dynamic>);
             break;
           }
         case 'enable-restocks':
@@ -310,8 +254,9 @@ class BrowserInstance extends HookWidget {
               )
               .replaceFirst(
                 '\$REGION\$',
-                json.encode('eu'),
+                json.encode(profile.region),
               );
+
           controller.evaluateJavascript(
             source: injection,
           );

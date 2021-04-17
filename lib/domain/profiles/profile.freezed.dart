@@ -248,7 +248,7 @@ class __$ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
 @JsonSerializable()
 
 /// @nodoc
-class _$_Profile implements _Profile {
+class _$_Profile extends _Profile {
   const _$_Profile(
       {@required this.firstName,
       @required this.lastName,
@@ -277,7 +277,8 @@ class _$_Profile implements _Profile {
         assert(creditCardNumber != null),
         assert(expiryMonth != null),
         assert(expiryYear != null),
-        assert(securityCode != null);
+        assert(securityCode != null),
+        super._();
 
   factory _$_Profile.fromJson(Map<String, dynamic> json) =>
       _$_$_ProfileFromJson(json);
@@ -396,7 +397,8 @@ class _$_Profile implements _Profile {
   }
 }
 
-abstract class _Profile implements Profile {
+abstract class _Profile extends Profile {
+  const _Profile._() : super._();
   const factory _Profile(
       {@required String firstName,
       @required String lastName,

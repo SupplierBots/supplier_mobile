@@ -46,7 +46,7 @@
     );
 
     window.__nativeCache.onResponse((response) => {
-      if (!/.*(checkout|status).json$/.test(response.url)) return;
+      if (!/.*(checkout|status).json/.test(response.url)) return;
       try {
         const data = JSON.parse(response.text);
         if (!data.status) return;
@@ -80,7 +80,6 @@
           soldOutStyles.push(nextAvailableStyle.attributes.name);
         }
       }
-      sendItemDetails();
       timestamps.atc = Date.now();
       await checkout();
       timestamps.submit = Date.now();
@@ -169,7 +168,7 @@
       let removeButton = findElement(removeButtonSelectors);
       let soldOutButton = findElement(soldOutButtonSelectors);
 
-      const timeout = 3000;
+      const timeout = 5000;
       let waitingTime = 0;
       while (!removeButton && !soldOutButton) {
         lookForModifiedButtons([
@@ -218,32 +217,6 @@
       await waitForElement(checkoutButtonSelectors);
       findElement(checkoutButtonSelectors).click();
 
-      const cardHeaderSelectors = [
-        {
-          selector: "h2",
-          innerText: "card information",
-        },
-        {
-          selector: "h3",
-          innerText: "card information",
-        },
-        {
-          selector: "h1",
-          innerText: "card information",
-        },
-        {
-          selector: "p",
-          innerText: "card information",
-        },
-      ];
-
-      await waitForElement(cardHeaderSelectors);
-      await wait(300);
-
-      updateStatus("Checkout autofill");
-      findElement(cardHeaderSelectors).scrollIntoView();
-      const checkoutLoadTimestamp = Date.now();
-
       const creditCartSelectors = [
         {
           selector: "[placeholder*='credit card']",
@@ -252,6 +225,15 @@
           selector: "[maxlength='19']",
         },
       ];
+
+      await waitForElement(creditCartSelectors);
+      await wait(300);
+
+      updateStatus("Checkout autofill");
+
+      findElement(creditCartSelectors).scrollIntoView();
+      const checkoutLoadTimestamp = Date.now();
+
       await type(creditCartSelectors, paymentDetails.number.replace(/ /g, ""));
 
       await selectOption(paymentDetails.month);
@@ -536,14 +518,11 @@
       setTaskAction("update-status", status);
     }
 
-    function sendItemDetails() {
-      setTaskAction("item-details", itemDetails);
-    }
-
     function sendTaskResult(status, message) {
       setTaskAction("task-result", {
         status,
         message,
+        itemDetails,
         timestamps,
         modifiedButtons,
         processingDetails,

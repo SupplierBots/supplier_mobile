@@ -32,7 +32,7 @@ class DiscordWebhooksRepository implements WebhooksRepository {
       title: title,
       color: success ? _successColor : _failColor,
       footer: await _getFooter(),
-      thumbnail: MessageEmbedThumbnail(url: payload.item.image),
+      thumbnail: MessageEmbedThumbnail(url: payload.result.itemDetails.image),
       fields: [
         EmbedField(
           name: 'Date',
@@ -40,17 +40,17 @@ class DiscordWebhooksRepository implements WebhooksRepository {
         ),
         EmbedField(
           name: 'Product',
-          value: payload.item.name,
+          value: payload.result.itemDetails.name,
           inline: true,
         ),
         EmbedField(
           name: 'Style',
-          value: payload.item.style,
+          value: payload.result.itemDetails.style,
           inline: true,
         ),
         EmbedField(
           name: 'Size',
-          value: payload.item.size,
+          value: payload.result.itemDetails.size,
           inline: true,
         ),
         EmbedField(

@@ -20,12 +20,14 @@ class _$TaskResultTearOff {
   _TaskResult call(
       {@required String status,
       @required String message,
+      @required ItemDetails itemDetails,
       @required List<String> modifiedButtons,
       @required Timestamps timestamps,
       @required ProcessingDetails processingDetails}) {
     return _TaskResult(
       status: status,
       message: message,
+      itemDetails: itemDetails,
       modifiedButtons: modifiedButtons,
       timestamps: timestamps,
       processingDetails: processingDetails,
@@ -46,6 +48,7 @@ const $TaskResult = _$TaskResultTearOff();
 mixin _$TaskResult {
   String get status;
   String get message;
+  ItemDetails get itemDetails;
   List<String> get modifiedButtons;
   Timestamps get timestamps;
   ProcessingDetails get processingDetails;
@@ -63,10 +66,12 @@ abstract class $TaskResultCopyWith<$Res> {
   $Res call(
       {String status,
       String message,
+      ItemDetails itemDetails,
       List<String> modifiedButtons,
       Timestamps timestamps,
       ProcessingDetails processingDetails});
 
+  $ItemDetailsCopyWith<$Res> get itemDetails;
   $TimestampsCopyWith<$Res> get timestamps;
   $ProcessingDetailsCopyWith<$Res> get processingDetails;
 }
@@ -83,6 +88,7 @@ class _$TaskResultCopyWithImpl<$Res> implements $TaskResultCopyWith<$Res> {
   $Res call({
     Object status = freezed,
     Object message = freezed,
+    Object itemDetails = freezed,
     Object modifiedButtons = freezed,
     Object timestamps = freezed,
     Object processingDetails = freezed,
@@ -90,6 +96,9 @@ class _$TaskResultCopyWithImpl<$Res> implements $TaskResultCopyWith<$Res> {
     return _then(_value.copyWith(
       status: status == freezed ? _value.status : status as String,
       message: message == freezed ? _value.message : message as String,
+      itemDetails: itemDetails == freezed
+          ? _value.itemDetails
+          : itemDetails as ItemDetails,
       modifiedButtons: modifiedButtons == freezed
           ? _value.modifiedButtons
           : modifiedButtons as List<String>,
@@ -99,6 +108,16 @@ class _$TaskResultCopyWithImpl<$Res> implements $TaskResultCopyWith<$Res> {
           ? _value.processingDetails
           : processingDetails as ProcessingDetails,
     ));
+  }
+
+  @override
+  $ItemDetailsCopyWith<$Res> get itemDetails {
+    if (_value.itemDetails == null) {
+      return null;
+    }
+    return $ItemDetailsCopyWith<$Res>(_value.itemDetails, (value) {
+      return _then(_value.copyWith(itemDetails: value));
+    });
   }
 
   @override
@@ -131,10 +150,13 @@ abstract class _$TaskResultCopyWith<$Res> implements $TaskResultCopyWith<$Res> {
   $Res call(
       {String status,
       String message,
+      ItemDetails itemDetails,
       List<String> modifiedButtons,
       Timestamps timestamps,
       ProcessingDetails processingDetails});
 
+  @override
+  $ItemDetailsCopyWith<$Res> get itemDetails;
   @override
   $TimestampsCopyWith<$Res> get timestamps;
   @override
@@ -155,6 +177,7 @@ class __$TaskResultCopyWithImpl<$Res> extends _$TaskResultCopyWithImpl<$Res>
   $Res call({
     Object status = freezed,
     Object message = freezed,
+    Object itemDetails = freezed,
     Object modifiedButtons = freezed,
     Object timestamps = freezed,
     Object processingDetails = freezed,
@@ -162,6 +185,9 @@ class __$TaskResultCopyWithImpl<$Res> extends _$TaskResultCopyWithImpl<$Res>
     return _then(_TaskResult(
       status: status == freezed ? _value.status : status as String,
       message: message == freezed ? _value.message : message as String,
+      itemDetails: itemDetails == freezed
+          ? _value.itemDetails
+          : itemDetails as ItemDetails,
       modifiedButtons: modifiedButtons == freezed
           ? _value.modifiedButtons
           : modifiedButtons as List<String>,
@@ -181,11 +207,13 @@ class _$_TaskResult implements _TaskResult {
   const _$_TaskResult(
       {@required this.status,
       @required this.message,
+      @required this.itemDetails,
       @required this.modifiedButtons,
       @required this.timestamps,
       @required this.processingDetails})
       : assert(status != null),
         assert(message != null),
+        assert(itemDetails != null),
         assert(modifiedButtons != null),
         assert(timestamps != null),
         assert(processingDetails != null);
@@ -198,6 +226,8 @@ class _$_TaskResult implements _TaskResult {
   @override
   final String message;
   @override
+  final ItemDetails itemDetails;
+  @override
   final List<String> modifiedButtons;
   @override
   final Timestamps timestamps;
@@ -206,7 +236,7 @@ class _$_TaskResult implements _TaskResult {
 
   @override
   String toString() {
-    return 'TaskResult(status: $status, message: $message, modifiedButtons: $modifiedButtons, timestamps: $timestamps, processingDetails: $processingDetails)';
+    return 'TaskResult(status: $status, message: $message, itemDetails: $itemDetails, modifiedButtons: $modifiedButtons, timestamps: $timestamps, processingDetails: $processingDetails)';
   }
 
   @override
@@ -218,6 +248,9 @@ class _$_TaskResult implements _TaskResult {
             (identical(other.message, message) ||
                 const DeepCollectionEquality()
                     .equals(other.message, message)) &&
+            (identical(other.itemDetails, itemDetails) ||
+                const DeepCollectionEquality()
+                    .equals(other.itemDetails, itemDetails)) &&
             (identical(other.modifiedButtons, modifiedButtons) ||
                 const DeepCollectionEquality()
                     .equals(other.modifiedButtons, modifiedButtons)) &&
@@ -234,6 +267,7 @@ class _$_TaskResult implements _TaskResult {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(status) ^
       const DeepCollectionEquality().hash(message) ^
+      const DeepCollectionEquality().hash(itemDetails) ^
       const DeepCollectionEquality().hash(modifiedButtons) ^
       const DeepCollectionEquality().hash(timestamps) ^
       const DeepCollectionEquality().hash(processingDetails);
@@ -253,6 +287,7 @@ abstract class _TaskResult implements TaskResult {
   const factory _TaskResult(
       {@required String status,
       @required String message,
+      @required ItemDetails itemDetails,
       @required List<String> modifiedButtons,
       @required Timestamps timestamps,
       @required ProcessingDetails processingDetails}) = _$_TaskResult;
@@ -264,6 +299,8 @@ abstract class _TaskResult implements TaskResult {
   String get status;
   @override
   String get message;
+  @override
+  ItemDetails get itemDetails;
   @override
   List<String> get modifiedButtons;
   @override

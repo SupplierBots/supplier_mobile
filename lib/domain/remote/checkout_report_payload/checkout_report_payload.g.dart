@@ -12,13 +12,10 @@ _$_CheckoutReportPayload _$_$_CheckoutReportPayloadFromJson(
     attempt: json['attempt'] as int,
     checkoutDelay: json['checkoutDelay'] as int,
     region: json['region'] as String,
+    profileName: json['profileName'] as String,
     result: json['result'] == null
         ? null
         : TaskResult.fromJson(json['result'] as Map<String, dynamic>),
-    item: json['item'] == null
-        ? null
-        : ItemDetails.fromJson(json['item'] as Map<String, dynamic>),
-    profileName: json['profileName'] as String,
   );
 }
 
@@ -28,7 +25,6 @@ Map<String, dynamic> _$_$_CheckoutReportPayloadToJson(
       'attempt': instance.attempt,
       'checkoutDelay': instance.checkoutDelay,
       'region': instance.region,
-      'result': instance.result,
-      'item': instance.item,
       'profileName': instance.profileName,
+      'result': instance.result,
     };

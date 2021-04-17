@@ -11,6 +11,7 @@ import 'package:supplier_mobile/presentation/core/form/form_dropdown.dart';
 import 'package:supplier_mobile/presentation/core/form/form_switch.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
 import 'package:supplier_mobile/presentation/core/form/form_multi_select_field.dart';
+import 'package:supplier_mobile/presentation/tasks/widgets/form/tasks_form_dropdown_values.dart';
 
 class TasksForm extends HookWidget {
   const TasksForm({
@@ -71,17 +72,7 @@ class TasksForm extends HookWidget {
           const SizedBox(height: kPrimaryElementsSpacing),
           const FormDropdown(
             name: 'size',
-            items: [
-              'None/One-Size',
-              'Small',
-              'Medium',
-              'Large',
-              'XLarge',
-              '30',
-              '32',
-              '34',
-              '36'
-            ],
+            items: sizes,
             placeholder: 'Size',
           ),
           const SizedBox(height: kPrimaryElementsSpacing),

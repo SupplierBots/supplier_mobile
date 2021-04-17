@@ -78,7 +78,7 @@ class FirebaseRemoteRepository implements RemoteRepository {
         'processingAttempt': payload.result.processingDetails.processingAttempt,
         'cca': payload.result.processingDetails.cca,
         'queued': payload.result.processingDetails.queued,
-        'item': payload.item.toJson(),
+        'item': payload.result.itemDetails.toJson(),
         'checkoutDelay': payload.checkoutDelay,
         'modifiedButtons': payload.result.modifiedButtons,
         'region': payload.region,
