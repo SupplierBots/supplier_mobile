@@ -252,7 +252,7 @@
           selector: "[maxlength='19']",
         },
       ];
-      await type(creditCartSelectors, paymentDetails.number);
+      await type(creditCartSelectors, paymentDetails.number.replace(/ /g, ""));
 
       await selectOption(paymentDetails.month);
       await selectOption(paymentDetails.year);
