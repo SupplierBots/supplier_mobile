@@ -12,6 +12,7 @@ class FormSwitch extends StatelessWidget {
     @required this.name,
     @required this.label,
     this.validator,
+    this.onChange,
     this.toggleSize = 20.0,
     this.valueFontSize = 16.0,
     this.borderRadius = 10.0,
@@ -19,6 +20,7 @@ class FormSwitch extends StatelessWidget {
 
   final String name;
   final String label;
+  final void Function(bool) onChange;
   final FormFieldValidator<bool> validator;
 
   final double toggleSize;
@@ -58,6 +60,7 @@ class FormSwitch extends StatelessWidget {
                 onTap: () {
                   field.didChange(!current);
                   getIt<Vibrate>().tap(context);
+                  onChange?.call(field.value);
 
                   if (field.value) {
                     _animationController.forward();

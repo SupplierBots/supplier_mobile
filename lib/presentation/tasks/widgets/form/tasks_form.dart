@@ -23,6 +23,8 @@ class TasksForm extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final initialValues = useState<Map<String, dynamic>>();
+    final isAnySizeDropdownVisible = useState(false);
+
     final products = useMemoized(() {
       return context.read<RemoteCubit>().state.products.keys.toList();
     });
@@ -33,7 +35,10 @@ class TasksForm extends HookWidget {
 
       initialValues.value = uidOption.fold(
         () => null,
-        (uid) => tasks[uid].toJson(),
+        (uid) {
+          isAnySizeDropdownVisible.value = tasks[uid].anySize;
+          return tasks[uid].toJson();
+        },
       );
     });
 
@@ -77,18 +82,28 @@ class TasksForm extends HookWidget {
           ),
           const SizedBox(height: kPrimaryElementsSpacing),
           Row(
-            children: const [
-              FormSwitch(
+            children: [
+              const FormSwitch(
                 name: 'anyColor',
                 label: 'Any color',
               ),
-              SizedBox(width: 70),
+              const SizedBox(width: 70),
               FormSwitch(
                 name: 'anySize',
                 label: 'Any size',
+                onChange: (bool value) {
+                  isAnySizeDropdownVisible.value = value;
+                },
               ),
             ],
           ),
+          const SizedBox(height: kPrimaryElementsSpacing),
+          if (isAnySizeDropdownVisible.value)
+            const FormDropdown(
+              name: 'anySizeOption',
+              items: anySizeOptions,
+              placeholder: 'If selected size is not available choose',
+            ),
         ],
       ),
     );

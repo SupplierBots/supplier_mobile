@@ -4,7 +4,6 @@ import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/profiles/widgets/profiles_list_tile.dart';
-import 'package:supplier_mobile/presentation/profiles/widgets/super_window.dart';
 
 class ProfilesList extends StatelessWidget {
   const ProfilesList({
@@ -20,8 +19,10 @@ class ProfilesList extends StatelessWidget {
         children: [
           const SizedBox(height: 20),
           for (var profile in state.profiles.entries) ...[
-            ProfilesListTile(name: profile.key),
-            //SuperWindow(),
+            ProfilesListTile(
+              name: profile.key,
+              profile: profile.value,
+            ),
             const SizedBox(height: kPrimaryElementsSpacing)
           ]
         ],

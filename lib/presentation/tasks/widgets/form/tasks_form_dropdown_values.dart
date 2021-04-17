@@ -36,3 +36,9 @@ const sizes = [
   'M/L',
   'L/XL',
 ];
+
+const anySizeOptions = [
+  'The Largest',
+  'The Smallest',
+  'Random',
+];

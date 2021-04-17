@@ -13,6 +13,7 @@ _$_Task _$_$_TaskFromJson(Map<String, dynamic> json) {
     size: json['size'] as String,
     anyColor: json['anyColor'] as bool,
     anySize: json['anySize'] as bool,
+    anySizeOption: json['anySizeOption'] as String,
     colors: (json['colors'] as List)?.map((e) => e as String)?.toList(),
   );
 }
@@ -23,5 +24,6 @@ Map<String, dynamic> _$_$_TaskToJson(_$_Task instance) => <String, dynamic>{
       'size': instance.size,
       'anyColor': instance.anyColor,
       'anySize': instance.anySize,
+      'anySizeOption': instance.anySizeOption,
       'colors': instance.colors,
     };

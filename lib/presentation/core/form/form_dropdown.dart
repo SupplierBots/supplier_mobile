@@ -124,38 +124,43 @@ class FormDropdown extends HookWidget {
 
         return GestureDetector(
           onTap: toggleMenu,
-          child: GradientBorderContainer(
-            height: kInputsHeight,
-            borderGradient: getGradient(),
-            borderRadius: radius,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Flexible(
-                    child: Text(
-                      field.value ?? placeholder,
-                      style: TextStyle(
-                        color: field.value != null ? kLightPurple : kLighGrey,
-                        fontSize: 16,
+          child: Column(
+            children: [
+              GradientBorderContainer(
+                height: kInputsHeight,
+                borderGradient: getGradient(),
+                borderRadius: radius,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Flexible(
+                        child: Text(
+                          field.value ?? placeholder,
+                          style: TextStyle(
+                            color:
+                                field.value != null ? kLightPurple : kLighGrey,
+                            fontSize: 16,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  SizedBox(
-                    child: FittedBox(
-                      fit: BoxFit.fill,
-                      child: Icon(
-                        Icons.expand_more,
-                        size: 35,
-                        color: getIconColor(),
+                      SizedBox(
+                        child: FittedBox(
+                          fit: BoxFit.fill,
+                          child: Icon(
+                            Icons.expand_more,
+                            size: 35,
+                            color: getIconColor(),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         );
       },

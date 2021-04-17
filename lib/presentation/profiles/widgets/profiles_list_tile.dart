@@ -4,6 +4,7 @@ import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_cubit.dart';
 import 'package:supplier_mobile/application/settings/settings_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
+import 'package:supplier_mobile/domain/profiles/profile.dart';
 import 'package:supplier_mobile/inject.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
@@ -12,12 +13,11 @@ import 'package:supplier_mobile/presentation/core/styled_error_dialog.dart';
 import 'package:supplier_mobile/presentation/core/vibrate.dart';
 
 class ProfilesListTile extends StatelessWidget {
-  const ProfilesListTile({
-    Key key,
-    @required this.name,
-  }) : super(key: key);
+  const ProfilesListTile({Key key, @required this.name, @required this.profile})
+      : super(key: key);
 
   final String name;
+  final Profile profile;
 
   @override
   Widget build(BuildContext context) {
@@ -106,14 +106,14 @@ class ProfilesListTile extends StatelessWidget {
               padding: const EdgeInsets.only(right: 10),
               child: Row(
                 children: [
-                  const Text(
-                    'Firstname Lastname',
-                    style: TextStyle(color: kLightPurple, fontSize: 18),
+                  Text(
+                    '${profile.firstName} ${profile.lastName}',
+                    style: const TextStyle(color: kLightPurple, fontSize: 18),
                   ),
                   const Spacer(),
-                  const Text(
-                    '**** 5031',
-                    style: TextStyle(color: kPinkColor, fontSize: 18),
+                  Text(
+                    '**** ${profile.creditCardNumber.substring(15)}',
+                    style: const TextStyle(color: kPinkColor, fontSize: 18),
                   ),
                 ],
               ),

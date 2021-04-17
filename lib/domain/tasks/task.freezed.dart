@@ -23,6 +23,7 @@ class _$TaskTearOff {
       @required String size,
       @required bool anyColor,
       @required bool anySize,
+      @required String anySizeOption,
       @required List<String> colors}) {
     return _Task(
       product: product,
@@ -30,6 +31,7 @@ class _$TaskTearOff {
       size: size,
       anyColor: anyColor,
       anySize: anySize,
+      anySizeOption: anySizeOption,
       colors: colors,
     );
   }
@@ -51,6 +53,7 @@ mixin _$Task {
   String get size;
   bool get anyColor;
   bool get anySize;
+  String get anySizeOption;
   List<String> get colors;
 
   Map<String, dynamic> toJson();
@@ -68,6 +71,7 @@ abstract class $TaskCopyWith<$Res> {
       String size,
       bool anyColor,
       bool anySize,
+      String anySizeOption,
       List<String> colors});
 }
 
@@ -86,6 +90,7 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
     Object size = freezed,
     Object anyColor = freezed,
     Object anySize = freezed,
+    Object anySizeOption = freezed,
     Object colors = freezed,
   }) {
     return _then(_value.copyWith(
@@ -95,6 +100,9 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
       size: size == freezed ? _value.size : size as String,
       anyColor: anyColor == freezed ? _value.anyColor : anyColor as bool,
       anySize: anySize == freezed ? _value.anySize : anySize as bool,
+      anySizeOption: anySizeOption == freezed
+          ? _value.anySizeOption
+          : anySizeOption as String,
       colors: colors == freezed ? _value.colors : colors as List<String>,
     ));
   }
@@ -111,6 +119,7 @@ abstract class _$TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
       String size,
       bool anyColor,
       bool anySize,
+      String anySizeOption,
       List<String> colors});
 }
 
@@ -130,6 +139,7 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
     Object size = freezed,
     Object anyColor = freezed,
     Object anySize = freezed,
+    Object anySizeOption = freezed,
     Object colors = freezed,
   }) {
     return _then(_Task(
@@ -139,6 +149,9 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
       size: size == freezed ? _value.size : size as String,
       anyColor: anyColor == freezed ? _value.anyColor : anyColor as bool,
       anySize: anySize == freezed ? _value.anySize : anySize as bool,
+      anySizeOption: anySizeOption == freezed
+          ? _value.anySizeOption
+          : anySizeOption as String,
       colors: colors == freezed ? _value.colors : colors as List<String>,
     ));
   }
@@ -154,12 +167,14 @@ class _$_Task implements _Task {
       @required this.size,
       @required this.anyColor,
       @required this.anySize,
+      @required this.anySizeOption,
       @required this.colors})
       : assert(product != null),
         assert(profileName != null),
         assert(size != null),
         assert(anyColor != null),
         assert(anySize != null),
+        assert(anySizeOption != null),
         assert(colors != null);
 
   factory _$_Task.fromJson(Map<String, dynamic> json) =>
@@ -176,11 +191,13 @@ class _$_Task implements _Task {
   @override
   final bool anySize;
   @override
+  final String anySizeOption;
+  @override
   final List<String> colors;
 
   @override
   String toString() {
-    return 'Task(product: $product, profileName: $profileName, size: $size, anyColor: $anyColor, anySize: $anySize, colors: $colors)';
+    return 'Task(product: $product, profileName: $profileName, size: $size, anyColor: $anyColor, anySize: $anySize, anySizeOption: $anySizeOption, colors: $colors)';
   }
 
   @override
@@ -201,6 +218,9 @@ class _$_Task implements _Task {
             (identical(other.anySize, anySize) ||
                 const DeepCollectionEquality()
                     .equals(other.anySize, anySize)) &&
+            (identical(other.anySizeOption, anySizeOption) ||
+                const DeepCollectionEquality()
+                    .equals(other.anySizeOption, anySizeOption)) &&
             (identical(other.colors, colors) ||
                 const DeepCollectionEquality().equals(other.colors, colors)));
   }
@@ -213,6 +233,7 @@ class _$_Task implements _Task {
       const DeepCollectionEquality().hash(size) ^
       const DeepCollectionEquality().hash(anyColor) ^
       const DeepCollectionEquality().hash(anySize) ^
+      const DeepCollectionEquality().hash(anySizeOption) ^
       const DeepCollectionEquality().hash(colors);
 
   @JsonKey(ignore: true)
@@ -233,6 +254,7 @@ abstract class _Task implements Task {
       @required String size,
       @required bool anyColor,
       @required bool anySize,
+      @required String anySizeOption,
       @required List<String> colors}) = _$_Task;
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$_Task.fromJson;
@@ -247,6 +269,8 @@ abstract class _Task implements Task {
   bool get anyColor;
   @override
   bool get anySize;
+  @override
+  String get anySizeOption;
   @override
   List<String> get colors;
   @override

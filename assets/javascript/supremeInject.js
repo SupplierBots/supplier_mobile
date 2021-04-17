@@ -9,7 +9,7 @@
     const delays = $DELAYS$;
     const region = $REGION$;
 
-    const sizeToFind = convertSizes(productSize, region);
+    const sizeToFind = convertSizes(productSize.primary, region);
 
     const soldOutStyles = [];
     const itemDetails = {
@@ -380,7 +380,17 @@
       );
       if (primary || !anySize || sizes.length === 0) return primary;
 
-      return sizes[Math.floor(Math.random() * sizes.length)];
+      switch (productSize.anySizeOption) {
+        case "The Smallest": {
+          return sizes[0];
+        }
+        case "The Largest": {
+          return sizes[sizes.length - 1];
+        }
+        case "Random": {
+          return sizes[Math.floor(Math.random() * sizes.length)];
+        }
+      }
     }
 
     function selectStyle() {

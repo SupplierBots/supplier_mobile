@@ -234,7 +234,10 @@ class BrowserInstance extends HookWidget {
               )
               .replaceFirst(
                 '\$SIZE\$',
-                json.encode(task.size),
+                json.encode({
+                  'primary': task.size,
+                  'anySizeOption': task.anySizeOption,
+                }),
               )
               .replaceFirst(
                 '\$DELAYS\$',
