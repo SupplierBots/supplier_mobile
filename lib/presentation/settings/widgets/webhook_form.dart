@@ -59,6 +59,7 @@ class WebhookForm extends HookWidget {
             width: 150,
             height: 45,
             onTap: () {
+              _updateSettings();
               getIt<WebhooksRepository>().sendTestWebhook(
                 context.read<SettingsCubit>().state.webhookConfig,
               );

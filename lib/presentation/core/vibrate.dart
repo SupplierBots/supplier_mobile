@@ -21,4 +21,11 @@ class Vibrate {
     }
     HapticFeedback.heavyImpact();
   }
+
+  void tap(BuildContext context) {
+    if (!context.read<SettingsCubit>().state.personalization.enableVibrations) {
+      return;
+    }
+    HapticFeedback.mediumImpact();
+  }
 }

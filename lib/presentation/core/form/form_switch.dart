@@ -57,7 +57,7 @@ class FormSwitch extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   field.didChange(!current);
-                  getIt<Vibrate>().heavyImpactTap(context);
+                  getIt<Vibrate>().tap(context);
 
                   if (field.value) {
                     _animationController.forward();
