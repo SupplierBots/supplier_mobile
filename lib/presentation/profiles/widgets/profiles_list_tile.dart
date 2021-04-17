@@ -64,7 +64,7 @@ class ProfilesListTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.only(left: 18),
         alignment: Alignment.centerLeft,
-        height: 60,
+        height: 110,
         width: double.infinity,
         decoration: const BoxDecoration(
           color: kSecondaryBackground,
@@ -72,30 +72,50 @@ class ProfilesListTile extends StatelessWidget {
             Radius.circular(10),
           ),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  name,
-                  style: const TextStyle(color: kLightPurple, fontSize: 18),
+                Row(
+                  children: [
+                    Text(
+                      name,
+                      style: const TextStyle(color: kLightPurple, fontSize: 18),
+                    ),
+                    const SizedBox(width: 10),
+                    const Icon(
+                      CustomIcons.edit,
+                      color: kLighGrey,
+                      size: 18,
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 10),
-                const Icon(
-                  CustomIcons.edit,
-                  color: kLighGrey,
-                  size: 18,
+                IconButton(
+                  onPressed: _showDeleteAlert,
+                  padding: const EdgeInsets.all(20),
+                  icon: const Icon(
+                    CustomIcons.remove,
+                    color: kLighGrey,
+                    size: 18,
+                  ),
                 ),
               ],
             ),
-            IconButton(
-              onPressed: _showDeleteAlert,
-              padding: const EdgeInsets.all(20),
-              icon: const Icon(
-                CustomIcons.remove,
-                color: kLighGrey,
-                size: 18,
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Row(
+                children: [
+                  const Text(
+                    'Firstname Lastname',
+                    style: TextStyle(color: kLightPurple, fontSize: 18),
+                  ),
+                  const Spacer(),
+                  const Text(
+                    '**** 5031',
+                    style: TextStyle(color: kPinkColor, fontSize: 18),
+                  ),
+                ],
               ),
             ),
           ],
