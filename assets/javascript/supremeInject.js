@@ -34,6 +34,7 @@
       cca: false,
     };
     const modifiedButtons = [];
+    let stockRefreshTimestamp = Date.now();
 
     window.addEventListener(
       "hashchange",
@@ -46,12 +47,15 @@
     );
 
     window.__nativeCache.onResponse((response) => {
-      if (!/.*(checkout|status).json/.test(response.url)) return;
-      try {
-        const data = JSON.parse(response.text);
-        if (!data.status) return;
-        parseOrderStatus(data);
-      } catch {}
+      if (/.*(checkout|status).json/.test(response.url)) {
+        try {
+          const data = JSON.parse(response.text);
+          if (!data.status) return;
+          parseOrderStatus(data);
+        } catch {}
+      } else if (/stock/.test(response.url)) {
+        stockRefreshTimestamp = Date.now();
+      }
     });
 
     await main();
@@ -92,8 +96,7 @@
 
       if (!item) {
         try {
-          window.loadDataForPoll();
-          await wait(500);
+          await refreshStock();
           item = findItem(product);
         } catch {}
       }
@@ -623,6 +626,26 @@
           break;
         }
       }
+    }
+
+    async function refreshStock() {
+      const currentTimestamp = stockRefreshTimestamp;
+      const timeout = 1000;
+
+      try {
+        window.loadDataForPoll();
+
+        //Wait for timestamp change
+        let loadingTime = 0;
+        while (
+          currentTimestamp === stockRefreshTimestamp &&
+          loadingTime < timeout
+        ) {
+          await wait(50);
+          loadingTime += 50;
+        }
+        await wait(100);
+      } catch {}
     }
     //CORE *
 
