@@ -27,11 +27,18 @@ class TaskView extends HookWidget {
     Widget getTaskState() {
       switch (taskProgress.value.action) {
         case TaskAction.captcha:
-          return CaptchaState(solveAction: () {
-            context.read<RunnerCubit>().setVisibleTask(taskProgress.key);
-          });
+          return Positioned(
+            right: 0,
+            child: CaptchaState(solveAction: () {
+              context.read<RunnerCubit>().setVisibleTask(taskProgress.key);
+            }),
+          );
         default:
-          return const InProgressState();
+          return const Positioned(
+            top: 22,
+            right: 0,
+            child: InProgressState(),
+          );
       }
     }
 
@@ -46,7 +53,7 @@ class TaskView extends HookWidget {
       child: Padding(
         padding:
             const EdgeInsets.only(top: 18, bottom: 18, left: 20, right: 25),
-        child: Row(
+        child: Stack(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +97,6 @@ class TaskView extends HookWidget {
                 ),
               ],
             ),
-            const Spacer(),
             getTaskState(),
           ],
         ),

@@ -1,5 +1,3 @@
-import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
@@ -24,29 +22,28 @@ class IconParagraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-        children: [
-          WidgetSpan(
-            alignment: iconAlignment,
-            child: Padding(
-              padding: EdgeInsets.only(right: spaceBetween),
-              child: GradientWidget(
-                child: icon,
+    return Row(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(right: spaceBetween),
+          child: GradientWidget(
+            child: icon,
+          ),
+        ),
+        Container(
+          constraints: const BoxConstraints(maxWidth: 190),
+          child: FittedBox(
+            child: Text(
+              text,
+              style: TextStyle(
+                color: textColor,
+                fontSize: fontSize,
+                fontFamily: 'Lato',
               ),
             ),
           ),
-          TextSpan(
-            text: text,
-            style: TextStyle(
-              color: textColor,
-              fontSize: fontSize,
-              fontFamily: 'Lato',
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
