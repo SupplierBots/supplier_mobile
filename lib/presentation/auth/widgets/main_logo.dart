@@ -15,7 +15,7 @@ class MainLogo extends StatelessWidget {
       children: <Widget>[
         const GradientWidget(
           child: Icon(
-            CustomIcons.union,
+            CustomIcons.logo,
             color: Colors.white,
             size: 80,
           ),

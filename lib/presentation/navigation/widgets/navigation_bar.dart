@@ -31,17 +31,17 @@ class NavigationBar extends StatelessWidget {
               route: Routes.dashboardPage,
             ),
             NavigationButton(
-              iconSize: 30,
+              iconSize: 28,
               icon: Icons.play_arrow,
               route: Routes.tasksPage,
             ),
             NavigationButton(
-              iconSize: 23,
-              icon: CustomIcons.profiles,
+              iconSize: 24,
+              icon: CustomIcons.profile,
               route: Routes.profilesPage,
             ),
             NavigationButton(
-              iconSize: 23,
+              iconSize: 21,
               icon: CustomIcons.settings,
               route: Routes.settingsPage,
             ),

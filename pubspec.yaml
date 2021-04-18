@@ -1,7 +1,7 @@
 name: supplier_mobile
 description: Supreme & Palace Bot.
 publish_to: "none"
-version: 0.7.1+13
+version: 0.8.0+14
 
 environment:
   sdk: ">=2.8.0 <3.0.0"

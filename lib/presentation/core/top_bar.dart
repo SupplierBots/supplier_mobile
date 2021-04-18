@@ -34,7 +34,7 @@ class TopBar extends PreferredSize {
                 child: Container(
                   margin: const EdgeInsets.only(right: 10),
                   child: const Icon(
-                    CustomIcons.union,
+                    CustomIcons.logo,
                     color: Colors.white,
                     size: 45,
                   ),

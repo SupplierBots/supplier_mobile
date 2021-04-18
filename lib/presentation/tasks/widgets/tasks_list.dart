@@ -64,7 +64,7 @@ class TasksList extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.symmetric(horizontal: 8.0),
                               child: Icon(
-                                CustomIcons.profiles,
+                                CustomIcons.profile,
                                 color: kLighGrey,
                               ),
                             ),
@@ -161,7 +161,7 @@ class TasksList extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8.0),
                             child: Icon(
-                              CustomIcons.profiles,
+                              CustomIcons.profile,
                               color: kLighGrey,
                             ),
                           ),

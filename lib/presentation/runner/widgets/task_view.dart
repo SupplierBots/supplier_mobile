@@ -60,7 +60,7 @@ class TaskView extends HookWidget {
                       child: Icon(
                         CustomIcons.tshirt,
                         color: Colors.white,
-                        size: 18,
+                        size: 20,
                       ),
                     ),
                     const SizedBox(
@@ -84,13 +84,10 @@ class TaskView extends HookWidget {
                 Row(
                   children: [
                     const GradientWidget(
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 3),
-                        child: Icon(
-                          CustomIcons.profiles,
-                          color: Colors.white,
-                          size: 18,
-                        ),
+                      child: Icon(
+                        CustomIcons.profile,
+                        color: Colors.white,
+                        size: 20,
                       ),
                     ),
                     const SizedBox(width: 17),
@@ -104,13 +101,10 @@ class TaskView extends HookWidget {
                 Row(
                   children: [
                     const GradientWidget(
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 3),
-                        child: Icon(
-                          Icons.info_outline,
-                          color: Colors.white,
-                          size: 18,
-                        ),
+                      child: Icon(
+                        Icons.info_outline,
+                        color: Colors.white,
+                        size: 20,
                       ),
                     ),
                     const SizedBox(width: 17),

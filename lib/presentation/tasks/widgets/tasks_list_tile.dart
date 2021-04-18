@@ -65,7 +65,7 @@ class TasksListTile extends StatelessWidget {
                   child: Icon(
                     CustomIcons.tshirt,
                     color: Colors.white,
-                    size: 18,
+                    size: 20,
                   ),
                 ),
                 const SizedBox(width: 20),
@@ -93,12 +93,11 @@ class TasksListTile extends StatelessWidget {
             const SizedBox(height: 6),
             Row(
               children: <Widget>[
-                const SizedBox(width: 2),
                 const GradientWidget(
                   child: Icon(
-                    CustomIcons.profiles,
+                    CustomIcons.profile,
                     color: Colors.white,
-                    size: 18,
+                    size: 20,
                   ),
                 ),
                 const SizedBox(width: 18),
