@@ -100,10 +100,11 @@ class TasksForm extends HookWidget {
           ),
           const SizedBox(height: kPrimaryElementsSpacing),
           if (isAnySizeDropdownVisible.value)
-            const FormDropdown(
+            FormDropdown(
               name: 'anySizeOption',
               items: anySizeOptions,
               placeholder: 'If selected size is not available choose',
+              isRequired: isAnySizeDropdownVisible.value,
             ),
           const SizedBox(height: 75),
         ],
