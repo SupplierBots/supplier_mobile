@@ -7,6 +7,7 @@ import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
+import 'package:supplier_mobile/presentation/core/icon_paragraph.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/in_progress_state.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/task_state_3DSecure.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/task_state_captcha.dart';
@@ -56,26 +57,20 @@ class TaskView extends HookWidget {
               children: [
                 Row(
                   children: [
-                    const GradientWidget(
-                      child: Icon(
-                        CustomIcons.tshirt,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
                     GestureDetector(
                       onTap: () {
                         context
                             .read<RunnerCubit>()
                             .setVisibleTask(taskProgress.key);
                       },
-                      child: Text(
-                        task.product,
-                        style:
-                            const TextStyle(fontSize: 16, color: kLightPurple),
+                      child: IconParagraph(
+                        text: task.product,
+                        iconAlignment: PlaceholderAlignment.bottom,
+                        icon: const Icon(
+                          CustomIcons.tshirt,
+                          color: Colors.white,
+                          size: 20,
+                        ),
                       ),
                     ),
                   ],
@@ -83,34 +78,29 @@ class TaskView extends HookWidget {
                 const SizedBox(height: 12),
                 Row(
                   children: [
-                    const GradientWidget(
-                      child: Icon(
+                    IconParagraph(
+                      text: task.profileName,
+                      icon: const Icon(
                         CustomIcons.profile,
                         color: Colors.white,
                         size: 20,
                       ),
                     ),
-                    const SizedBox(width: 17),
-                    Text(
-                      task.profileName,
-                      style: const TextStyle(fontSize: 16, color: kLightPurple),
-                    ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 11),
                 Row(
                   children: [
-                    const GradientWidget(
-                      child: Icon(
+                    IconParagraph(
+                      text: taskProgress.value.message,
+                      iconAlignment: PlaceholderAlignment.bottom,
+                      spaceBetween: 19,
+                      textColor: kLighGrey,
+                      icon: const Icon(
                         Icons.info_outline,
                         color: Colors.white,
-                        size: 20,
+                        size: 19,
                       ),
-                    ),
-                    const SizedBox(width: 17),
-                    Text(
-                      taskProgress.value.message,
-                      style: const TextStyle(fontSize: 16, color: kLighGrey),
                     ),
                   ],
                 ),

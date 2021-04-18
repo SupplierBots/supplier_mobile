@@ -9,6 +9,7 @@ import 'package:supplier_mobile/inject.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
+import 'package:supplier_mobile/presentation/core/icon_paragraph.dart';
 import 'package:supplier_mobile/presentation/core/styled_alert_dialog.dart';
 import 'package:supplier_mobile/presentation/core/vibrate.dart';
 
@@ -61,19 +62,13 @@ class TasksListTile extends StatelessWidget {
           children: [
             Row(
               children: [
-                const GradientWidget(
-                  child: Icon(
+                IconParagraph(
+                  text: task.product,
+                  iconAlignment: PlaceholderAlignment.bottom,
+                  icon: const Icon(
                     CustomIcons.tshirt,
                     color: Colors.white,
                     size: 20,
-                  ),
-                ),
-                const SizedBox(width: 20),
-                Text(
-                  task.product,
-                  style: const TextStyle(
-                    color: kLightPurple,
-                    fontSize: 16,
                   ),
                 ),
                 const Spacer(),
@@ -93,17 +88,13 @@ class TasksListTile extends StatelessWidget {
             const SizedBox(height: 6),
             Row(
               children: <Widget>[
-                const GradientWidget(
-                  child: Icon(
+                IconParagraph(
+                  text: task.profileName,
+                  icon: const Icon(
                     CustomIcons.profile,
                     color: Colors.white,
                     size: 20,
                   ),
-                ),
-                const SizedBox(width: 18),
-                Text(
-                  task.profileName,
-                  style: const TextStyle(color: kLightPurple, fontSize: 16),
                 ),
                 const Spacer(),
                 const Padding(
