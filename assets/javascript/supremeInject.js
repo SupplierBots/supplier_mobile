@@ -194,9 +194,10 @@
         return false;
       }
       try {
-        itemDetails.image = queryElement({
-          selector: "#style-image-container img",
-        }).src;
+        itemDetails.image = productDetailView.model.attributes.selectedStyle.attributes.image_url.replace(
+          "//",
+          "https://"
+        );
       } catch {}
       await wait(300);
       return true;
@@ -395,36 +396,35 @@
 
     function selectStyle() {
       const styles = productDetailView.model.attributes.styles.models;
-      const primary = findMatchingStyle(colors, styles);
+
+      const filteredStyles = styles.filter(
+        (s) =>
+          !soldOutStyles.includes(s.attributes.name) &&
+          !colors.negative.some((c) =>
+            s.attributes.name.toLowerCase().includes(c)
+          )
+      );
+
+      if (filteredStyles.length === 0) {
+        return null;
+      }
+
+      const primary = filteredStyles.find((s) =>
+        colors.positive.some((c) => s.attributes.name.toLowerCase().includes(c))
+      );
+
+      const secondary =
+        filteredStyles[Math.floor(Math.random() * filteredStyles.length)];
+
+      if (colors.positive.length == 0) {
+        return secondary;
+      }
 
       if (primary || !anyColor) {
         return primary;
       }
 
-      const remainingStyles = styles.filter(
-        (s) => !soldOutStyles.includes(s.attributes.name)
-      );
-
-      if (remainingStyles.length === 0) {
-        return null;
-      }
-
-      const secondary =
-        remainingStyles[Math.floor(Math.random() * remainingStyles.length)];
       return secondary;
-    }
-
-    function findMatchingStyle(colors, styles) {
-      for (let targetColor of colors) {
-        const match = styles.find(
-          (s) =>
-            !soldOutStyles.includes(s.attributes.name) &&
-            s.attributes.name.toLowerCase().includes(targetColor)
-        );
-        if (!match) continue;
-        return match;
-      }
-      return null;
     }
 
     function findItem(product) {

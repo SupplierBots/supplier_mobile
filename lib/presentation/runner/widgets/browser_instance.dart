@@ -14,6 +14,7 @@ import 'package:supplier_mobile/application/settings/settings_cubit.dart';
 import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
 import 'package:supplier_mobile/domain/remote/checkout_report_payload/checkout_report_payload.dart';
 import 'package:supplier_mobile/domain/remote/remote_repository.dart';
+import 'package:supplier_mobile/domain/tasks/colors_keywords.dart';
 import 'package:supplier_mobile/domain/webhooks/webhooks_repository.dart';
 import 'package:supplier_mobile/inject.dart';
 import 'package:supplier_mobile/presentation/runner/widgets/address_cookie_generator.dart';
@@ -222,7 +223,7 @@ class BrowserInstance extends HookWidget {
               )
               .replaceFirst(
                 '\$COLORS\$',
-                json.encode(task.colors),
+                json.encode(ColorsKeywords.fromList(task.colors)),
               )
               .replaceFirst(
                 '\$ANY_SIZE\$',

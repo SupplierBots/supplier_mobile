@@ -3,9 +3,10 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
+import 'package:supplier_mobile/presentation/core/form/form_multi_select_item_negative.dart';
+import 'package:supplier_mobile/presentation/core/form/form_multi_select_item_positive.dart';
 import 'package:supplier_mobile/presentation/core/form/form_text_field.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
-import 'package:supplier_mobile/presentation/core/form/form_multi_select_item.dart';
 
 class FormMultiSelectField extends StatelessWidget {
   const FormMultiSelectField({
@@ -27,7 +28,7 @@ class FormMultiSelectField extends StatelessWidget {
       name: name,
       validator: (List<String> items) {
         if (items == null || items.isEmpty) {
-          return 'You have to add at least one';
+          return 'You have to add at least one color';
         }
         return null;
       },
@@ -82,17 +83,30 @@ class FormMultiSelectField extends StatelessWidget {
                           ? []
                           : field.value
                               .map(
-                                (item) => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: FormMultiSelectItem(
-                                    value: item,
-                                    onTap: () {
-                                      final copiedList = [...field.value];
-                                      copiedList.remove(item);
-                                      field.didChange(copiedList);
-                                    },
-                                  ),
-                                ),
+                                (item) =>
+                                    Builder(builder: (BuildContext context) {
+                                  void _removeFunction() {
+                                    final copiedList = [...field.value];
+                                    copiedList.remove(item);
+                                    field.didChange(copiedList);
+                                  }
+
+                                  final isPositive = item.startsWith('+');
+                                  final itemValue = item.substring(1);
+
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: isPositive
+                                        ? FormMultiSelectItemPositive(
+                                            value: itemValue,
+                                            onTap: _removeFunction,
+                                          )
+                                        : FormMultiSelectItemNegative(
+                                            value: itemValue,
+                                            onTap: _removeFunction,
+                                          ),
+                                  );
+                                }),
                               )
                               .toList(),
                     ),
@@ -126,9 +140,10 @@ class FormMultiSelectField extends StatelessWidget {
                                   backgroundColor: kTertiaryBackground,
                                   name: 'item',
                                   valueTransformer: (String item) {
-                                    return item
-                                        .replaceAll('+', '')
-                                        .toLowerCase();
+                                    if (!item.startsWith(RegExp(r'[\+-]'))) {
+                                      item = '+$item';
+                                    }
+                                    return item.toLowerCase();
                                   },
                                   validator: (String item) {
                                     if (field.value != null &&

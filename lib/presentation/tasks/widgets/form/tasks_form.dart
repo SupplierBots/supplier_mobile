@@ -23,6 +23,7 @@ class TasksForm extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final initialValues = useState<Map<String, dynamic>>();
+
     final isAnySizeDropdownVisible = useState(false);
 
     final products = useMemoized(() {
@@ -104,6 +105,7 @@ class TasksForm extends HookWidget {
               items: anySizeOptions,
               placeholder: 'If selected size is not available choose',
             ),
+          const SizedBox(height: 75),
         ],
       ),
     );

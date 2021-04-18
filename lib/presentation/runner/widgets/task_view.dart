@@ -8,7 +8,6 @@ import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/icon_paragraph.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/in_progress_state.dart';
-import 'package:supplier_mobile/presentation/tasks/widgets/task_state_3DSecure.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/task_state_captcha.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/task_progress.dart';
 
@@ -31,8 +30,6 @@ class TaskView extends HookWidget {
           return CaptchaState(solveAction: () {
             context.read<RunnerCubit>().setVisibleTask(taskProgress.key);
           });
-        case TaskAction.secure:
-          return const SecureState();
         default:
           return const InProgressState();
       }

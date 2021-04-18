@@ -8,9 +8,10 @@ abstract class DashboardState with _$DashboardState {
   }) = _DashboardState;
   factory DashboardState.initial() => const DashboardState(
         generalInfo: GeneralInfo(
-          //TODO: Set init info
-          news: 'init news',
-          tips: 'init tips',
+          news:
+              'Finally an open beta is here! We would be thankful for your feedback. Please be aware that some errors may occur, we will try to fix them as fast as possible. Make sure that you have the latest version installed. Thank you for participating.',
+          tips:
+              'Remember to login into your google account before running any tasks to decrease the chance of captcha, which can slow you significantly during a drop.',
           version: '0.0.0',
         ),
       );

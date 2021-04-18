@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/domain/core/string_extensions.dart';
 
-class FormMultiSelectItem extends StatelessWidget {
-  const FormMultiSelectItem({
+class FormMultiSelectItemPositive extends StatelessWidget {
+  const FormMultiSelectItemPositive({
     Key key,
     @required this.onTap,
     @required this.value,
