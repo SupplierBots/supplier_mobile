@@ -203,7 +203,14 @@ class BrowserInstance extends HookWidget {
           final task = context.read<TasksCubit>().state.tasks[uid];
           final profile =
               context.read<ProfilesCubit>().state.profiles[task.profileName];
+
           final remote = context.read<RemoteCubit>().state;
+
+          if (remote.products[task.product] == null) {
+            _updateProgress('Item no longer available');
+            finished.value = true;
+            return;
+          }
 
           checkoutDelay.value = restockMode.value
               ? remote.delays.restocksCheckout
