@@ -91,6 +91,14 @@
       let item = findItem(product);
 
       if (!item) {
+        try {
+          window.loadDataForPoll();
+          await wait(500);
+          item = findItem(product);
+        } catch {}
+      }
+
+      if (!item) {
         return await reload();
       }
 
