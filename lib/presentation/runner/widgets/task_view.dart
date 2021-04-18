@@ -7,7 +7,7 @@ import 'package:supplier_mobile/application/tasks/tasks_cubit.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/icon_paragraph.dart';
-import 'package:supplier_mobile/presentation/tasks/widgets/in_progress_state.dart';
+import 'package:supplier_mobile/presentation/runner/widgets/progress_map.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/task_state_captcha.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/task_progress.dart';
 
@@ -34,15 +34,23 @@ class TaskView extends HookWidget {
             }),
           );
         default:
-          return const Positioned(
-            top: 22,
-            right: 0,
-            child: InProgressState(),
-          );
+          return Container();
       }
     }
 
+    double getTaskProgress() {
+      final message = taskProgress.value.message;
+      if (progressMap.containsKey(message)) {
+        return progressMap[message];
+      }
+      if (message.contains('Processing')) {
+        return progressMap['Processing (x)'];
+      }
+      return 0;
+    }
+
     return Container(
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       width: double.infinity,
       decoration: const BoxDecoration(
         color: kSecondaryBackground,
@@ -50,56 +58,71 @@ class TaskView extends HookWidget {
           Radius.circular(10),
         ),
       ),
-      child: Padding(
-        padding:
-            const EdgeInsets.only(top: 18, bottom: 18, left: 20, right: 25),
-        child: Stack(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 19, bottom: 16, left: 20, right: 25),
+            child: Stack(
               children: [
-                GestureDetector(
-                  onTap: () {
-                    context
-                        .read<RunnerCubit>()
-                        .setVisibleTask(taskProgress.key);
-                  },
-                  child: IconParagraph(
-                    text: task.product,
-                    iconAlignment: PlaceholderAlignment.bottom,
-                    icon: const Icon(
-                      CustomIcons.tshirt,
-                      color: Colors.white,
-                      size: 20,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        context
+                            .read<RunnerCubit>()
+                            .setVisibleTask(taskProgress.key);
+                      },
+                      child: IconParagraph(
+                        text: task.product,
+                        iconAlignment: PlaceholderAlignment.bottom,
+                        icon: const Icon(
+                          CustomIcons.tshirt,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 12),
+                    IconParagraph(
+                      text: task.profileName,
+                      icon: const Icon(
+                        CustomIcons.profile,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    IconParagraph(
+                      text: taskProgress.value.message,
+                      iconAlignment: PlaceholderAlignment.bottom,
+                      spaceBetween: 19,
+                      textColor: kLighGrey,
+                      icon: const Icon(
+                        Icons.info_outline,
+                        color: Colors.white,
+                        size: 19,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 12),
-                IconParagraph(
-                  text: task.profileName,
-                  icon: const Icon(
-                    CustomIcons.profile,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                ),
-                const SizedBox(height: 11),
-                IconParagraph(
-                  text: taskProgress.value.message,
-                  iconAlignment: PlaceholderAlignment.bottom,
-                  spaceBetween: 19,
-                  textColor: kLighGrey,
-                  icon: const Icon(
-                    Icons.info_outline,
-                    color: Colors.white,
-                    size: 19,
-                  ),
-                ),
+                getTaskState(),
               ],
             ),
-            getTaskState(),
-          ],
-        ),
+          ),
+          FractionallySizedBox(
+            widthFactor: getTaskProgress(),
+            child: Container(
+              height: 3,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                gradient: kPrimaryGradient,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

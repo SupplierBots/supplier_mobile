@@ -10,8 +10,8 @@ class InProgressState extends StatelessWidget {
     return const Padding(
       padding: EdgeInsets.only(right: 15.0),
       child: SizedBox(
-        height: 40,
-        width: 40,
+        height: 20,
+        width: 20,
         child: CircularProgressIndicator(
           strokeWidth: 3,
         ),

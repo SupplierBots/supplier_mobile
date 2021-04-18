@@ -31,7 +31,7 @@ class IconParagraph extends StatelessWidget {
           ),
         ),
         Container(
-          constraints: const BoxConstraints(maxWidth: 190),
+          constraints: const BoxConstraints(maxWidth: 230),
           child: FittedBox(
             child: Text(
               text,
