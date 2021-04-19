@@ -73,52 +73,72 @@ class ProfilesListTile extends StatelessWidget {
             Radius.circular(10),
           ),
         ),
-        child: Column(
+        child: Stack(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      name,
-                      style: const TextStyle(color: kLightPurple, fontSize: 18),
+                    Row(
+                      children: [
+                        Text(
+                          name,
+                          style: const TextStyle(
+                              color: kLightPurple, fontSize: 18),
+                        ),
+                        const SizedBox(width: 10),
+                        const Icon(
+                          CustomIcons.edit,
+                          color: kLighGrey,
+                          size: 18,
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 10),
-                    const Icon(
-                      CustomIcons.edit,
-                      color: kLighGrey,
-                      size: 18,
+                    IconButton(
+                      onPressed: _showDeleteAlert,
+                      padding: const EdgeInsets.all(20),
+                      icon: const Icon(
+                        CustomIcons.remove,
+                        color: kLighGrey,
+                        size: 18,
+                      ),
                     ),
                   ],
                 ),
-                IconButton(
-                  onPressed: _showDeleteAlert,
-                  padding: const EdgeInsets.all(20),
-                  icon: const Icon(
-                    CustomIcons.remove,
-                    color: kLighGrey,
-                    size: 18,
+                Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: Text(
+                    '${profile.firstName} ${profile.lastName}',
+                    style: const TextStyle(color: kLightPurple, fontSize: 18),
                   ),
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: Row(
-                children: [
-                  Text(
-                    '${profile.firstName} ${profile.lastName}',
-                    style: const TextStyle(color: kLightPurple, fontSize: 18),
-                  ),
-                  const Spacer(),
-                  GradientWidget(
-                    child: Text(
-                      '**** ${profile.creditCardNumber.substring(15)}',
+            Positioned(
+              bottom: 15,
+              right: 20,
+              child: GradientWidget(
+                child: Row(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(top: 9.0),
+                      child: Text(
+                        '****',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          letterSpacing: 1.5,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      ' ${profile.creditCardNumber.substring(15)}',
                       style: const TextStyle(color: Colors.white, fontSize: 18),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

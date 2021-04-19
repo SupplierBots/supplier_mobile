@@ -39,19 +39,15 @@ class TasksProgressList extends HookWidget {
                   child: Center(
                     child: FractionallySizedBox(
                       widthFactor: kMainContentScreenWidth,
-                      child: BlocBuilder<RunnerCubit, RunnerState>(
-                        builder: (context, state) {
-                          return ListView(children: [
-                            const SizedBox(height: 20),
-                            for (var task in state.tasksProgress.entries) ...[
-                              TaskView(
-                                taskProgress: task,
-                              ),
-                              const SizedBox(height: kPrimaryElementsSpacing),
-                            ]
-                          ]);
-                        },
-                      ),
+                      child: ListView(children: [
+                        const SizedBox(height: 20),
+                        for (var task in tasks.entries) ...[
+                          TaskView(
+                            taskKey: task.key,
+                          ),
+                          const SizedBox(height: kPrimaryElementsSpacing),
+                        ]
+                      ]),
                     ),
                   ),
                 ),

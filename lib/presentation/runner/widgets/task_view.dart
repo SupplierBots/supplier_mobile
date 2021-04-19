@@ -13,24 +13,27 @@ import 'package:supplier_mobile/presentation/tasks/widgets/task_progress.dart';
 
 class TaskView extends HookWidget {
   const TaskView({
-    @required this.taskProgress,
+    @required this.taskKey,
   });
 
-  final MapEntry<String, TaskProgress> taskProgress;
+  final String taskKey;
 
   @override
   Widget build(BuildContext context) {
     final task = BlocProvider.of<TasksCubit>(context, listen: false)
         .state
-        .tasks[taskProgress.key];
+        .tasks[taskKey];
+
+    final taskProgress =
+        context.watch<RunnerCubit>().state.tasksProgress[taskKey];
 
     Widget getTaskState() {
-      switch (taskProgress.value.action) {
+      switch (taskProgress.action) {
         case TaskAction.captcha:
           return Positioned(
             right: 0,
             child: CaptchaState(solveAction: () {
-              context.read<RunnerCubit>().setVisibleTask(taskProgress.key);
+              context.read<RunnerCubit>().setVisibleTask(taskKey);
             }),
           );
         default:
@@ -38,8 +41,7 @@ class TaskView extends HookWidget {
       }
     }
 
-    double getTaskProgress() {
-      final message = taskProgress.value.message;
+    double getTaskProgress(String message) {
       if (progressMap.containsKey(message)) {
         return progressMap[message];
       }
@@ -49,80 +51,97 @@ class TaskView extends HookWidget {
       return 0;
     }
 
-    return Container(
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        color: kSecondaryBackground,
-        borderRadius: BorderRadius.all(
-          Radius.circular(10),
+    final progressTween = useState(Tween(begin: 0.0, end: 0.0));
+
+    return BlocListener<RunnerCubit, RunnerState>(
+      listener: (context, state) {
+        progressTween.value = Tween(
+          begin: 0.0,
+          end: getTaskProgress(
+            state.tasksProgress[taskKey].message,
+          ),
+        );
+      },
+      child: Container(
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          color: kSecondaryBackground,
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding:
-                const EdgeInsets.only(top: 19, bottom: 16, left: 20, right: 25),
-            child: Stack(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        context
-                            .read<RunnerCubit>()
-                            .setVisibleTask(taskProgress.key);
-                      },
-                      child: IconParagraph(
-                        text: task.product,
-                        iconAlignment: PlaceholderAlignment.bottom,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                  top: 19, bottom: 16, left: 20, right: 25),
+              child: Stack(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          context.read<RunnerCubit>().setVisibleTask(taskKey);
+                        },
+                        child: IconParagraph(
+                          text: task.product,
+                          iconAlignment: PlaceholderAlignment.bottom,
+                          icon: const Icon(
+                            CustomIcons.tshirt,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      IconParagraph(
+                        text: task.profileName,
                         icon: const Icon(
-                          CustomIcons.tshirt,
+                          CustomIcons.profile,
                           color: Colors.white,
                           size: 20,
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 12),
-                    IconParagraph(
-                      text: task.profileName,
-                      icon: const Icon(
-                        CustomIcons.profile,
-                        color: Colors.white,
-                        size: 20,
+                      const SizedBox(height: 12),
+                      IconParagraph(
+                        text: taskProgress.message,
+                        iconAlignment: PlaceholderAlignment.bottom,
+                        spaceBetween: 19,
+                        textColor: kLighGrey,
+                        icon: const Icon(
+                          Icons.info_outline,
+                          color: Colors.white,
+                          size: 19,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 12),
-                    IconParagraph(
-                      text: taskProgress.value.message,
-                      iconAlignment: PlaceholderAlignment.bottom,
-                      spaceBetween: 19,
-                      textColor: kLighGrey,
-                      icon: const Icon(
-                        Icons.info_outline,
-                        color: Colors.white,
-                        size: 19,
-                      ),
-                    ),
-                  ],
-                ),
-                getTaskState(),
-              ],
-            ),
-          ),
-          FractionallySizedBox(
-            widthFactor: getTaskProgress(),
-            child: Container(
-              height: 3,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                gradient: kPrimaryGradient,
+                    ],
+                  ),
+                  getTaskState(),
+                ],
               ),
             ),
-          ),
-        ],
+            TweenAnimationBuilder<double>(
+              tween: progressTween.value,
+              duration: const Duration(milliseconds: 100),
+              builder: (_, value, child) {
+                return FractionallySizedBox(
+                  widthFactor: value,
+                  child: child,
+                );
+              },
+              child: Container(
+                height: 3,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  gradient: kPrimaryGradient,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
