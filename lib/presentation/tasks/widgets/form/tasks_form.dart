@@ -46,68 +46,71 @@ class TasksForm extends HookWidget {
     return FormBuilder(
       key: formKey,
       initialValue: initialValues.value,
-      child: ListView(
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          const Header(text: 'Product details', underlineWidth: 220),
-          const SizedBox(
-            height: 15,
-          ),
-          FormDropdown(
-            name: 'profileName',
-            items: context.read<ProfilesCubit>().state.profiles.keys.toList(),
-            placeholder: 'Profile',
-          ),
-          const SizedBox(
-            height: kPrimaryElementsSpacing,
-          ),
-          FormDropdown(
-            name: 'product',
-            items: products,
-            placeholder: 'Product',
-          ),
-          const SizedBox(height: kPrimaryElementsSpacing),
-          FormMultiSelectField(
-            name: 'colors',
-            title: 'Colors',
-            placeholder: 'Enter color',
-            formKey: formKey,
-          ),
-          const SizedBox(height: kPrimaryElementsSpacing),
-          const FormDropdown(
-            name: 'size',
-            items: sizes,
-            placeholder: 'Size',
-          ),
-          const SizedBox(height: kPrimaryElementsSpacing),
-          Row(
-            children: [
-              const FormSwitch(
-                name: 'anyColor',
-                label: 'Any color',
-              ),
-              const SizedBox(width: 70),
-              FormSwitch(
-                name: 'anySize',
-                label: 'Any size',
-                onChange: (bool value) {
-                  isAnySizeDropdownVisible.value = value;
-                },
-              ),
-            ],
-          ),
-          const SizedBox(height: kPrimaryElementsSpacing),
-          if (isAnySizeDropdownVisible.value)
-            FormDropdown(
-              name: 'anySizeOption',
-              items: anySizeOptions,
-              placeholder: 'If selected size is not available choose',
-              isRequired: isAnySizeDropdownVisible.value,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 20,
             ),
-          const SizedBox(height: 120),
-        ],
+            const Header(text: 'Product details', underlineWidth: 220),
+            const SizedBox(
+              height: 15,
+            ),
+            FormDropdown(
+              name: 'profileName',
+              items: context.read<ProfilesCubit>().state.profiles.keys.toList(),
+              placeholder: 'Profile',
+            ),
+            const SizedBox(
+              height: kPrimaryElementsSpacing,
+            ),
+            FormDropdown(
+              name: 'product',
+              items: products,
+              placeholder: 'Product',
+            ),
+            const SizedBox(height: kPrimaryElementsSpacing),
+            FormMultiSelectField(
+              name: 'colors',
+              title: 'Colors',
+              placeholder: 'Enter color',
+              formKey: formKey,
+            ),
+            const SizedBox(height: kPrimaryElementsSpacing),
+            const FormDropdown(
+              name: 'size',
+              items: sizes,
+              placeholder: 'Size',
+            ),
+            const SizedBox(height: kPrimaryElementsSpacing),
+            Row(
+              children: [
+                const FormSwitch(
+                  name: 'anyColor',
+                  label: 'Any color',
+                ),
+                const SizedBox(width: 70),
+                FormSwitch(
+                  name: 'anySize',
+                  label: 'Any size',
+                  onChange: (bool value) {
+                    isAnySizeDropdownVisible.value = value;
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: kPrimaryElementsSpacing),
+            if (isAnySizeDropdownVisible.value)
+              FormDropdown(
+                name: 'anySizeOption',
+                items: anySizeOptions,
+                placeholder: 'If selected size is not available choose',
+                isRequired: isAnySizeDropdownVisible.value,
+              ),
+            const SizedBox(height: 225),
+          ],
+        ),
       ),
     );
   }

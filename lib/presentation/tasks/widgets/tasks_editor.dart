@@ -85,11 +85,14 @@ class TasksEditor extends HookWidget {
             ),
           ),
           body: Center(
-            child: FractionallySizedBox(
-              widthFactor: kMainContentScreenWidth,
-              child: state.isEditing
-                  ? TasksForm(formKey: formKey)
-                  : const TasksList(),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: FractionallySizedBox(
+                widthFactor: kMainContentScreenWidth,
+                child: state.isEditing
+                    ? TasksForm(formKey: formKey)
+                    : const TasksList(),
+              ),
             ),
           ),
           extendBody: true,
