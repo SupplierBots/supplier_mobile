@@ -6,10 +6,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:supplier_mobile/application/profiles/profiles_cubit.dart';
 import 'package:supplier_mobile/application/profiles/profiles_editor/profiles_editor_cubit.dart';
 import 'package:supplier_mobile/domain/profiles/profile.dart';
+import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart';
 import 'package:supplier_mobile/presentation/core/edit_header.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
-import 'package:supplier_mobile/presentation/core/vibrate.dart';
 import 'package:supplier_mobile/presentation/navigation/widgets/animated_navigation_bar.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
@@ -65,32 +65,6 @@ class ProfilesEditor extends HookWidget {
             confirmAction: _submitProfile,
           ),
         ),
-        floatingActionButton: !state.isEditing
-            ? Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: FloatingActionButton(
-                  backgroundColor: kSecondaryBackground,
-                  onPressed: () {
-                    showDialog<void>(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (_) {
-                        return BlocProvider<ProfilesEditorCubit>.value(
-                          value: context.read<ProfilesEditorCubit>(),
-                          child: CreateProfileModal(),
-                        );
-                      },
-                    );
-                  },
-                  child: const GradientWidget(
-                    child: Icon(
-                      CustomIcons.plus,
-                      size: 20,
-                    ),
-                  ),
-                ),
-              )
-            : null,
         body: Align(
           alignment: Alignment.topCenter,
           child: FractionallySizedBox(
