@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 
-class VersionID extends StatelessWidget {
-  const VersionID({
+class VersionNumber extends StatelessWidget {
+  const VersionNumber({
     Key key,
     @required this.version,
   }) : super(key: key);

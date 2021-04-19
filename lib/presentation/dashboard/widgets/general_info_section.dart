@@ -7,7 +7,6 @@ import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
 import 'package:supplier_mobile/presentation/core/header.dart';
 import 'package:supplier_mobile/presentation/dashboard/widgets/update_warning.dart';
-import 'package:supplier_mobile/presentation/dashboard/widgets/version_id.dart';
 import 'package:version/version.dart';
 
 class GeneralInfoSection extends HookWidget {
@@ -56,9 +55,8 @@ class GeneralInfoSection extends HookWidget {
           style: const TextStyle(fontSize: 16, color: kLighGrey),
         ),
         const SizedBox(
-          height: 20,
+          height: 75,
         ),
-        VersionID(version: currentVersion.value),
       ],
     );
   }

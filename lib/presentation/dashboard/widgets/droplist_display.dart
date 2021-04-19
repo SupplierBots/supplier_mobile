@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supplier_mobile/domain/dashboard/droplists/droplist.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
-import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:url_launcher/url_launcher.dart';
 

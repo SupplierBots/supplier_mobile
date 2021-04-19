@@ -28,17 +28,19 @@ class DashboardPage extends StatelessWidget {
           alignment: Alignment.topCenter,
           child: FractionallySizedBox(
             widthFactor: kMainContentScreenWidth,
-            child: Column(
-              children: <Widget>[
-                const SizedBox(
-                  height: 20,
-                ),
-                DroplistsSection(),
-                const SizedBox(
-                  height: 20,
-                ),
-                GeneralInfoSection(),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  DroplistsSection(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  GeneralInfoSection(),
+                ],
+              ),
             ),
           ),
         ),

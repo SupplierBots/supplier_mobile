@@ -37,17 +37,18 @@ class ProfilesList extends StatelessWidget {
             )
           else
             Center(
-                child: Container(
-              margin: const EdgeInsets.only(bottom: 75),
-              child: const Text(
-                "You haven't created any profiles yet",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: kDarkGrey,
-                  fontSize: 18,
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 75),
+                child: const Text(
+                  "You haven't created any profiles yet",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: kDarkGrey,
+                    fontSize: 18,
+                  ),
                 ),
               ),
-            )),
+            ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
