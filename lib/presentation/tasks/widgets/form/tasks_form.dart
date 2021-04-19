@@ -106,7 +106,7 @@ class TasksForm extends HookWidget {
               placeholder: 'If selected size is not available choose',
               isRequired: isAnySizeDropdownVisible.value,
             ),
-          const SizedBox(height: 75),
+          const SizedBox(height: 120),
         ],
       ),
     );

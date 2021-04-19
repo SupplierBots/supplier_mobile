@@ -54,6 +54,13 @@ class FormDropdown extends HookWidget {
 
           if (!_isMenuOpened.value) return;
 
+          await Scrollable.ensureVisible(
+            context,
+            alignmentPolicy: ScrollPositionAlignmentPolicy.explicit,
+            alignment: 0.5,
+            duration: const Duration(milliseconds: 150),
+          );
+
           final RenderBox button = context.findRenderObject() as RenderBox;
           final RenderBox overlay =
               Overlay.of(context).context.findRenderObject() as RenderBox;
@@ -74,7 +81,7 @@ class FormDropdown extends HookWidget {
 
           if (items.isEmpty) return;
 
-          final valueFromPopup = await Navigator.push(
+          final valueFuture = await Navigator.push(
             context,
             FormDropdownPopupRoute<String>(
               position: position,
@@ -92,6 +99,7 @@ class FormDropdown extends HookWidget {
             ),
           );
 
+          final valueFromPopup = valueFuture;
           _isMenuOpened.value = !_isMenuOpened.value;
           if (valueFromPopup == null) return;
           field.didChange(valueFromPopup);

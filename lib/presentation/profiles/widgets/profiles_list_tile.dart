@@ -135,7 +135,10 @@ class ProfilesListTile extends StatelessWidget {
                     ),
                     Text(
                       ' ${profile.creditCardNumber.substring(15)}',
-                      style: const TextStyle(color: Colors.white, fontSize: 18),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
                     ),
                   ],
                 ),

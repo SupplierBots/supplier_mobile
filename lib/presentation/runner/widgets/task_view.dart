@@ -125,7 +125,9 @@ class TaskView extends HookWidget {
             ),
             TweenAnimationBuilder<double>(
               tween: progressTween.value,
-              duration: const Duration(milliseconds: 100),
+              duration: progressTween.value.end == 0
+                  ? Duration.zero
+                  : const Duration(milliseconds: 100),
               builder: (_, value, child) {
                 return FractionallySizedBox(
                   widthFactor: value,
