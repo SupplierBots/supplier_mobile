@@ -13,6 +13,12 @@
       "deviceId": "00008101-001471A11061401E"
     },
     {
+      "name": "iPhone 7",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "7d038a5c0a730411ede0c5825c456b5074a267c2"
+    },
+    {
       "name": "Xiaomi Redmi Note 9",
       "request": "launch",
       "type": "dart",
