@@ -8,6 +8,7 @@ import 'package:supplier_mobile/domain/profiles/profile.dart';
 import 'package:supplier_mobile/inject.dart';
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
+import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 import 'package:supplier_mobile/presentation/core/styled_alert_dialog.dart';
 import 'package:supplier_mobile/presentation/core/styled_error_dialog.dart';
 import 'package:supplier_mobile/presentation/core/vibrate.dart';
@@ -64,7 +65,7 @@ class ProfilesListTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.only(left: 18),
         alignment: Alignment.centerLeft,
-        height: 110,
+        height: 105,
         width: double.infinity,
         decoration: const BoxDecoration(
           color: kSecondaryBackground,
@@ -103,7 +104,7 @@ class ProfilesListTile extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(right: 20),
               child: Row(
                 children: [
                   Text(
@@ -111,9 +112,11 @@ class ProfilesListTile extends StatelessWidget {
                     style: const TextStyle(color: kLightPurple, fontSize: 18),
                   ),
                   const Spacer(),
-                  Text(
-                    '**** ${profile.creditCardNumber.substring(15)}',
-                    style: const TextStyle(color: kPinkColor, fontSize: 18),
+                  GradientWidget(
+                    child: Text(
+                      '**** ${profile.creditCardNumber.substring(15)}',
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
+                    ),
                   ),
                 ],
               ),
