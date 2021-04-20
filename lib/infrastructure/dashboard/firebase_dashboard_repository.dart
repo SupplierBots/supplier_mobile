@@ -4,7 +4,6 @@ import 'package:injectable/injectable.dart';
 import 'package:supplier_mobile/domain/dashboard/dashboard_failure.dart';
 import 'package:supplier_mobile/domain/dashboard/dashboard_repository.dart';
 import 'package:supplier_mobile/domain/dashboard/droplists/droplist.dart';
-import 'package:supplier_mobile/domain/dashboard/droplists/droplists_collection.dart';
 import 'package:supplier_mobile/domain/dashboard/general_info/general_info.dart';
 import 'package:supplier_mobile/infrastructure/core/firestore_helpers.dart';
 import 'package:rxdart/rxdart.dart';
@@ -17,38 +16,27 @@ class FirebaseDashboardRepository implements DashboardRepository {
   final FirebaseFirestore _firestore;
 
   @override
-  Stream<Either<DashboardFailure, DroplistCollection>> watchDroplists() async* {
-    yield* Rx.combineLatest2(
-        _getDroplistStream('supreme'),
-        _getDroplistStream('palace'),
-        (
-          Droplist supremeDroplist,
-          Droplist palaceDroplist,
-        ) =>
-            right<DashboardFailure, DroplistCollection>(
-              DroplistCollection(
-                supreme: supremeDroplist,
-                palace: palaceDroplist,
-              ),
-            )).onErrorReturnWith(
+  Stream<Either<DashboardFailure, List<Droplist>>> watchDroplists() async* {
+    yield* _firestore.dashboardCollection
+        .doc('droplists')
+        .collection('supreme')
+        .orderBy('date', descending: true)
+        .limit(2)
+        .snapshots()
+        .map(
+          (query) => right<DashboardFailure, List<Droplist>>(query.docs
+              .map(
+                (doc) => FirebaseDroplist.fromSnapshot(doc.data()).toDomain(),
+              )
+              .toList()),
+        )
+        .onErrorReturnWith(
       (dynamic e) {
-        return left<DashboardFailure, DroplistCollection>(
+        return left<DashboardFailure, List<Droplist>>(
           const DashboardFailure.unexpected(),
         );
       },
     );
-  }
-
-  Stream<Droplist> _getDroplistStream(String page) {
-    return _firestore.dashboardCollection
-        .doc('droplists')
-        .collection(page)
-        .orderBy('date', descending: true)
-        .limit(1)
-        .snapshots()
-        .map(
-          (s) => FirebaseDroplist.fromSnapshot(s.docs.first.data()).toDomain(),
-        );
   }
 
   @override

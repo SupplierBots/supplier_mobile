@@ -4,7 +4,7 @@ part of 'dashboard_cubit.dart';
 abstract class DashboardState with _$DashboardState {
   const factory DashboardState({
     @required GeneralInfo generalInfo,
-    DroplistCollection droplists,
+    @required List<Droplist> droplists,
   }) = _DashboardState;
   factory DashboardState.initial() => const DashboardState(
         generalInfo: GeneralInfo(
@@ -14,6 +14,7 @@ abstract class DashboardState with _$DashboardState {
               'Remember to login into your google account before running any tasks to decrease the chance of captcha, which can slow you significantly during a drop.',
           version: '0.0.0',
         ),
+        droplists: [],
       );
 
   factory DashboardState.fromJson(Map<String, dynamic> json) =>

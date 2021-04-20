@@ -7,13 +7,11 @@ import 'package:url_launcher/url_launcher.dart';
 class DroplistDisplay extends StatelessWidget {
   const DroplistDisplay({
     Key key,
-    this.icon,
     @required this.droplist,
-    this.image,
+    this.isActive = false,
   }) : super(key: key);
-  final Icon icon;
   final Droplist droplist;
-  final Image image;
+  final bool isActive;
 
   Future<void> launchURL() async {
     if (await canLaunch(droplist.link)) {
@@ -41,7 +39,8 @@ class DroplistDisplay extends StatelessWidget {
                   SizedBox(
                     height: 20,
                     width: 20,
-                    child: image,
+                    child: Image.asset(
+                        'assets/images/${isActive ? "Supreme" : "SupremeGrey"}.png'),
                   ),
                   const Spacer(),
                   Text(

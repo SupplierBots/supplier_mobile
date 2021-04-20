@@ -10,14 +10,14 @@ class DroplistsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = context.watch<DashboardCubit>().state;
 
-    if (state.droplists == null) {
+    if (state.droplists.length < 2) {
       return Container();
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Header(text: 'Incoming drops', underlineWidth: 200),
+        const Header(text: 'Droplists', underlineWidth: 130),
         const SizedBox(
           height: 10,
         ),
@@ -25,8 +25,8 @@ class DroplistsSection extends StatelessWidget {
           children: [
             Flexible(
               child: DroplistDisplay(
-                image: Image.asset('assets/images/Supreme.png'),
-                droplist: state.droplists.supreme,
+                droplist: state.droplists[0],
+                isActive: true,
               ),
             ),
             const SizedBox(
@@ -34,8 +34,7 @@ class DroplistsSection extends StatelessWidget {
             ),
             Flexible(
               child: DroplistDisplay(
-                image: Image.asset('assets/images/Palace.png'),
-                droplist: state.droplists.palace,
+                droplist: state.droplists[1],
               ),
             ),
           ],

@@ -6,7 +6,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:supplier_mobile/domain/dashboard/dashboard_failure.dart';
 import 'package:supplier_mobile/domain/dashboard/dashboard_repository.dart';
-import 'package:supplier_mobile/domain/dashboard/droplists/droplists_collection.dart';
+import 'package:supplier_mobile/domain/dashboard/droplists/droplist.dart';
 import 'package:supplier_mobile/domain/dashboard/general_info/general_info.dart';
 
 part 'dashboard_state.dart';
@@ -18,7 +18,7 @@ class DashboardCubit extends HydratedCubit<DashboardState> {
   DashboardCubit(this._dashboardRepository) : super(DashboardState.initial());
   final DashboardRepository _dashboardRepository;
 
-  StreamSubscription<Either<DashboardFailure, DroplistCollection>>
+  StreamSubscription<Either<DashboardFailure, List<Droplist>>>
       _droplistsSubscription;
   StreamSubscription<Either<DashboardFailure, GeneralInfo>> _infoSubscription;
 
@@ -42,7 +42,7 @@ class DashboardCubit extends HydratedCubit<DashboardState> {
         );
   }
 
-  void loadedDroplists(DroplistCollection droplists) {
+  void loadedDroplists(List<Droplist> droplists) {
     emit(state.copyWith(droplists: droplists));
   }
 

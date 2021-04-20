@@ -18,7 +18,7 @@ class _$DashboardStateTearOff {
 
 // ignore: unused_element
   _DashboardState call(
-      {@required GeneralInfo generalInfo, DroplistCollection droplists}) {
+      {@required GeneralInfo generalInfo, List<Droplist> droplists}) {
     return _DashboardState(
       generalInfo: generalInfo,
       droplists: droplists,
@@ -38,7 +38,7 @@ const $DashboardState = _$DashboardStateTearOff();
 /// @nodoc
 mixin _$DashboardState {
   GeneralInfo get generalInfo;
-  DroplistCollection get droplists;
+  List<Droplist> get droplists;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -50,10 +50,9 @@ abstract class $DashboardStateCopyWith<$Res> {
   factory $DashboardStateCopyWith(
           DashboardState value, $Res Function(DashboardState) then) =
       _$DashboardStateCopyWithImpl<$Res>;
-  $Res call({GeneralInfo generalInfo, DroplistCollection droplists});
+  $Res call({GeneralInfo generalInfo, List<Droplist> droplists});
 
   $GeneralInfoCopyWith<$Res> get generalInfo;
-  $DroplistCollectionCopyWith<$Res> get droplists;
 }
 
 /// @nodoc
@@ -74,9 +73,8 @@ class _$DashboardStateCopyWithImpl<$Res>
       generalInfo: generalInfo == freezed
           ? _value.generalInfo
           : generalInfo as GeneralInfo,
-      droplists: droplists == freezed
-          ? _value.droplists
-          : droplists as DroplistCollection,
+      droplists:
+          droplists == freezed ? _value.droplists : droplists as List<Droplist>,
     ));
   }
 
@@ -89,16 +87,6 @@ class _$DashboardStateCopyWithImpl<$Res>
       return _then(_value.copyWith(generalInfo: value));
     });
   }
-
-  @override
-  $DroplistCollectionCopyWith<$Res> get droplists {
-    if (_value.droplists == null) {
-      return null;
-    }
-    return $DroplistCollectionCopyWith<$Res>(_value.droplists, (value) {
-      return _then(_value.copyWith(droplists: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -108,12 +96,10 @@ abstract class _$DashboardStateCopyWith<$Res>
           _DashboardState value, $Res Function(_DashboardState) then) =
       __$DashboardStateCopyWithImpl<$Res>;
   @override
-  $Res call({GeneralInfo generalInfo, DroplistCollection droplists});
+  $Res call({GeneralInfo generalInfo, List<Droplist> droplists});
 
   @override
   $GeneralInfoCopyWith<$Res> get generalInfo;
-  @override
-  $DroplistCollectionCopyWith<$Res> get droplists;
 }
 
 /// @nodoc
@@ -136,9 +122,8 @@ class __$DashboardStateCopyWithImpl<$Res>
       generalInfo: generalInfo == freezed
           ? _value.generalInfo
           : generalInfo as GeneralInfo,
-      droplists: droplists == freezed
-          ? _value.droplists
-          : droplists as DroplistCollection,
+      droplists:
+          droplists == freezed ? _value.droplists : droplists as List<Droplist>,
     ));
   }
 }
@@ -156,7 +141,7 @@ class _$_DashboardState implements _DashboardState {
   @override
   final GeneralInfo generalInfo;
   @override
-  final DroplistCollection droplists;
+  final List<Droplist> droplists;
 
   @override
   String toString() {
@@ -195,7 +180,7 @@ class _$_DashboardState implements _DashboardState {
 abstract class _DashboardState implements DashboardState {
   const factory _DashboardState(
       {@required GeneralInfo generalInfo,
-      DroplistCollection droplists}) = _$_DashboardState;
+      List<Droplist> droplists}) = _$_DashboardState;
 
   factory _DashboardState.fromJson(Map<String, dynamic> json) =
       _$_DashboardState.fromJson;
@@ -203,7 +188,7 @@ abstract class _DashboardState implements DashboardState {
   @override
   GeneralInfo get generalInfo;
   @override
-  DroplistCollection get droplists;
+  List<Droplist> get droplists;
   @override
   @JsonKey(ignore: true)
   _$DashboardStateCopyWith<_DashboardState> get copyWith;

@@ -11,10 +11,10 @@ _$_DashboardState _$_$_DashboardStateFromJson(Map<String, dynamic> json) {
     generalInfo: json['generalInfo'] == null
         ? null
         : GeneralInfo.fromJson(json['generalInfo'] as Map<String, dynamic>),
-    droplists: json['droplists'] == null
-        ? null
-        : DroplistCollection.fromJson(
-            json['droplists'] as Map<String, dynamic>),
+    droplists: (json['droplists'] as List)
+        ?.map((e) =>
+            e == null ? null : Droplist.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
