@@ -49,7 +49,7 @@ class UpdateWarning extends StatelessWidget {
                   )),
                   TextSpan(
                     text:
-                        'Tap to open TestFlight and install latest available version!',
+                        'Tap to open TestFlight and install the latest available version!',
                     style: TextStyle(fontSize: 16, color: kLightPurple),
                   ),
                 ],

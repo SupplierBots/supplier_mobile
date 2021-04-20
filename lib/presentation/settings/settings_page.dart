@@ -52,7 +52,7 @@ class SettingsPage extends HookWidget {
                 widthFactor: kMainContentScreenWidth,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SignOutButton(),
                     const SizedBox(height: 15),
