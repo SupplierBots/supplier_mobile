@@ -31,7 +31,7 @@ class HelpPage extends StatelessWidget {
                 ),
                 sectionName: 'Dashboard',
                 explanation:
-                    'sratat jebac fabijanskiego, sratatata  fabojanskiego, sratatata jebac fabojanskiegox sratatata jebac fabojanskiego :)sratatata jebac fabojanskiego :)',
+                    'Here you will find the most important information about bot, short tips and also links to current droplists.',
                 iconPadding: 4,
               ),
               const SizedBox(height: kPrimaryElementsSpacing),
@@ -43,7 +43,7 @@ class HelpPage extends StatelessWidget {
                 ),
                 sectionName: 'Tasks',
                 explanation:
-                    'sratat jebac fabijanskiego, sratatata  fabojanskiego, sratatata jebac fabojanskiegox sratatata jebac fabojanskiego :) sratatata jebac fabojanskiego :)',
+                    'In this tab you can create and start tasks with chosen products and profiles, which you configured before. Here you can also log in to your Google account to minimise risk of getting captcha during a drop.',
                 iconPadding: 4,
               ),
               const SizedBox(height: kPrimaryElementsSpacing),
@@ -55,7 +55,7 @@ class HelpPage extends StatelessWidget {
                 ),
                 sectionName: 'Profiles',
                 explanation:
-                    'sratat jebac fabijanskiego, sratatata  fabojanskiego, sratatata jebac fabojanskiegox sratatata jebac fabojanskiego :) sratatata jebac fabojanskiego :)',
+                    'In this tab you can add billing and shipping data, which will be used in your orders. Remember, you can’t use the same profile to purchase the same item twice.',
               ),
               const SizedBox(height: kPrimaryElementsSpacing),
               const HelpParagraph(
@@ -66,7 +66,7 @@ class HelpPage extends StatelessWidget {
                 ),
                 sectionName: 'Settings',
                 explanation:
-                    'sratat jebac fabijanskiego, sratatata  fabojanskiego, sratatata jebac fabojanskiegox sratatata jebac fabojanskiego :) sratatata jebac fabojanskiego :)',
+                    'Here you can turn off the vibrations, extra warnings and configure webhooks which allow the bot to send notifications to your Discord server.',
               ),
               const SizedBox(height: 20),
               SecondaryButton(
