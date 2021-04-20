@@ -267,7 +267,6 @@ class BrowserInstance extends HookWidget {
                 '\$REGION\$',
                 json.encode(profile.region),
               );
-
           controller.evaluateJavascript(
             source: injection,
           );

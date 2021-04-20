@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:supplier_mobile/presentation/tasks/widgets/task_progress.dart';
+import 'package:supplier_mobile/domain/tasks/task_action.dart';
 
 part 'task_progress.freezed.dart';
 

@@ -8,8 +8,8 @@ import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/icon_paragraph.dart';
 import 'package:supplier_mobile/presentation/runner/widgets/progress_map.dart';
-import 'package:supplier_mobile/presentation/tasks/widgets/task_state_captcha.dart';
-import 'package:supplier_mobile/presentation/tasks/widgets/task_progress.dart';
+import 'package:supplier_mobile/presentation/runner/widgets/captcha_button.dart';
+import 'package:supplier_mobile/domain/tasks/task_action.dart';
 
 class TaskView extends HookWidget {
   const TaskView({
@@ -26,20 +26,6 @@ class TaskView extends HookWidget {
 
     final taskProgress =
         context.watch<RunnerCubit>().state.tasksProgress[taskKey];
-
-    Widget getTaskState() {
-      switch (taskProgress.action) {
-        case TaskAction.captcha:
-          return Positioned(
-            right: 0,
-            child: CaptchaState(solveAction: () {
-              context.read<RunnerCubit>().setVisibleTask(taskKey);
-            }),
-          );
-        default:
-          return Container();
-      }
-    }
 
     double getTaskProgress(String message) {
       if (progressMap.containsKey(message)) {
@@ -88,6 +74,7 @@ class TaskView extends HookWidget {
                         },
                         child: IconParagraph(
                           text: task.product,
+                          maxWidth: 250,
                           iconAlignment: PlaceholderAlignment.bottom,
                           icon: const Icon(
                             CustomIcons.tshirt,
@@ -119,7 +106,16 @@ class TaskView extends HookWidget {
                       ),
                     ],
                   ),
-                  getTaskState(),
+                  if (taskProgress.action == TaskAction.captcha)
+                    Positioned(
+                      right: 0,
+                      top: 40,
+                      child: CaptchaButton(
+                        solveAction: () {
+                          context.read<RunnerCubit>().setVisibleTask(taskKey);
+                        },
+                      ),
+                    ),
                 ],
               ),
             ),

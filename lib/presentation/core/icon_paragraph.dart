@@ -11,6 +11,7 @@ class IconParagraph extends StatelessWidget {
     this.textColor = kLightPurple,
     this.spaceBetween = 18,
     this.iconAlignment = PlaceholderAlignment.middle,
+    this.maxWidth = 230,
   }) : super(key: key);
 
   final double fontSize;
@@ -19,6 +20,7 @@ class IconParagraph extends StatelessWidget {
   final String text;
   final Icon icon;
   final PlaceholderAlignment iconAlignment;
+  final double maxWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class IconParagraph extends StatelessWidget {
           ),
         ),
         Container(
-          constraints: const BoxConstraints(maxWidth: 230),
+          constraints: BoxConstraints(maxWidth: maxWidth),
           child: FittedBox(
             child: Text(
               text,

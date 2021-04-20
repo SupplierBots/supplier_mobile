@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart' hide Task;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:supplier_mobile/application/runner/cubit/task_progress.dart';
 import 'package:supplier_mobile/domain/tasks/task.dart';
-import 'package:supplier_mobile/presentation/tasks/widgets/task_progress.dart';
+import 'package:supplier_mobile/domain/tasks/task_action.dart';
 
 part 'runner_state.dart';
 part 'runner_cubit.freezed.dart';

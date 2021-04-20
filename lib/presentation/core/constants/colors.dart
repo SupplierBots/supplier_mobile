@@ -14,6 +14,10 @@ const Color kDarkRed = Color(0xFF890000);
 const LinearGradient kPrimaryGradient = LinearGradient(
   colors: [kPinkColor, kVioletColor],
 );
+const LinearGradient kPrimaryGradientReversed = LinearGradient(
+  colors: [kVioletColor, kPinkColor],
+);
+
 const LinearGradient kRedGradient = LinearGradient(
   colors: [Color(0xFFD20000), Color(0xFF890000)],
 );
