@@ -12,6 +12,7 @@ import 'package:supplier_mobile/presentation/core/buttons/secondary_button.dart'
 import 'package:supplier_mobile/presentation/core/constants/colors.dart';
 import 'package:supplier_mobile/presentation/core/constants/custom_icons.dart';
 import 'package:supplier_mobile/presentation/core/constants/scaling.dart';
+import 'package:supplier_mobile/presentation/core/gradient_widget.dart';
 import 'package:supplier_mobile/presentation/navigation/router.gr.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/google_account_bar.dart';
 import 'package:supplier_mobile/presentation/tasks/widgets/tasks_list_tile.dart';
@@ -59,6 +60,39 @@ class TasksList extends HookWidget {
             const SizedBox(height: 20),
             const GoogleAccountBar(),
             const SizedBox(height: kPrimaryElementsSpacing),
+            if (state.tasks.isNotEmpty) ...[
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                decoration: const BoxDecoration(
+                  color: kSecondaryBackground,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+                child: Row(
+                  children: const [
+                    GradientWidget(
+                      child: Icon(
+                        Icons.info_outline,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Text(
+                      'Start tasks ~20 seconds before the drop',
+                      style: TextStyle(
+                        color: kLightPurple,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: kPrimaryElementsSpacing),
+            ],
             for (var task in state.tasks.entries) ...[
               TasksListTile(
                 uid: task.key,
