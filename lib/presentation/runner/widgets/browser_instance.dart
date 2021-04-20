@@ -261,6 +261,7 @@ class BrowserInstance extends HookWidget {
                   'month': profile.expiryMonth,
                   'year': profile.expiryYear,
                   'cvv': profile.securityCode,
+                  'state': convertStateToCode(profile.state) ?? 'N/A'
                 }),
               )
               .replaceFirst(

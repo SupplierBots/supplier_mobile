@@ -9,7 +9,7 @@ String generateAddressCookie(BuildContext context, String uid) {
       context.read<ProfilesCubit>().state.profiles[task.profileName];
 
   final state =
-      profile.region == 'us' ? _convertStateToCode(profile.state) : 'undefined';
+      profile.region == 'us' ? convertStateToCode(profile.state) : 'undefined';
 
   final phone = profile.region == 'us'
       ? profile.phoneNumber.replaceFirstMapped(RegExp(r'(\d{3})(\d{3})(\d{4})'),
@@ -23,7 +23,6 @@ String generateAddressCookie(BuildContext context, String uid) {
       '${profile.firstName} ${profile.lastName}|${profile.email}|$phone|${profile.address}|${profile.addressDetails}|${profile.city}|$state|${profile.postcode}|${_convertCountryToCode(profile.country)}$suffix'
           .replaceAll(' ', '%20')
           .replaceAll('@', '%40');
-
   return value;
 }
 
@@ -105,7 +104,7 @@ String _convertCountryToCode(String country) {
   return country;
 }
 
-String _convertStateToCode(String state) {
+String convertStateToCode(String state) {
   switch (state) {
     case 'Alabama':
       return 'AL';

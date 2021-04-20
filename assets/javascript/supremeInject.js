@@ -19,9 +19,9 @@
       image: "https://i.imgur.com/fUUYrFx.png", //Logo fallback
     };
     const timestamps = {
-      start: "",
-      atc: "",
-      submit: "",
+      start: 0,
+      atc: 0,
+      submit: 0,
     };
     const processingDetails = {
       billingErrors: "None",
@@ -239,8 +239,11 @@
       ];
 
       await waitForElement(creditCartSelectors);
-      await wait(300);
-
+      await wait(150);
+      if (region === "us") {
+        await selectOption(paymentDetails.state);
+      }
+      await wait(150);
       updateStatus("Checkout autofill");
 
       findElement(creditCartSelectors).scrollIntoView();
