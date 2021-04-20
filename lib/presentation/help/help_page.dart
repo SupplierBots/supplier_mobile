@@ -6,6 +6,7 @@ import 'package:supplier_mobile/presentation/core/constants/typography.dart';
 import 'package:supplier_mobile/presentation/core/top_bar.dart';
 import 'package:supplier_mobile/presentation/help/widgets/help_paragraph.dart';
 import 'package:supplier_mobile/presentation/navigation/widgets/navigation_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HelpPage extends StatelessWidget {
   @override
@@ -72,7 +73,12 @@ class HelpPage extends StatelessWidget {
                 text: 'Open detailed guide',
                 width: 180,
                 height: 45,
-                onTap: () {},
+                onTap: () async {
+                  const guideUrl = 'https://docs.supplierbot.io/';
+                  if (await canLaunch(guideUrl)) {
+                    await launch(guideUrl);
+                  }
+                },
               )
             ],
           ),
