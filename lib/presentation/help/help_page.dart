@@ -31,7 +31,7 @@ class HelpPage extends StatelessWidget {
                 ),
                 sectionName: 'Dashboard',
                 explanation:
-                    'Here you will find the most important information about bot, short tips and also links to current droplists.',
+                    'Here you can find the most important information about the bot, short tips and links to current droplists.',
                 iconPadding: 4,
               ),
               const SizedBox(height: kPrimaryElementsSpacing),
@@ -43,7 +43,7 @@ class HelpPage extends StatelessWidget {
                 ),
                 sectionName: 'Tasks',
                 explanation:
-                    'In this tab you can create and start tasks with chosen products and profiles, which you configured before. Here you can also log in to your Google account to minimise risk of getting captcha during a drop.',
+                    'In this tab you can create and start tasks with chosen products and previously created profiles. Here you can also log in to your Google account to minimise the chance of getting a captcha during a drop.',
                 iconPadding: 4,
               ),
               const SizedBox(height: kPrimaryElementsSpacing),
@@ -55,7 +55,7 @@ class HelpPage extends StatelessWidget {
                 ),
                 sectionName: 'Profiles',
                 explanation:
-                    'In this tab you can add billing and shipping data, which will be used in your orders. Remember, you can’t use the same profile to purchase the same item twice.',
+                    'On this page you can add billing and shipping data, which will be used for your orders. Remember, you can’t purchase chosen item twice using the same profile.',
               ),
               const SizedBox(height: kPrimaryElementsSpacing),
               const HelpParagraph(
@@ -66,7 +66,7 @@ class HelpPage extends StatelessWidget {
                 ),
                 sectionName: 'Settings',
                 explanation:
-                    'Here you can turn off the vibrations, extra warnings and configure webhooks which allow the bot to send notifications to your Discord server.',
+                    'Here you can turn off vibrations, extra warnings and configure webhooks which allow the bot to send notifications to your Discord server.',
               ),
               const SizedBox(height: 20),
               SecondaryButton(
