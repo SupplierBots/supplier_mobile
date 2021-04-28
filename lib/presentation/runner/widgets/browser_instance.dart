@@ -55,13 +55,12 @@ class BrowserInstance extends HookWidget {
           );
     }
 
-    Future<void> _startTask() async {
-      taskAttempt.value++;
+    Future<void> _loadPage() async {
       await webViewController.loadUrl(
           urlRequest: URLRequest(
         url: Uri.parse('about:blank'),
       ));
-      await webViewController.clearCache();
+      await webViewController.ios.clearInstanceData();
       await webViewController.ios.cookieHandler.deleteAllCookies();
 
       final cookies = context.read<CookiesCubit>().state.getGoogleCookies();
@@ -99,6 +98,11 @@ class BrowserInstance extends HookWidget {
           urlRequest: URLRequest(
         url: Uri.parse('https://www.supremenewyork.com/mobile'),
       ));
+    }
+
+    Future<void> _startTask() async {
+      taskAttempt.value++;
+      await _loadPage();
     }
 
     Future<void> _messagesHandler(List<dynamic> messages) async {
@@ -166,6 +170,11 @@ class BrowserInstance extends HookWidget {
         case 'enable-restocks':
           {
             restockMode.value = true;
+            break;
+          }
+        case 'clean-refresh':
+          {
+            _loadPage();
             break;
           }
         case 'debug':

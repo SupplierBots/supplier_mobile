@@ -21,12 +21,15 @@
     const timestamps = {
       start: 0,
       atc: 0,
+      finished: 0,
       submit: 0,
     };
     const processingDetails = {
+      captchaToken: "",
       billingErrors: "None",
       slug: "",
       orderNumber: "#Unknown",
+      waitedForCaptchaLoad: false,
       processingAttempt: 0,
       highTraffic: false,
       bParameter: false,
@@ -58,12 +61,21 @@
       }
     });
 
+    if (document.readyState === "complete") {
+    } else {
+      window.addEventListener("DOMContentLoaded", main);
+    }
+
     await main();
     async function main() {
-      await initialize();
+      await waitForMainScriptLoad();
 
       if (!document.location.href.includes("product")) {
-        await productSearch();
+        const product = await findProduct();
+        await initialize();
+        await loadProduct(product);
+      } else {
+        await initialize();
       }
 
       timestamps.start = Date.now();
@@ -86,11 +98,11 @@
       }
       timestamps.atc = Date.now();
       await checkout();
-      timestamps.submit = Date.now();
+      timestamps.finished = Date.now();
     }
 
     //* STEPS
-    async function productSearch() {
+    async function findProduct() {
       updateStatus("Waiting for product");
       let item = findItem(product);
 
@@ -102,11 +114,13 @@
       }
 
       if (!item) {
-        return await reload();
+        return await cleanRefresh();
       }
-
       updateStatus("Product found");
+      return item;
+    }
 
+    async function loadProduct(item) {
       queryAllElements({
         selector: "li",
       })
@@ -295,6 +309,9 @@
         },
       ];
 
+      await waitForCaptchaRenderer();
+      await waitForElement(processButtonSelectors);
+
       watchCaptchaChallenge();
       findElement(processButtonSelectors).click();
       lookForModifiedButtons([
@@ -348,7 +365,28 @@
       itemDetails.name = productDetailView.model.attributes.name;
     }
 
+    async function waitForCaptchaRenderer() {
+      const selector = [
+        {
+          selector: "#g-recaptcha, .g-recaptcha",
+        },
+      ];
+      while (!findElement(selector)) {
+        processingDetails.waitedForCaptchaLoad = true;
+        await wait(250);
+      }
+    }
+
     async function watchCaptchaChallenge() {
+      const orginalCallback = window.recaptchaCallback;
+      window.recaptchaCallback = (res) => {
+        updateStatus("Waiting for response");
+        setTaskAction("captcha-solved");
+        processingDetails.captchaToken = res;
+        timestamps.submit = Date.now();
+        orginalCallback(res);
+      };
+
       const iframeSelector = {
         selector: "iframe[src*='recaptcha/api2/b']",
       };
@@ -359,13 +397,6 @@
       }
 
       if (captchaIFrame.style.height != "0px") {
-        const orginalCallback = window.recaptchaCallback;
-        window.recaptchaCallback = (res) => {
-          updateStatus("Waiting for response");
-          setTaskAction("captcha-solved");
-          orginalCallback(res);
-        };
-
         setTaskAction("captcha");
       }
     }
@@ -386,7 +417,7 @@
     async function waitForRestock() {
       setTaskAction("enable-restocks");
       updateStatus("Waiting for restock");
-      await reload();
+      await refresh();
     }
 
     function selectSize(sizes, sizeToFind, anySize) {
@@ -466,7 +497,13 @@
     // PAGE FUNCTIONS *
 
     //* INITIALIZATION
+    async function waitForMainScriptLoad() {
+      while (typeof Supreme === "undefined") {
+        await wait(100);
+      }
+    }
     async function initialize() {
+      updateStatus("Waiting for resources");
       while (document.readyState !== "complete") {
         await wait(100);
       }
@@ -476,7 +513,7 @@
         await wait(100);
         loadingTime += 100;
       }
-      if (typeof Supreme === "undefined") return await reload();
+      if (typeof Supreme === "undefined") return await cleanRefresh();
       $.fx.off = true;
       //Disable animations
     }
@@ -533,9 +570,15 @@
       }
     }
 
-    async function reload() {
+    async function refresh() {
       await wait(delays.refresh);
       window.location.reload();
+    }
+
+    async function cleanRefresh() {
+      await wait(delays.refresh);
+      setTaskAction("clean-refresh");
+      await wait(1000);
     }
 
     function updateStatus(status) {

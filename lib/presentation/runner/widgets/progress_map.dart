@@ -4,6 +4,7 @@ const progressMap = <String, double>{
   'Loading page': 0.1,
   'Waiting for product': 0.2,
   'Product found': 0.3,
+  'Waiting for resources': 0.35,
   'Loading product details': 0.4,
   'Adding to cart': 0.5,
   'Loading checkout': 0.6,

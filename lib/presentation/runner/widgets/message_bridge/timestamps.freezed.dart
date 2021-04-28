@@ -18,10 +18,14 @@ class _$TimestampsTearOff {
 
 // ignore: unused_element
   _Timestamps call(
-      {@required int start, @required int atc, @required int submit}) {
+      {@required int start,
+      @required int atc,
+      @required int finished,
+      @required int submit}) {
     return _Timestamps(
       start: start,
       atc: atc,
+      finished: finished,
       submit: submit,
     );
   }
@@ -40,6 +44,7 @@ const $Timestamps = _$TimestampsTearOff();
 mixin _$Timestamps {
   int get start;
   int get atc;
+  int get finished;
   int get submit;
 
   Map<String, dynamic> toJson();
@@ -52,7 +57,7 @@ abstract class $TimestampsCopyWith<$Res> {
   factory $TimestampsCopyWith(
           Timestamps value, $Res Function(Timestamps) then) =
       _$TimestampsCopyWithImpl<$Res>;
-  $Res call({int start, int atc, int submit});
+  $Res call({int start, int atc, int finished, int submit});
 }
 
 /// @nodoc
@@ -67,11 +72,13 @@ class _$TimestampsCopyWithImpl<$Res> implements $TimestampsCopyWith<$Res> {
   $Res call({
     Object start = freezed,
     Object atc = freezed,
+    Object finished = freezed,
     Object submit = freezed,
   }) {
     return _then(_value.copyWith(
       start: start == freezed ? _value.start : start as int,
       atc: atc == freezed ? _value.atc : atc as int,
+      finished: finished == freezed ? _value.finished : finished as int,
       submit: submit == freezed ? _value.submit : submit as int,
     ));
   }
@@ -83,7 +90,7 @@ abstract class _$TimestampsCopyWith<$Res> implements $TimestampsCopyWith<$Res> {
           _Timestamps value, $Res Function(_Timestamps) then) =
       __$TimestampsCopyWithImpl<$Res>;
   @override
-  $Res call({int start, int atc, int submit});
+  $Res call({int start, int atc, int finished, int submit});
 }
 
 /// @nodoc
@@ -100,11 +107,13 @@ class __$TimestampsCopyWithImpl<$Res> extends _$TimestampsCopyWithImpl<$Res>
   $Res call({
     Object start = freezed,
     Object atc = freezed,
+    Object finished = freezed,
     Object submit = freezed,
   }) {
     return _then(_Timestamps(
       start: start == freezed ? _value.start : start as int,
       atc: atc == freezed ? _value.atc : atc as int,
+      finished: finished == freezed ? _value.finished : finished as int,
       submit: submit == freezed ? _value.submit : submit as int,
     ));
   }
@@ -115,9 +124,13 @@ class __$TimestampsCopyWithImpl<$Res> extends _$TimestampsCopyWithImpl<$Res>
 /// @nodoc
 class _$_Timestamps implements _Timestamps {
   const _$_Timestamps(
-      {@required this.start, @required this.atc, @required this.submit})
+      {@required this.start,
+      @required this.atc,
+      @required this.finished,
+      @required this.submit})
       : assert(start != null),
         assert(atc != null),
+        assert(finished != null),
         assert(submit != null);
 
   factory _$_Timestamps.fromJson(Map<String, dynamic> json) =>
@@ -128,11 +141,13 @@ class _$_Timestamps implements _Timestamps {
   @override
   final int atc;
   @override
+  final int finished;
+  @override
   final int submit;
 
   @override
   String toString() {
-    return 'Timestamps(start: $start, atc: $atc, submit: $submit)';
+    return 'Timestamps(start: $start, atc: $atc, finished: $finished, submit: $submit)';
   }
 
   @override
@@ -143,6 +158,9 @@ class _$_Timestamps implements _Timestamps {
                 const DeepCollectionEquality().equals(other.start, start)) &&
             (identical(other.atc, atc) ||
                 const DeepCollectionEquality().equals(other.atc, atc)) &&
+            (identical(other.finished, finished) ||
+                const DeepCollectionEquality()
+                    .equals(other.finished, finished)) &&
             (identical(other.submit, submit) ||
                 const DeepCollectionEquality().equals(other.submit, submit)));
   }
@@ -152,6 +170,7 @@ class _$_Timestamps implements _Timestamps {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(start) ^
       const DeepCollectionEquality().hash(atc) ^
+      const DeepCollectionEquality().hash(finished) ^
       const DeepCollectionEquality().hash(submit);
 
   @JsonKey(ignore: true)
@@ -169,6 +188,7 @@ abstract class _Timestamps implements Timestamps {
   const factory _Timestamps(
       {@required int start,
       @required int atc,
+      @required int finished,
       @required int submit}) = _$_Timestamps;
 
   factory _Timestamps.fromJson(Map<String, dynamic> json) =
@@ -178,6 +198,8 @@ abstract class _Timestamps implements Timestamps {
   int get start;
   @override
   int get atc;
+  @override
+  int get finished;
   @override
   int get submit;
   @override

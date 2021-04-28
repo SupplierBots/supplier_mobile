@@ -8,6 +8,7 @@ abstract class Timestamps with _$Timestamps {
   const factory Timestamps({
     @required int start,
     @required int atc,
+    @required int finished,
     @required int submit,
   }) = _Timestamps;
   factory Timestamps.fromJson(Map<String, dynamic> json) =>

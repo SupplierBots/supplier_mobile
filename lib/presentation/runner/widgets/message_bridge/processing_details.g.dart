@@ -16,6 +16,8 @@ _$_ProcessingDetails _$_$_ProcessingDetailsFromJson(Map<String, dynamic> json) {
     queued: json['queued'] as bool,
     cca: json['cca'] as bool,
     orderNumber: json['orderNumber'] as String,
+    waitedForCaptchaLoad: json['waitedForCaptchaLoad'] as bool,
+    captchaToken: json['captchaToken'] as String,
   );
 }
 
@@ -30,4 +32,6 @@ Map<String, dynamic> _$_$_ProcessingDetailsToJson(
       'queued': instance.queued,
       'cca': instance.cca,
       'orderNumber': instance.orderNumber,
+      'waitedForCaptchaLoad': instance.waitedForCaptchaLoad,
+      'captchaToken': instance.captchaToken,
     };

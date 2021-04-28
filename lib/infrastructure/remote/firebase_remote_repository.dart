@@ -89,6 +89,11 @@ class FirebaseRemoteRepository implements RemoteRepository {
             payload.result.timestamps.submit),
         'startTimestamp': Timestamp.fromMillisecondsSinceEpoch(
             payload.result.timestamps.start),
+        'finishedTimestamp': Timestamp.fromMillisecondsSinceEpoch(
+            payload.result.timestamps.finished),
+        'captchaToken': payload.result.processingDetails.captchaToken,
+        'waitedForCaptchaRenderer':
+            payload.result.processingDetails.waitedForCaptchaLoad,
         'checkoutTime':
             payload.result.timestamps.submit - payload.result.timestamps.start,
         'userId': userId,

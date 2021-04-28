@@ -18,7 +18,7 @@ class _$DashboardStateTearOff {
 
 // ignore: unused_element
   _DashboardState call(
-      {@required GeneralInfo generalInfo, List<Droplist> droplists}) {
+      {@required GeneralInfo generalInfo, @required List<Droplist> droplists}) {
     return _DashboardState(
       generalInfo: generalInfo,
       droplists: droplists,
@@ -132,8 +132,10 @@ class __$DashboardStateCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_DashboardState implements _DashboardState {
-  const _$_DashboardState({@required this.generalInfo, this.droplists})
-      : assert(generalInfo != null);
+  const _$_DashboardState(
+      {@required this.generalInfo, @required this.droplists})
+      : assert(generalInfo != null),
+        assert(droplists != null);
 
   factory _$_DashboardState.fromJson(Map<String, dynamic> json) =>
       _$_$_DashboardStateFromJson(json);
@@ -180,7 +182,7 @@ class _$_DashboardState implements _DashboardState {
 abstract class _DashboardState implements DashboardState {
   const factory _DashboardState(
       {@required GeneralInfo generalInfo,
-      List<Droplist> droplists}) = _$_DashboardState;
+      @required List<Droplist> droplists}) = _$_DashboardState;
 
   factory _DashboardState.fromJson(Map<String, dynamic> json) =
       _$_DashboardState.fromJson;

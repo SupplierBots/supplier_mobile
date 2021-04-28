@@ -25,7 +25,9 @@ class _$ProcessingDetailsTearOff {
       @required bool bParameter,
       @required bool queued,
       @required bool cca,
-      @required String orderNumber}) {
+      @required String orderNumber,
+      @required bool waitedForCaptchaLoad,
+      @required String captchaToken}) {
     return _ProcessingDetails(
       billingErrors: billingErrors,
       slug: slug,
@@ -35,6 +37,8 @@ class _$ProcessingDetailsTearOff {
       queued: queued,
       cca: cca,
       orderNumber: orderNumber,
+      waitedForCaptchaLoad: waitedForCaptchaLoad,
+      captchaToken: captchaToken,
     );
   }
 
@@ -58,6 +62,8 @@ mixin _$ProcessingDetails {
   bool get queued;
   bool get cca;
   String get orderNumber;
+  bool get waitedForCaptchaLoad;
+  String get captchaToken;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -77,7 +83,9 @@ abstract class $ProcessingDetailsCopyWith<$Res> {
       bool bParameter,
       bool queued,
       bool cca,
-      String orderNumber});
+      String orderNumber,
+      bool waitedForCaptchaLoad,
+      String captchaToken});
 }
 
 /// @nodoc
@@ -99,6 +107,8 @@ class _$ProcessingDetailsCopyWithImpl<$Res>
     Object queued = freezed,
     Object cca = freezed,
     Object orderNumber = freezed,
+    Object waitedForCaptchaLoad = freezed,
+    Object captchaToken = freezed,
   }) {
     return _then(_value.copyWith(
       billingErrors: billingErrors == freezed
@@ -116,6 +126,12 @@ class _$ProcessingDetailsCopyWithImpl<$Res>
       cca: cca == freezed ? _value.cca : cca as bool,
       orderNumber:
           orderNumber == freezed ? _value.orderNumber : orderNumber as String,
+      waitedForCaptchaLoad: waitedForCaptchaLoad == freezed
+          ? _value.waitedForCaptchaLoad
+          : waitedForCaptchaLoad as bool,
+      captchaToken: captchaToken == freezed
+          ? _value.captchaToken
+          : captchaToken as String,
     ));
   }
 }
@@ -135,7 +151,9 @@ abstract class _$ProcessingDetailsCopyWith<$Res>
       bool bParameter,
       bool queued,
       bool cca,
-      String orderNumber});
+      String orderNumber,
+      bool waitedForCaptchaLoad,
+      String captchaToken});
 }
 
 /// @nodoc
@@ -159,6 +177,8 @@ class __$ProcessingDetailsCopyWithImpl<$Res>
     Object queued = freezed,
     Object cca = freezed,
     Object orderNumber = freezed,
+    Object waitedForCaptchaLoad = freezed,
+    Object captchaToken = freezed,
   }) {
     return _then(_ProcessingDetails(
       billingErrors: billingErrors == freezed
@@ -176,6 +196,12 @@ class __$ProcessingDetailsCopyWithImpl<$Res>
       cca: cca == freezed ? _value.cca : cca as bool,
       orderNumber:
           orderNumber == freezed ? _value.orderNumber : orderNumber as String,
+      waitedForCaptchaLoad: waitedForCaptchaLoad == freezed
+          ? _value.waitedForCaptchaLoad
+          : waitedForCaptchaLoad as bool,
+      captchaToken: captchaToken == freezed
+          ? _value.captchaToken
+          : captchaToken as String,
     ));
   }
 }
@@ -192,7 +218,9 @@ class _$_ProcessingDetails implements _ProcessingDetails {
       @required this.bParameter,
       @required this.queued,
       @required this.cca,
-      @required this.orderNumber})
+      @required this.orderNumber,
+      @required this.waitedForCaptchaLoad,
+      @required this.captchaToken})
       : assert(billingErrors != null),
         assert(slug != null),
         assert(processingAttempt != null),
@@ -200,7 +228,9 @@ class _$_ProcessingDetails implements _ProcessingDetails {
         assert(bParameter != null),
         assert(queued != null),
         assert(cca != null),
-        assert(orderNumber != null);
+        assert(orderNumber != null),
+        assert(waitedForCaptchaLoad != null),
+        assert(captchaToken != null);
 
   factory _$_ProcessingDetails.fromJson(Map<String, dynamic> json) =>
       _$_$_ProcessingDetailsFromJson(json);
@@ -221,10 +251,14 @@ class _$_ProcessingDetails implements _ProcessingDetails {
   final bool cca;
   @override
   final String orderNumber;
+  @override
+  final bool waitedForCaptchaLoad;
+  @override
+  final String captchaToken;
 
   @override
   String toString() {
-    return 'ProcessingDetails(billingErrors: $billingErrors, slug: $slug, processingAttempt: $processingAttempt, highTraffic: $highTraffic, bParameter: $bParameter, queued: $queued, cca: $cca, orderNumber: $orderNumber)';
+    return 'ProcessingDetails(billingErrors: $billingErrors, slug: $slug, processingAttempt: $processingAttempt, highTraffic: $highTraffic, bParameter: $bParameter, queued: $queued, cca: $cca, orderNumber: $orderNumber, waitedForCaptchaLoad: $waitedForCaptchaLoad, captchaToken: $captchaToken)';
   }
 
   @override
@@ -251,7 +285,13 @@ class _$_ProcessingDetails implements _ProcessingDetails {
                 const DeepCollectionEquality().equals(other.cca, cca)) &&
             (identical(other.orderNumber, orderNumber) ||
                 const DeepCollectionEquality()
-                    .equals(other.orderNumber, orderNumber)));
+                    .equals(other.orderNumber, orderNumber)) &&
+            (identical(other.waitedForCaptchaLoad, waitedForCaptchaLoad) ||
+                const DeepCollectionEquality().equals(
+                    other.waitedForCaptchaLoad, waitedForCaptchaLoad)) &&
+            (identical(other.captchaToken, captchaToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.captchaToken, captchaToken)));
   }
 
   @override
@@ -264,7 +304,9 @@ class _$_ProcessingDetails implements _ProcessingDetails {
       const DeepCollectionEquality().hash(bParameter) ^
       const DeepCollectionEquality().hash(queued) ^
       const DeepCollectionEquality().hash(cca) ^
-      const DeepCollectionEquality().hash(orderNumber);
+      const DeepCollectionEquality().hash(orderNumber) ^
+      const DeepCollectionEquality().hash(waitedForCaptchaLoad) ^
+      const DeepCollectionEquality().hash(captchaToken);
 
   @JsonKey(ignore: true)
   @override
@@ -286,7 +328,9 @@ abstract class _ProcessingDetails implements ProcessingDetails {
       @required bool bParameter,
       @required bool queued,
       @required bool cca,
-      @required String orderNumber}) = _$_ProcessingDetails;
+      @required String orderNumber,
+      @required bool waitedForCaptchaLoad,
+      @required String captchaToken}) = _$_ProcessingDetails;
 
   factory _ProcessingDetails.fromJson(Map<String, dynamic> json) =
       _$_ProcessingDetails.fromJson;
@@ -307,6 +351,10 @@ abstract class _ProcessingDetails implements ProcessingDetails {
   bool get cca;
   @override
   String get orderNumber;
+  @override
+  bool get waitedForCaptchaLoad;
+  @override
+  String get captchaToken;
   @override
   @JsonKey(ignore: true)
   _$ProcessingDetailsCopyWith<_ProcessingDetails> get copyWith;
