@@ -19,7 +19,7 @@ class FirebaseRemoteRepository implements RemoteRepository {
   @override
   Stream<Either<RemoteFailure, Delays>> watchDelays() async* {
     yield* _firestore
-        .collection('global')
+        .collection('mobile')
         .doc('delays')
         .snapshots()
         .map(

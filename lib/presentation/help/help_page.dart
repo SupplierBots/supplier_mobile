@@ -74,7 +74,7 @@ class HelpPage extends StatelessWidget {
                 width: 180,
                 height: 45,
                 onTap: () async {
-                  const guideUrl = 'https://docs.supplierbot.io/';
+                  const guideUrl = 'https://docs.supplierbots.io/';
                   if (await canLaunch(guideUrl)) {
                     await launch(guideUrl);
                   }

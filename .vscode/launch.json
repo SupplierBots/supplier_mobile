@@ -28,13 +28,13 @@
       "name": "iPhone 8 (Simulator)",
       "request": "launch",
       "type": "dart",
-      "deviceId": "BF066338-44E1-4924-9A98-8E05E4AC6404"
+      "deviceId": "4613412D-525A-4350-8657-006CD074E401"
     },
     {
       "name": "iPhone 12 (Simulator)",
       "request": "launch",
       "type": "dart",
-      "deviceId": "B78730F3-7386-4606-A7DE-F43721F41526"
+      "deviceId": "F9FA36A1-322B-4699-8602-371F4C193ACB"
     },
     {
       "name": "Nexus 6 (Simulator)",
