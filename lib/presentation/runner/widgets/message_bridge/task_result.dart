@@ -13,6 +13,8 @@ abstract class TaskResult with _$TaskResult {
     @required String message,
     @required ItemDetails itemDetails,
     @required List<String> modifiedButtons,
+    @required List<String> requestsLogs,
+    @required List<String> submitCookies,
     @required Timestamps timestamps,
     @required ProcessingDetails processingDetails,
   }) = _TaskResult;

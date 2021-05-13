@@ -16,6 +16,7 @@ abstract class ProcessingDetails with _$ProcessingDetails {
     @required String orderNumber,
     @required bool waitedForCaptchaLoad,
     @required String captchaToken,
+    @required String lastStatus,
   }) = _ProcessingDetails;
   factory ProcessingDetails.fromJson(Map<String, dynamic> json) =>
       _$ProcessingDetailsFromJson(json);

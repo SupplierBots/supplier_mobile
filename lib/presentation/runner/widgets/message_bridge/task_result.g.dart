@@ -15,6 +15,10 @@ _$_TaskResult _$_$_TaskResultFromJson(Map<String, dynamic> json) {
         : ItemDetails.fromJson(json['itemDetails'] as Map<String, dynamic>),
     modifiedButtons:
         (json['modifiedButtons'] as List)?.map((e) => e as String)?.toList(),
+    requestsLogs:
+        (json['requestsLogs'] as List)?.map((e) => e as String)?.toList(),
+    submitCookies:
+        (json['submitCookies'] as List)?.map((e) => e as String)?.toList(),
     timestamps: json['timestamps'] == null
         ? null
         : Timestamps.fromJson(json['timestamps'] as Map<String, dynamic>),
@@ -31,6 +35,8 @@ Map<String, dynamic> _$_$_TaskResultToJson(_$_TaskResult instance) =>
       'message': instance.message,
       'itemDetails': instance.itemDetails,
       'modifiedButtons': instance.modifiedButtons,
+      'requestsLogs': instance.requestsLogs,
+      'submitCookies': instance.submitCookies,
       'timestamps': instance.timestamps,
       'processingDetails': instance.processingDetails,
     };

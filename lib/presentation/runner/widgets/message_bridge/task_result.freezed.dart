@@ -22,6 +22,8 @@ class _$TaskResultTearOff {
       @required String message,
       @required ItemDetails itemDetails,
       @required List<String> modifiedButtons,
+      @required List<String> requestsLogs,
+      @required List<String> submitCookies,
       @required Timestamps timestamps,
       @required ProcessingDetails processingDetails}) {
     return _TaskResult(
@@ -29,6 +31,8 @@ class _$TaskResultTearOff {
       message: message,
       itemDetails: itemDetails,
       modifiedButtons: modifiedButtons,
+      requestsLogs: requestsLogs,
+      submitCookies: submitCookies,
       timestamps: timestamps,
       processingDetails: processingDetails,
     );
@@ -50,6 +54,8 @@ mixin _$TaskResult {
   String get message;
   ItemDetails get itemDetails;
   List<String> get modifiedButtons;
+  List<String> get requestsLogs;
+  List<String> get submitCookies;
   Timestamps get timestamps;
   ProcessingDetails get processingDetails;
 
@@ -68,6 +74,8 @@ abstract class $TaskResultCopyWith<$Res> {
       String message,
       ItemDetails itemDetails,
       List<String> modifiedButtons,
+      List<String> requestsLogs,
+      List<String> submitCookies,
       Timestamps timestamps,
       ProcessingDetails processingDetails});
 
@@ -90,6 +98,8 @@ class _$TaskResultCopyWithImpl<$Res> implements $TaskResultCopyWith<$Res> {
     Object message = freezed,
     Object itemDetails = freezed,
     Object modifiedButtons = freezed,
+    Object requestsLogs = freezed,
+    Object submitCookies = freezed,
     Object timestamps = freezed,
     Object processingDetails = freezed,
   }) {
@@ -102,6 +112,12 @@ class _$TaskResultCopyWithImpl<$Res> implements $TaskResultCopyWith<$Res> {
       modifiedButtons: modifiedButtons == freezed
           ? _value.modifiedButtons
           : modifiedButtons as List<String>,
+      requestsLogs: requestsLogs == freezed
+          ? _value.requestsLogs
+          : requestsLogs as List<String>,
+      submitCookies: submitCookies == freezed
+          ? _value.submitCookies
+          : submitCookies as List<String>,
       timestamps:
           timestamps == freezed ? _value.timestamps : timestamps as Timestamps,
       processingDetails: processingDetails == freezed
@@ -152,6 +168,8 @@ abstract class _$TaskResultCopyWith<$Res> implements $TaskResultCopyWith<$Res> {
       String message,
       ItemDetails itemDetails,
       List<String> modifiedButtons,
+      List<String> requestsLogs,
+      List<String> submitCookies,
       Timestamps timestamps,
       ProcessingDetails processingDetails});
 
@@ -179,6 +197,8 @@ class __$TaskResultCopyWithImpl<$Res> extends _$TaskResultCopyWithImpl<$Res>
     Object message = freezed,
     Object itemDetails = freezed,
     Object modifiedButtons = freezed,
+    Object requestsLogs = freezed,
+    Object submitCookies = freezed,
     Object timestamps = freezed,
     Object processingDetails = freezed,
   }) {
@@ -191,6 +211,12 @@ class __$TaskResultCopyWithImpl<$Res> extends _$TaskResultCopyWithImpl<$Res>
       modifiedButtons: modifiedButtons == freezed
           ? _value.modifiedButtons
           : modifiedButtons as List<String>,
+      requestsLogs: requestsLogs == freezed
+          ? _value.requestsLogs
+          : requestsLogs as List<String>,
+      submitCookies: submitCookies == freezed
+          ? _value.submitCookies
+          : submitCookies as List<String>,
       timestamps:
           timestamps == freezed ? _value.timestamps : timestamps as Timestamps,
       processingDetails: processingDetails == freezed
@@ -209,12 +235,16 @@ class _$_TaskResult implements _TaskResult {
       @required this.message,
       @required this.itemDetails,
       @required this.modifiedButtons,
+      @required this.requestsLogs,
+      @required this.submitCookies,
       @required this.timestamps,
       @required this.processingDetails})
       : assert(status != null),
         assert(message != null),
         assert(itemDetails != null),
         assert(modifiedButtons != null),
+        assert(requestsLogs != null),
+        assert(submitCookies != null),
         assert(timestamps != null),
         assert(processingDetails != null);
 
@@ -230,13 +260,17 @@ class _$_TaskResult implements _TaskResult {
   @override
   final List<String> modifiedButtons;
   @override
+  final List<String> requestsLogs;
+  @override
+  final List<String> submitCookies;
+  @override
   final Timestamps timestamps;
   @override
   final ProcessingDetails processingDetails;
 
   @override
   String toString() {
-    return 'TaskResult(status: $status, message: $message, itemDetails: $itemDetails, modifiedButtons: $modifiedButtons, timestamps: $timestamps, processingDetails: $processingDetails)';
+    return 'TaskResult(status: $status, message: $message, itemDetails: $itemDetails, modifiedButtons: $modifiedButtons, requestsLogs: $requestsLogs, submitCookies: $submitCookies, timestamps: $timestamps, processingDetails: $processingDetails)';
   }
 
   @override
@@ -254,6 +288,12 @@ class _$_TaskResult implements _TaskResult {
             (identical(other.modifiedButtons, modifiedButtons) ||
                 const DeepCollectionEquality()
                     .equals(other.modifiedButtons, modifiedButtons)) &&
+            (identical(other.requestsLogs, requestsLogs) ||
+                const DeepCollectionEquality()
+                    .equals(other.requestsLogs, requestsLogs)) &&
+            (identical(other.submitCookies, submitCookies) ||
+                const DeepCollectionEquality()
+                    .equals(other.submitCookies, submitCookies)) &&
             (identical(other.timestamps, timestamps) ||
                 const DeepCollectionEquality()
                     .equals(other.timestamps, timestamps)) &&
@@ -269,6 +309,8 @@ class _$_TaskResult implements _TaskResult {
       const DeepCollectionEquality().hash(message) ^
       const DeepCollectionEquality().hash(itemDetails) ^
       const DeepCollectionEquality().hash(modifiedButtons) ^
+      const DeepCollectionEquality().hash(requestsLogs) ^
+      const DeepCollectionEquality().hash(submitCookies) ^
       const DeepCollectionEquality().hash(timestamps) ^
       const DeepCollectionEquality().hash(processingDetails);
 
@@ -289,6 +331,8 @@ abstract class _TaskResult implements TaskResult {
       @required String message,
       @required ItemDetails itemDetails,
       @required List<String> modifiedButtons,
+      @required List<String> requestsLogs,
+      @required List<String> submitCookies,
       @required Timestamps timestamps,
       @required ProcessingDetails processingDetails}) = _$_TaskResult;
 
@@ -303,6 +347,10 @@ abstract class _TaskResult implements TaskResult {
   ItemDetails get itemDetails;
   @override
   List<String> get modifiedButtons;
+  @override
+  List<String> get requestsLogs;
+  @override
+  List<String> get submitCookies;
   @override
   Timestamps get timestamps;
   @override

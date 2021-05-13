@@ -35,8 +35,12 @@
       bParameter: false,
       queued: false,
       cca: false,
+      lastStatus: "",
     };
     const modifiedButtons = [];
+    const requestsLogs = [];
+    let submitCookies = [];
+    let processingTimeoutId = 0;
     let stockRefreshTimestamp = Date.now();
 
     window.addEventListener(
@@ -50,14 +54,31 @@
     );
 
     window.__nativeCache.onResponse((response) => {
+      if (
+        !response.url.includes("mixpanel") &&
+        !response.url.includes("store_credits")
+      ) {
+        let log = `${response.status} ${response.method} ${response.url}`;
+        if (processingDetails.slug) {
+          log = log.replace(processingDetails.slug, "slug");
+        }
+        requestsLogs.push(log);
+      }
+
       if (/.*(checkout|status).json/.test(response.url)) {
         try {
+          if (!response.success && /checkout/.test(response.url)) {
+            sendTaskResult("500", "Failed");
+            return;
+          }
           const data = JSON.parse(response.text);
           if (!data.status) return;
           parseOrderStatus(data);
         } catch {}
       } else if (/stock/.test(response.url)) {
         stockRefreshTimestamp = Date.now();
+      } else if (/cardinal_ad/.test(response.url) && !response.success) {
+        retryCardinalAd();
       }
     });
 
@@ -139,7 +160,7 @@
             selector: ".name",
           });
           if (!nameChild) return false;
-          return nameChild.innerText === item.name;
+          return isProductMatch(nameChild.innerText, product.keywords);
         })
         ?.click();
     }
@@ -219,10 +240,11 @@
         return false;
       }
       try {
-        itemDetails.image = productDetailView.model.attributes.selectedStyle.attributes.image_url.replace(
-          "//",
-          "https://"
-        );
+        itemDetails.image =
+          productDetailView.model.attributes.selectedStyle.attributes.image_url.replace(
+            "//",
+            "https://"
+          );
       } catch {}
       await wait(300);
       return true;
@@ -311,8 +333,18 @@
 
       await waitForCaptchaRenderer();
       await waitForElement(processButtonSelectors);
-
       watchCaptchaChallenge();
+
+      const cookiesToIgnore = ["address", "__utm", "mp_"];
+      submitCookies = document.cookie
+        .split("; ")
+        .filter(
+          (cookie) =>
+            !cookiesToIgnore.some((cookieToIgnore) =>
+              cookie.includes(cookieToIgnore)
+            )
+        );
+
       findElement(processButtonSelectors).click();
       lookForModifiedButtons([
         "checkout",
@@ -542,9 +574,8 @@
     }
 
     function queryElementChild(element, { selector, innerText }) {
-      const elements = window.__nativeCache.elementQuerySelectorAll.bind(
-        element
-      )(selector);
+      const elements =
+        window.__nativeCache.elementQuerySelectorAll.bind(element)(selector);
       if (innerText) {
         const filtered = elements.filter((e) =>
           e.innerText.includes(innerText)
@@ -593,6 +624,8 @@
         timestamps,
         modifiedButtons,
         processingDetails,
+        requestsLogs,
+        submitCookies,
       });
     }
 
@@ -607,6 +640,12 @@
       if (response.id) {
         processingDetails.orderNumber = `#${response.id}`;
       }
+
+      processingDetails.lastStatus = response.status;
+      clearTimeout(processingTimeoutId);
+      processingTimeoutId = setTimeout(() => {
+        sendTaskResult("processing", "Processing");
+      }, 15000);
 
       switch (response.status) {
         case "cardinal_queued":
@@ -696,6 +735,27 @@
     //CORE *
 
     //* UTILS
+    function retryCardinalAd() {
+      try {
+        $.ajax({
+          type: "POST",
+          url: `/checkout/${processingDetails.slug}/cardinal_ad.json`,
+          data: $("#mobile_checkout_form").serializeArray(),
+          dataType: "json",
+          timeout: 20000,
+          success: function (e) {
+            window.setTimeout(() => {
+              if (window.pollOrderStatus && processingDetails.slug) {
+                window.pollOrderStatus(processingDetails.slug);
+              }
+            }, 3000);
+          },
+          xhrFields: {
+            withCredentials: true,
+          },
+        });
+      } catch {}
+    }
     async function wait(milliseconds) {
       await new Promise((resolve) => setTimeout(resolve, milliseconds));
     }

@@ -19,6 +19,7 @@
             url: this.responseURL,
             text: this.responseText,
             success: true,
+            status: this.status,
           });
         });
         this.addEventListener("error", function (err) {
@@ -26,6 +27,7 @@
             ...params,
             text: this.responseText,
             success: false,
+            status: this.status,
           });
         });
         window.__nativeCache.requestOpen.apply(this, arguments);

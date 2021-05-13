@@ -146,7 +146,9 @@ class BrowserInstance extends HookWidget {
               region: profile.region,
             );
 
-            _updateProgress(result.message);
+            if (result.status != 'processing') {
+              _updateProgress(result.message);
+            }
 
             getIt<RemoteRepository>().reportCheckout(checkoutPayload);
 

@@ -27,7 +27,8 @@ class _$ProcessingDetailsTearOff {
       @required bool cca,
       @required String orderNumber,
       @required bool waitedForCaptchaLoad,
-      @required String captchaToken}) {
+      @required String captchaToken,
+      @required String lastStatus}) {
     return _ProcessingDetails(
       billingErrors: billingErrors,
       slug: slug,
@@ -39,6 +40,7 @@ class _$ProcessingDetailsTearOff {
       orderNumber: orderNumber,
       waitedForCaptchaLoad: waitedForCaptchaLoad,
       captchaToken: captchaToken,
+      lastStatus: lastStatus,
     );
   }
 
@@ -64,6 +66,7 @@ mixin _$ProcessingDetails {
   String get orderNumber;
   bool get waitedForCaptchaLoad;
   String get captchaToken;
+  String get lastStatus;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -85,7 +88,8 @@ abstract class $ProcessingDetailsCopyWith<$Res> {
       bool cca,
       String orderNumber,
       bool waitedForCaptchaLoad,
-      String captchaToken});
+      String captchaToken,
+      String lastStatus});
 }
 
 /// @nodoc
@@ -109,6 +113,7 @@ class _$ProcessingDetailsCopyWithImpl<$Res>
     Object orderNumber = freezed,
     Object waitedForCaptchaLoad = freezed,
     Object captchaToken = freezed,
+    Object lastStatus = freezed,
   }) {
     return _then(_value.copyWith(
       billingErrors: billingErrors == freezed
@@ -132,6 +137,8 @@ class _$ProcessingDetailsCopyWithImpl<$Res>
       captchaToken: captchaToken == freezed
           ? _value.captchaToken
           : captchaToken as String,
+      lastStatus:
+          lastStatus == freezed ? _value.lastStatus : lastStatus as String,
     ));
   }
 }
@@ -153,7 +160,8 @@ abstract class _$ProcessingDetailsCopyWith<$Res>
       bool cca,
       String orderNumber,
       bool waitedForCaptchaLoad,
-      String captchaToken});
+      String captchaToken,
+      String lastStatus});
 }
 
 /// @nodoc
@@ -179,6 +187,7 @@ class __$ProcessingDetailsCopyWithImpl<$Res>
     Object orderNumber = freezed,
     Object waitedForCaptchaLoad = freezed,
     Object captchaToken = freezed,
+    Object lastStatus = freezed,
   }) {
     return _then(_ProcessingDetails(
       billingErrors: billingErrors == freezed
@@ -202,6 +211,8 @@ class __$ProcessingDetailsCopyWithImpl<$Res>
       captchaToken: captchaToken == freezed
           ? _value.captchaToken
           : captchaToken as String,
+      lastStatus:
+          lastStatus == freezed ? _value.lastStatus : lastStatus as String,
     ));
   }
 }
@@ -220,7 +231,8 @@ class _$_ProcessingDetails implements _ProcessingDetails {
       @required this.cca,
       @required this.orderNumber,
       @required this.waitedForCaptchaLoad,
-      @required this.captchaToken})
+      @required this.captchaToken,
+      @required this.lastStatus})
       : assert(billingErrors != null),
         assert(slug != null),
         assert(processingAttempt != null),
@@ -230,7 +242,8 @@ class _$_ProcessingDetails implements _ProcessingDetails {
         assert(cca != null),
         assert(orderNumber != null),
         assert(waitedForCaptchaLoad != null),
-        assert(captchaToken != null);
+        assert(captchaToken != null),
+        assert(lastStatus != null);
 
   factory _$_ProcessingDetails.fromJson(Map<String, dynamic> json) =>
       _$_$_ProcessingDetailsFromJson(json);
@@ -255,10 +268,12 @@ class _$_ProcessingDetails implements _ProcessingDetails {
   final bool waitedForCaptchaLoad;
   @override
   final String captchaToken;
+  @override
+  final String lastStatus;
 
   @override
   String toString() {
-    return 'ProcessingDetails(billingErrors: $billingErrors, slug: $slug, processingAttempt: $processingAttempt, highTraffic: $highTraffic, bParameter: $bParameter, queued: $queued, cca: $cca, orderNumber: $orderNumber, waitedForCaptchaLoad: $waitedForCaptchaLoad, captchaToken: $captchaToken)';
+    return 'ProcessingDetails(billingErrors: $billingErrors, slug: $slug, processingAttempt: $processingAttempt, highTraffic: $highTraffic, bParameter: $bParameter, queued: $queued, cca: $cca, orderNumber: $orderNumber, waitedForCaptchaLoad: $waitedForCaptchaLoad, captchaToken: $captchaToken, lastStatus: $lastStatus)';
   }
 
   @override
@@ -291,7 +306,10 @@ class _$_ProcessingDetails implements _ProcessingDetails {
                     other.waitedForCaptchaLoad, waitedForCaptchaLoad)) &&
             (identical(other.captchaToken, captchaToken) ||
                 const DeepCollectionEquality()
-                    .equals(other.captchaToken, captchaToken)));
+                    .equals(other.captchaToken, captchaToken)) &&
+            (identical(other.lastStatus, lastStatus) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastStatus, lastStatus)));
   }
 
   @override
@@ -306,7 +324,8 @@ class _$_ProcessingDetails implements _ProcessingDetails {
       const DeepCollectionEquality().hash(cca) ^
       const DeepCollectionEquality().hash(orderNumber) ^
       const DeepCollectionEquality().hash(waitedForCaptchaLoad) ^
-      const DeepCollectionEquality().hash(captchaToken);
+      const DeepCollectionEquality().hash(captchaToken) ^
+      const DeepCollectionEquality().hash(lastStatus);
 
   @JsonKey(ignore: true)
   @override
@@ -330,7 +349,8 @@ abstract class _ProcessingDetails implements ProcessingDetails {
       @required bool cca,
       @required String orderNumber,
       @required bool waitedForCaptchaLoad,
-      @required String captchaToken}) = _$_ProcessingDetails;
+      @required String captchaToken,
+      @required String lastStatus}) = _$_ProcessingDetails;
 
   factory _ProcessingDetails.fromJson(Map<String, dynamic> json) =
       _$_ProcessingDetails.fromJson;
@@ -355,6 +375,8 @@ abstract class _ProcessingDetails implements ProcessingDetails {
   bool get waitedForCaptchaLoad;
   @override
   String get captchaToken;
+  @override
+  String get lastStatus;
   @override
   @JsonKey(ignore: true)
   _$ProcessingDetailsCopyWith<_ProcessingDetails> get copyWith;

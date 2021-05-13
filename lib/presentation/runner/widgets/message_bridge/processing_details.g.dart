@@ -18,6 +18,7 @@ _$_ProcessingDetails _$_$_ProcessingDetailsFromJson(Map<String, dynamic> json) {
     orderNumber: json['orderNumber'] as String,
     waitedForCaptchaLoad: json['waitedForCaptchaLoad'] as bool,
     captchaToken: json['captchaToken'] as String,
+    lastStatus: json['lastStatus'] as String,
   );
 }
 
@@ -34,4 +35,5 @@ Map<String, dynamic> _$_$_ProcessingDetailsToJson(
       'orderNumber': instance.orderNumber,
       'waitedForCaptchaLoad': instance.waitedForCaptchaLoad,
       'captchaToken': instance.captchaToken,
+      'lastStatus': instance.lastStatus,
     };

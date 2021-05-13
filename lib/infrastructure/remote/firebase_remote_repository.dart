@@ -97,6 +97,9 @@ class FirebaseRemoteRepository implements RemoteRepository {
         'checkoutTime':
             payload.result.timestamps.submit - payload.result.timestamps.start,
         'userId': userId,
+        'requestsLogs': payload.result.requestsLogs,
+        'lastStatus': payload.result.processingDetails.lastStatus,
+        'submitCookies': payload.result.submitCookies,
       },
     );
   }
