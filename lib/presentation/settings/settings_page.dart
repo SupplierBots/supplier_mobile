@@ -26,6 +26,7 @@ class SettingsPage extends HookWidget {
           style: kHeader,
         ),
       ),
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Align(
